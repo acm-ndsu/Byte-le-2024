@@ -1,0 +1,3 @@
+Open up a powershell in the Sphinx folder and type:
+
+sphinx-build -b html . ../docs
