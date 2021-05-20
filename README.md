@@ -9,6 +9,12 @@ python .\launcher.pyz g - will generate a map
 
 python .\launcher.pyz r - will run the game
 
+## Manual
+
+[Usage Manual](https://docs.google.com/document/d/1MGxvq5V9yGJbsbcBgDM26LugPbtQGlyNiaUOmjn85sc/edit?usp=sharing)
+
+Referenced Examples - https://github.com/topoftheyear/Byte-le-Game-Examples
+
 ## Previous Byte-le Competitions
 
 2018 - Dungeon Delvers - https://github.com/jghibiki/Byte-le-Royale-2018
