@@ -5,7 +5,7 @@ from typing import Self
 
 
 class Avatar(GameObject):
-    def __init__(self, item: Item = None, position=None):
+    def __init__(self, item: Item = None, position: tuple[int,int]=None):
         super().__init__()
         self.object_type = ObjectType.AVATAR
         self.held_item = item
@@ -22,7 +22,7 @@ class Avatar(GameObject):
 
     @property
     # return format for tuple (x-position, y-position), assumes (0,0) is top left of the game board
-    def position(self) -> tuple:
+    def position(self) -> tuple[int, int]:
         return self.__position
 
     @held_item.setter

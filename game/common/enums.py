@@ -12,6 +12,7 @@ class ObjectType(Enum):
     NONE = auto()
     ACTION = auto()
     PLAYER = auto()
+    AVATAR = auto()
     GAMEBOARD = auto()
     TILE = auto()
     ITEM = auto()
