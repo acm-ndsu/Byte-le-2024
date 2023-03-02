@@ -28,20 +28,20 @@ class Avatar(GameObject):
     @held_item.setter
     def held_item(self, item: Item):
         # If it's not an item, and it's not None, raise the error
-        if not isinstance(item, Item) and item:
-            raise ValueError("avatar.held_item must be an Item or None.")
+        if item and not isinstance(item, Item):
+            raise ValueError(f"{self.__class__.__name__}.held_item must be an Item or None.")
         self.__held_item = item
 
     @score.setter
     def score(self, score: int):
-        if not isinstance(score, int):
-            raise ValueError("avatar.score must be an int.")
+        if score and not isinstance(score, int):
+            raise ValueError(f"{self.__class__.__name__}.score must be an int.")
         self.__score = score
 
     @position.setter
     def position(self, position: tuple[int, int]):
-        if not(isinstance(position, tuple) and list(map(type, position)) == [int, int]) and position:
-            raise ValueError("avatar.position must be a tuple of two ints.")
+        if position and not(isinstance(position, tuple) and list(map(type, position)) == [int, int]):
+            raise ValueError(f"{self.__class__.__name__}.position must be a tuple of two ints.")
         self.__position = position
 
     def to_json(self) -> dict:

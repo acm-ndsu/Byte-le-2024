@@ -16,6 +16,8 @@ class ObjectType(Enum):
     GAMEBOARD = auto()
     TILE = auto()
     ITEM = auto()
+    STATION = auto()
+    OCCUPIABLE_STATION = auto()
 
 
 class ActionType(Enum):
