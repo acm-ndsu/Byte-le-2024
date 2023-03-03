@@ -14,6 +14,9 @@ if __name__ == '__main__':
 
     # Generate Subparser
     gen_subpar = spar.add_parser('generate', aliases=['g'], help='Generates a new random game map')
+
+    gen_subpar.add_argument('-seed', '-s', action='store', type=int, nargs='?', dest='seed',
+                            help='Allows you to pass a seed into the generate function.')
     
     # Run Subparser and optionals
     run_subpar = spar.add_parser('run', aliases=['r'],
@@ -33,7 +36,10 @@ if __name__ == '__main__':
 
     # Generate game options
     if action in ['generate', 'g']:
-        generate()
+        if par_args.seed:
+            generate(par_args.seed)
+        else:
+            generate()
     
     # Run game options
     elif action in ['run', 'r']:
