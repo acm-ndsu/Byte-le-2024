@@ -16,6 +16,7 @@ class ObjectType(Enum):
     GAMEBOARD = auto()
     VECTOR = auto()
     TILE = auto()
+    WALL = auto()
     ITEM = auto()
     STATION = auto()
     OCCUPIABLE_STATION = auto()
