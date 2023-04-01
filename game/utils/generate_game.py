@@ -2,7 +2,7 @@ import random
 
 from game.config import *
 from game.utils.helpers import write_json_file
-from game.common.game_board import GameBoard
+from game.common.map.game_board import GameBoard
 
 
 def generate(seed: int = random.randint(0, 1000000000)):
@@ -14,7 +14,6 @@ def generate(seed: int = random.randint(0, 1000000000)):
 
     # for x in range(1, MAX_TICKS + 1):
     #     data[x] = 'data'
-
 
     # Verify logs location exists
     if not os.path.exists(GAME_MAP_DIR):
