@@ -40,7 +40,7 @@ class Avatar(GameObject):
 
     @position.setter
     def position(self, position: Vector | None) -> None:
-        if position is not None and not(isinstance(position, Vector) and list(map(type, position)) == Vector):
+        if position is not None and not isinstance(position, Vector):
             raise ValueError(f"{self.__class__.__name__}.position must be a Vector or None.")
         self.__position = position
 

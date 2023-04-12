@@ -11,6 +11,10 @@ python .\launcher.pyz g - will generate a map
 python .\launcher.pyz r - will run the game
 ```
 
+## Required Python Version
+
+- Requires Python 3.11 due to type of Self
+
 ## Test Suite Commands:
 
 ```bash

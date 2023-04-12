@@ -35,7 +35,7 @@ class Station(GameObject):
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        item: Item = data['item']
+        item: dict = data['item']
         if item is None:
             self.item = None
             return self
