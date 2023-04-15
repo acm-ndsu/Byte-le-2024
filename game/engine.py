@@ -5,6 +5,7 @@ import os
 import sys
 import traceback
 
+from game.common.map.game_board import GameBoard
 from game.common.player import Player
 from game.config import *
 from game.controllers.master_controller import MasterController
@@ -36,8 +37,8 @@ class Engine:
             if self.quiet_mode:
                 f = open(os.devnull, 'w')
                 sys.stdout = f
-            self.boot()
             self.load()
+            self.boot()
             for self.current_world_key in tqdm(
                     self.master_controller.game_loop_logic(),
                     bar_format=TQDM_BAR_FORMAT,
@@ -146,9 +147,9 @@ class Engine:
             self.clients.sort(key=lambda clnt: clnt.team_name, reverse=True)
             # Finally, request master controller to establish clients with basic objects
             if SET_NUMBER_OF_CLIENTS_START == 1:
-                self.master_controller.give_clients_objects(self.clients[0])
+                self.master_controller.give_clients_objects(self.clients[0], self.world)
             else:
-                self.master_controller.give_clients_objects(self.clients)
+                self.master_controller.give_clients_objects(self.clients, self.world)
 
     # Loads in the world
     def load(self):
@@ -167,7 +168,9 @@ class Engine:
         world = None
         with open(GAME_MAP_FILE) as json_file:
             world = json.load(json_file)
+            world['game_board'] = GameBoard().from_json(world['game_board'])
         self.world = world
+
 
     # Sits on top of all actions that need to happen before the player takes their turn
     def pre_tick(self):
@@ -260,7 +263,8 @@ class Engine:
         else:
             data = self.master_controller.create_turn_log(self.clients, self.tick_number)
 
-        self.game_logs[self.tick_number] = data
+        with open(os.path.join(LOGS_DIR, f"turn_{self.tick_number:04d}.json"), 'w+') as f:
+            json.dump(data, f)
 
         # Perform a game over check
         if self.master_controller.game_over:

@@ -1,5 +1,7 @@
-from game.common.enums import DebugLevel
+from game.common.enums import DebugLevel, ActionType
 from game.config import Debug
+from game.common.player import Player
+from game.common.map.game_board import GameBoard
 
 
 class Controller:
@@ -8,7 +10,7 @@ class Controller:
         self.debug_level = DebugLevel.controller
         self.debug = False
 
-    def handle_actions(self, client, world):
+    def handle_actions(self, action: ActionType, client: Player, world: GameBoard):
         return
 
     def print(self, *args):

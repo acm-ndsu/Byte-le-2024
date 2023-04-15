@@ -12,10 +12,10 @@ class InteractController(Controller):
     def __init__(self):
         super().__init__()
 
-    def handle_actions(self, client: Player, world: GameBoard):
+    def handle_actions(self, action: ActionType, client: Player, world: GameBoard):
         # match interaction type with x and y
         vector: Vector
-        match client.action:
+        match action:
             case ActionType.INTERACT_UP:
                 vector = Vector(x=0, y=-1)
             case ActionType.INTERACT_DOWN:

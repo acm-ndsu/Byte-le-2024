@@ -5,7 +5,7 @@ from game.common.enums import *
 
 
 class Player(GameObject):
-    def __init__(self, code: object | None = None, team_name: str | None = None, action: ActionType | None = None,
+    def __init__(self, code: object | None = None, team_name: str | None = None, actions: list[ActionType] = [],
                  avatar: Avatar | None = None):
         super().__init__()
         self.object_type: ObjectType = ObjectType.PLAYER
@@ -14,21 +14,23 @@ class Player(GameObject):
         self.team_name: str | None = team_name
         self.code: object = code
         # self.action: Action = action
-        self.action: ActionType | None = action
+        self.actions: list[ActionType] | list = actions
         self.avatar: Avatar | None = avatar
 
     @property
-    def action(self) -> ActionType | None:  # change to Action if you want to use the action object
-        return self.__action
+    def actions(self) -> list[ActionType] | list:  # change to Action if you want to use the action object
+        return self.__actions
 
-    @action.setter
-    def action(self, action: ActionType | None) -> None:  # showing it returns nothing(like void in java)
+    @actions.setter
+    def actions(self, actions: list[ActionType] | list) -> None:  # showing it returns nothing(like void in java)
         # if it's (not none = and) if its (none = or)
-        if action is not None and not isinstance(action, ActionType):  # since it can be either none or action type we need it to be and not or
-            # ^change to Action if you want to use the action object
-            raise ValueError(f'{self.__class__.__name__}.action must be ActionType or None')
+        # going across all action types and making it a boolean, if any are true this will be true\/
+        if actions is None or not isinstance(actions, list) \
+                or (len(actions) > 0
+                    and any(map(lambda action_type: not isinstance(action_type, ActionType), actions))):
+            raise ValueError(f'{self.__class__.__name__}.action must be an empty list or a list of action types')
             # ^if it's not either throw an error
-        self.__action = action
+        self.__actions = actions
 
     @property
     def functional(self) -> bool:
@@ -76,22 +78,21 @@ class Player(GameObject):
         data['functional'] = self.functional
         # data['error'] = self.error  # .to_json() if self.error is not None else None
         data['team_name'] = self.team_name
-        data['action'] = self.actiontype.to_json() if self.actiontype is not None else None
+        data['actions'] = self.actions
         data['avatar'] = self.avatar.to_json() if self.avatar is not None else None
 
         return data
 
     def from_json(self, data):
         super().from_json(data)
-        
+
         self.functional = data['functional']
         # self.error = data['error']  # .from_json(data['action']) if data['action'] is not None else None
         self.team_name = data['team_name']
 
-        action: ActionType | None = data['action']
+        self.actions: list[ActionType] | list = data['actions']
         avatar: Avatar | None = data['avatar']
-        if action is None and avatar is None:
-            self.action = None
+        if avatar is None:
             self.avatar = None
             return self
         # match case for action

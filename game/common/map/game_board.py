@@ -98,7 +98,7 @@ class GameBoard(GameObject):
         self.walled: bool = walled
 
         # game_map is initially going to be None. Since generation is slow, call generate_map() as needed
-        self.game_map: list[list[GameObject]] | None = None
+        self.game_map: list[list[Tile]] | None = None
 
     @property
     def seed(self) -> int:

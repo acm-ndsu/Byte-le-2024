@@ -10,6 +10,8 @@ TQDM_UNITS = " turns"                               # units TQDM takes in the ba
 
 MAX_SECONDS_PER_TURN = 0.1                          # max number of basic operations clients have for their turns
 
+MAX_NUMBER_OF_ACTIONS_PER_TURN = 2                  # max number of actions per turn is currently set to 2
+
 MIN_CLIENTS_START = None                            # minimum number of clients required to start running the game; should be None when SET_NUMBER_OF_CLIENTS is used
 MAX_CLIENTS_START = None                            # maximum number of clients required to start running the game; should be None when SET_NUMBER_OF_CLIENTS is used
 SET_NUMBER_OF_CLIENTS_START = 2                     # required number of clients to start running the game; should be None when MIN_CLIENTS or MAX_CLIENTS are used

@@ -11,11 +11,11 @@ class MovementController(Controller):
     def __init__(self):
         super().__init__()
 
-    def handle_actions(self, client: Player, world: GameBoard):
+    def handle_actions(self, action: ActionType, client: Player, world: GameBoard):
         avatar_pos: Vector = Vector(client.avatar.position.x, client.avatar.position.y)
 
         pos_mod: Vector
-        match client.action:
+        match action:
             case ActionType.MOVE_UP:
                 pos_mod = Vector(x=0, y=-1)
             case ActionType.MOVE_DOWN:
