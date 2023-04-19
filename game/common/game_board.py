@@ -1,6 +1,8 @@
 import random
 from typing import Self
 from game.utils.vector import Vector
+from game.common.stations.occupiable_station import Occupiable_Station
+from game.common.stations.station import Station
 from game.common.avatar import Avatar
 from game.common.game_object import GameObject
 from game.common.map.tile import Tile
@@ -102,35 +104,51 @@ class GameBoard(GameObject):
                  locations: dict[tuple[Vector]:list[GameObject]] | None = None, walled: bool = False):
 
         super().__init__()
-        self.seed = seed
-        random.seed(seed)
-        self.object_type: ObjectType = ObjectType.GAMEBOARD
-        self.event_active = None
-        self.map_size: Vector = map_size
-        self.locations: dict = locations
-        self.walled: bool = walled
-
         # game_map is initially going to be None. Since generation is slow, call generate_map() as needed
         self.game_map: list[list[GameObject]] | None = None
-
+        self.seed: int | None = seed
+        random.seed(seed)
+        self.object_type: ObjectType = ObjectType.GAMEBOARD
+        self.event_active: int | None = None
+        self.map_size: Vector = map_size
+        # when passing Vectors as a tuple, end the tuple of Vectors with a comma so it is recognized as a tuple
+        self.locations: dict | None = locations
+        self.walled: bool = walled
+        
     @property
     def seed(self) -> int:
         return self.__seed
 
     @seed.setter
-    def seed(self, seed: int | None):
-        if seed is not None or not isinstance(seed, int):
-            raise ValueError("Seed must be an integer.")
+    def seed(self, seed: int | None) -> None:
+        if self.game_map is not None:
+            raise RuntimeError(f'{self.__class__.__name__} variables cannot be changed once generate_map is run.')
+        if seed is not None and not isinstance(seed, int):
+            raise ValueError(f'{self.__class__.__name__}.seed must be an integer.')
         self.__seed = seed
+
+    @property
+    def game_map(self) -> list[list[GameObject]] | None:
+        return self.__game_map
+    
+    @game_map.setter
+    def game_map(self, game_map: list[list[GameObject]]) -> None:
+        if game_map is not None and (not isinstance(game_map, list) or \
+                any(map(lambda l: not isinstance(l, list), game_map)) or \
+                any([any(map(lambda g: not isinstance(g, GameObject), l)) for l in game_map])):
+            raise ValueError(f'{self.__class__.__name__}.game_map must be a list[list[GameObject]].')
+        self.__game_map = game_map
 
     @property
     def map_size(self) -> Vector:
         return self.__map_size
 
     @map_size.setter
-    def map_size(self, map_size: Vector):
+    def map_size(self, map_size: Vector) -> None:
+        if self.game_map is not None:
+            raise RuntimeError(f'{self.__class__.__name__} variables cannot be changed once generate_map is run.')
         if map_size is None or not isinstance(map_size, Vector):
-            raise ValueError("Map_size must be a Vector.")
+            raise ValueError(f'{self.__class__.__name__}.map_size must be a Vector.')
         self.__map_size = map_size
 
     @property
@@ -138,14 +156,17 @@ class GameBoard(GameObject):
         return self.__locations
 
     @locations.setter
-    def locations(self, locations: dict[tuple[Vector]:list[GameObject]] | None):
-        if locations is not None or not isinstance(locations, dict):
+    def locations(self, locations: dict[tuple[Vector]:list[GameObject]] | None) -> None:
+        if self.game_map is not None:
+            raise RuntimeError(f'{self.__class__.__name__} variables cannot be changed once generate_map is run.')
+        if locations is not None and not isinstance(locations, dict):
             raise ValueError("Locations must be a dict. The key must be a tuple of Vector Objects, and the "
                              "value a list of GameObject.")
-        for k,v in locations:
-            if len(k) != len(v):
-                raise ValueError("Cannot set the locations for the game_board. A key has a different "
-                                 "length than its key.")
+        if locations is not None:
+            for k,v in locations.items():
+                if len(k) != len(v):
+                    raise ValueError("Cannot set the locations for the game_board. A key has a different "
+                                    "length than its key.")
 
         self.__locations = locations
 
@@ -154,13 +175,15 @@ class GameBoard(GameObject):
         return self.__walled
 
     @walled.setter
-    def walled(self, walled: bool):
+    def walled(self, walled: bool) -> None:
+        if self.game_map is not None:
+            raise RuntimeError(f'{self.__class__.__name__} variables cannot be changed once generate_map is run.')
         if walled is None or not isinstance(walled, bool):
-            raise ValueError("Walled must be a bool.")
+            raise ValueError(f'{self.__class__.__name__}.walled must be a bool.')
 
         self.__walled = walled
 
-    def generate_map(self):
+    def generate_map(self) -> None:
         # generate map
         self.game_map = [[Tile() for _ in range(self.map_size.x)] for _ in range(self.map_size.y)]
 
@@ -174,35 +197,33 @@ class GameBoard(GameObject):
 
         self.__populate_map()
 
-    def __populate_map(self):
+    def __populate_map(self) -> None:
         for k, v in self.locations.items():
             if len(k) != len(v) or (len(k) == 0 or len(v) == 0):  # Key-Value lengths must be > 0 and equal
                 raise ValueError("A key-value pair from game_board.locations has mismatching lengths. "
                                  "They must be the same length, regardless of size.")
 
-            # random.choices returns a randomized list which is used in __help_populate()
-            j = random.choices(k, k=len(k))
+            # random.sample returns a randomized list which is used in __help_populate()
+            j = random.sample(k, k=len(k))
             self.__help_populate(j, v)
 
-    def __help_populate(self, vector_list: list[Vector], v: list[GameObject]):
-        for i in v:
-            temp_vector: Vector = vector_list.pop()
-
+    def __help_populate(self, vector_list: list[Vector], v: list[GameObject]) -> None:
+        for j, i in zip(vector_list,v):
             if isinstance(i, Avatar):  # If the GameObject is an Avatar, assign it the coordinate position
-                i.position = temp_vector
+                i.position = j
 
-            temp_tile: GameObject = self.game_map[temp_vector.y][temp_vector.x]
+            temp_tile: GameObject = self.game_map[j.y][j.x]
 
             while hasattr(temp_tile.occupied_by, 'occupied_by'):
                 temp_tile = temp_tile.occupied_by
 
-            if temp_tile is not None:
+            if temp_tile is None:
                 raise ValueError("Last item on the given tile doesn't have the 'occupied_by' attribute.")
 
             temp_tile.occupied_by = i
 
     def get_objects(self, look_for: ObjectType) -> list[GameObject]:
-        to_return = list()
+        to_return: list[GameObject] = list()
 
         for row in self.game_map:
             for object_in_row in row:
@@ -211,7 +232,7 @@ class GameBoard(GameObject):
 
         return to_return
 
-    def __get_objects_help(look_for: ObjectType, temp: GameObject | Tile, to_return: list[GameObject]):
+    def __get_objects_help(self, look_for: ObjectType, temp: GameObject | Tile, to_return: list[GameObject]):
         while hasattr(temp, 'occupied_by'):
             if temp.object_type is look_for:
                 to_return.append(temp)
@@ -224,25 +245,40 @@ class GameBoard(GameObject):
 
     def to_json(self) -> dict:
         data: dict[str, str] = super().to_json()
-        temp: list[list[GameObject]] = list((map(lambda tile: tile.to_json(), y)) for y in self.game_map)
+        temp: list[list[GameObject]] = list(list(map(lambda tile: tile.to_json(), y)) for y in self.game_map) if self.game_map is not None else None
         data["game_map"] = temp
         data["seed"] = self.seed
-        data["map_size"] = self.map_size
-        data["locations"] = self.locations
+        data["map_size"] = self.map_size.to_json()
+        data["location_vectors"] = [[vec.to_json() for vec in k] for k in self.locations.keys()] if self.locations is not None else None
+        data["location_objects"] = [[obj.to_json() for obj in v] for v in self.locations.values()] if self.locations is not None else None
         data["walled"] = self.walled
         data['event_active'] = self.event_active
         return data
 
-    def generate_event(self, start, end):
+    def generate_event(self, start: int, end: int) -> None:
         self.event_active = random.randint(start, end)
 
-    def from_json(self, data) -> Self:
+    def __from_json_helper(self, data: dict) -> GameObject:
+        match data['object_type']:
+            case ObjectType.WALL:
+                return Wall().from_json(data)
+            case ObjectType.OCCUPIABLE_STATION:
+                return Occupiable_Station().from_json(data)
+            case ObjectType.STATION:
+                return Station().from_json(data)
+            case ObjectType.AVATAR:
+                return Avatar().from_json(data)
+            # If adding more ObjectTypes that can be placed on the game_board, specify here
+            case _:
+                raise ValueError(f'The location (dict) must have a valid key (tuple of vectors) and a valid value (list of GameObjects).')
+
+    def from_json(self, data: dict) -> Self:
         super().from_json(data)
         temp = data["game_map"]
-        self.game_map: list[list[GameObject]] = list((map(lambda tile: Tile().from_json(tile), y)) for y in temp)
         self.seed: int | None = data["seed"]
-        self.map_size: Vector = data["map_size"]
-        self.locations: dict[tuple[Vector]:list[GameObject]] = data["locations"]
+        self.map_size: Vector = Vector().from_json(data["map_size"])
+        self.locations: dict[tuple[Vector]:list[GameObject]] = {tuple(map(lambda vec: Vector().from_json(vec), k)) : [self.__from_json_helper(obj) for obj in v] for k, v in zip(data["location_vectors"], data["location_objects"])} if data["location_vectors"] is not None else None
         self.walled: bool = data["walled"]
-        self.event_active = data['event_active']
+        self.event_active: int = data['event_active']
+        self.game_map: list[list[GameObject]] = list(list(map(lambda tile: Tile().from_json(tile), y)) for y in temp) if temp is not None else None
         return self

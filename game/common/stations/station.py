@@ -19,7 +19,7 @@ class Station(GameObject):
     @item.setter
     def item(self, item: Item) -> None:
         if item is not None and not isinstance(item, Item):
-            raise ValueError(f"{self.__class__.__name__}.item must be an Item or None, not {item}.")
+            raise ValueError(f'{self.__class__.__name__}.item must be an Item or None, not {item}.')
         self.__item = item
 
     # take action method

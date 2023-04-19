@@ -6,4 +6,4 @@ class Wall(GameObject):
     def __init__(self):
         super().__init__()
         self.object_type = ObjectType.WALL
-        
+    

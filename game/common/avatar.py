@@ -6,7 +6,7 @@ from typing import Self
 
 
 class Avatar(GameObject):
-    """
+    '''
     Notes for the inventory:
 
     The avatar's inventory is a list of items. Each item has a quantity and a stack_size (the max amount of an
@@ -89,7 +89,7 @@ class Avatar(GameObject):
             picked_up_item is left where it was first found.
         Inventory after:
         [inventory_item (5/5), inventory_item (5/5) inventory_item (5/5) inventory_item (5/5), inventory_item (5/5)]
-    """
+    '''
 
     def __init__(self, item: Item | None = None, position: Vector | None = None, inventory: list[Item] = [],
                  max_inventory_size: int = 10):
@@ -125,34 +125,34 @@ class Avatar(GameObject):
     def held_item(self, item: Item | None) -> None:
         # If it's not an item, and it's not None, raise the error
         if item is not None and not isinstance(item, Item):
-            raise ValueError(f"{self.__class__.__name__}.held_item must be an Item or None.")
+            raise ValueError(f'{self.__class__.__name__}.held_item must be an Item or None.')
         self.__held_item: Item = item
 
     @score.setter
     def score(self, score: int) -> None:
         if score is None or not isinstance(score, int):
-            raise ValueError(f"{self.__class__.__name__}.score must be an int.")
+            raise ValueError(f'{self.__class__.__name__}.score must be an int.')
         self.__score: int = score
 
     @position.setter
     def position(self, position: Vector | None) -> None:
         if position is not None and not isinstance(position, Vector):
-            raise ValueError(f"{self.__class__.__name__}.position must be a Vector or None.")
+            raise ValueError(f'{self.__class__.__name__}.position must be a Vector or None.')
         self.__position: Vector | None = position
 
     @inventory.setter
     def inventory(self, inventory: list[Item]) -> None:
         if inventory is None or not isinstance(inventory, list) \
                 or (len(inventory) > 0 and any(map(lambda item: not isinstance(item, Item), inventory))):
-            raise ValueError(f"{self.__class__.__name__}.inventory must be a list of Items.")
+            raise ValueError(f'{self.__class__.__name__}.inventory must be a list of Items.')
         if len(inventory) > self.max_inventory_size:
-            raise ValueError(f"{self.__class__.__name__}.inventory size must be less than max_inventory_size")
+            raise ValueError(f'{self.__class__.__name__}.inventory size must be less than max_inventory_size')
         self.__inventory: list[Item] = inventory
 
     @max_inventory_size.setter
     def max_inventory_size(self, size: int) -> None:
         if size is None or not isinstance(size, int):
-            raise ValueError(f"{self.__class__.__name__}.max_inventory_size must be an int.")
+            raise ValueError(f'{self.__class__.__name__}.max_inventory_size must be an int.')
         self.__max_inventory_size: int = size
 
     def pick_up(self, item: Item) -> Item | None:
@@ -169,7 +169,7 @@ class Avatar(GameObject):
         data: dict = super().to_json()
         data['held_item'] = self.held_item.to_json() if self.held_item is not None else None
         data['score'] = self.score
-        data['position'] = self.position
+        data['position'] = self.position.to_json() if self.position is not None else None 
         data['inventory'] = self.inventory
         data['max_inventory_size'] = self.max_inventory_size
         return data
@@ -177,7 +177,7 @@ class Avatar(GameObject):
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
         self.score: int = data['score']
-        self.position: Vector | None = data['position']
+        self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
         self.inventory: list[Item] = data['inventory']
         self.max_inventory_size: int = data['max_inventory_size']
         held_item: Item | None = data['held_item']
@@ -189,6 +189,6 @@ class Avatar(GameObject):
             case ObjectType.ITEM:
                 self.held_item = Item().from_json(data['held_item'])
             case _:
-                raise ValueError(f"{self.__class__.__name__}.held_item needs to be an item.")
+                raise ValueError(f'{self.__class__.__name__}.held_item needs to be an item.')
 
         return self

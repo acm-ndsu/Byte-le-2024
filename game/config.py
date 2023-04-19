@@ -39,6 +39,6 @@ GAME_MAP_FILE = os.path.join(GAME_MAP_DIR, GAME_MAP_FILE_NAME)      # Filepath f
 
 
 class Debug:                    # Keeps track of the current debug level of the game
-    level = DebugLevel.none
+    level = DebugLevel.NONE
 
 # Other Settings Here --------------------------------------------------------------------------------------------------
