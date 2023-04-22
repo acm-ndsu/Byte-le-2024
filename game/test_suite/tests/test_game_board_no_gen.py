@@ -5,11 +5,10 @@ from game.common.avatar import Avatar
 from game.common.items.item import Item
 from game.common.stations.station import Station
 from game.common.stations.occupiable_station import Occupiable_Station
-from game.common.map.tile import Tile
 from game.common.map.wall import Wall
 from game.utils.vector import Vector
 from game.common.game_object import GameObject
-from game.common.game_board import GameBoard
+from game.common.map.game_board import GameBoard
 
 # class to test initalization of game_board
 class TestGameBoard(unittest.TestCase):
