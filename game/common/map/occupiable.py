@@ -3,25 +3,31 @@ from game.common.game_object import GameObject
 from game.common.items.item import Item
 from typing import Self
 
-"""This object exists to encapsulate all objects that could be placed on the gameboard"""
+
 class Occupiable(GameObject):
+    """
+    This object exists to encapsulate all objects that could be placed on the gameboard.
+
+    Occupiable objects can only be occupied by GameObjects. None is acceptable for this too. Item inherits
+    from GameObjects, but it is not allowed to be on an Occupiable object.
+    """
+
     def __init__(self, occupied_by: GameObject = None, **kwargs):
         super().__init__()
         self.object_type: ObjectType = ObjectType.OCCUPIABLE
-        self.occupied_by: GameObject|None = occupied_by
-
+        self.occupied_by: GameObject | None = occupied_by
 
     @property
-    def occupied_by(self) -> GameObject|None:
+    def occupied_by(self) -> GameObject | None:
         return self.__occupied_by
 
     @occupied_by.setter
-    def occupied_by(self, occupied_by: GameObject|None) -> None:
+    def occupied_by(self, occupied_by: GameObject | None) -> None:
         if occupied_by is not None and isinstance(occupied_by, Item):
             raise ValueError(f'{self.__class__.__name__}.occupied_by cannot be an Item.')
         if occupied_by is not None and not isinstance(occupied_by, GameObject):
             raise ValueError(f'{self.__class__.__name__}.occupied_by must be None or an instance of GameObject.')
-        self.__occupied_by = occupied_by  
+        self.__occupied_by = occupied_by
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
@@ -31,4 +37,3 @@ class Occupiable(GameObject):
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
         return self
-        

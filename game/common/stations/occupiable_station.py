@@ -29,7 +29,6 @@ class OccupiableStation(Occupiable, Station):
             case ObjectType.STATION:
                 self.occupied_by: Station = Station().from_json(data['occupied_by'])
             case _:
-                raise Exception(f'Could not parse occupied_by: {self.occupied_by}')                  
+                raise Exception(f'Could not parse occupied_by: {self.occupied_by}')
         return self
 
-        

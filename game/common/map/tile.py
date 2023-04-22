@@ -8,8 +8,13 @@ from game.common.map.wall import Wall
 from typing import Self
 
 
-"""This object exists to encapsulate all objects that could be placed on the gameboard"""
 class Tile(Occupiable):
+    """
+    This object exists to encapsulate all objects that could be placed on the gameboard.
+
+    Tiles will represent things like the floor in the game. They inherit from Occupiable, which allows for tiles to
+    have certain GameObjects and the avatar in it.
+    """
     def __init__(self, occupied_by: GameObject = None):
         super().__init__()
         self.object_type: ObjectType = ObjectType.TILE

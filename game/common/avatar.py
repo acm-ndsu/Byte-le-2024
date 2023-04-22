@@ -6,7 +6,7 @@ from typing import Self
 
 
 class Avatar(GameObject):
-    '''
+    """
     Notes for the inventory:
 
     The avatar's inventory is a list of items. Each item has a quantity and a stack_size (the max amount of an
@@ -89,7 +89,7 @@ class Avatar(GameObject):
             picked_up_item is left where it was first found.
         Inventory after:
         [inventory_item (5/5), inventory_item (5/5) inventory_item (5/5) inventory_item (5/5), inventory_item (5/5)]
-    '''
+    """
 
     def __init__(self, item: Item | None = None, position: Vector | None = None, inventory: list[Item] = [],
                  max_inventory_size: int = 10):
