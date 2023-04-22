@@ -7,7 +7,7 @@ from game.common.map.game_board import GameBoard
 class Controller:
 
     def __init__(self):
-        self.debug_level = DebugLevel.controller
+        self.debug_level = DebugLevel.CONTROLLER
         self.debug = False
 
     def handle_actions(self, action: ActionType, client: Player, world: GameBoard):

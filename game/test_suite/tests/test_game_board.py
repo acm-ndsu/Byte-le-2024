@@ -4,7 +4,8 @@ from game.common.enums import ObjectType
 from game.common.avatar import Avatar
 from game.common.items.item import Item
 from game.common.stations.station import Station
-from game.common.stations.occupiable_station import Occupiable_Station
+from game.common.stations.occupiable_station import OccupiableStation
+from game.common.map.tile import Tile
 from game.common.map.wall import Wall
 from game.utils.vector import Vector
 from game.common.game_object import GameObject
@@ -18,7 +19,7 @@ class TestGameBoard(unittest.TestCase):
         self.avatar: Avatar = Avatar(None, Vector(5, 5))
         self.locations: dict[tuple[Vector]:list[GameObject]] = {
             (Vector(1, 1),):[Station(None)],
-            (Vector(1, 2), Vector(1, 3)):[Occupiable_Station(self.item), Station(None)],
+            (Vector(1, 2), Vector(1, 3)):[OccupiableStation(self.item), Station(None)],
             (Vector(5, 5),):[self.avatar],
             (Vector(5, 6),):[self.wall]
         }
@@ -63,8 +64,8 @@ class TestGameBoard(unittest.TestCase):
         
     # test that get_objects works correctly with occupiable stations
     def test_get_objects_occupiable_station(self):
-        occupiable_stations: list[Occupiable_Station] = self.game_board.get_objects(ObjectType.OCCUPIABLE_STATION)
-        self.assertTrue(all(map(lambda occupiable_station: isinstance(occupiable_station, Occupiable_Station), occupiable_stations)))
+        occupiable_stations: list[OccupiableStation] = self.game_board.get_objects(ObjectType.OCCUPIABLE_STATION)
+        self.assertTrue(all(map(lambda occupiable_station: isinstance(occupiable_station, OccupiableStation), occupiable_stations)))
         self.assertEqual(len(occupiable_stations), 1)
 
     # test that get_objects works correctly with avatar

@@ -68,7 +68,7 @@ class Player(GameObject):
 
     @object_type.setter
     def object_type(self, object_type: ObjectType) -> None:
-        if object_type is None or not isinstance(object_type, GameObject):
+        if object_type is None or not isinstance(object_type, ObjectType):
             raise ValueError(f'{self.__class__.__name__}.object_type must be ObjectType')
         self.__object_type = object_type
 

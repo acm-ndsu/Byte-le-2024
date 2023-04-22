@@ -36,5 +36,4 @@ class InteractController(Controller):
 
         if stat is not None and isinstance(stat, Station):
             result: Item | None = stat.take_action(client.avatar)
-
-        client.avatar.held_item = result
+            client.avatar.held_item = result

@@ -69,7 +69,7 @@ class TestAvatar(unittest.TestCase):
 
         # test json method
 
-    def testAvatarJson(self):
+    def test_avatar_json(self):
         self.avatar.held_item = self.item
         self.avatar.position = Vector(10, 10)
         data: dict = self.avatar.to_json()

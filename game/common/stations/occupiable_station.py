@@ -7,10 +7,12 @@ from game.common.game_object import GameObject
 from typing import Self
 
 # create station object that contains occupied_by
-class Occupiable_Station(Occupiable, Station):
-    def __init__(self, item: Item = None, occupied_by: GameObject = None):
-        super().__init__(occupied_by=occupied_by, item=item)
+class OccupiableStation(Occupiable, Station):
+    def __init__(self, held_item: Item | None = None, occupied_by: GameObject | None = None):
+        super().__init__(occupied_by=occupied_by, held_item=held_item)
         self.object_type: ObjectType = ObjectType.OCCUPIABLE_STATION
+        self.held_item = held_item
+        self.occupied_by = occupied_by
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
@@ -23,7 +25,7 @@ class Occupiable_Station(Occupiable, Station):
             case ObjectType.AVATAR:
                 self.occupied_by: Avatar = Avatar().from_json(data['occupied_by'])
             case ObjectType.OCCUPIABLE_STATION:
-                self.occupied_by: Occupiable_Station = Occupiable_Station().from_json(data['occupied_by'])
+                self.occupied_by: OccupiableStation = OccupiableStation().from_json(data['occupied_by'])
             case ObjectType.STATION:
                 self.occupied_by: Station = Station().from_json(data['occupied_by'])
             case _:
