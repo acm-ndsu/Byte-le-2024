@@ -5,6 +5,11 @@ from game.common.enums import *
 
 
 class Player(GameObject):
+    """
+    The Player class is what represents the team that's competing. The player can contain a list of Actions to
+    execute each turn. The avatar is what's used to execute actions (e.g., interacting with stations, picking up
+    items, etc.).
+    """
     def __init__(self, code: object | None = None, team_name: str | None = None, actions: list[ActionType] = [],
                  avatar: Avatar | None = None):
         super().__init__()
@@ -37,7 +42,7 @@ class Player(GameObject):
         return self.__functional
 
     @functional.setter  # do this for all the setters
-    def functional(self, functional: bool) -> None:  # this enforces the type intting
+    def functional(self, functional: bool) -> None:  # this enforces the type hinting
         if functional is None or not isinstance(functional, bool):  # if this statement is true throw an error
             raise ValueError(f'{self.__class__.__name__}.functional must be a boolean')
         self.__functional = functional

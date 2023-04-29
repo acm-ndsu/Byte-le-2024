@@ -6,8 +6,13 @@ from game.common.stations.station import Station
 from game.common.game_object import GameObject
 from typing import Self
 
+
 # create station object that contains occupied_by
 class OccupiableStation(Occupiable, Station):
+    """
+    Occupiable Stations are stations that can have things in them, including the player. These can be created to have
+    items the player can take, or it can be occupied by any other GameObject.
+    """
     def __init__(self, held_item: Item | None = None, occupied_by: GameObject | None = None):
         super().__init__(occupied_by=occupied_by, held_item=held_item)
         self.object_type: ObjectType = ObjectType.OCCUPIABLE_STATION
@@ -31,4 +36,3 @@ class OccupiableStation(Occupiable, Station):
             case _:
                 raise Exception(f'Could not parse occupied_by: {self.occupied_by}')
         return self
-
