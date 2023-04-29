@@ -309,6 +309,6 @@ class Engine:
 
     # Debug print statement
     def debug(*args):
-        if Debug.level >= DebugLevel.engine:
+        if Debug.level >= DebugLevel.ENGINE:
             print('Engine: ', end='')
             print(*args)

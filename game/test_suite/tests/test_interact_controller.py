@@ -13,8 +13,12 @@ from game.common.action import ActionType
 from game.common.player import Player
 from game.common.enums import ObjectType
 
-# class to test the interact_controller 
+
 class TestInteractController(unittest.TestCase):
+    """
+    This class is to test the InteractController class and its methods.
+    """
+
     def setUp(self) -> None:
         self.interact_controller: InteractController = InteractController()
         self.item: Item = Item(10, None)
@@ -22,12 +26,12 @@ class TestInteractController(unittest.TestCase):
         self.occupiable_station: OccupiableStation = OccupiableStation(self.item)
         self.avatar: Avatar = Avatar(None, Vector(5, 5))
         self.locations: dict[tuple[Vector]:list[GameObject]] = {
-            (Vector(1, 1),):[Station(None)],
-            (Vector(5, 4),):[self.occupiable_station],
-            (Vector(6, 5),):[Station(self.item)],
-            (Vector(4, 5),):[Station(None)],
-            (Vector(5, 5),):[self.avatar],
-            (Vector(5, 6),):[self.wall]
+            (Vector(1, 1),): [Station(None)],
+            (Vector(5, 4),): [self.occupiable_station],
+            (Vector(6, 5),): [Station(self.item)],
+            (Vector(4, 5),): [Station(None)],
+            (Vector(5, 5),): [self.avatar],
+            (Vector(5, 6),): [self.wall]
         }
         self.game_board: GameBoard = GameBoard(1, Vector(10, 10), self.locations, False)
         self.player: Player = Player(None, None, [], self.avatar)
@@ -43,7 +47,7 @@ class TestInteractController(unittest.TestCase):
         self.interact_controller.handle_actions(ActionType.INTERACT_UP, self.player, self.game_board)
         self.assertEqual(self.avatar.held_item.object_type, ObjectType.ITEM)
 
-    # interact and pick up from an station
+    # interact and pick up from a station
     def test_interact_item_station(self):
         self.interact_controller.handle_actions(ActionType.INTERACT_RIGHT, self.player, self.game_board)
         self.assertEqual(self.avatar.held_item.object_type, ObjectType.ITEM)

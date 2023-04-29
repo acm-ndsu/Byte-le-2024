@@ -124,6 +124,8 @@ class Player(GameObject):
     def __str__(self):
         p = f"""ID: {self.id}
             Team name: {self.team_name}
-            Action: {self.action}
+            Actions: 
             """
+        # This concatenates every action from the list of actions to the string 
+        [p:= p + action for action in self.actions]
         return p

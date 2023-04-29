@@ -7,8 +7,12 @@ from game.common.avatar import Avatar
 from game.common.items.item import Item
 from game.common.enums import ObjectType
 
-# class that tests occupiable_station and its methods
+
 class TestOccupiableStation(unittest.TestCase):
+    """
+    This class is to test the OccupiableStation class and its methods.
+    """
+
     def setUp(self) -> None:
         self.occupiable_station: OccupiableStation = OccupiableStation()
         self.occupiable_station1: OccupiableStation = OccupiableStation()
@@ -16,17 +20,17 @@ class TestOccupiableStation(unittest.TestCase):
         self.station: Station = Station()
         self.avatar: Avatar = Avatar()
         self.item: Item = Item()
-    
+
     # test adding wall to occupiable_station
     def test_wall_occ(self):
         self.occupiable_station.occupied_by = self.wall
         self.assertEqual(self.occupiable_station.occupied_by.object_type, ObjectType.WALL)
-    
+
     # test adding station to occupiable_station
     def test_station_occ(self):
         self.occupiable_station.occupied_by = self.station
         self.assertEqual(self.occupiable_station.occupied_by.object_type, ObjectType.STATION)
-    
+
     # test adding avatar to occupiable_station
     def test_avatar_occ(self):
         self.occupiable_station.occupied_by = self.avatar
@@ -52,7 +56,7 @@ class TestOccupiableStation(unittest.TestCase):
         occupiable_station: OccupiableStation = OccupiableStation().from_json(data)
         self.assertEqual(self.occupiable_station.object_type, occupiable_station.object_type)
         self.assertEqual(self.occupiable_station.occupied_by.object_type, occupiable_station.occupied_by.object_type)
-    
+
     # test json method with nested occupiable_station
     def test_nested_occ_json(self):
         self.occupiable_station.occupied_by = self.occupiable_station1
@@ -61,5 +65,6 @@ class TestOccupiableStation(unittest.TestCase):
         occupiable_station: OccupiableStation = OccupiableStation().from_json(data)
         self.assertEqual(self.occupiable_station.object_type, occupiable_station.object_type)
         self.assertEqual(self.occupiable_station.occupied_by.object_type, occupiable_station.occupied_by.object_type)
-        assert(isinstance(occupiable_station.occupied_by, OccupiableStation))
-        self.assertEqual(self.occupiable_station.occupied_by.occupied_by.object_type, occupiable_station.occupied_by.occupied_by.object_type)
+        assert (isinstance(occupiable_station.occupied_by, OccupiableStation))
+        self.assertEqual(self.occupiable_station.occupied_by.occupied_by.object_type,
+                         occupiable_station.occupied_by.occupied_by.object_type)

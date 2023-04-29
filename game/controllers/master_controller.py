@@ -15,6 +15,43 @@ from game.config import MAX_NUMBER_OF_ACTIONS_PER_TURN
 
 
 class MasterController(Controller):
+    """
+    give_client_objects:
+        Takes a list of Player objects and places it in the game world.
+
+    ----------------------------------------------------------------------------------------------------------------
+
+    game_loop_logic:
+        Increments the turn count as the game plays (look at the engine to see how it's controlled more).
+
+    ----------------------------------------------------------------------------------------------------------------
+
+    interpret_current_turn_data:
+        This accesses the game_board in the first turn of the game and generates the game's seed.
+
+    ----------------------------------------------------------------------------------------------------------------
+
+    client_turn_arguments:
+        There are lines of code commented out that create Action Objects instead of using the enum. If your project
+        needs Actions Objects instead of the enums, comment out the enums and use Objects as necessary.
+
+    ----------------------------------------------------------------------------------------------------------------
+
+    turn_logic:
+        This method executes every movement and interact behavior from every client in the game.
+
+    ----------------------------------------------------------------------------------------------------------------
+
+    create_turn_log:
+        This method creates a dictionary that stores the turn, all client objects, and game_board's JSON file to
+        be used as the turn log.
+
+    ----------------------------------------------------------------------------------------------------------------
+
+    return_final_results:
+        This method creates a dictionary that stores a list of clients' JSON files. This represents the final
+        results of the game.
+    """
     def __init__(self):
         super().__init__()
         self.game_over: bool = False
@@ -29,7 +66,7 @@ class MasterController(Controller):
     def give_clients_objects(self, clients: list[Player], world: dict):
         # starting_positions = [[3, 3], [3, 9]]   # would be done in generate game
         for index, client in enumerate(clients):
-            client.avatar: Avatar = Avatar(position=world[index])
+            client.avatar = Avatar(position=world[index])
 
     # Generator function. Given a key:value pair where the key is the identifier for the current world and the value is
     # the state of the world, returns the key that will give the appropriate world information
@@ -47,7 +84,7 @@ class MasterController(Controller):
     def interpret_current_turn_data(self, clients: list[Player], world: dict, turn):
         self.current_world_data = world
         if turn == 1:
-            random.seed(world["game_board"].seed)
+            random.seed(world['game_board'].seed)
             # self.event_times = random.randrange(162, 172), random.randrange(329, 339)
 
     # Receive a specific client and send them what they get per turn. Also obfuscates necessary objects.
@@ -84,7 +121,7 @@ class MasterController(Controller):
         # event type.example is just a placeholder for now
 
     # Return serialized version of game
-    def create_turn_log(self, clients: list[Player], turn):
+    def create_turn_log(self, clients: list[Player], turn: int):
         data = dict()
         data['tick'] = turn
         data['clients'] = [client.to_json() for client in clients]

@@ -11,20 +11,23 @@ from game.utils.vector import Vector
 from game.common.game_object import GameObject
 from game.common.map.game_board import GameBoard
 
-# class to test initalization of game_board
+
 class TestGameBoard(unittest.TestCase):
+    """
+    This class is to test the GameBoard class and its methods *without* the map being generated.
+    """
     def setUp(self) -> None:
         self.item: Item = Item(10, None)
         self.wall: Wall = Wall()
         self.avatar: Avatar = Avatar(None, Vector(5, 5))
         self.locations: dict[tuple[Vector]:list[GameObject]] = {
-            (Vector(1, 1),):[Station(None)],
-            (Vector(1, 2), Vector(1, 3)):[OccupiableStation(self.item), Station(None)],
-            (Vector(5, 5),):[self.avatar],
-            (Vector(5, 6),):[self.wall]
+            (Vector(1, 1),): [Station(None)],
+            (Vector(1, 2), Vector(1, 3)): [OccupiableStation(self.item), Station(None)],
+            (Vector(5, 5),): [self.avatar],
+            (Vector(5, 6),): [self.wall]
         }
         self.game_board: GameBoard = GameBoard(1, Vector(10, 10), self.locations, False)
-    
+
     # test seed
     def test_seed(self):
         self.game_board.seed = 2
@@ -48,10 +51,10 @@ class TestGameBoard(unittest.TestCase):
     # test locations
     def test_locations(self):
         self.locations = {
-            (Vector(1, 1),):[self.avatar],
-            (Vector(1, 2), Vector(1, 3)):[OccupiableStation(self.item), Station(None)],
-            (Vector(5, 5),):[Station(None)],
-            (Vector(5, 6),):[self.wall]
+            (Vector(1, 1),): [self.avatar],
+            (Vector(1, 2), Vector(1, 3)): [OccupiableStation(self.item), Station(None)],
+            (Vector(5, 5),): [Station(None)],
+            (Vector(5, 6),): [self.wall]
         }
         self.game_board.locations = self.locations
         self.assertEqual(str(self.game_board.locations), str(self.locations))
@@ -59,18 +62,20 @@ class TestGameBoard(unittest.TestCase):
     def test_locations_fail_type(self):
         with self.assertRaises(ValueError) as e:
             self.game_board.locations = "wow"
-        self.assertEqual(str(e.exception), 'Locations must be a dict. The key must be a tuple of Vector Objects, and the value a list of GameObject.')
+        self.assertEqual(str(e.exception), 'Locations must be a dict. The key must be a tuple of Vector Objects, '
+                                           'and the value a list of GameObject.')
 
     def test_locations_fail_len(self):
         with self.assertRaises(ValueError) as e:
             self.locations = {
-            (Vector(1, 1),):[],
-            (Vector(1, 2), Vector(1, 3)):[OccupiableStation(self.item), Station(None)],
-            (Vector(5, 5),):[Station(None)],
-            (Vector(5, 6),):[self.wall]
-        }
+                (Vector(1, 1),): [],
+                (Vector(1, 2), Vector(1, 3)): [OccupiableStation(self.item), Station(None)],
+                (Vector(5, 5),): [Station(None)],
+                (Vector(5, 6),): [self.wall]
+            }
             self.game_board.locations = self.locations
-        self.assertEqual(str(e.exception), 'Cannot set the locations for the game_board. A key has a different length than its key.')
+        self.assertEqual(str(e.exception), 'Cannot set the locations for the game_board. A key has a different length '
+                                           'than its key.')
 
     # test walled
     def test_walled(self):
@@ -93,7 +98,7 @@ class TestGameBoard(unittest.TestCase):
 
     def test_generate_map(self):
         self.game_board.generate_map()
-        self.assertEqual(self.game_board.game_map[1][1].occupied_by.object_type, ObjectType.STATION) 
+        self.assertEqual(self.game_board.game_map[1][1].occupied_by.object_type, ObjectType.STATION)
         self.assertEqual(self.game_board.game_map[2][1].occupied_by.object_type, ObjectType.OCCUPIABLE_STATION)
         self.assertEqual(self.game_board.game_map[3][1].occupied_by.object_type, ObjectType.STATION)
         self.assertEqual(self.game_board.game_map[5][5].occupied_by.object_type, ObjectType.AVATAR)

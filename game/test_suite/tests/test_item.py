@@ -4,8 +4,12 @@ from game.common.avatar import Avatar
 from game.common.items.item import Item
 from game.common.enums import ObjectType
 
-# class to test the item class and its methods
+
 class TestItem(unittest.TestCase):
+    """
+    This class is to test the Item class and its methods.
+    """
+
     def setUp(self) -> None:
         self.avatar: Avatar = Avatar(None, None, [], 1)
         self.item: Item = Item()

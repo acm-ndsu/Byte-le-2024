@@ -8,6 +8,20 @@ from game.utils.vector import Vector
 
 
 class InteractController(Controller):
+    """
+    The Interact Controller manages the actions the player tries to execute. As the game is played, a player can
+    interact with their surrounding, adjacent stations and the space they're currently standing on.
+
+    x x x x x x
+    x         x
+    x   o     x
+    x o P o   x
+    x   o     x
+    x x x x x x
+
+    The given visual shows how players can interact. "P" represents the player; "o" represents the spaces that can be
+    interacted with (included where the "P" is); and "x" represents the walls and map border.
+    """
 
     def __init__(self):
         super().__init__()

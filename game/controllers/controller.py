@@ -5,7 +5,10 @@ from game.common.map.game_board import GameBoard
 
 
 class Controller:
-
+    """
+    This class is a super class for every controller type that's necessary. Refer to the other controller files for
+    a more detailed description on how they work.
+    """
     def __init__(self):
         self.debug_level = DebugLevel.CONTROLLER
         self.debug = False

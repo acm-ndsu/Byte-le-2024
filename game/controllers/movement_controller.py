@@ -7,6 +7,14 @@ from game.utils.vector import Vector
 
 
 class MovementController(Controller):
+    """
+    The Movement Controller manages the movement actions the player tries to execute. Players can move up, down,
+    left, and right. If the player tries to move into a space that's impassable, they don't move.
+
+    For example, if the player attempts to move into an Occupiable Station (something the player can be on) that is
+    occupied by a Wall object (something the player can't be on), the player doesn't move. That is, if the player
+    tries to move into anything that can't be occupied by something, they won't move.
+    """
 
     def __init__(self):
         super().__init__()

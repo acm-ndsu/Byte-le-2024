@@ -7,8 +7,11 @@ from game.common.stations.occupiable_station import OccupiableStation
 from game.common.avatar import Avatar
 from game.common.enums import ObjectType
 
-# class that tests the tile class and its methods
+
 class TestTile(unittest.TestCase):
+    """
+    This class is to test the Tile class and its methods.
+    """
     def setUp(self) -> None:
         self.tile: Tile = Tile()
         self.wall: Wall = Wall()
@@ -25,7 +28,7 @@ class TestTile(unittest.TestCase):
     def test_station_tile(self):
         self.tile.occupied_by = self.station
         self.assertEqual(self.tile.occupied_by.object_type, ObjectType.STATION)
-    
+
     # test adding occupiable_station to tile
     def test_occupiable_station_tile(self):
         self.tile.occupied_by = self.occupiable_station
@@ -52,5 +55,5 @@ class TestTile(unittest.TestCase):
         tile: Tile = Tile().from_json(data)
         self.assertEqual(self.tile.object_type, tile.object_type)
         self.assertEqual(self.tile.occupied_by.object_type, tile.occupied_by.object_type)
-        assert(isinstance(tile.occupied_by, OccupiableStation))
+        assert (isinstance(tile.occupied_by, OccupiableStation))
         self.assertEqual(self.tile.occupied_by.occupied_by.object_type, tile.occupied_by.occupied_by.object_type)

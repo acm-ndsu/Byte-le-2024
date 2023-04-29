@@ -5,8 +5,11 @@ from game.common.items.item import Item
 from game.utils.vector import Vector
 
 
-# class to test the avatar class and its methods
 class TestAvatar(unittest.TestCase):
+    """
+    This class is to test the Avatar class and its methods.
+    """
+
     def setUp(self) -> None:
         self.avatar: Avatar = Avatar(None, None, [], 1)
         self.item: Item = Item(10, 100, 1, 1)
