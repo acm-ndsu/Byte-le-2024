@@ -1,9 +1,9 @@
-from game.controllers.controller import Controller
 from game.common.player import Player
 from game.common.map.game_board import GameBoard
 from game.common.map.tile import Tile
 from game.common.enums import *
 from game.utils.vector import Vector
+from game.controllers.controller import Controller
 
 
 class MovementController(Controller):
@@ -52,4 +52,4 @@ class MovementController(Controller):
             temp = temp.occupied_by
 
         temp.occupied_by = None
-        client.avatar.position = (temp_vec.x, temp_vec.y)
+        client.avatar.position = Vector(temp_vec.x, temp_vec.y)
