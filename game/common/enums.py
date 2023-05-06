@@ -28,6 +28,9 @@ class ObjectType(Enum):
     OCCUPIABLE = auto()
     STATION = auto()
     OCCUPIABLE_STATION = auto()
+    STATION_EXAMPLE = auto()
+    STATION_RECEIVER_EXAMPLE = auto()
+    OCCUPIABLE_STATION_EXAMPLE = auto()
 
 
 class ActionType(Enum):

@@ -28,9 +28,9 @@ class Station(GameObject):
             raise ValueError(f'{self.__class__.__name__}.held_item must be an Item or None, not {held_item}.')
         self.__item = held_item
 
-    # take action method
+    # base of take action method, defined in classes that extend Station (StationExample demonstrates this) 
     def take_action(self, avatar: Avatar) -> Item | None:
-        return self.held_item
+        pass
 
     # json methods
     def to_json(self) -> dict:
@@ -47,9 +47,9 @@ class Station(GameObject):
             return self
 
         # framework match case for from json, can add more object types that can be item
-        match held_item['object_type']:
+        match ObjectType(held_item['object_type']):
             case ObjectType.ITEM:
-                self.held_item = Item().from_json(data['held_item'])
+                self.held_item = Item().from_json(held_item)
             case _:
-                raise Exception(f'Could not parse held_item: {self.held_item}')
+                raise Exception(f'Could not parse held_item: {held_item}')
         return self

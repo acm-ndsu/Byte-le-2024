@@ -19,7 +19,7 @@ class Player(GameObject):
         self.team_name: str | None = team_name
         self.code: object = code
         # self.action: Action = action
-        self.actions: list[ActionType] | list = actions
+        self.actions: list[ActionType] = actions
         self.avatar: Avatar | None = avatar
 
     @property
@@ -69,7 +69,7 @@ class Player(GameObject):
 
     @property
     def object_type(self) -> ObjectType:
-        return self.object_type
+        return self.__object_type
 
     @object_type.setter
     def object_type(self, object_type: ObjectType) -> None:
@@ -83,7 +83,7 @@ class Player(GameObject):
         data['functional'] = self.functional
         # data['error'] = self.error  # .to_json() if self.error is not None else None
         data['team_name'] = self.team_name
-        data['actions'] = self.actions
+        data['actions'] = [act.value for act in self.actions]
         data['avatar'] = self.avatar.to_json() if self.avatar is not None else None
 
         return data
@@ -95,7 +95,7 @@ class Player(GameObject):
         # self.error = data['error']  # .from_json(data['action']) if data['action'] is not None else None
         self.team_name = data['team_name']
 
-        self.actions: list[ActionType] | list = data['actions']
+        self.actions: list[ActionType] = [ObjectType(action) for action in data['actions']]
         avatar: Avatar | None = data['avatar']
         if avatar is None:
             self.avatar = None
@@ -110,7 +110,7 @@ class Player(GameObject):
         #         raise Exception(f'Could not parse action: {self.action}')
 
         # match case for avatar
-        match avatar['object_type']:
+        match ObjectType(avatar['object_type']):
             case ObjectType.AVATAR:
                 self.avatar = Avatar().from_json(data['avatar'])
             case None:

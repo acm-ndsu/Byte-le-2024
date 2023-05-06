@@ -185,10 +185,10 @@ class Avatar(GameObject):
             self.held_item = None
             return self
 
-        match held_item['object_type']:
+        match ObjectType(held_item['object_type']):
             case ObjectType.ITEM:
-                self.held_item = Item().from_json(data['held_item'])
+                self.held_item = Item().from_json(held_item)
             case _:
-                raise ValueError(f'{self.__class__.__name__}.held_item needs to be an item.')
+                raise ValueError(f'held_item needs to be an item, not {held_item}.')
 
         return self

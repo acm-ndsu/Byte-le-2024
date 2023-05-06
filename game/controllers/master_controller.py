@@ -12,6 +12,7 @@ from game.controllers.controller import Controller
 from game.controllers.interact_controller import InteractController
 from game.common.map.game_board import GameBoard
 from game.config import MAX_NUMBER_OF_ACTIONS_PER_TURN
+from game.utils.vector import Vector 
 
 
 class MasterController(Controller):
@@ -65,8 +66,12 @@ class MasterController(Controller):
     # Receives all clients for the purpose of giving them the objects they will control
     def give_clients_objects(self, clients: list[Player], world: dict):
         # starting_positions = [[3, 3], [3, 9]]   # would be done in generate game
-        for index, client in enumerate(clients):
-            client.avatar = Avatar(position=world[index])
+        gb: GameBoard = world['game_board']
+        avatars: list[Avatar] = gb.get_objects(ObjectType.AVATAR)
+        for avatar, client in zip(avatars,clients):
+            avatar.position = Vector(1,1)
+            client.avatar = avatar
+            
 
     # Generator function. Given a key:value pair where the key is the identifier for the current world and the value is
     # the state of the world, returns the key that will give the appropriate world information
@@ -108,8 +113,14 @@ class MasterController(Controller):
     def turn_logic(self, clients: list[Player], turn):
         for client in clients:
             for i in range(MAX_NUMBER_OF_ACTIONS_PER_TURN):
-                self.movement_controller.handle_actions(client.actions[i], client, self.current_world_data["game_board"])
-                self.interact_controller.handle_actions(client.actions[i], client, self.current_world_data["game_board"])
+                try:
+                    self.movement_controller.handle_actions(client.actions[i], client, self.current_world_data["game_board"])
+                except IndexError:
+                    pass
+                try:
+                    self.interact_controller.handle_actions(client.actions[i], client, self.current_world_data["game_board"])
+                except IndexError:
+                    pass
         # checks event logic at the end of round
         # self.handle_events(clients)
 

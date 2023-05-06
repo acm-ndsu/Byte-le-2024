@@ -4,7 +4,7 @@ from game.config import Debug
 
 class UserClient:
     def __init__(self):
-        self.debug_level = DebugLevel.client
+        self.debug_level = DebugLevel.CLIENT
         self.debug = True
 
     def print(self, *args):
@@ -15,5 +15,5 @@ class UserClient:
     def team_name(self):
         return "No_Team_Name_Available"
 
-    def take_turn(self, turn, actions, world):
+    def take_turn(self, turn, actions, world, avatar):
         raise NotImplementedError("Implement this in subclass")

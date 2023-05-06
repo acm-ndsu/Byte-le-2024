@@ -60,7 +60,7 @@ class Item(GameObject):
         *** Refer to avatar.py for a more in-depth explanation of how picking up items work with examples. ***
     """
 
-    def __init__(self, value: int = 1, durability: int | None = 100, quantity: int = 1, stack_size: int = 1):
+    def __init__(self, value: int = 1, durability: int | None = None, quantity: int = 1, stack_size: int = 1):
         super().__init__()
         self.__quantity = None  # This is here to prevent an error
         self.__durability = None  # This is here to prevent an error
@@ -87,7 +87,7 @@ class Item(GameObject):
         return self.__stack_size
 
     @durability.setter
-    def durability(self, durability: int | None):
+    def durability(self, durability: int | None) -> None:
         if durability is not None and not isinstance(durability, int):
             raise ValueError(f'{self.__class__.__name__}.durability must be an int or None.')
         if durability is not None and self.stack_size != 1:
@@ -145,16 +145,16 @@ class Item(GameObject):
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
+        data['stack_size'] = self.stack_size
         data['durability'] = self.durability
         data['value'] = self.value
         data['quantity'] = self.quantity
-        data['stack_size'] = self.stack_size
         return data
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
         self.durability: int | None = data['durability']
-        self.value: int = data['value']
-        self.quantity: int = data['quantity']
         self.stack_size: int = data['stack_size']
+        self.quantity: int = data['quantity']
+        self.value: int = data['value']
         return self

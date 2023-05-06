@@ -263,7 +263,8 @@ class GameBoard(GameObject):
         self.event_active = random.randint(start, end)
 
     def __from_json_helper(self, data: dict) -> GameObject:
-        match data['object_type']:
+        temp:ObjectType = ObjectType(data['object_type'])
+        match temp:
             case ObjectType.WALL:
                 return Wall().from_json(data)
             case ObjectType.OCCUPIABLE_STATION:
@@ -287,6 +288,6 @@ class GameBoard(GameObject):
             zip(data["location_vectors"], data["location_objects"])} if data["location_vectors"] is not None else None
         self.walled: bool = data["walled"]
         self.event_active: int = data['event_active']
-        self.game_map: list[list[Tile]] = list(
-            list(map(lambda tile: Tile().from_json(tile), y)) for y in temp) if temp is not None else None
+        self.game_map: list[list[Tile]] = [
+            [Tile().from_json(tile) for tile in y] for y in temp] if temp is not None else None
         return self

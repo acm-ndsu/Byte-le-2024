@@ -177,16 +177,11 @@ class Engine:
         # Increment the tick
         self.tick_number += 1
 
-        # Retrieve current world info
-        if self.current_world_key not in self.world:
-            raise KeyError('Given generated world key does not exist inside the world.')
-        current_world = self.world[self.current_world_key]
-
         # Send current world information to master controller for purposes
         if SET_NUMBER_OF_CLIENTS_START == 1:
-            self.master_controller.interpret_current_turn_data(self.clients[0], current_world, self.tick_number)
+            self.master_controller.interpret_current_turn_data(self.clients[0], self.world, self.tick_number)
         else:
-            self.master_controller.interpret_current_turn_data(self.clients, current_world, self.tick_number)
+            self.master_controller.interpret_current_turn_data(self.clients, self.world, self.tick_number)
 
     # Does actions like lets the player take their turn and asks master controller to perform game logic
     def tick(self):
