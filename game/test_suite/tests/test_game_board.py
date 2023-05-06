@@ -62,27 +62,27 @@ class TestGameBoard(unittest.TestCase):
 
     # test that get_objects works correctly with stations
     def test_get_objects_station(self):
-        stations: list[Station] = self.game_board.get_objects(ObjectType.STATION)
-        self.assertTrue(all(map(lambda station: isinstance(station, Station), stations)))
+        stations: list[tuple[Vector, list[Station]]] = self.game_board.get_objects(ObjectType.STATION)
+        self.assertTrue(all(map(lambda station: isinstance(station[1][0], Station), stations)))
         self.assertEqual(len(stations), 2)
 
     # test that get_objects works correctly with occupiable stations
     def test_get_objects_occupiable_station(self):
-        occupiable_stations: list[OccupiableStation] = self.game_board.get_objects(ObjectType.OCCUPIABLE_STATION)
+        occupiable_stations: list[tuple[Vector, list[OccupiableStation]]] = self.game_board.get_objects(ObjectType.OCCUPIABLE_STATION)
         self.assertTrue(
-            all(map(lambda occupiable_station: isinstance(occupiable_station, OccupiableStation), occupiable_stations)))
+            all(map(lambda occupiable_station: isinstance(occupiable_station[1][0], OccupiableStation), occupiable_stations)))
         self.assertEqual(len(occupiable_stations), 1)
 
     # test that get_objects works correctly with avatar
     def test_get_objects_avatar(self):
-        avatars: list[Avatar] = self.game_board.get_objects(ObjectType.AVATAR)
-        self.assertTrue(all(map(lambda avatar: isinstance(avatar, Avatar), avatars)))
+        avatars: list[tuple[Vector, list[Avatar]]] = self.game_board.get_objects(ObjectType.AVATAR)
+        self.assertTrue(all(map(lambda avatar: isinstance(avatar[1][0], Avatar), avatars)))
         self.assertEqual(len(avatars), 1)
 
     # test that get_objects works correctly with walls
     def test_get_objects_wall(self):
-        walls: list[Wall] = self.game_board.get_objects(ObjectType.WALL)
-        self.assertTrue(all(map(lambda wall: isinstance(wall, Wall), walls)))
+        walls: list[tuple[Vector, list[Wall]]] = self.game_board.get_objects(ObjectType.WALL)
+        self.assertTrue(all(map(lambda wall: isinstance(wall[1][0], Wall), walls)))
         self.assertEqual(len(walls), 1)
 
     # test json method
