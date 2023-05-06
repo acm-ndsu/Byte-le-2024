@@ -88,6 +88,7 @@ class MasterController(Controller):
     # Receives world data from the generated game log and is responsible for interpreting it
     def interpret_current_turn_data(self, clients: list[Player], world: dict, turn):
         self.current_world_data = world
+
         if turn == 1:
             random.seed(world['game_board'].seed)
             # self.event_times = random.randrange(162, 172), random.randrange(329, 339)
@@ -98,7 +99,7 @@ class MasterController(Controller):
         # client.action: Action = turn_action
         # ^if you want to use action as an object instead of an enum
 
-        turn_actions: list[ActionType] | list = []
+        turn_actions: list[ActionType] = []
         client.actions = turn_actions
 
         # Create deep copies of all objects sent to the player

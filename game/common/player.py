@@ -121,6 +121,7 @@ class Player(GameObject):
         # self.action = Action().from_json(data['action']) if data['action'] is not None else None
         # self.avatar = Avatar().from_json(data['avatar']) if data['avatar'] is not None else None
 
+# to String
     def __str__(self):
         p = f"""ID: {self.id}
             Team name: {self.team_name}
