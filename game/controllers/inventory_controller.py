@@ -30,6 +30,6 @@ class InventoryController(Controller):
         try:
             avatar.held_item = avatar.inventory[index]
         except IndexError:
-            raise IndexError(f'The given action type, {action}, is not within bounds of the given inventory of '
+            raise IndexError(f'The given action type, {action.name}, is not within bounds of the given inventory of '
                              f'size {len(avatar.inventory)}. Select an ActionType enum that will be within the '
                              f'inventory\'s bounds.')
