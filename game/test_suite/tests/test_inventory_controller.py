@@ -76,11 +76,13 @@ class TestInventoryController(unittest.TestCase):
         self.assertEqual(self.avatar.held_item, self.inventory[9])
         self.check_inventory_item()
 
+    # Testing using the inventory controller with the wrong ActionType
     def test_with_wrong_action_type(self):
         self.inventory_controller.handle_actions(ActionType.MOVE_LEFT, self.player, self.game_board)
-        self.assertEqual(self.avatar.held_item, None)
+        self.assertEqual(self.avatar.held_item, self.avatar.inventory[0])
         self.check_inventory_item()
 
+    # Tests accessing a slot of the inventory given an enum that's out of bounds
     def test_with_out_of_bounds(self):
         with self.assertRaises(IndexError) as e:
             self.inventory: [Item] = [Item(1), Item(2), Item(3), Item(4), Item(5)]
@@ -93,7 +95,7 @@ class TestInventoryController(unittest.TestCase):
                                            'that will be within the inventory\'s bounds.')
 
     def check_inventory_item(self):
-        # Test to make sure that the inventory hasn't shift items
+        # Test to make sure that the inventory hasn't shifted items
         self.assertEqual(self.avatar.inventory[0].value, 1)
         self.assertEqual(self.avatar.inventory[1].value, 2)
         self.assertEqual(self.avatar.inventory[2].value, 3)

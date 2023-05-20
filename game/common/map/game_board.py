@@ -102,7 +102,7 @@ class GameBoard(GameObject):
     """
 
     def __init__(self, seed: int | None = None, map_size: Vector = Vector(),
-                 locations: dict[tuple[Vector]:list[Tile]] | None = None, walled: bool = False):
+                 locations: dict[tuple[Vector]:list[GameObject]] | None = None, walled: bool = False):
 
         super().__init__()
         # game_map is initially going to be None. Since generation is slow, call generate_map() as needed
@@ -287,7 +287,7 @@ class GameBoard(GameObject):
         temp = data["game_map"]
         self.seed: int | None = data["seed"]
         self.map_size: Vector = Vector().from_json(data["map_size"])
-        self.locations: dict[tuple[Vector]:list[Tile]] = {
+        self.locations: dict[tuple[Vector]:list[GameObject]] = {
             tuple(map(lambda vec: Vector().from_json(vec), k)): [self.__from_json_helper(obj) for obj in v] for k, v in
             zip(data["location_vectors"], data["location_objects"])} if data["location_vectors"] is not None else None
         self.walled: bool = data["walled"]

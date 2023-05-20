@@ -105,8 +105,8 @@ class Item(GameObject):
     def quantity(self, quantity: int) -> None:
         if quantity is None or not isinstance(quantity, int):
             raise ValueError(f'{self.__class__.__name__}.quantity must be an int.')
-        if quantity <= 0:
-            raise ValueError(f'{self.__class__.__name__}.quantity must be greater than 0.')
+        if quantity < 0:
+            raise ValueError(f'{self.__class__.__name__}.quantity must be greater than or equal to 0.')
 
         # The self.quantity is set to the lower value between stack_size and the given quantity
         # The remaining given quantity is returned if it's larger than self.quantity
@@ -126,9 +126,37 @@ class Item(GameObject):
             raise ValueError(f'{self.__class__.__name__}.stack_size must be greater than or equal to the quantity.')
         self.__stack_size: int = stack_size
 
-    def pick_up(self, item: Self) -> Self | None:
-        if item is None or not isinstance(item, Item):
+    def take(self, item: Self) -> Self | None:
+        if item is not None and not isinstance(item, Item):
             raise ValueError(f'{item.__class__.__name__} is not of type Item.')
+
+        # If the item is None, just return None
+        if item is None:
+            return None
+
+        # If the items don't match, return the given item without modifications
+        if self.object_type != item.object_type:
+            return item
+
+        # If subtracting the given item's quantity from self's quantity is less than 0, raise an error
+        if self.quantity - item.quantity < 0:
+            item.quantity -= self.quantity
+            self.quantity = 0
+            return item
+
+        # Reduce self.quantity
+        self.quantity -= item.quantity
+        item.quantity = 0
+
+        return None
+
+    def pick_up(self, item: Self) -> Self | None:
+        if item is not None and not isinstance(item, Item):
+            raise ValueError(f'{item.__class__.__name__} is not of type Item.')
+
+        # If the item is None, just return None
+        if item is None:
+            return None
 
         # If the items don't match, return the given item without modifications
         if self.object_type != item.object_type:
@@ -142,6 +170,9 @@ class Item(GameObject):
 
         # Add the given item's quantity to the self item
         self.quantity += item.quantity
+        item.quantity = 0
+
+        return None
 
     def to_json(self) -> dict:
         data: dict = super().to_json()

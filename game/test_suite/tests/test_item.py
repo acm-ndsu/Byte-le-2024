@@ -11,7 +11,7 @@ class TestItem(unittest.TestCase):
     """
 
     def setUp(self) -> None:
-        self.avatar: Avatar = Avatar(None, None, [], 1)
+        self.avatar: Avatar = Avatar(None, 1)
         self.item: Item = Item()
 
     # test set durability
@@ -57,8 +57,8 @@ class TestItem(unittest.TestCase):
 
     def test_set_quantity_fail_greater_than_0(self):
         with self.assertRaises(ValueError) as e:
-            self.item.quantity = 0
-        self.assertEqual(str(e.exception), 'Item.quantity must be greater than 0.')
+            self.item.quantity = -1
+        self.assertEqual(str(e.exception), 'Item.quantity must be greater than or equal to 0.')
 
     def test_set_quantity_fail_stack_size(self):
         with self.assertRaises(ValueError) as e:
@@ -88,11 +88,6 @@ class TestItem(unittest.TestCase):
         self.item = Item(10, None, 1, 10)
         self.item.pick_up(item)
         self.assertEqual(self.item.quantity, 3)
-
-    def test_pick_up_fail(self):
-        with self.assertRaises(ValueError) as e:
-            self.item.pick_up(self.item.pick_up(None))
-        self.assertEqual(str(e.exception), 'NoneType is not of type Item.')
 
     def test_pick_up_wrong_object_type(self):
         item: Item = Item(10, 10, 1, 1)

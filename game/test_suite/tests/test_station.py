@@ -17,7 +17,7 @@ class TestStation(unittest.TestCase):
         self.station = Station()
         self.item = Item(10, None, 2, 64)
         self.station_example = StationExample(self.item)
-        self.avatar = Avatar(None, Vector(2, 2), [], 10)
+        self.avatar = Avatar(Vector(2, 2), 10)
         self.inventory: list[Item] = [Item(0), Item(1), Item(2), Item(3), Item(4), Item(5), Item(6), Item(7), Item(8), Item(9)]
         self.player = Player(avatar=self.avatar)
         self.avatar.inventory = self.inventory

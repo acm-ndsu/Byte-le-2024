@@ -91,19 +91,20 @@ class Avatar(GameObject):
         [inventory_item (5/5), inventory_item (5/5) inventory_item (5/5) inventory_item (5/5), inventory_item (5/5)]
     """
 
-    def __init__(self, item: Item | None = None, position: Vector | None = None, inventory: list[Item] = [],
-                 max_inventory_size: int = 10):
+    def __init__(self, position: Vector | None = None, max_inventory_size: int = 10):
         super().__init__()
         self.object_type: ObjectType = ObjectType.AVATAR
-        self.held_item: Item | None = item
         self.score: int = 0
         self.position: Vector | None = position
         self.max_inventory_size: int = max_inventory_size
-        self.inventory: list[Item] = inventory
+        self.inventory: list[Item | None] = [None] * max_inventory_size
+        self.held_item: Item | None = self.inventory[0]
+        self.__held_index: int = 0
 
     @property
     def held_item(self) -> Item | None:
-        return self.__held_item
+        self.__clean_inventory()
+        return self.inventory[self.__held_index]
 
     @property
     def score(self) -> int:
@@ -114,7 +115,7 @@ class Avatar(GameObject):
         return self.__position
 
     @property
-    def inventory(self) -> list[Item]:
+    def inventory(self) -> list[Item | None]:
         return self.__inventory
 
     @property
@@ -123,10 +124,19 @@ class Avatar(GameObject):
 
     @held_item.setter
     def held_item(self, item: Item | None) -> None:
+        self.__clean_inventory()
+
         # If it's not an item, and it's not None, raise the error
         if item is not None and not isinstance(item, Item):
             raise ValueError(f'{self.__class__.__name__}.held_item must be an Item or None.')
-        self.__held_item: Item = item
+
+        # If the item is not contained in the inventory, the error will be raised.
+        if not self.inventory.__contains__(item):
+            raise ValueError(f'{self.__class__.__name__}.held_item must be set to an item that already exists'
+                             f' in the inventory.')
+
+        # If the item is contained in the inventory, set the held_index to that item's index
+        self.__held_index = self.inventory.index(item)
 
     @score.setter
     def score(self, score: int) -> None:
@@ -141,12 +151,15 @@ class Avatar(GameObject):
         self.__position: Vector | None = position
 
     @inventory.setter
-    def inventory(self, inventory: list[Item]) -> None:
+    def inventory(self, inventory: list[Item | None]) -> None:
+        # If every item in the inventory is not of type None or Item, throw an error
         if inventory is None or not isinstance(inventory, list) \
-                or (len(inventory) > 0 and any(map(lambda item: not isinstance(item, Item), inventory))):
+                or (len(inventory) > 0 and any(map(lambda item: item is not None and not
+                    isinstance(item, Item), inventory))):
             raise ValueError(f'{self.__class__.__name__}.inventory must be a list of Items.')
         if len(inventory) > self.max_inventory_size:
-            raise ValueError(f'{self.__class__.__name__}.inventory size must be less than max_inventory_size')
+            raise ValueError(f'{self.__class__.__name__}.inventory size must be less than or equal to '
+                             f'max_inventory_size')
         self.__inventory: list[Item] = inventory
 
     @max_inventory_size.setter
@@ -155,19 +168,63 @@ class Avatar(GameObject):
             raise ValueError(f'{self.__class__.__name__}.max_inventory_size must be an int.')
         self.__max_inventory_size: int = size
 
-    def pick_up(self, item: Item) -> Item | None:
-        t = item
-        [t := i.pick_up(t) for i in self.inventory]
+    # Private helper method that cleans the inventory of items that have a quantity of 0. This is a safety check
+    def __clean_inventory(self):
+        # This condenses the inventory if there are duplicate items and combines them together
+        for i, item in enumerate(self.inventory):
+            [j.pick_up(item) for j in self.inventory[:i] if j is not None]
 
-        if t is not None and len(self.inventory) < self.max_inventory_size:
-            self.inventory.append(t)
+        # This removes any items in the inventory that have a quantity of 0 and replaces them with None
+        remove: [int] = [x[0] for x in enumerate(self.inventory) if x[1] is not None and x[1].quantity == 0]
+        for i in remove:
+            self.inventory[i] = None
+
+    """
+    Call this method when a station is taking the held item from the avatar
+    
+    This method can be modified more for different scenarios where the held item would be dropped
+        (e.g., you make a game where being attacked forces you to drop your held item)
+    
+    If you want the held item to go somewhere specifically and not become None, that can be changed too.
+    
+    Make sure to keep clean inventory in this method
+    """
+    def drop_held_item(self) -> Item | None:
+        # The held item will be taken from the avatar will be replaced with None in the inventory
+        held_item = self.held_item
+        self.inventory[self.__held_index] = None
+
+        self.__clean_inventory()
+
+        return held_item
+
+    def take(self, item: Item | None) -> Item | None:
+        # Calls the take method on every index on the inventory. If i isn't None, call the method
+        # NOTE: If the list is full of None (i.e., no Item objects are in it), nothing will happen
+        [item := i.take(item) for i in self.inventory if i is not None]
+        self.__clean_inventory()
+        return item
+
+    def pick_up(self, item: Item | None) -> Item | None:
+        self.__clean_inventory()
+
+        # Calls the pick_up method on every index on the inventory. If i isn't None, call the method
+        [item := i.pick_up(item) for i in self.inventory if i is not None]
+
+        # If the inventory has a slot with None, it will replace that None value with the item
+        if self.inventory.__contains__(None):
+            index = self.inventory.index(None)
+            self.inventory.pop(index)
+            self.inventory.insert(index, item)
+            # Nothing is then returned
             return None
 
-        return t
+        # If the item can't be in the inventory, return it
+        return item
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
-        data['held_item'] = self.held_item.to_json() if self.held_item is not None else None
+        data['held_index'] = self.__held_index
         data['score'] = self.score
         data['position'] = self.position.to_json() if self.position is not None else None 
         data['inventory'] = self.inventory
@@ -180,15 +237,6 @@ class Avatar(GameObject):
         self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
         self.inventory: list[Item] = data['inventory']
         self.max_inventory_size: int = data['max_inventory_size']
-        held_item: Item | None = data['held_item']
-        if held_item is None:
-            self.held_item = None
-            return self
-
-        match ObjectType(held_item['object_type']):
-            case ObjectType.ITEM:
-                self.held_item = Item().from_json(held_item)
-            case _:
-                raise ValueError(f'held_item needs to be an item, not {held_item}.')
+        self.held_item: Item | None = self.inventory[data['held_index']]
 
         return self

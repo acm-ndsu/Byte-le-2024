@@ -49,5 +49,4 @@ class InteractController(Controller):
         stat: Station = world.game_map[vector.y][vector.x].occupied_by
 
         if stat is not None and isinstance(stat, Station):
-            result: Item | None = stat.take_action(client.avatar)
-            client.avatar.held_item = result
+            stat.take_action(client.avatar)
