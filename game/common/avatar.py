@@ -91,8 +91,12 @@ class Avatar(GameObject):
         [inventory_item (5/5), inventory_item (5/5) inventory_item (5/5) inventory_item (5/5), inventory_item (5/5)]
     """
 
-    def __init__(self, position: Vector | None = None, max_inventory_size: int = 10):
+    def __init__(self, movement_speed: int = 1, drop_rate: float = 1.0, steal_rate: float = 0.0,
+                 position: Vector | None = None, max_inventory_size: int = 50):
         super().__init__()
+        self.movement_speed: int = movement_speed
+        self.drop_rate: float = drop_rate
+        self.steal_rate: float = steal_rate
         self.object_type: ObjectType = ObjectType.AVATAR
         self.score: int = 0
         self.position: Vector | None = position
