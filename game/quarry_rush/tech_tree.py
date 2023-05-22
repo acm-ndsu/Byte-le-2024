@@ -17,6 +17,7 @@ class Tree(Generic[T]):
 class TechTree:
     def __init__(self, player_functions: PlayerFunctions):
         self.tree = self.build_tree(player_functions)
+        self.research('Mining Robotics')
         
     def tech_names(self) -> list[str]:
         def tree_names(tree: Tree[tuple[Tech, bool]]) -> list[str]:
@@ -24,7 +25,14 @@ class TechTree:
         return tree_names(self.tree)
     
     def research(self, tech_name: str) -> bool:
-        return False
+        def research_tree(tree: Tree[tuple[Tech, bool]]) -> bool:
+            if tree.value[1]:
+                return any(map(research_tree, tree.subs))
+            else:
+                if tree.value[0].name == tech_name:
+                    tree.value[1] = True
+                    return True
+                return False
     
     def cost_of(self, tech_name: str) -> int:
         def search_tree(tree: Tree[tuple[Tech, bool]]) -> int:
@@ -90,6 +98,5 @@ class TechTree:
                 )
             ]
         ).fmap(lambda tech : (tech, False))
-        tree.value = (tree.value[0], True)
         
         return tree
