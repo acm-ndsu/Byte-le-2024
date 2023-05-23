@@ -69,6 +69,10 @@ class TechTree:
         return research_tree(self.tree)
     
     def tech_info(self, tech_name: str) -> TechInfo | None:
+        """
+        Returns a TechInfo object about the tech with the given name if the tech is found in the tree.
+        Returns None if the tech isn't found
+        """
         def search_tree(tree: Tree[tuple[Tech, bool]]) -> TechInfo | None:
             if tree.value[0].name == tech_name:
                 return TechInfo(name=tree.value[0].name, cost=tree.value[0].cost, point_value=tree.value[0].point_value)
