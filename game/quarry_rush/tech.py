@@ -2,6 +2,10 @@ from typing import Callable
 from player_functions import PlayerFunctions
 
 class Tech:
+    """
+    This class represents a single tech. It contains the name, cost, point value, and effect
+    of researching the tech
+    """
     def __init__(self, name: str, cost: int, point_value: int, apply: Callable[[], None]):
         self.name = name
         self.cost = cost
@@ -9,6 +13,9 @@ class Tech:
         self.apply = apply
         
 def techs(player_functions: PlayerFunctions) -> dict[str, Tech]:
+    """
+    Creates the techs for a specific player
+    """
     return {
         'Mining Robotics': Tech(
             name='Mining Robotics',
