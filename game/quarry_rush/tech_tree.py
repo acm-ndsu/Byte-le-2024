@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import Callable, TypeVar, Generic
-from tech import Tech, techs
+from tech import Tech, techs, TechInfo
 from player_functions import PlayerFunctions
 from functools import reduce
 
@@ -68,12 +68,11 @@ class TechTree:
                 return False
         return research_tree(self.tree)
     
-    def cost_of(self, tech_name: str) -> int:
-        """
-        Takes the name of a tech and returns the cost of that tech or -1 if the tech was not found
-        """
-        def search_tree(tree: Tree[tuple[Tech, bool]]) -> int:
-            return max(tree.value[0].cost if tree.value[0].name == tech_name else -1, max([-1] + list(map(search_tree, tree.subs))))
+    def tech_info(self, tech_name: str) -> TechInfo | None:
+        def search_tree(tree: Tree[tuple[Tech, bool]]) -> TechInfo | None:
+            if tree.value[0].name == tech_name:
+                return TechInfo(name=tree.value[0].name, cost=tree.value[0].cost, point_value=tree.value[0].point_value)
+            return reduce(lambda acc, x : x if x is not None else acc, map(search_tree, tree.subs), None)
         return search_tree(self.tree)
     
     def score(self) -> int:
