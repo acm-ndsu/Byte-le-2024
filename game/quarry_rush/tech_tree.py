@@ -12,7 +12,7 @@ class Tree(Generic[T]):
         self.subs = subs
         
     def fmap(self, func: Callable[[T], E]) -> Tree[E]:
-        return Tree(func(self.value), map(lambda sub : sub.fmap(func), self.subs))
+        return Tree(func(self.value), list(map(lambda sub : sub.fmap(func), self.subs)))
     
 class TechTree:
     def __init__(self, player_functions: PlayerFunctions):
@@ -24,15 +24,22 @@ class TechTree:
             return [tree.value[0].name] + reduce(lambda x, y : x + y, map(tree_names, tree.subs), [])
         return tree_names(self.tree)
     
+    def researched_techs(self) -> list[str]:
+        def tree_researched(tree: Tree[tuple[Tech, bool]]) -> list[str]:
+            sub_researched = reduce(lambda x, y : x + y, list(map(tree_researched, tree.subs)), [])
+            return [tree.value[0].name] + sub_researched if tree.value[1] else sub_researched
+        return tree_researched(self.tree)
+    
     def research(self, tech_name: str) -> bool:
         def research_tree(tree: Tree[tuple[Tech, bool]]) -> bool:
             if tree.value[1]:
                 return any(map(research_tree, tree.subs))
             else:
                 if tree.value[0].name == tech_name:
-                    tree.value[1] = True
+                    tree.value = (tree.value[0], True)
                     return True
                 return False
+        return research_tree(self.tree)
     
     def cost_of(self, tech_name: str) -> int:
         def search_tree(tree: Tree[tuple[Tech, bool]]) -> int:
