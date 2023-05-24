@@ -90,11 +90,9 @@ class Player(GameObject):
 
     def from_json(self, data):
         super().from_json(data)
-
         self.functional = data['functional']
         # self.error = data['error']  # .from_json(data['action']) if data['action'] is not None else None
         self.team_name = data['team_name']
-
         self.actions: list[ActionType] = [ObjectType(action) for action in data['actions']]
         avatar: Avatar | None = data['avatar']
         if avatar is None:
