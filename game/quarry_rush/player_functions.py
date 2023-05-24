@@ -38,7 +38,7 @@ class PlayerFunctions:
                  unlock_landmines: Callable[[], None],
                  unlock_emps: Callable[[], None],
                  unlock_trap_detection: Callable[[], None]):
-        self.increase_movement = increase_movement,
+        self.increase_movement = increase_movement
         self.increase_mining = increase_mining
         self.unlock_movement_overdrive = unlock_movement_overdrive
         self.unlock_mining_overdrive = unlock_mining_overdrive
