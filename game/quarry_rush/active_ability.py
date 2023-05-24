@@ -35,3 +35,22 @@ class ActiveAbility(GameObject):
             raise ValueError(f'{self.__class__.__name__}.cooldown must be an int')
         self.__cooldown = cooldown
 
+    # to json
+    def to_json(self) -> dict:
+        data: dict = super().to_json()
+        data['name'] = self.name
+        data['cooldown'] = self.cooldown
+        return data
+
+    # from json
+    def from_json(self, data: dict):
+        super().from_json(data)
+        self.name: str = data['name']
+        self.cooldown: int = data['cooldown']
+        return self
+
+
+
+
+
+
