@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import Callable, TypeVar, Generic
-from tech import Tech, techs, TechInfo
-from player_functions import PlayerFunctions
+from game.quarry_rush.tech import Tech, techs, TechInfo
+from game.quarry_rush.player_functions import PlayerFunctions
 from functools import reduce
 
 T = TypeVar('T')

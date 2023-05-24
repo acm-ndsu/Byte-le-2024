@@ -1,5 +1,5 @@
 from typing import Callable
-from player_functions import PlayerFunctions
+from game.quarry_rush.player_functions import PlayerFunctions
 
 class Tech:
     """
