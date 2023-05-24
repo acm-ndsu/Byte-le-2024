@@ -91,12 +91,9 @@ class Avatar(GameObject):
         [inventory_item (5/5), inventory_item (5/5) inventory_item (5/5) inventory_item (5/5), inventory_item (5/5)]
     """
 
-    def __init__(self, movement_speed: int = 1, drop_rate: float = 1.0, steal_rate: float = 0.0,
-                 position: Vector | None = None, max_inventory_size: int = 50):
+    def __init__(self, position: Vector | None = None, max_inventory_size: int = 50, movement_speed: int = 1,
+                 drop_rate: float = 1.0, steal_rate: float = 0.0):
         super().__init__()
-        self.movement_speed: int = movement_speed
-        self.drop_rate: float = drop_rate
-        self.steal_rate: float = steal_rate
         self.object_type: ObjectType = ObjectType.AVATAR
         self.score: int = 0
         self.position: Vector | None = position
@@ -104,6 +101,9 @@ class Avatar(GameObject):
         self.inventory: list[Item | None] = [None] * max_inventory_size
         self.held_item: Item | None = self.inventory[0]
         self.__held_index: int = 0
+        self.movement_speed: int = movement_speed  # determines how many tiles the player moves
+        self.drop_rate: float = drop_rate  # determines how many items are dropped after mining
+        self.steal_rate: float = steal_rate  # determines how much the player steals from others when traps are used
 
     @property
     def held_item(self) -> Item | None:
@@ -125,6 +125,18 @@ class Avatar(GameObject):
     @property
     def max_inventory_size(self) -> int:
         return self.__max_inventory_size
+
+    @property
+    def movement_speed(self):
+        return self.__movement_speed
+
+    @property
+    def drop_rate(self):
+        return self.__drop_rate
+
+    @property
+    def steal_rate(self):
+        return self.__steal_rate
 
     @held_item.setter
     def held_item(self, item: Item | None) -> None:
@@ -171,6 +183,24 @@ class Avatar(GameObject):
         if size is None or not isinstance(size, int):
             raise ValueError(f'{self.__class__.__name__}.max_inventory_size must be an int.')
         self.__max_inventory_size: int = size
+
+    @movement_speed.setter
+    def movement_speed(self, speed: int) -> None:
+        if speed is None or not isinstance(speed, int):
+            raise ValueError(f'{self.__class__.__name__}.movement_speed must be an int.')
+        self.__movement_speed: int = speed
+
+    @drop_rate.setter
+    def drop_rate(self, drop_rate: float) -> None:
+        if drop_rate is None or not isinstance(drop_rate, float):
+            raise ValueError(f'{self.__class__.__name__}.drop_rate must be a float.')
+        self.__drop_rate = drop_rate
+
+    @steal_rate.setter
+    def steal_rate(self, steal_rate: float) -> None:
+        if steal_rate is None or not isinstance(steal_rate, float):
+            raise ValueError(f'{self.__class__.__name__}.steal_rate must be a float.')
+        self.__steal_rate = steal_rate
 
     # Private helper method that cleans the inventory of items that have a quantity of 0. This is a safety check
     def __clean_inventory(self):
@@ -233,6 +263,9 @@ class Avatar(GameObject):
         data['position'] = self.position.to_json() if self.position is not None else None 
         data['inventory'] = self.inventory
         data['max_inventory_size'] = self.max_inventory_size
+        data['movement_speed'] = self.movement_speed
+        data['drop_rate'] = self.drop_rate
+        data['steal_rate'] = self.steal_rate
         return data
 
     def from_json(self, data: dict) -> Self:
@@ -242,5 +275,8 @@ class Avatar(GameObject):
         self.inventory: list[Item] = data['inventory']
         self.max_inventory_size: int = data['max_inventory_size']
         self.held_item: Item | None = self.inventory[data['held_index']]
+        self.movement_speed = data['movement_speed']
+        self.drop_rate = data['drop_rate']
+        self.steal_rate = data['steal_rate']
 
         return self

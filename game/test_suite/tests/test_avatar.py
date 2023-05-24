@@ -128,7 +128,7 @@ class TestAvatar(unittest.TestCase):
         self.avatar.inventory = [Item(quantity=5, stack_size=5), Item(quantity=7, stack_size=7),
                                  Item(quantity=10, stack_size=10)]
         with self.assertRaises(ValueError) as e:
-            taken = self.avatar.take('')
+            self.avatar.take('')
         self.assertEqual(str(e.exception), 'str is not of type Item.')
 
     # Tests picking up an item and failing
@@ -171,3 +171,45 @@ class TestAvatar(unittest.TestCase):
         self.assertEqual(self.avatar.held_item.durability, avatar.held_item.durability)
         self.assertEqual(self.avatar.position.object_type, avatar.position.object_type)
         self.assertEqual(str(self.avatar.position), str(avatar.position))
+
+    # Quarry Rush tests below ------------------------------------------------------------------------------------------
+
+    # Test setting movement speed
+    def test_avatar_set_movement_speed(self):
+        self.avatar.movement_speed = 5
+        self.assertEqual(self.avatar.movement_speed, 5)
+
+    def test_avatar_set_movement_speed_fail(self):
+        with self.assertRaises(ValueError) as e:
+            self.avatar.movement_speed = 'Fail'
+        self.assertEqual(str(e.exception), 'Avatar.movement_speed must be an int.')
+
+    # Test setting drop rate
+    def test_avatar_set_drop_rate(self):
+        self.avatar.drop_rate = 5.3
+        self.assertEqual(self.avatar.drop_rate, 5.3)
+
+    def test_avatar_set_drop_rate_fail(self):
+        with self.assertRaises(ValueError) as e:
+            self.avatar.drop_rate = 'Fail'
+        self.assertEqual(str(e.exception), 'Avatar.drop_rate must be a float.')
+
+    # Test setting steal rate
+    def test_avatar_set_steal_rate(self):
+        self.avatar.steal_rate = 3.3
+        self.assertEqual(self.avatar.steal_rate, 3.3)
+
+    def test_avatar_set_steal_rate_fail(self):
+        with self.assertRaises(ValueError) as e:
+            self.avatar.steal_rate = 'Fail'
+        self.assertEqual(str(e.exception), 'Avatar.steal_rate must be a float.')
+
+    # Tests to make sure the inventory doesn't go above 50
+    def test_inventory_size(self):
+        self.avatar: Avatar = Avatar()
+        self.item: Item = Item()
+        self.avatar.inventory = [self.item] * 50
+        self.item = Item(durability=None, quantity=2, stack_size=2)
+        returned: Item = self.avatar.pick_up(self.item)
+        self.assertEqual(returned, self.item)
+        self.assertEqual(len(self.avatar.inventory), 50)
