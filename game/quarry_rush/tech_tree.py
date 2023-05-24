@@ -64,6 +64,7 @@ class TechTree:
             else:
                 if tree.value[0].name == tech_name:
                     tree.value = (tree.value[0], True)
+                    tree.value[0].apply()
                     return True
                 return False
         return research_tree(self.tree)
