@@ -58,11 +58,7 @@ class TestActiveAbility(unittest.TestCase):
     # fail test: json
     def test_active_ability_json(self):
         data: dict = self.active_ability.to_json()
-        active_ability: ActiveAbility = ActiveAbility.from_json(data)
+        active_ability: ActiveAbility = ActiveAbility().from_json(data)
         self.assertEqual(self.active_ability.name, active_ability.name)
         self.assertEqual(self.active_ability.cooldown, active_ability.cooldown)
         self.assertEqual(self.active_ability.object_type, active_ability.object_type)
-
-
-
-
