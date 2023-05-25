@@ -14,16 +14,16 @@ class TestTechTree(unittest.TestCase):
         self.mock_unlock_landmines = Mock()
         self.mock_unlock_emps = Mock()
         self.mock_unlock_trap_detection = Mock()
-        player_functions = PlayerFunctions(increase_movement=self.mock_increase_movement,
-                                           increase_mining=self.mock_increase_mining,
-                                           unlock_movement_overdrive=self.mock_unlock_movement_overdrive,
-                                           unlock_mining_overdrive=self.mock_unlock_mining_overdrive,
-                                           unlock_dynamite=self.mock_unlock_dynamite,
-                                           unlock_landmines=self.mock_unlock_landmines,
-                                           unlock_emps=self.mock_unlock_emps,
-                                           unlock_trap_detection=self.mock_unlock_trap_detection)
+        self.player_functions = PlayerFunctions(increase_movement=self.mock_increase_movement,
+                                                increase_mining=self.mock_increase_mining,
+                                                unlock_movement_overdrive=self.mock_unlock_movement_overdrive,
+                                                unlock_mining_overdrive=self.mock_unlock_mining_overdrive,
+                                                unlock_dynamite=self.mock_unlock_dynamite,
+                                                unlock_landmines=self.mock_unlock_landmines,
+                                                unlock_emps=self.mock_unlock_emps,
+                                                unlock_trap_detection=self.mock_unlock_trap_detection)
         
-        self.tech_tree = TechTree(player_functions)
+        self.tech_tree = TechTree(self.player_functions)
         
     def test_tech_names(self):
         names = self.tech_tree.tech_names()
@@ -91,3 +91,11 @@ class TestTechTree(unittest.TestCase):
         self.tech_tree.research('Dynamite')
         result = self.tech_tree.score()
         self.assertEqual(result, 3)
+
+    def test_tech_tree_json(self):
+        self.tech_tree.research('High Yield Drilling')
+        self.tech_tree.research('Unnamed Mining Tech')
+        result = self.tech_tree.to_json()
+        for tech in self.tech_tree.tech_names():
+            self.assertEqual(result[tech], self.tech_tree.is_researched(tech))
+        self.assertEqual(self.player_functions, result['player_functions'])

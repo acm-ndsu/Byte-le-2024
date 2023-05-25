@@ -1,8 +1,9 @@
 from __future__ import annotations
-from typing import Callable, TypeVar, Generic
+from typing import Callable, TypeVar, Generic, Self
 from game.quarry_rush.tech import Tech, techs, TechInfo
 from game.quarry_rush.player_functions import PlayerFunctions
 from functools import reduce
+from game.common.game_object import GameObject
 
 T = TypeVar('T')
 E = TypeVar('E')
@@ -14,7 +15,7 @@ class Tree(Generic[T]):
     def fmap(self, func: Callable[[T], E]) -> Tree[E]:
         return Tree(func(self.value), list(map(lambda sub : sub.fmap(func), self.subs)))
     
-class TechTree:
+class TechTree(GameObject):
     """
     Represents a single player's tech tree
 
@@ -23,6 +24,7 @@ class TechTree:
     [Note]: This class does not handle cost validation or taking research points away from the player
     """
     def __init__(self, player_functions: PlayerFunctions):
+        self.player_functions = player_functions
         self.tree = self.build_tree(player_functions)
         self.research('Mining Robotics')
         
@@ -148,3 +150,20 @@ class TechTree:
         ).fmap(lambda tech : (tech, False))
         
         return tree
+    
+    def to_json(self) -> dict:
+        result: dict = {}
+        for tech in self.tech_names():
+            result[tech] = self.is_researched(tech)
+        result['player_functions'] = self.player_functions
+        return result
+
+    def from_json(self, data: dict) -> Self:
+        self.player_functions = data['player_functions']
+        self.tree = self.build_tree(self.player_functions)
+        def set_researched(tree: Tree[tuple[Tech, bool]]) -> None:
+            tree.value = (tree.value[0], data[tree.value[0].name])
+            for sub in tree.subs:
+                set_researched(sub)
+        set_researched(self.tree)
+        return self
