@@ -29,6 +29,7 @@ class ObjectType(Enum):
     STATION_EXAMPLE = auto()
     STATION_RECEIVER_EXAMPLE = auto()
     OCCUPIABLE_STATION_EXAMPLE = auto()
+    ACTIVE_ABILITY = auto()
 
 
 class ActionType(Enum):

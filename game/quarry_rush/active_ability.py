@@ -1,14 +1,17 @@
 from game.common.enums import ObjectType
 from game.common.game_object import GameObject
+from typing import Self
 
 
 class ActiveAbility(GameObject):
 
-    def __init__(self, name: str = "temp", cooldown: int = 1):
+    def __init__(self, name: str = "", cooldown: int = 1):
         super().__init__()
-        self.object_type = ObjectType
-        self.name: str = name
-        self.cooldown: int = cooldown
+        self.object_type = ObjectType.ACTIVE_ABILITY
+        # self.__name: str = ""
+        # self.__cooldown: int = 1
+        self.name = name
+        self.cooldown = cooldown
 
 # name getter
     @property
@@ -17,8 +20,8 @@ class ActiveAbility(GameObject):
 
 # name setter
     @name.setter
-    def name(self, name: str):
-        if name is not isinstance(name, str):
+    def name(self, name: str) -> None:
+        if name is None or not isinstance(name, str):
             raise ValueError(f'{self.__class__.__name__}.name must be a String')
         self.__name = name
 
@@ -30,9 +33,11 @@ class ActiveAbility(GameObject):
 
 # cooldown setter
     @cooldown.setter
-    def cooldown(self, cooldown: int) -> 1:   # currently I just have the default set to 1, should not be negative
-        if cooldown is not isinstance(cooldown, int):
+    def cooldown(self, cooldown: int) -> None:   # currently I just have the default set to 1, should not be negative
+        if cooldown is None or not isinstance(cooldown, int):
             raise ValueError(f'{self.__class__.__name__}.cooldown must be an int')
+        if cooldown < 0:
+            raise ValueError(f'{self.__class__.__name__}.cooldown cannot be negative')
         self.__cooldown = cooldown
 
     # to json
@@ -43,11 +48,12 @@ class ActiveAbility(GameObject):
         return data
 
     # from json
-    def from_json(self, data: dict):
+    def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.name: str = data['name']
-        self.cooldown: int = data['cooldown']
+        self.name = data["name"]
+        self.cooldown = data["cooldown"]
         return self
+
 
 
 
