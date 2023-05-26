@@ -55,7 +55,7 @@ class TestActiveAbility(unittest.TestCase):
             self.active_ability.cooldown = -1
         self.assertEqual(str(e.exception), 'ActiveAbility.cooldown cannot be negative')
 
-    # fail test: json
+    # test: json
     def test_active_ability_json(self):
         data: dict = self.active_ability.to_json()
         active_ability: ActiveAbility = ActiveAbility().from_json(data)
