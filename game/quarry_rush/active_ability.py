@@ -8,8 +8,6 @@ class ActiveAbility(GameObject):
     def __init__(self, name: str = "", cooldown: int = 1):
         super().__init__()
         self.object_type = ObjectType.ACTIVE_ABILITY
-        # self.__name: str = ""
-        # self.__cooldown: int = 1
         self.name = name
         self.cooldown = cooldown
 
@@ -33,7 +31,7 @@ class ActiveAbility(GameObject):
 
 # cooldown setter
     @cooldown.setter
-    def cooldown(self, cooldown: int) -> None:   # currently I just have the default set to 1, should not be negative
+    def cooldown(self, cooldown: int) -> None:
         if cooldown is None or not isinstance(cooldown, int):
             raise ValueError(f'{self.__class__.__name__}.cooldown must be an int')
         if cooldown < 0:
