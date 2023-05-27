@@ -76,4 +76,4 @@ class Vector(GameObject):
         return Vector(-self.x, -self.y)
     
     def distance(self, other_vector: Self) -> int:
-        return Vector.add_vectors(self, other_vector.negative()).length()
+        return abs(self.x - other_vector.x) + abs(self.y - other_vector.y)
