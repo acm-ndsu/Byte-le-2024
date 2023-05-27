@@ -30,10 +30,12 @@ class TestAvatarInventory(unittest.TestCase):
             self.avatar.inventory = [Item(1, 1), Item(4, 2)]
         self.assertEqual(str(e.exception), 'Avatar.inventory size must be less than or equal to max_inventory_size')
 
+    # Tests setting max_inventory_size
     def test_avatar_set_max_inventory_size(self):
         self.avatar.max_inventory_size = 10
         self.assertEqual(str(self.avatar.max_inventory_size), str(10))
 
+    # Fails if max_inventory_size isn't an int
     def test_avatar_set_max_inventory_size_fail(self):
         with self.assertRaises(ValueError) as e:
             self.avatar.max_inventory_size = 'Fail'

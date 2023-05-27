@@ -4,6 +4,8 @@ from game.common.enums import ObjectType
 from game.common.game_object import GameObject
 from game.common.items.item import Item
 from game.utils.vector import Vector
+from game.quarry_rush.tech_tree import TechTree
+from game.quarry_rush.player_functions import PlayerFunctions
 
 
 class Avatar(GameObject):
@@ -105,6 +107,7 @@ class Avatar(GameObject):
         self.movement_speed: int = movement_speed  # determines how many tiles the player moves
         self.drop_rate: float = drop_rate  # determines how many items are dropped after mining
         self.steal_rate: float = steal_rate  # determines how much the player steals from others when traps are used
+        # self.tech_tree: TechTree =  # the player's tech tree will be auto-implemented
 
     @property
     def held_item(self) -> Item | None:
