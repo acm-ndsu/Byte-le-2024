@@ -54,18 +54,24 @@ class ActiveAbility(GameObject):
             raise ValueError(f'{self.__class__.__name__}.cooldown_tick cannot be negative')
         self.__cooldown_tick = cooldown_tick
 
+# is_useable will be a boolean checking to see if the object on cooldown is able to be used again
+    def is_useable(self) -> bool:
+        return self.cooldown_tick == 0
+
     # to json
     def to_json(self) -> dict:
         data: dict = super().to_json()
         data['name'] = self.name
         data['cooldown'] = self.cooldown
+        data['cooldown_tick'] = self.cooldown_tick
         return data
 
     # from json
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.name = data["name"]
-        self.cooldown = data["cooldown"]
+        self.name = data['name']
+        self.cooldown = data['cooldown']
+        self.cooldown_tick = data['cooldown_tick']
         return self
 
 

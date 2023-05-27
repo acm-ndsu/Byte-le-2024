@@ -79,10 +79,21 @@ class TestActiveAbility(unittest.TestCase):
             self.active_ability.cooldown_tick = -1
         self.assertEqual(str(e.exception), 'ActiveAbility.cooldown_tick cannot be negative')
 
+    #test is_useable: 0 = true
+    def test_is_useale_true(self):
+        self.active_ability.cooldown_tick = 0
+        self.assertEqual(self.active_ability.is_useable(), True)
+
+    #test is_useable: any other number = false
+    def test_is_useale_false(self):
+        self.active_ability.cooldown_tick = 1
+        self.assertEqual(self.active_ability.is_useable(), False)
+
     # test: json
     def test_active_ability_json(self):
         data: dict = self.active_ability.to_json()
         active_ability: ActiveAbility = ActiveAbility().from_json(data)
         self.assertEqual(self.active_ability.name, active_ability.name)
         self.assertEqual(self.active_ability.cooldown, active_ability.cooldown)
+        self.assertEqual(self.active_ability.cooldown_tick, active_ability.cooldown_tick)
         self.assertEqual(self.active_ability.object_type, active_ability.object_type)
