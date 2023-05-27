@@ -55,6 +55,30 @@ class TestActiveAbility(unittest.TestCase):
             self.active_ability.cooldown = -1
         self.assertEqual(str(e.exception), 'ActiveAbility.cooldown cannot be negative')
 
+    # test: cooldown_tick
+    def test_cooldown_tick(self):
+        self.cooldown_tick = 1
+        self.active_ability.cooldown_tick = 1
+        self.assertEqual(self.active_ability.cooldown_tick, self.cooldown_tick)
+
+    # fail test: cooldown_tick CANT be null
+    def test_cooldown_tick_fail_null(self):
+        with self.assertRaises(ValueError) as e:
+            self.active_ability.cooldown_tick = None
+        self.assertEqual(str(e.exception), 'ActiveAbility.cooldown_tick must be an int')
+
+    # fail test: cooldown_tick cannot be anything else
+    def test_cooldown_tick_fail_str(self):
+        with self.assertRaises(ValueError) as e:
+            self.active_ability.cooldown_tick = ""
+        self.assertEqual(str(e.exception), 'ActiveAbility.cooldown_tick must be an int')
+
+    # fail test: cooldown_tick cannot be negative
+    def test_cooldown_tick_fail_negative(self):
+        with self.assertRaises(ValueError) as e:
+            self.active_ability.cooldown_tick = -1
+        self.assertEqual(str(e.exception), 'ActiveAbility.cooldown_tick cannot be negative')
+
     # test: json
     def test_active_ability_json(self):
         data: dict = self.active_ability.to_json()
