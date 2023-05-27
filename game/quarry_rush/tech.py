@@ -26,6 +26,10 @@ def techs(player_functions: PlayerFunctions) -> dict[str, Tech]:
     """
     Creates the techs for a specific player
     """
+    def combine(*things: Callable[[], None]) -> None:
+        for thing in things:
+            thing()
+
     return {
         'Mining Robotics': Tech(
             name='Mining Robotics',
@@ -66,14 +70,14 @@ def techs(player_functions: PlayerFunctions) -> dict[str, Tech]:
             name='Unnamed Mining Tech',
             cost=0,
             point_value=1,
-            apply=lambda : player_functions.increase_mining(-.2)
+            apply=lambda : player_functions.increase_mining(0.2)
         ),
         
         'Landmines': Tech(
             name='Landmines',
             cost=0,
             point_value=1,
-            apply=player_functions.unlock_landmines
+            apply=lambda : combine(player_functions.unlock_landmines, lambda : player_functions.increase_stealing(0.2))
         ),
         
         'Overdrive Movement': Tech(
@@ -94,7 +98,7 @@ def techs(player_functions: PlayerFunctions) -> dict[str, Tech]:
             name='EMPs',
             cost=0,
             point_value=1,
-            apply=player_functions.unlock_emps
+            apply=lambda : combine(player_functions.unlock_emps, lambda : player_functions.increase_stealing(0.2))
         ),
         
         'Trap Detection': Tech(

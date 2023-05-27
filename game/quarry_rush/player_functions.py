@@ -32,6 +32,7 @@ class PlayerFunctions:
     def __init__(self,
                  increase_movement: Callable[[int], None],
                  increase_mining: Callable[[float], None],
+                 increase_stealing: Callable[[float], None],
                  unlock_movement_overdrive: Callable[[], None],
                  unlock_mining_overdrive: Callable[[], None],
                  unlock_dynamite: Callable[[], None],
@@ -40,6 +41,7 @@ class PlayerFunctions:
                  unlock_trap_detection: Callable[[], None]):
         self.increase_movement = increase_movement
         self.increase_mining = increase_mining
+        self.increase_stealing = increase_stealing
         self.unlock_movement_overdrive = unlock_movement_overdrive
         self.unlock_mining_overdrive = unlock_mining_overdrive
         self.unlock_dynamite = unlock_dynamite

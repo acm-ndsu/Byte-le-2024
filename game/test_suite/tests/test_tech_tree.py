@@ -8,6 +8,7 @@ class TestTechTree(unittest.TestCase):
     def setUp(self):
         self.mock_increase_movement = Mock()
         self.mock_increase_mining = Mock()
+        self.mock_increase_stealing = Mock()
         self.mock_unlock_movement_overdrive = Mock()
         self.mock_unlock_mining_overdrive = Mock()
         self.mock_unlock_dynamite = Mock()
@@ -16,6 +17,7 @@ class TestTechTree(unittest.TestCase):
         self.mock_unlock_trap_detection = Mock()
         self.player_functions = PlayerFunctions(increase_movement=self.mock_increase_movement,
                                                 increase_mining=self.mock_increase_mining,
+                                                increase_stealing=self.mock_increase_stealing,
                                                 unlock_movement_overdrive=self.mock_unlock_movement_overdrive,
                                                 unlock_mining_overdrive=self.mock_unlock_mining_overdrive,
                                                 unlock_dynamite=self.mock_unlock_dynamite,
@@ -48,6 +50,7 @@ class TestTechTree(unittest.TestCase):
         self.assertFalse(result)
         self.assertEqual(names, ['Mining Robotics'])
         self.mock_unlock_emps.assert_not_called()
+        self.mock_increase_stealing.assert_not_called()
         
     def test_research_emp_with_detection(self):
         self.tech_tree.research('High Yield Drilling')
@@ -60,6 +63,7 @@ class TestTechTree(unittest.TestCase):
         self.assertEqual(names, ['Mining Robotics', 'High Yield Drilling', 'Dynamite', 'Landmines', 'Trap Detection'])
         self.mock_unlock_trap_detection.assert_called_once()
         self.mock_unlock_emps.assert_not_called()
+        self.mock_increase_stealing.assert_called_once_with(0.2) # This is from unlocking landmines. If emps runs this function, the test will fail
         
     def test_research_detection_with_emp(self):
         self.tech_tree.research('High Yield Drilling')
