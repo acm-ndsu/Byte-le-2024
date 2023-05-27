@@ -1,5 +1,6 @@
 from game.common.enums import *
 from game.config import Debug
+import logging
 
 
 class UserClient:
@@ -7,10 +8,11 @@ class UserClient:
         self.debug_level = DebugLevel.CLIENT
         self.debug = True
 
-    def print(self, *args):
+    def debug(self, *args):
         if self.debug and Debug.level >= self.debug_level:
-            print(f'{self.__class__.__name__}: ', end='')
-            print(*args)
+            logging.basicConfig(level=logging.DEBUG)
+            for arg in args:
+                logging.debug(f'{self.__class__.__name__}: {arg}')
 
     def team_name(self):
         return "No_Team_Name_Available"

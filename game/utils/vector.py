@@ -1,6 +1,6 @@
 from game.common.game_object import GameObject
 from game.common.enums import ObjectType
-from typing import Self
+from typing import Self, Tuple
 
 
 class Vector(GameObject):
@@ -49,6 +49,10 @@ class Vector(GameObject):
 
     def add_y(self, y: int) -> None:
         self.y += y
+
+    def as_tuple(self) -> Tuple[int, int]:
+        """Returns (x: int, y: int)"""
+        return (self.x, self.y)
 
     def to_json(self) -> dict:
         data = super().to_json()
