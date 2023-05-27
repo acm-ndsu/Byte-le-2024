@@ -118,10 +118,7 @@ class MasterController(Controller):
                     self.movement_controller.handle_actions(client.actions[i], client, self.current_world_data["game_board"])
                 except IndexError:
                     pass
-                try:
-                    self.interact_controller.handle_actions(client.actions[i], client, self.current_world_data["game_board"])
-                except IndexError:
-                    pass
+
         # checks event logic at the end of round
         # self.handle_events(clients)
 
