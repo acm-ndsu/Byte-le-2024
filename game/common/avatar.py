@@ -240,7 +240,7 @@ class Avatar(GameObject):
             [j.pick_up(item) for j in self.inventory[:i] if j is not None]
 
         # This removes any items in the inventory that have a quantity of 0 and replaces them with None
-        remove: [int] = [x[0] for x in enumerate(self.inventory) if x[1] is not None and x[1].quantity == 0]
+        remove: list[int] = [x[0] for x in enumerate(self.inventory) if x[1] is not None and x[1].quantity == 0]
         for i in remove:
             self.inventory[i] = None
 

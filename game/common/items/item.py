@@ -1,5 +1,6 @@
 from game.common.enums import ObjectType
 from game.common.game_object import GameObject
+from game.utils.vector import Vector
 from typing import Self
 
 
@@ -64,7 +65,14 @@ class Item(GameObject):
         **Refer to avatar.py for a more in-depth explanation of how picking up items work with examples.**
     """
 
-    def __init__(self, value: int = 1, durability: int | None = None, quantity: int = 1, stack_size: int = 1):
+    """
+    Differences between item class in engine and item class in 2024 game:
+        - Item contains a position and a name (this should allow an item to be located on the gameboard without occupying a station)
+        - Added getter and setter methods for position and name
+        - Added position and name to json methods
+    """
+
+    def __init__(self, value: int = 1, durability: int | None = None, quantity: int = 1, stack_size: int = 1, position: Vector | None = None, name: str | None = None):
         super().__init__()
         self.__quantity = None  # This is here to prevent an error
         self.__durability = None  # This is here to prevent an error
@@ -73,6 +81,8 @@ class Item(GameObject):
         self.stack_size: int = stack_size  # the max quantity this item can contain
         self.durability: int | None = durability  # durability can be None to represent infinite durability
         self.quantity: int = quantity  # the current amount of this item
+        self.position: Vector | None = position # position of item
+        self.name: str | None = name # name associated with item
 
     @property
     def durability(self) -> int | None:
@@ -89,6 +99,14 @@ class Item(GameObject):
     @property
     def stack_size(self) -> int:
         return self.__stack_size
+    
+    @property
+    def position(self) -> Vector | None:
+        return self.__position
+    
+    @property
+    def name(self) -> str | None:
+        return self.__name
 
     @durability.setter
     def durability(self, durability: int | None) -> None:
@@ -129,6 +147,18 @@ class Item(GameObject):
         if self.__quantity is not None and stack_size < self.__quantity:
             raise ValueError(f'{self.__class__.__name__}.stack_size must be greater than or equal to the quantity.')
         self.__stack_size: int = stack_size
+
+    @position.setter
+    def position(self, position: Vector | None) -> None:
+        if position is not None and not isinstance(position, Vector):
+            raise ValueError(f'{self.__class__.__name__}.position must be a Vector or None.')
+        self.__position: Vector | None = position
+
+    @name.setter
+    def name(self, name: str | None) -> None:
+        if name is not None and not isinstance(name, str):
+            raise ValueError(f'{self.__class__.__name__}.name must be a str or None.')
+        self.__name: str | None = name
 
     def take(self, item: Self) -> Self | None:
         if item is not None and not isinstance(item, Item):
@@ -184,6 +214,8 @@ class Item(GameObject):
         data['durability'] = self.durability
         data['value'] = self.value
         data['quantity'] = self.quantity
+        data['position'] = self.position.to_json() if self.position is not None else None
+        data['name'] = self.name
         return data
 
     def from_json(self, data: dict) -> Self:
@@ -192,4 +224,6 @@ class Item(GameObject):
         self.stack_size: int = data['stack_size']
         self.quantity: int = data['quantity']
         self.value: int = data['value']
+        self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
+        self.name: str | None = data['name']
         return self

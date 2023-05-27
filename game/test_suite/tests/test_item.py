@@ -2,6 +2,7 @@ import unittest
 
 from game.common.avatar import Avatar
 from game.common.items.item import Item
+from game.utils.vector import Vector
 from game.common.enums import ObjectType
 
 
@@ -68,21 +69,53 @@ class TestItem(unittest.TestCase):
             self.item.stack_size = 1
         self.assertEqual(str(e.exception), 'Item.quantity cannot be greater than Item.stack_size')
 
-    def test_stack_size(self):
+    # test set stack_size
+    def test_set_stack_size(self):
         self.item = Item(10, None, 10, 10)
         self.assertEqual(self.item.quantity, 10)
 
-    def test_stack_size_fail(self):
+    def test_set_stack_size_fail(self):
         with self.assertRaises(ValueError) as e:
             self.item.stack_size = 'fail'
         self.assertEqual(str(e.exception), 'Item.stack_size must be an int.')
 
-    def test_stack_size_fail_quantity(self):
+    def test_set_stack_size_fail_quantity(self):
         # value, durability, quantity, stack size
         with self.assertRaises(ValueError) as e:
             item: Item = Item(10, None, 10, 10)
             item.stack_size = 5
         self.assertEqual(str(e.exception), 'Item.stack_size must be greater than or equal to the quantity.')
+
+    # test set position
+    def test_set_position(self):
+        self.position = Vector(2, 2)
+        self.item.position = self.position
+        self.assertEqual(self.item.position.object_type, self.position.object_type)
+        self.assertEqual(self.item.position.x, self.position.x)
+        self.assertEqual(self.item.position.y, self.position.y)
+
+    def test_set_position_none(self):
+        self.position = None
+        self.assertEqual(self.item.position, None)
+
+    def test_set_position_fail(self):
+        with self.assertRaises(ValueError) as e:
+            self.item.position = "Not accepted"
+        self.assertEqual(str(e.exception), 'Item.position must be a Vector or None.')
+
+    # test set name
+    def test_set_name(self):
+        self.item.name = 'Test Name'
+        self.assertEqual(self.item.name, 'Test Name')   
+
+    def test_set_name_none(self):
+        self.item.name = None
+        self.assertEqual(self.item.name, None)
+
+    def test_name_fail(self):
+        with self.assertRaises(ValueError) as e:
+            self.item.name = Vector(3, 2)
+        self.assertEqual(str(e.exception), 'Item.name must be a str or None.')
 
     def test_pick_up(self):
         # value, durability, quantity, stack size
@@ -105,6 +138,8 @@ class TestItem(unittest.TestCase):
         self.assertEqual(surplus.quantity, 9)
 
     def test_item_json(self):
+        self.item.position = Vector(2, 2)
+        self.item.name = "Test"
         data: dict = self.item.to_json()
         item: Item = Item().from_json(data)
         self.assertEqual(self.item.object_type, item.object_type)
@@ -112,3 +147,7 @@ class TestItem(unittest.TestCase):
         self.assertEqual(self.item.stack_size, item.stack_size)
         self.assertEqual(self.item.durability, item.durability)
         self.assertEqual(self.item.quantity, item.quantity)
+        self.assertEqual(self.item.position.object_type, item.position.object_type)
+        self.assertEqual(self.item.position.x, item.position.x)
+        self.assertEqual(self.item.position.y, item.position.y)
+        self.assertEqual(self.item.name, item.name)
