@@ -79,15 +79,32 @@ class TestActiveAbility(unittest.TestCase):
             self.active_ability.cooldown_tick = -1
         self.assertEqual(str(e.exception), 'ActiveAbility.cooldown_tick cannot be negative')
 
-    #test is_useable: 0 = true
+    # test is_useable: 0 = true
     def test_is_useale_true(self):
         self.active_ability.cooldown_tick = 0
         self.assertEqual(self.active_ability.is_useable(), True)
 
-    #test is_useable: any other number = false
+    # test is_useable: any other number = false
     def test_is_useale_false(self):
         self.active_ability.cooldown_tick = 1
         self.assertEqual(self.active_ability.is_useable(), False)
+
+    # test decrease_cooldown_tick
+    def test_decrease_cooldown_tick(self):
+        self.active_ability.decrease_cooldown_tick()
+        self.assertEqual(self.active_ability.cooldown_tick, 0)  # check to make decremented properly
+
+    # test decrease_cooldown_tick: CANT be negative
+    def test_decrease_cooldown_tick_fail_negative(self):
+        self.active_ability.cooldown_tick = 0
+        self.active_ability.decrease_cooldown_tick()
+        self.assertEqual(self.active_ability.cooldown_tick, 0)
+
+    # test reset cooldown tick: testing to reset it back to the original cooldown variable
+    def test_reset_cooldown_tick(self):
+        self.active_ability.cooldown_tick = 0
+        self.active_ability.reset_cooldown_tick()
+        self.assertEqual(self.active_ability.cooldown_tick, 1)
 
     # test: json
     def test_active_ability_json(self):

@@ -58,7 +58,17 @@ class ActiveAbility(GameObject):
     def is_useable(self) -> bool:
         return self.cooldown_tick == 0
 
-    # to json
+# decrease cooldown, decrement cooldown: at the end of each turn it will have to be called for each avatar
+    def decrease_cooldown_tick(self):
+        self.__cooldown_tick -= 1  # calling the getter specifically
+        if self.cooldown_tick < 0:
+            self.cooldown_tick = 0  # so it cannot be negative
+
+# reset cooldown tick: resetting the cooldown tick
+    def reset_cooldown_tick(self):
+        self.cooldown_tick = self.cooldown
+
+# to json
     def to_json(self) -> dict:
         data: dict = super().to_json()
         data['name'] = self.name
@@ -66,7 +76,7 @@ class ActiveAbility(GameObject):
         data['cooldown_tick'] = self.cooldown_tick
         return data
 
-    # from json
+# from json
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
         self.name = data['name']
