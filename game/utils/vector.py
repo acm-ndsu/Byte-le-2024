@@ -66,3 +66,14 @@ class Vector(GameObject):
 
     def __str__(self) -> str:
         return f"Coordinates: ({self.x}, {self.y})"
+
+    # Stuff added for Byte-le 2024
+    
+    def length(self) -> int:
+        return abs(self.x) + abs(self.y)
+    
+    def negative(self) -> Self:
+        return Vector(-self.x, -self.y)
+    
+    def distance(self, other_vector: Self) -> int:
+        return abs(self.x - other_vector.x) + abs(self.y - other_vector.y)

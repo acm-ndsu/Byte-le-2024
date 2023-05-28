@@ -1,7 +1,5 @@
 import unittest
 from game.common.player import Player
-from game.common.game_object import GameObject
-from game.common.avatar import Avatar
 from game.common.enums import *
 from game.common.avatar import Avatar
 
@@ -54,7 +52,7 @@ class TestPlayer(unittest.TestCase):
 
     def test_functional_fail_int(self):
         with self.assertRaises(ValueError) as e:
-            self.player.functional = "Strig"
+            self.player.functional = "String"
         self.assertEqual(str(e.exception), 'Player.functional must be a boolean')
 
     # team name
