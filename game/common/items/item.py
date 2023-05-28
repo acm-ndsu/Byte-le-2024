@@ -68,7 +68,7 @@ class Item(GameObject):
         - Added position and name to json methods
     """
 
-    def __init__(self, value: int = 1, durability: int | None = None, quantity: int = 1, stack_size: int = 1, position: Vector | None = None, name: str | None = None):
+    def __init__(self, value: int | None = None, science_point_value: int | None = None, durability: int | None = None, quantity: int = 1, stack_size: int = 1, position: Vector | None = None, name: str | None = None):
         super().__init__()
         self.__quantity = None  # This is here to prevent an error
         self.__durability = None  # This is here to prevent an error
@@ -85,9 +85,11 @@ class Item(GameObject):
         return self.__durability
 
     @property
-    def value(self) -> int:
+    def value(self) -> int | None:
         return self.__value
-
+    @property
+    def science_point_value(self) -> int | None:
+        return self.science_point_value
     @property
     def quantity(self) -> int:
         return self.__quantity
@@ -114,11 +116,15 @@ class Item(GameObject):
         self.__durability = durability
 
     @value.setter
-    def value(self, value: int) -> None:
+    def value(self, value: int| None) -> None:
         if value is None or not isinstance(value, int):
             raise ValueError(f'{self.__class__.__name__}.value must be an int.')
         self.__value: int = value
-
+    @science_point_value.setter
+    def science_point_value(self, science_point_value: int| None) -> None:
+        if science_point_value is None or not isinstance(science_point_value, int):
+            raise ValueError(f'{self.__class__.__name__}.science_point_value must be an int.')
+        self.science_point_value: int = science_point_value
     @quantity.setter
     def quantity(self, quantity: int) -> None:
         if quantity is None or not isinstance(quantity, int):
@@ -208,7 +214,8 @@ class Item(GameObject):
         data: dict = super().to_json()
         data['stack_size'] = self.stack_size
         data['durability'] = self.durability
-        data['value'] = self.value
+        data['value'] = self.value 
+        data['science_point_value'] = self.science_point_value 
         data['quantity'] = self.quantity
         data['position'] = self.position.to_json() if self.position is not None else None
         data['name'] = self.name
@@ -219,7 +226,8 @@ class Item(GameObject):
         self.durability: int | None = data['durability']
         self.stack_size: int = data['stack_size']
         self.quantity: int = data['quantity']
-        self.value: int = data['value']
+        self.science_point_value: int = data['science_point_value']
+        self.value: int| None = data['value']
         self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
         self.name: str | None = data['name']
         return self
