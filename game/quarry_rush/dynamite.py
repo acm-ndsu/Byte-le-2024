@@ -5,7 +5,9 @@ from game.quarry_rush.active_ability import ActiveAbility
 
 class Dynamite(ActiveAbility):
 
-    def __init__(self):
+    def __init__(self, blast_radius[]):
         super().__init__()
 
-    def blast_radius(self, blast_radius, ):
+
+
+
