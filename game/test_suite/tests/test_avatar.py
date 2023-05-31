@@ -1,7 +1,8 @@
 import unittest
 
-from game.common.avatar import Avatar
+from game.common.avatar import Avatar, LockedTechError
 from game.common.items.item import Item
+from game.quarry_rush.tech_tree import TechTree
 from game.utils.vector import Vector
 
 
@@ -93,14 +94,136 @@ class TestAvatar(unittest.TestCase):
             self.avatar.drop_rate = 'Fail'
         self.assertEqual(str(e.exception), 'Avatar.drop_rate must be a float.')
 
-    # Test setting steal rate
-    def test_avatar_set_steal_rate(self):
-        self.avatar.steal_rate = 3.3
-        self.assertEqual(self.avatar.steal_rate, 3.3)
+    # test that getting the tech tree works
+    def get_tech_tree(self):
+        other_tree: TechTree = self.avatar.get_tech_tree()
+        self.assertEqual(self.avatar.get_tech_tree(), other_tree)
 
-    # Test setting the steal rate to an illegal value
-    def test_avatar_set_steal_rate_fail(self):
-        with self.assertRaises(ValueError) as e:
-            self.avatar.steal_rate = 'Fail'
-        self.assertEqual(str(e.exception), 'Avatar.steal_rate must be a float.')
+    # Testing which techs are unlocked
+    def test_unlocked_tech(self):
+        self.assertTrue(self.avatar.is_researched('Mining Robotics'))
+        self.assertFalse(self.avatar.is_researched('Better Drivetrains'))
+        self.assertFalse(self.avatar.is_researched('Dynamite'))
 
+    # Unlocking Overdrive Movement will fail if Unnamed Drivetrain Tech isn't researched
+    def test_unlock_overdrive_movement_fail(self):
+        with self.assertRaises(LockedTechError) as e:
+            self.avatar.get_tech_tree().player_functions.unlock_movement_overdrive()
+        self.assertEqual(str(e.exception), 'Avatar must unlock Unnamed Drivetrain Tech before using Overdrive '
+                                           'Movement.')
+
+    # Tests that unlocking Overdrive Movement works
+    def test_unlock_overdrive_movement(self):
+        self.avatar.get_tech_tree().research('Better Drivetrains')
+        self.avatar.get_tech_tree().research('Unnamed Drivetrain Tech')
+        self.avatar.get_tech_tree().research('Overdrive Movement')
+        self.assertTrue(self.avatar.is_researched('Better Drivetrains'))
+        self.assertTrue(self.avatar.is_researched('Unnamed Drivetrain Tech'))
+        self.assertTrue(self.avatar.is_researched('Overdrive Movement'))
+
+    # Fails if Unnamed Mining Tech isn't researched
+    def test_unlock_overdrive_mining_fail(self):
+        with self.assertRaises(LockedTechError) as e:
+            self.avatar.get_tech_tree().player_functions.unlock_mining_overdrive()
+        self.assertEqual(str(e.exception), 'Avatar must unlock Unnamed Mining Tech before using Overdrive '
+                                           'Mining.')
+
+    # Tests that unlocking Overdrive Mining works
+    def test_unlock_overdrive_mining(self):
+        self.avatar.get_tech_tree().research('High Yield Drilling')
+        self.avatar.get_tech_tree().research('Unnamed Mining Tech')
+        self.avatar.get_tech_tree().research('Overdrive Mining')
+        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('Unnamed Mining Tech'))
+        self.assertTrue(self.avatar.is_researched('Overdrive Mining'))
+
+    # Fails if High Yield Drilling isn't researched
+    def test_unlock_dynamite_fail(self):
+        with self.assertRaises(LockedTechError) as e:
+            self.avatar.get_tech_tree().player_functions.unlock_dynamite()
+        self.assertEqual(str(e.exception), 'Avatar must unlock High Yield Drilling before using Dynamite.')
+
+    # Tests that unlocking Dynamite works
+    def test_unlock_dynamite(self):
+        self.avatar.get_tech_tree().research('High Yield Drilling')
+        self.avatar.get_tech_tree().research('Dynamite')
+        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('Dynamite'))
+
+    # Fails if Dynamite isn't researched
+    def test_unlock_landmines_fail(self):
+        with self.assertRaises(LockedTechError) as e:
+            self.avatar.get_tech_tree().player_functions.unlock_landmines()
+        self.assertEqual(str(e.exception), 'Avatar must unlock Dynamite before using Landmines.')
+
+    # Tests that unlocking Landmines works
+    def test_unlock_landmines(self):
+        self.avatar.get_tech_tree().research('High Yield Drilling')
+        self.avatar.get_tech_tree().research('Dynamite')
+        self.avatar.get_tech_tree().research('Landmines')
+        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('Dynamite'))
+        self.assertTrue(self.avatar.is_researched('Landmines'))
+
+    # Fails if Landmines aren't researched
+    def test_unlock_emps_fail(self):
+        with self.assertRaises(LockedTechError) as e:
+            self.avatar.get_tech_tree().player_functions.unlock_emps()
+        self.assertEqual(str(e.exception), 'Avatar must unlock Landmines before using EMPs.')
+
+    # Tests that unlocking EMPs works
+    def test_unlock_emps(self):
+        self.avatar.get_tech_tree().research('High Yield Drilling')
+        self.avatar.get_tech_tree().research('Dynamite')
+        self.avatar.get_tech_tree().research('Landmines')
+        self.avatar.get_tech_tree().research('EMPs')
+        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('Dynamite'))
+        self.assertTrue(self.avatar.is_researched('Landmines'))
+        self.assertTrue(self.avatar.is_researched('EMPs'))
+
+    # Fails if Landmines aren't researched
+    def test_unlock_trap_detection_fail(self):
+        with self.assertRaises(LockedTechError) as e:
+            self.avatar.get_tech_tree().player_functions.unlock_trap_detection()
+        self.assertEqual(str(e.exception), 'Avatar must unlock Landmines before using Trap Detection.')
+
+    # Tests that unlocking EMPs works
+    def test_unlock_trap_detection(self):
+        self.avatar.get_tech_tree().research('High Yield Drilling')
+        self.avatar.get_tech_tree().research('Dynamite')
+        self.avatar.get_tech_tree().research('Landmines')
+        self.avatar.get_tech_tree().research('Trap Detection')
+        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('Dynamite'))
+        self.assertTrue(self.avatar.is_researched('Landmines'))
+        self.assertTrue(self.avatar.is_researched('Trap Detection'))
+
+    # Tests getting the researched techs
+    def test_get_researched_techs(self):
+        self.assertEqual(self.avatar.get_researched_techs(), ['Mining Robotics'])
+        self.avatar.get_tech_tree().research('Better Drivetrains')
+        self.assertEqual(self.avatar.get_researched_techs(), ['Mining Robotics', 'Better Drivetrains'])
+
+    # Test the json with the new implementations
+    def test_avatar_json(self):
+        self.avatar.position = Vector(10, 10)
+        data: dict = self.avatar.to_json()
+        avatar: Avatar = Avatar().from_json(data)
+        self.assertEqual(self.avatar.object_type, avatar.object_type)
+        self.assertEqual(self.avatar.score, avatar.score)
+        self.assertEqual(self.avatar.held_item, avatar.held_item)
+        self.assertEqual(str(self.avatar.position), str(avatar.position))
+        self.assertEqual(self.avatar.inventory, avatar.inventory)
+        self.assertEqual(self.avatar.max_inventory_size, avatar.max_inventory_size)
+        self.assertEqual(self.avatar.held_item, avatar.held_item)
+        self.assertEqual(self.avatar.movement_speed, avatar.movement_speed)
+        self.assertEqual(self.avatar.drop_rate, avatar.drop_rate)
+        self.test_tech_tree()
+
+    # helper method that checks a tech tree
+    def test_tech_tree(self):
+        other_tree: dict = self.avatar.get_tech_tree().to_json()
+        for tech in self.avatar.get_tech_tree().tech_names():
+            self.assertEqual(other_tree[tech], self.avatar.get_tech_tree().is_researched(tech))
+        self.assertEqual(self.avatar.get_tech_tree().player_functions, other_tree['player_functions'])
