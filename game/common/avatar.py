@@ -101,8 +101,7 @@ class Avatar(GameObject):
         [inventory_item (5/5), inventory_item (5/5) inventory_item (5/5) inventory_item (5/5), inventory_item (5/5)]
     """
 
-    def __init__(self, position: Vector | None = None, max_inventory_size: int = 50, movement_speed: int = 1,
-                 drop_rate: float = 1.0):
+    def __init__(self, position: Vector | None = None, max_inventory_size: int = 50):
         super().__init__()
         self.object_type: ObjectType = ObjectType.AVATAR
         self.score: int = 0
@@ -112,8 +111,8 @@ class Avatar(GameObject):
         self.inventory: list[Item | None] = [None] * max_inventory_size
         self.held_item: Item | None = self.inventory[0]
         self.__held_index: int = 0
-        self.movement_speed: int = movement_speed  # determines how many tiles the player moves
-        self.drop_rate: float = drop_rate  # determines how many items are dropped after mining
+        self.movement_speed: int = 1  # determines how many tiles the player moves
+        self.drop_rate: float = 1.0  # determines how many items are dropped after mining
         self.__abilities: dict = self.__create_abilities_dict()  # used to manage unlocking new abilities
         self.__tech_tree: TechTree = self.__create_tech_tree()  # the tech tree cannot be set; made private for security
 
@@ -170,12 +169,20 @@ class Avatar(GameObject):
     def score(self, score: int) -> None:
         if score is None or not isinstance(score, int):
             raise ValueError(f'{self.__class__.__name__}.score must be an int.')
+
+        if score < 0:
+            raise ValueError(f'{self.__class__.__name__}.score must be a positive int.')
+
         self.__score: int = score
 
     @science_points.setter
     def science_points(self, points: int) -> None:
         if points is None or not isinstance(points, int):
             raise ValueError(f'{self.__class__.__name__}.science_points must be an int.')
+
+        if points < 0:
+            raise ValueError(f'{self.__class__.__name__}.science_points must be a positive int.')
+
         self.__science_points: int = points
 
     @position.setter
@@ -200,18 +207,30 @@ class Avatar(GameObject):
     def max_inventory_size(self, size: int) -> None:
         if size is None or not isinstance(size, int):
             raise ValueError(f'{self.__class__.__name__}.max_inventory_size must be an int.')
+
+        if size < 0:
+            raise ValueError(f'{self.__class__.__name__}.max_inventory_size must be a positive int.')
+
         self.__max_inventory_size: int = size
 
     @movement_speed.setter
     def movement_speed(self, speed: int) -> None:
         if speed is None or not isinstance(speed, int):
             raise ValueError(f'{self.__class__.__name__}.movement_speed must be an int.')
+
+        if speed < 0:
+            raise ValueError(f'{self.__class__.__name__}.movement_speed must be a positive int.')
+
         self.__movement_speed: int = speed
 
     @drop_rate.setter
     def drop_rate(self, drop_rate: float) -> None:
         if drop_rate is None or not isinstance(drop_rate, float):
             raise ValueError(f'{self.__class__.__name__}.drop_rate must be a float.')
+
+        if drop_rate < 0:
+            raise ValueError(f'{self.__class__.__name__}.drop_rate must be a positive float.')
+
         self.__drop_rate = drop_rate
 
     # Tech Tree methods and implementation------------------------------------------------------------------------------
@@ -329,42 +348,15 @@ class Avatar(GameObject):
         tech_info: TechInfo = self.__tech_tree.tech_info(tech_name)
 
         # If invalid tech_name, throw an error
-        if tech_name is None:
+        if tech_info is None:
             raise ValueError(f'{tech_name} is not a valid tech name.')
         
         # If the player can't afford the wanted tech, do nothing
         if self.science_points < tech_info.cost:
             return
 
-        self.__buy_new_tech_helper(tech_name)
-
-        # Subtract the cost from the player's science_points
-        self.science_points -= tech_info.cost
-
-    def __buy_new_tech_helper(self, tech_name: str) -> None:
-        """
-        This helper method checks what the given tech_name is. Based on the tech name, it will call the
-        appropriate function.
-        """
-        self.__tech_tree.research(tech_name)
-
-        match tech_name:
-            case 'Better Drivetrains' | 'Unnamed Drivetrain Tech':
-                self.__tech_tree.player_functions.increase_movement(1)  # amount can change for balance
-            case 'Overdrive Movement':
-                self.__tech_tree.player_functions.unlock_movement_overdrive()
-            case 'High Yield Drilling' | 'Unnamed Mining Tech':
-                self.__tech_tree.player_functions.increase_mining(1.5)  # amount can change for balance
-            case 'Overdrive Mining':
-                self.__tech_tree.player_functions.unlock_mining_overdrive()
-            case'Dynamite':
-                self.__tech_tree.player_functions.unlock_dynamite()
-            case 'Landmines':
-                self.__tech_tree.player_functions.unlock_landmines()
-            case 'EMPs':
-                self.__tech_tree.player_functions.unlock_emps()
-            case _:
-                self.__tech_tree.player_functions.unlock_trap_detection()
+        self.__tech_tree.research(tech_name)  # Research the wanted tech
+        self.science_points -= tech_info.cost  # Subtract the cost from the player's science_points
 
     def get_tech_tree(self) -> TechTree:
         return self.__tech_tree

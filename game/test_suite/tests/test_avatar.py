@@ -74,6 +74,18 @@ class TestAvatar(unittest.TestCase):
 
     # Quarry Rush tests below ------------------------------------------------------------------------------------------
 
+    # Test setting score to be negative
+    def test_set_score_negative(self):
+        with self.assertRaises(ValueError) as e:
+            self.avatar.score = -1
+        self.assertEqual(str(e.exception), 'Avatar.score must be a positive int.')
+
+    # Test setting max inventory size to be negative
+    def test_set_max_inv_size(self):
+        with self.assertRaises(ValueError) as e:
+            self.avatar.max_inventory_size = -1
+        self.assertEqual(str(e.exception), 'Avatar.max_inventory_size must be a positive int.')
+
     # Test setting movement speed
     def test_avatar_set_movement_speed(self):
         self.avatar.movement_speed = 5
@@ -83,6 +95,11 @@ class TestAvatar(unittest.TestCase):
         with self.assertRaises(ValueError) as e:
             self.avatar.movement_speed = 'Fail'
         self.assertEqual(str(e.exception), 'Avatar.movement_speed must be an int.')
+
+    def test_movement_speed_negative(self):
+        with self.assertRaises(ValueError) as e:
+            self.avatar.movement_speed = -1
+        self.assertEqual(str(e.exception), 'Avatar.movement_speed must be a positive int.')
 
     # Test setting science_points
     def test_avatar_set_science_points(self):
@@ -94,6 +111,11 @@ class TestAvatar(unittest.TestCase):
             self.avatar.science_points = 'Fail'
         self.assertEqual(str(e.exception), 'Avatar.science_points must be an int.')
 
+    def test_set_science_points_negative(self):
+        with self.assertRaises(ValueError) as e:
+            self.avatar.science_points = -1
+        self.assertEqual(str(e.exception), 'Avatar.science_points must be a positive int.')
+
     # Test setting drop rate
     def test_avatar_set_drop_rate(self):
         self.avatar.drop_rate = 5.3
@@ -103,6 +125,11 @@ class TestAvatar(unittest.TestCase):
         with self.assertRaises(ValueError) as e:
             self.avatar.drop_rate = 'Fail'
         self.assertEqual(str(e.exception), 'Avatar.drop_rate must be a float.')
+
+    def test_drop_rate_negative(self):
+        with self.assertRaises(ValueError) as e:
+            self.avatar.drop_rate = -1.0
+        self.assertEqual(str(e.exception), 'Avatar.drop_rate must be a positive float.')
 
     # Testing which techs are unlocked
     def test_unlocked_tech(self):
