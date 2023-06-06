@@ -7,12 +7,6 @@ from game.quarry_rush.tech import TechInfo
 from game.utils.vector import Vector
 from game.quarry_rush.tech_tree import TechTree
 from game.quarry_rush.player_functions import PlayerFunctions
-from typing import Callable
-
-
-class LockedTechError(Exception):
-    "Raised when trying to access a tech out of order."
-    pass
 
 
 class Avatar(GameObject):
@@ -322,7 +316,7 @@ class Avatar(GameObject):
         # If invalid tech_name, throw an error
         if tech_info is None:
             raise ValueError(f'{tech_name} is not a valid tech name.')
-        
+
         # If the player can't afford the wanted tech, do nothing
         if self.science_points < tech_info.cost:
             return False
