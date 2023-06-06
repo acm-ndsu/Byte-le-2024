@@ -34,10 +34,12 @@ class TestAvatarInventory(unittest.TestCase):
             self.avatar.inventory = [Item(1, 1), Item(4, 2)]
         self.assertEqual(str(e.exception), 'Avatar.inventory size must be less than or equal to max_inventory_size')
 
+    # Tests setting max_inventory_size
     def test_avatar_set_max_inventory_size(self):
         self.avatar.max_inventory_size = 10
         self.assertEqual(str(self.avatar.max_inventory_size), str(10))
 
+    # Fails if max_inventory_size isn't an int
     def test_avatar_set_max_inventory_size_fail(self):
         with self.assertRaises(ValueError) as e:
             self.avatar.max_inventory_size = 'Fail'
@@ -135,3 +137,15 @@ class TestAvatarInventory(unittest.TestCase):
     def test_avatar_drop_held_item_none(self):
         held_item = self.avatar.drop_held_item()
         self.assertEqual(held_item, None)
+
+    # Quarry Rush tests below ------------------------------------------------------------------------------------------
+
+    # Tests to make sure the inventory doesn't go above 50
+    def test_inventory_size(self):
+        self.avatar: Avatar = Avatar()
+        self.item: Item = Item()
+        self.avatar.inventory = [self.item] * 50
+        self.item = Item(durability=None, quantity=2, stack_size=2)
+        returned: Item = self.avatar.pick_up(self.item)
+        self.assertEqual(returned, self.item)
+        self.assertEqual(len(self.avatar.inventory), 50)
