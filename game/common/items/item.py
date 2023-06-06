@@ -68,7 +68,8 @@ class Item(GameObject):
         - Added position and name to json methods
     """
 
-    def __init__(self, value: int = 1, durability: int | None = None, quantity: int = 1, stack_size: int = 1, position: Vector | None = None, name: str | None = None):
+    def __init__(self, value: int = 1, durability: int | None = None, quantity: int = 1, stack_size: int = 1,
+                 position: Vector | None = None, name: str | None = None):
         super().__init__()
         self.__quantity = None  # This is here to prevent an error
         self.__durability = None  # This is here to prevent an error
@@ -77,8 +78,8 @@ class Item(GameObject):
         self.stack_size: int = stack_size  # the max quantity this item can contain
         self.durability: int | None = durability  # durability can be None to represent infinite durability
         self.quantity: int = quantity  # the current amount of this item
-        self.position: Vector | None = position # position of item
-        self.name: str | None = name # name associated with item
+        self.position: Vector | None = position  # position of item
+        self.name: str | None = name  # name associated with item
 
     @property
     def durability(self) -> int | None:
