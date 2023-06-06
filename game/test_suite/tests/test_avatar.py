@@ -137,12 +137,9 @@ class TestAvatar(unittest.TestCase):
         self.assertFalse(self.avatar.is_researched('Better Drivetrains'))
         self.assertFalse(self.avatar.is_researched('Dynamite'))
 
-    # Unlocking Overdrive Movement will fail if Unnamed Drivetrain Tech isn't researched
+    # Buying Overdrive Movement will return False if the tree hasn't developed to it yet
     def test_unlock_overdrive_movement_fail(self):
-        with self.assertRaises(LockedTechError) as e:
-            self.avatar.buy_new_tech('Overdrive Movement')
-        self.assertEqual(str(e.exception), 'Avatar must unlock Unnamed Drivetrain Tech before using Overdrive '
-                                           'Movement.')
+        self.assertFalse(self.avatar.buy_new_tech('Overdrive Movement'))
 
     # Tests that unlocking Overdrive Movement works
     def test_unlock_overdrive_movement(self):
@@ -153,12 +150,9 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.is_researched('Unnamed Drivetrain Tech'))
         self.assertTrue(self.avatar.is_researched('Overdrive Movement'))
 
-    # Fails if Unnamed Mining Tech isn't researched
+    # Buying Overdrive Mining will return False if the tree hasn't developed to it yet
     def test_unlock_overdrive_mining_fail(self):
-        with self.assertRaises(LockedTechError) as e:
-            self.avatar.buy_new_tech('Overdrive Mining')
-        self.assertEqual(str(e.exception), 'Avatar must unlock Unnamed Mining Tech before using Overdrive '
-                                           'Mining.')
+        self.assertFalse(self.avatar.buy_new_tech('Overdrive Mining'))
 
     # Tests that unlocking Overdrive Mining works
     def test_unlock_overdrive_mining(self):
@@ -169,11 +163,9 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.is_researched('Unnamed Mining Tech'))
         self.assertTrue(self.avatar.is_researched('Overdrive Mining'))
 
-    # Fails if High Yield Drilling isn't researched
+    # Buying Dynamite will return False if the tree hasn't developed to it yet
     def test_unlock_dynamite_fail(self):
-        with self.assertRaises(LockedTechError) as e:
-            self.avatar.buy_new_tech('Dynamite')
-        self.assertEqual(str(e.exception), 'Avatar must unlock High Yield Drilling before using Dynamite.')
+        self.assertFalse(self.avatar.buy_new_tech('Dynamite'))
 
     # Tests that unlocking Dynamite works
     def test_unlock_dynamite(self):
@@ -182,11 +174,9 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
 
-    # Fails if Dynamite isn't researched
+    # Buying Landmines will return False if the tree hasn't developed to it yet
     def test_unlock_landmines_fail(self):
-        with self.assertRaises(LockedTechError) as e:
-            self.avatar.buy_new_tech('Landmines')
-        self.assertEqual(str(e.exception), 'Avatar must unlock Dynamite before using Landmines.')
+        self.assertFalse(self.avatar.buy_new_tech('Landmines'))
 
     # Tests that unlocking Landmines works
     def test_unlock_landmines(self):
@@ -197,13 +187,11 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
 
-    # Fails if Landmines aren't researched
+    # Buying EMPs will return False if the tree hasn't developed to it yet
     def test_unlock_emps_fail(self):
-        with self.assertRaises(LockedTechError) as e:
-            self.avatar.buy_new_tech('EMPs')
-        self.assertEqual(str(e.exception), 'Avatar must unlock Landmines before using EMPs.')
+        self.assertFalse(self.avatar.buy_new_tech('EMPs'))
 
-    # Tests that unlocking EMPs works
+    # Tests that unlocking EMPs works and that unlocking Trap Detection returns False
     def test_unlock_emps(self):
         self.avatar.buy_new_tech('High Yield Drilling')
         self.avatar.buy_new_tech('Dynamite')
@@ -213,14 +201,13 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
         self.assertTrue(self.avatar.is_researched('EMPs'))
+        self.assertFalse(self.avatar.is_researched('Trap Detection'))
 
-    # Fails if Landmines aren't researched
+    # Buying Trap Detection will return False if the tree hasn't developed to it yet
     def test_unlock_trap_detection_fail(self):
-        with self.assertRaises(LockedTechError) as e:
-            self.avatar.buy_new_tech('Trap Detection')
-        self.assertEqual(str(e.exception), 'Avatar must unlock Landmines before using Trap Detection.')
+        self.assertFalse(self.avatar.buy_new_tech('Trap Detection'))
 
-    # Tests that unlocking EMPs works
+    # Tests that unlocking Trap Detection works and that unlocking EMPs returns False
     def test_unlock_trap_detection(self):
         self.avatar.buy_new_tech('High Yield Drilling')
         self.avatar.buy_new_tech('Dynamite')
@@ -230,6 +217,7 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
         self.assertTrue(self.avatar.is_researched('Trap Detection'))
+        self.assertFalse(self.avatar.is_researched('EMPs'))
 
     # Tests getting the researched techs
     def test_get_researched_techs(self):

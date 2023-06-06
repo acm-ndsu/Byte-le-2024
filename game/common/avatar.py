@@ -237,8 +237,8 @@ class Avatar(GameObject):
 
     # Helper method to create the tech tree
     def __create_tech_tree(self) -> TechTree:
-        player_functions = PlayerFunctions(increase_movement=lambda x: self.movement_speed + x,
-                                           increase_mining=lambda x: self.drop_rate + x,
+        player_functions = PlayerFunctions(increase_movement=self.__increase_movement,  # change number for balance
+                                           increase_mining=self.__increase_drop_rate,  # change number for balance
                                            unlock_movement_overdrive=self.__unlock_overdrive_movement,
                                            unlock_mining_overdrive=self.__unlock_overdrive_mining,
                                            unlock_dynamite=self.__unlock_dynamite,
@@ -247,87 +247,57 @@ class Avatar(GameObject):
                                            unlock_trap_detection=self.__unlock_trap_detection)
         return TechTree(player_functions)
 
-    def __unlock_overdrive_movement(self) -> None:
-        # If the player hasn't unlocked Unnamed Drivetrain Tech, raise an error
-        if not self.__tech_tree.is_researched('Unnamed Drivetrain Tech'):
-            raise LockedTechError(f'{self.__class__.__name__} must unlock Unnamed Drivetrain Tech before using '
-                                  f'Overdrive Movement.')
+    def __increase_movement(self, amt: int) -> None:
+        self.movement_speed += amt
 
+    def __increase_drop_rate(self, amt: float) -> None:
+        self.drop_rate += amt
+
+    def __unlock_overdrive_movement(self) -> None:
         # If the player hasn't unlocked Overdrive Movement, set the abilities value to true and research it
         if not self.__abilities['Overdrive Movement']:
             self.__abilities['Overdrive Movement'] = True
-            self.__tech_tree.research('Overdrive Movement')
         # otherwise, use the Overdrive Movement ability
         else:
             pass  # will be implemented later as development progresses
 
     def __unlock_overdrive_mining(self) -> None:
-        # If the player hasn't unlocked Unnamed Mining Tech, raise an error
-        if not self.__tech_tree.is_researched('Unnamed Mining Tech'):
-            raise LockedTechError(f'{self.__class__.__name__} must unlock Unnamed Mining Tech before using '
-                                  f'Overdrive Mining.')
-
         # If the player hasn't unlocked Overdrive Mining, set the abilities value to true and research it
         if not self.__abilities['Overdrive Mining']:
             self.__abilities['Overdrive Mining'] = True
-            self.__tech_tree.research('Overdrive Mining')
         # otherwise, use the Overdrive Mining ability
         else:
             pass  # will be implemented later as development progresses
 
     def __unlock_dynamite(self) -> None:
-        # If the player hasn't unlocked High Yield Drilling, raise an error
-        if not self.__tech_tree.is_researched('High Yield Drilling'):
-            raise LockedTechError(f'{self.__class__.__name__} must unlock High Yield Drilling before using '
-                                  f'Dynamite.')
-
         # If the player hasn't unlocked Dynamite, set the abilities value to true and research it
         if not self.__abilities['Dynamite']:
             self.__abilities['Dynamite'] = True
-            self.__tech_tree.research('Dynamite')
         # otherwise, use the Dynamite ability
         else:
             pass  # will be implemented later as development progresses
 
     def __unlock_landmines(self) -> None:
-        # If the player hasn't unlocked Dynamite, raise an error
-        if not self.__tech_tree.is_researched('Dynamite'):
-            raise LockedTechError(f'{self.__class__.__name__} must unlock Dynamite before using '
-                                  f'Landmines.')
-
         # If the player hasn't unlocked Landmines, set the abilities value to true and research it
         if not self.__abilities['Landmines']:
             self.__abilities['Landmines'] = True
-            self.__tech_tree.research('Landmines')
         # otherwise, use the Landmine ability
         else:
             pass  # will be implemented later as development progresses
 
     def __unlock_emps(self) -> None:
-        # If the player hasn't unlocked Landmines, raise an error
-        if not self.__tech_tree.is_researched('Landmines'):
-            raise LockedTechError(f'{self.__class__.__name__} must unlock Landmines before using '
-                                  f'EMPs.')
-
         # If the player hasn't unlocked EMPs or Trap Detection, set the abilities value to true and research it
         if not self.__abilities['EMPs'] and not self.__abilities['Trap Detection']:
             self.__abilities['EMPs'] = True
             self.__abilities['Landmines'] = False  # Landmines will be locked again since player upgraded from them
-            self.__tech_tree.research('EMPs')
         # otherwise, use the EMP ability
         else:
             pass  # will be implemented later as development progresses
 
     def __unlock_trap_detection(self) -> None:
-        # If the player hasn't unlocked Landmines, raise an error
-        if not self.__tech_tree.is_researched('Landmines'):
-            raise LockedTechError(f'{self.__class__.__name__} must unlock Landmines before using '
-                                  f'Trap Detection.')
-
         # If the player hasn't unlocked Trap Detection or EMPs, set the abilities value to true and research it
         if not self.__abilities['Trap Detection'] and not self.__abilities['EMPs']:
             self.__abilities['Trap Detection'] = True
-            self.__tech_tree.research('Trap Detection')
         # otherwise, use the Trap Detection ability
         else:
             pass  # will be implemented later as development progresses
@@ -342,7 +312,9 @@ class Avatar(GameObject):
                      'Trap Detection': False}
         return abilities
 
-    def buy_new_tech(self, tech_name: str) -> None:
+    def buy_new_tech(self, tech_name: str) -> bool:
+        """By giving the name of a tech, this method attempts to buy the tech. It returns a boolean representing if
+        the purchase was successful or not."""
         # to prevent players from using this whenever, there can be another check here to see if they are at their base
 
         tech_info: TechInfo = self.__tech_tree.tech_info(tech_name)
@@ -353,10 +325,15 @@ class Avatar(GameObject):
         
         # If the player can't afford the wanted tech, do nothing
         if self.science_points < tech_info.cost:
-            return
+            return False
 
-        self.__tech_tree.research(tech_name)  # Research the wanted tech
-        self.science_points -= tech_info.cost  # Subtract the cost from the player's science_points
+        successful: bool = self.__tech_tree.research(tech_name)  # Research the wanted tech
+
+        # Subtract the cost from the player's science_points if successfully researched
+        if successful:
+            self.science_points -= tech_info.cost
+
+        return successful
 
     def get_tech_tree(self) -> TechTree:
         return self.__tech_tree
