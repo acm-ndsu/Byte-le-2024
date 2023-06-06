@@ -1,5 +1,6 @@
 import unittest
 from game.quarry_rush.active_ability import ActiveAbility
+from game.common.avatar import Avatar
 
 
 class TestActiveAbility(unittest.TestCase):
@@ -30,6 +31,24 @@ class TestActiveAbility(unittest.TestCase):
         with self.assertRaises(ValueError) as e:
             self.active_ability.name = 1
         self.assertEqual(str(e.exception), 'ActiveAbility.name must be a String')
+
+    # test: avatar
+    def test_avatar(self):
+        self.avatar = Avatar()
+        self.active_ability.avatar = self.avatar
+        self.assertEqual(self.active_ability.avatar, self.avatar)
+
+    # test: avatar none
+    def test_avatar_none(self):
+        self.avatar = None
+        self.active_ability.avatar = self.avatar
+        self.assertEqual(self.active_ability.avatar, self.avatar)
+
+    # fail test: avatar cannot be anything else
+    def test_avatar_fail(self):
+        with self.assertRaises(ValueError) as e:
+            self.active_ability.avatar = ""
+        self.assertEqual(str(e.exception), 'ActiveAbility.avatar must be Avatar or None')
 
     # test: cooldown
     def test_cooldown(self):
