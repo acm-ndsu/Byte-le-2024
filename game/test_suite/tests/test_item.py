@@ -127,7 +127,7 @@ class TestItem(unittest.TestCase):
         item: Item = Item(10, 10, 3, 10)
         self.item = Item(10, 10, 3, 10)
         self.item.pick_up(item)
-        self.assertEqual(self.item.quantity, 3)
+        self.assertEqual(self.item.quantity, 6)
 
     def test_pick_up_wrong_object_type(self):
         item: Item = Item(10, 10, 1, 10, 1)
