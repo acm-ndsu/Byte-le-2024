@@ -124,8 +124,8 @@ class TestItem(unittest.TestCase):
 
     def test_pick_up(self):
         # value, durability, quantity, stack size
-        item: Item = Item(10, 10, 10, 10)
-        self.item = Item(10, 10, 10, 10)
+        item: Item = Item(10, 10, 3, 10)
+        self.item = Item(10, 10, 3, 10)
         self.item.pick_up(item)
         self.assertEqual(self.item.quantity, 3)
 
