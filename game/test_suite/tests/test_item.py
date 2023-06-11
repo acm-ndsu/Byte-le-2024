@@ -27,7 +27,7 @@ class TestItem(unittest.TestCase):
     def test_set_durability_fail(self):
         with self.assertRaises(ValueError) as e:
             self.item.durability = 'fail'
-        self.assertEqual(str(e.exception), 'Item.durability must be an int or None.')
+        self.assertEqual(str(e.exception), 'Item.durability must be an int.')
 
     def test_set_durability_stack_size_fail(self):
         with self.assertRaises(ValueError) as e:
@@ -43,7 +43,7 @@ class TestItem(unittest.TestCase):
     def test_set_value_fail(self):
         with self.assertRaises(ValueError) as e:
             self.item.value = 'fail'
-        self.assertEqual(str(e.exception), 'Item.value must be an int or None.')
+        self.assertEqual(str(e.exception), 'Item.value must be an int.')
     def test_set_science_point_value(self):
         self.item.science_point_value = 10
         self.assertEqual(self.item.science_point_value, 10)
@@ -51,7 +51,7 @@ class TestItem(unittest.TestCase):
     def test_set_science_point_value_fail(self):
         with self.assertRaises(ValueError) as e:
             self.item.science_point_value = 'fail'
-        self.assertEqual(str(e.exception), 'Item.science_point_value must be an int or None.')
+        self.assertEqual(str(e.exception), 'Item.science_point_value must be an int.')
     # test set quantity
     def test_set_quantity(self):
         self.item = Item(10, 10, None, 10, 10)
