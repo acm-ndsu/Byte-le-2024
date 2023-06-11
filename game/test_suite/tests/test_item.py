@@ -130,9 +130,9 @@ class TestItem(unittest.TestCase):
         self.assertEqual(self.item.quantity, 6)
 
     def test_pick_up_wrong_object_type(self):
-        item: Item = Item(10, 10, 1, 10, 1)
+        item: Item = Item(10, 10, 10, 50)
         item.object_type = ObjectType.PLAYER
-        self.item = Item(10,  10, 1, 10, 1)
+        self.item = Item(10,  10, 10, 50)
         self.item = self.item.pick_up(item)
         self.assertEqual(self.item.object_type, item.object_type)
 
