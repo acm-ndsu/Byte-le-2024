@@ -53,9 +53,9 @@ class TestAvatarInventory(unittest.TestCase):
 
     # Tests that picking up an item of one that already exists in the inventory works
     def test_avatar_pick_up_extra(self):
-        item1: Item = Item(10, None, 1, 3)
-        item2: Item = Item(10, None, 1, 3)
-        item3: Item = Item(10, None, 1, 3)
+        item1: Item = Item(10, 0, 1, 3)
+        item2: Item = Item(10, 0, 1, 3)
+        item3: Item = Item(10, 0, 1, 3)
         self.avatar.pick_up(item1)
         self.avatar.pick_up(item2)
         self.avatar.pick_up(item3)
@@ -63,9 +63,9 @@ class TestAvatarInventory(unittest.TestCase):
 
     # Tests that picking up an item that would cause a surplus doesn't cause quantity to go over stack_size
     def test_avatar_pick_up_surplus(self):
-        item1: Item = Item(10, None, 2, 3)
-        item2: Item = Item(10, None, 1, 3)
-        item3: Item = Item(10, None, 3, 3)
+        item1: Item = Item(10, 0, 2, 3)
+        item2: Item = Item(10, 0, 1, 3)
+        item3: Item = Item(10, 0, 3, 3)
         self.avatar.pick_up(item1)
         self.avatar.pick_up(item2)
         surplus: Item = self.avatar.pick_up(item3)
