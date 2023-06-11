@@ -18,7 +18,7 @@ class TestGameBoard(unittest.TestCase):
     """
 
     def setUp(self) -> None:
-        self.item: Item = Item(10, None)
+        self.item: Item = Item(10)
         self.wall: Wall = Wall()
         self.avatar: Avatar = Avatar(Vector(5, 5))
         self.locations: dict[tuple[Vector]:list[GameObject]] = {
