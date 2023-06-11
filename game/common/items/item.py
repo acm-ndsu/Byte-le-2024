@@ -72,6 +72,7 @@ class Item(GameObject):
         super().__init__()
         self.__quantity = None  # This is here to prevent an error
         self.__durability = None  # This is here to prevent an error
+        self.science_point_value: int = science_point_value #Science point value of an item
         self.object_type: ObjectType = ObjectType.ITEM
         self.value: int = value  # Value can more specified based on purpose (e.g., the sell price)
         self.stack_size: int = stack_size  # the max quantity this item can contain
@@ -120,11 +121,13 @@ class Item(GameObject):
         if value is None or not isinstance(value, int):
             raise ValueError(f'{self.__class__.__name__}.value must be an int.')
         self.__value: int = value
+
     @science_point_value.setter
     def science_point_value(self, science_point_value: int) -> None:
         if science_point_value is None or not isinstance(science_point_value, int):
             raise ValueError(f'{self.__class__.__name__}.science_point_value must be an int.')
         self.science_point_value: int = science_point_value
+
     @quantity.setter
     def quantity(self, quantity: int) -> None:
         if quantity is None or not isinstance(quantity, int):
