@@ -1,20 +1,28 @@
 from builtins import hasattr
 
-from game.common.avatar import Avatar
 from game.common.items.item import Item
-from typing import Self
+
 
 class InventoryManager(object):
     """
     This class is used to manage Avatar inventories.
     """
 
+    __inventory_1: list[Item] = []
+    __inventory_2: list[Item] = []
+
     def __new__(cls):
+        # This method only creates one singleton object of this class
         if not hasattr(cls, 'instance'):
             cls.instance = super(InventoryManager, cls).__new__(cls)
+            cls.__inventories: dict[str, list[Item]] = {
+                'avatar_1': cls.__inventory_1,
+                'avatar_2': cls.__inventory_2
+            }  # Might change avatar_1 and avatar_2 to be the name of the company the avatar is working for in the lore
+
             return cls.instance
 
-    def __clean_inventory(self) -> None:
+    def __clean_inventory(self, wanted_inventory: str) -> None:
         """
         This method is used to manage the inventory. Whenever an item has a quantity of 0, it will set that item object
             to None since it doesn't exist in the inventory anymore. Otherwise, if there are multiple instances of an
