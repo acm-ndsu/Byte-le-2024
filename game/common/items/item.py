@@ -90,7 +90,7 @@ class Item(GameObject):
         return self.__value
     @property
     def science_point_value(self) -> int :
-        return self.science_point_value
+        return self.__science_point_value
     @property
     def quantity(self) -> int:
         return self.__quantity
@@ -126,7 +126,7 @@ class Item(GameObject):
     def science_point_value(self, science_point_value: int) -> None:
         if science_point_value is None or not isinstance(science_point_value, int):
             raise ValueError(f'{self.__class__.__name__}.science_point_value must be an int.')
-        self.science_point_value: int = science_point_value
+        self.__science_point_value: int = science_point_value
 
     @quantity.setter
     def quantity(self, quantity: int) -> None:
