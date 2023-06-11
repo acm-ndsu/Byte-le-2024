@@ -27,7 +27,7 @@ class TestItem(unittest.TestCase):
     def test_set_durability_fail(self):
         with self.assertRaises(ValueError) as e:
             self.item.durability = 'fail'
-        self.assertEqual(str(e.exception), 'Item.durability must be an int.')
+        self.assertEqual(str(e.exception), 'Item.durability must be an int or None.')
 
     def test_set_durability_stack_size_fail(self):
         with self.assertRaises(ValueError) as e:
