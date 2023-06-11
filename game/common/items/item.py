@@ -68,7 +68,7 @@ class Item(GameObject):
         - Added position and name to json methods
     """
 
-    def __init__(self, value: int, science_point_value: int, durability: int | None = None, quantity: int = 1, stack_size: int = 1, position: Vector | None = None, name: str | None = None):
+    def __init__(self, value: int=0, science_point_value: int =0, durability: int | None = None, quantity: int = 1, stack_size: int = 1, position: Vector | None = None, name: str | None = None):
         super().__init__()
         self.__quantity = None  # This is here to prevent an error
         self.__durability = None  # This is here to prevent an error
