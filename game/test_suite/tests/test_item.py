@@ -31,7 +31,7 @@ class TestItem(unittest.TestCase):
 
     def test_set_durability_stack_size_fail(self):
         with self.assertRaises(ValueError) as e:
-            self.item = Item(10, 10, 10, 10)
+            self.item = Item(10, 10, 1, 0)
             self.item.durability = 19
         self.assertEqual(str(e.exception), 'Item.durability must be set to None if stack_size is not equal to 1.')
 
@@ -130,9 +130,9 @@ class TestItem(unittest.TestCase):
         self.assertEqual(self.item.quantity, 3)
 
     def test_pick_up_wrong_object_type(self):
-        item: Item = Item(10, 10, 10, 1, 1)
+        item: Item = Item(10, 10, 1, 10, 1)
         item.object_type = ObjectType.PLAYER
-        self.item = Item(10,  10, 10, 1, 1)
+        self.item = Item(10,  10, 1, 10, 1)
         self.item = self.item.pick_up(item)
         self.assertEqual(self.item.object_type, item.object_type)
 
