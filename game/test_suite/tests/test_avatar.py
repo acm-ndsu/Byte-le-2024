@@ -86,9 +86,9 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that picking up an item of one that already exists in the inventory works
     def test_avatar_pick_up_extra(self):
-        self.item1: Item = Item(10, None, 1, 3)
-        self.item2: Item = Item(10, None, 1, 3)
-        self.item3: Item = Item(10, None, 1, 3)
+        self.item1: Item = Item(10, 0, 1, 3)
+        self.item2: Item = Item(10, 0, 1, 3)
+        self.item3: Item = Item(10, 0, 1, 3)
         self.avatar.pick_up(self.item1)
         self.avatar.pick_up(self.item2)
         self.avatar.pick_up(self.item3)
