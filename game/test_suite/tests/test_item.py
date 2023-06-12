@@ -31,7 +31,7 @@ class TestItem(unittest.TestCase):
 
     def test_set_durability_stack_size_fail(self):
         with self.assertRaises(ValueError) as e:
-            self.item = Item(10, None, 10, 10)
+            self.item = Item(10, 10, 1, 10)
             self.item.durability = 19
         self.assertEqual(str(e.exception), 'Item.durability must be set to None if stack_size is not equal to 1.')
 
@@ -44,10 +44,17 @@ class TestItem(unittest.TestCase):
         with self.assertRaises(ValueError) as e:
             self.item.value = 'fail'
         self.assertEqual(str(e.exception), 'Item.value must be an int.')
+    def test_set_science_point_value(self):
+        self.item.science_point_value = 10
+        self.assertEqual(self.item.science_point_value, 10)
 
+    def test_set_science_point_value_fail(self):
+        with self.assertRaises(ValueError) as e:
+            self.item.science_point_value = 'fail'
+        self.assertEqual(str(e.exception), 'Item.science_point_value must be an int.')
     # test set quantity
     def test_set_quantity(self):
-        self.item = Item(10, None, 10, 10)
+        self.item = Item(10, 10, 10, 10)
         self.item.quantity = 5
         self.assertEqual(self.item.quantity, 5)
 
@@ -69,7 +76,7 @@ class TestItem(unittest.TestCase):
 
     # test set stack_size
     def test_set_stack_size(self):
-        self.item = Item(10, None, 10, 10)
+        self.item =Item(10, 10, 10, 10)
         self.assertEqual(self.item.quantity, 10)
 
     def test_set_stack_size_fail(self):
@@ -80,7 +87,7 @@ class TestItem(unittest.TestCase):
     def test_set_stack_size_fail_quantity(self):
         # value, durability, quantity, stack size
         with self.assertRaises(ValueError) as e:
-            item: Item = Item(10, None, 10, 10)
+            item: Item = Item(10, 10, 10, 10)
             item.stack_size = 5
         self.assertEqual(str(e.exception), 'Item.stack_size must be greater than or equal to the quantity.')
 
@@ -117,21 +124,21 @@ class TestItem(unittest.TestCase):
 
     def test_pick_up(self):
         # value, durability, quantity, stack size
-        item: Item = Item(10, None, 2, 10)
-        self.item = Item(10, None, 1, 10)
+        item: Item = Item(10, 10, 3, 10)
+        self.item = Item(10, 10, 3, 10)
         self.item.pick_up(item)
-        self.assertEqual(self.item.quantity, 3)
+        self.assertEqual(self.item.quantity, 6)
 
     def test_pick_up_wrong_object_type(self):
-        item: Item = Item(10, 10, 1, 1)
+        item: Item = Item(10, 10, 10, 50)
         item.object_type = ObjectType.PLAYER
-        self.item = Item(10, 10, 1, 1)
+        self.item = Item(10,  10, 10, 50)
         self.item = self.item.pick_up(item)
         self.assertEqual(self.item.object_type, item.object_type)
 
     def test_pick_up_surplus(self):
-        item: Item = Item(10, None, 10, 10)
-        self.item = Item(10, None, 9, 10)
+        item: Item = Item(10, 10, 10, 10)
+        self.item = Item(10, 10, 9, 10)
         surplus: Item = self.item.pick_up(item)
         self.assertEqual(surplus.quantity, 9)
 
@@ -145,6 +152,7 @@ class TestItem(unittest.TestCase):
         self.assertEqual(self.item.stack_size, item.stack_size)
         self.assertEqual(self.item.durability, item.durability)
         self.assertEqual(self.item.quantity, item.quantity)
+        self.assertEqual(self.item.science_point_value, item.science_point_value)
         self.assertEqual(self.item.position.object_type, item.position.object_type)
         self.assertEqual(self.item.position.x, item.position.x)
         self.assertEqual(self.item.position.y, item.position.y)
