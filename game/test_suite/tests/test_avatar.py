@@ -12,7 +12,7 @@ class TestAvatar(unittest.TestCase):
     """
 
     def setUp(self) -> None:
-        self.avatar: Avatar = Avatar(None, 1)
+        self.avatar: Avatar = Avatar()
         self.item: Item = Item(10, 100, 1, 1)
 
     # test set item

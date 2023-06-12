@@ -16,9 +16,9 @@ class TestInventoryController(unittest.TestCase):
     def setUp(self) -> None:
         self.inventory_controller: InventoryController = InventoryController()
         self.item: Item = Item()
-        self.avatar: Avatar = Avatar(max_inventory_size=10)
+        self.avatar: Avatar = Avatar()
 
-        self.inventory: [Item] = [Item(1), Item(2), Item(3), Item(4), Item(5), Item(6), Item(7), Item(8),
+        self.inventory: list[Item] = [Item(1), Item(2), Item(3), Item(4), Item(5), Item(6), Item(7), Item(8),
                                   Item(9), Item(10)]
 
         self.avatar.inventory = self.inventory
@@ -85,7 +85,7 @@ class TestInventoryController(unittest.TestCase):
     # Tests accessing a slot of the inventory given an enum that's out of bounds
     def test_with_out_of_bounds(self):
         with self.assertRaises(IndexError) as e:
-            self.inventory: [Item] = [Item(1), Item(2), Item(3), Item(4), Item(5)]
+            self.inventory: list[Item] = [Item(1), Item(2), Item(3), Item(4), Item(5)]
             self.avatar.max_inventory_size = 5
             self.avatar.inventory = self.inventory
             self.player: Player = Player(avatar=self.avatar)

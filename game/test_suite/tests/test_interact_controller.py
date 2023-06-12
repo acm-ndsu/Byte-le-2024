@@ -29,7 +29,7 @@ class TestInteractController(unittest.TestCase):
         self.occupiable_station: OccupiableStation = OccupiableStation(self.item)
         self.station_example: StationExample = StationExample(self.item)
         self.occupiable_station_example = OccupiableStationExample(self.item)
-        self.avatar: Avatar = Avatar(Vector(5, 5))
+        self.avatar: Avatar = Avatar(position=Vector(5, 5))
         self.locations: dict[tuple[Vector]:list[GameObject]] = {
             (Vector(1, 1),): [Station(None)],
             (Vector(5, 4),): [self.occupiable_station_example],

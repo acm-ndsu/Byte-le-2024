@@ -26,7 +26,7 @@ class TestMovementControllerIfOccupiableStationIsOccupiable(unittest.TestCase):
         self.occ_station = OccupiableStation()
         # self.wall = Wall()
         # test movements up, down, left and right by starting with default 3,3 then know if it changes from there \/
-        self.avatar = Avatar(None, Vector(1, 1), [], 1)
+        self.avatar = Avatar(position=Vector(1, 1))
         self.client = Player(None, None, [], self.avatar)
         self.game_board.generate_map()
 

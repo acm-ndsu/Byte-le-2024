@@ -2,6 +2,7 @@ import unittest
 
 from game.common.avatar import Avatar
 from game.common.items.item import Item
+from game.common.enums import Company
 
 
 class TestAvatarInventory(unittest.TestCase):
@@ -10,7 +11,7 @@ class TestAvatarInventory(unittest.TestCase):
     """
 
     def setUp(self) -> None:
-        self.avatar: Avatar = Avatar(None, 1)
+        self.avatar: Avatar = Avatar()
         self.item: Item = Item(10, 100, 1, 1)
 
     # test set inventory
@@ -90,7 +91,7 @@ class TestAvatarInventory(unittest.TestCase):
         When more subclasses of Item are created, more specific tests can be created if needed.
         """
 
-        self.avatar: Avatar = Avatar(None, 3)
+        self.avatar: Avatar = Avatar()
         self.avatar.inventory = [Item(quantity=5, stack_size=5), Item(quantity=7, stack_size=7),
                                  Item(quantity=10, stack_size=10)]
         taken = self.avatar.take(Item(quantity=3, stack_size=3))
@@ -104,7 +105,7 @@ class TestAvatarInventory(unittest.TestCase):
         self.assertEqual(taken, None)
 
     def test_take_fail(self):
-        self.avatar: Avatar = Avatar(None, 3)
+        self.avatar: Avatar = Avatar()
         self.avatar.inventory = [Item(quantity=5, stack_size=5), Item(quantity=7, stack_size=7),
                                  Item(quantity=10, stack_size=10)]
         with self.assertRaises(ValueError) as e:
