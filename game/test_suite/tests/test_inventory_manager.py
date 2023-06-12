@@ -31,5 +31,5 @@ class TestInventoryManager(unittest.TestCase):
         data: dict = self.manager.to_json()
         manager: InventoryManager = InventoryManager().from_json(data)
         self.assertEqual(self.manager.object_type, manager.object_type)
-        self.assertEqual(self.manager., self.avatar.score)
-        self.assertEqual(self.avatar.science_points, self.avatar.science_points)
+        self.assertEqual(self.manager.get_inventory(Company.CHURCH), manager.get_inventory(Company.CHURCH))
+        self.assertEqual(self.manager.get_inventory(Company.TURING), manager.get_inventory(Company.TURING))

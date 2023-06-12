@@ -2,8 +2,9 @@ import random
 
 from game.common.enums import Company, ObjectType
 from game.common.game_object import GameObject
-
 from game.common.items.item import Item
+
+from typing import Self
 
 
 class InventoryManager(GameObject):
@@ -70,39 +71,39 @@ class InventoryManager(GameObject):
                 inventory[i] = item
                 return True
         return False
-    
+
     def take(self, item: Item, company: Company) -> bool:
         """
         Takes the given item away from the given player. If the item was successfully take, return True, else False.
         """
         inventory = self.__inventories[company]
-        
+
         for i in range(0, self.__inventory_size):
             if inventory[i].__eq__(item):
                 inventory[i] = None
                 return True
         return False
-    
+
     def steal(self, to_company: Company, from_company: Company, steal_rate: float) -> None:
         """
         Take items from from_company and give them to to_company based on the steal_rate
         """
         from_inventory = self.__inventories[from_company]
-        
+
         for item in list(filter(lambda i: i is not None, from_inventory)):
             if random.random() <= steal_rate:
                 self.take(item, from_company)
                 self.give(item, to_company)
-                
+
     def get_inventory(self, company: Company) -> list[Item | None]:
         return self.__inventories[company]
 
     def to_json(self):
         data: dict = super().to_json()
-        data['inventory_size'] = self.__inventory_size
         data['inventories'] = self.__inventories
+        return data
 
-    def from_json(self, data: dict):
+    def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.__inventory_size: int = data['inventory_size']
         self.__inventories: dict[Company, list[Item | None]] = data['inventories']
+        return self
