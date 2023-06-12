@@ -17,5 +17,3 @@ class TestInventoryManager(unittest.TestCase):
         new_manager: InventoryManager = InventoryManager()
         self.assertTrue(isinstance(self.manager, InventoryManager))
         self.assertTrue(new_manager is None)
-
-
