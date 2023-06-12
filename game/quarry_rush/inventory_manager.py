@@ -86,9 +86,7 @@ class InventoryManager(object):
         """
         from_inventory = self.__inventories[from_company]
         
-        r = random.random
-        
         for item in list(filter(lambda i: i is not None, from_inventory)):
-            if r() <= steal_rate:
+            if random.random() <= steal_rate:
                 self.take(item, from_company)
                 self.give(item, to_company)
