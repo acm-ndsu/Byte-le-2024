@@ -26,7 +26,7 @@ class TestInteractController(unittest.TestCase):
 
     def setUp(self) -> None:
         self.interact_controller: InteractController = InteractController()
-        self.item: Item = Item(10, None)
+        self.item: Item = Item(10)
         self.wall: Wall = Wall()
         self.occupiable_station: OccupiableStation = OccupiableStation(self.item)
         self.station_example: StationExample = StationExample(self.item)
