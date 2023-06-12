@@ -15,16 +15,6 @@ class TestAvatar(unittest.TestCase):
         self.avatar: Avatar = Avatar()
         self.item: Item = Item(10, 100, 1, 1)
 
-    # test set item
-    def test_avatar_set_item(self):
-        self.avatar.pick_up(self.item)
-        self.assertEqual(self.avatar.held_item, self.item)
-
-    def test_avatar_set_item_fail(self):
-        with self.assertRaises(ValueError) as e:
-            self.avatar.held_item = 3
-        self.assertEqual(str(e.exception), 'Avatar.held_item must be an Item or None.')
-
     # test set score
     def test_avatar_set_score(self):
         self.avatar.score = 10
@@ -51,24 +41,17 @@ class TestAvatar(unittest.TestCase):
 
     # test json method
     def test_avatar_json_with_none_item(self):
-        # held item will be None
-        self.avatar.held_item = self.avatar.inventory[0]
         self.avatar.position = Vector(10, 10)
         data: dict = self.avatar.to_json()
         avatar: Avatar = Avatar().from_json(data)
         self.assertEqual(self.avatar.object_type, avatar.object_type)
-        self.assertEqual(self.avatar.held_item, avatar.held_item)
         self.assertEqual(str(self.avatar.position), str(avatar.position))
 
     def test_avatar_json_with_item(self):
-        self.avatar.pick_up(Item(1, 1))
         self.avatar.position = Vector(10, 10)
         data: dict = self.avatar.to_json()
         avatar: Avatar = Avatar().from_json(data)
         self.assertEqual(self.avatar.object_type, avatar.object_type)
-        self.assertEqual(self.avatar.held_item.object_type, avatar.held_item.object_type)
-        self.assertEqual(self.avatar.held_item.value, avatar.held_item.value)
-        self.assertEqual(self.avatar.held_item.durability, avatar.held_item.durability)
         self.assertEqual(self.avatar.position.object_type, avatar.position.object_type)
         self.assertEqual(str(self.avatar.position), str(avatar.position))
 
@@ -79,12 +62,6 @@ class TestAvatar(unittest.TestCase):
         with self.assertRaises(ValueError) as e:
             self.avatar.score = -1
         self.assertEqual(str(e.exception), 'Avatar.score must be a positive int.')
-
-    # Test setting max inventory size to be negative
-    def test_set_max_inv_size(self):
-        with self.assertRaises(ValueError) as e:
-            self.avatar.max_inventory_size = -1
-        self.assertEqual(str(e.exception), 'Avatar.max_inventory_size must be a positive int.')
 
     # Test setting movement speed
     def test_avatar_set_movement_speed(self):
@@ -233,11 +210,7 @@ class TestAvatar(unittest.TestCase):
         self.assertEqual(self.avatar.object_type, self.avatar.object_type)
         self.assertEqual(self.avatar.score, self.avatar.score)
         self.assertEqual(self.avatar.science_points, self.avatar.science_points)
-        self.assertEqual(self.avatar.held_item, self.avatar.held_item)
         self.assertEqual(str(self.avatar.position), str(self.avatar.position))
-        self.assertEqual(self.avatar.inventory, self.avatar.inventory)
-        self.assertEqual(self.avatar.max_inventory_size, self.avatar.max_inventory_size)
-        self.assertEqual(self.avatar.held_item, self.avatar.held_item)
         self.assertEqual(self.avatar.movement_speed, self.avatar.movement_speed)
         self.assertEqual(self.avatar.drop_rate, self.avatar.drop_rate)
 

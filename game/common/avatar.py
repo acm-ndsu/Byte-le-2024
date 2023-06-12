@@ -212,12 +212,9 @@ class Avatar(GameObject):
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
-        data['held_index'] = self.__held_index
         data['score'] = self.score
         data['science_points'] = self.science_points
         data['position'] = self.position.to_json() if self.position is not None else None
-        data['inventory'] = self.inventory
-        data['max_inventory_size'] = self.max_inventory_size
         data['movement_speed'] = self.movement_speed
         data['drop_rate'] = self.drop_rate
         data['tech_tree'] = self.__tech_tree.to_json()
@@ -225,13 +222,9 @@ class Avatar(GameObject):
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.__held_index = data['held_index']
         self.score: int = data['score']
         self.science_points: int = data['science_points']
         self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
-        self.inventory: list[Item] = data['inventory']
-        self.max_inventory_size: int = data['max_inventory_size']
-        self.held_item: Item | None = self.inventory[data['held_index']]
         self.movement_speed = data['movement_speed']
         self.drop_rate = data['drop_rate']
         self.__tech_tree = data['tech_tree']

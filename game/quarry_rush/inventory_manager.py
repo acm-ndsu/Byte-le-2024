@@ -1,5 +1,5 @@
 from builtins import hasattr
-from common.enums import Company
+from game.common.enums import Company
 
 from game.common.items.item import Item
 
@@ -16,17 +16,14 @@ class InventoryManager(object):
         if not hasattr(cls, 'instance'):
             cls.instance = super(InventoryManager, cls).__new__(cls)
             cls.__inventories: dict[Company, list[Item | None]] = {
-                Company.CHURCH: cls.create_empty_inventory(),
-                Company.TURING: cls.create_empty_inventory()
+                Company.CHURCH: cls.create_empty_inventory(cls),
+                Company.TURING: cls.create_empty_inventory(cls)
             } 
 
             return cls.instance
         
     def create_empty_inventory(cls) -> list[Item | None]:
-        new_inventory = []
-        for i in range(0, cls.__inventory_size):
-            new_inventory[i] = None
-        return new_inventory
+        return [None] * cls.__inventory_size
 
     def cash_in_science(self, company: Company) -> int:
         # Returns false instead of crashing if the given string doesn't exist in the dictionary.
