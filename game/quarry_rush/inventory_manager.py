@@ -1,4 +1,5 @@
 from builtins import hasattr
+from common.enums import Company
 
 from game.common.items.item import Item
 
@@ -7,23 +8,29 @@ class InventoryManager(object):
     """
     This class is used to manage Avatar inventories.
     """
+    
+    __inventory_size = 50
 
     def __new__(cls):
         # This method only creates one singleton object of this class
         if not hasattr(cls, 'instance'):
             cls.instance = super(InventoryManager, cls).__new__(cls)
-            cls.__inventories: dict[str, list[Item | None]] = {
-                'church': [],
-                'turing': []
-            }  # Might change avatar_1 and avatar_2 to be the name of the company the avatar is working for in the lore
+            cls.__inventories: dict[Company, list[Item | None]] = {
+                Company.CHURCH: cls.create_empty_inventory(),
+                Company.TURING: cls.create_empty_inventory()
+            } 
 
             return cls.instance
+        
+    def create_empty_inventory(cls) -> list[Item | None]:
+        new_inventory = []
+        for i in range(0, cls.__inventory_size):
+            new_inventory[i] = None
+        return new_inventory
 
-    def cash_in_science(self, player: str) -> int:
+    def cash_in_science(self, company: Company) -> int:
         # Returns false instead of crashing if the given string doesn't exist in the dictionary.
-        if player not in self.__inventories.keys():
-            return 0
-        inventory = self.__inventories[player]
+        inventory = self.__inventories[company]
 
         total: int = 0
 
@@ -34,11 +41,9 @@ class InventoryManager(object):
 
         return total
 
-    def cash_in_gold(self, player: str) -> int:
+    def cash_in_gold(self, company: Company) -> int:
         # Returns false instead of crashing if the given string doesn't exist in the dictionary.
-        if player not in self.__inventories.keys():
-            return 0
-        inventory = self.__inventories[player]
+        inventory = self.__inventories[company]
 
         total: int = 0
 
@@ -49,5 +54,14 @@ class InventoryManager(object):
 
         return total
 
-    def give(self, item: Item, player: str) -> bool:
-        pass
+    def give(self, item: Item, company: Company) -> bool:
+        '''
+        Give the selected player the given item. If the item was successfully given to the player, return True, otherwise False.
+        '''
+        inventory = self.__inventories[company]
+        
+        for i in range(0, len(inventory)):
+            if inventory[i] is None:
+                inventory[i] = item
+                return True
+        return False
