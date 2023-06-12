@@ -12,4 +12,4 @@ class StationExample(Station):
 
     def take_action(self, avatar: Avatar) -> Item | None:
         pass
-        # avatar.pick_up(self.held_item)
+        avatar.pick_up(self.held_item)
