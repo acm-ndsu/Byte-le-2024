@@ -207,12 +207,12 @@ class TestAvatar(unittest.TestCase):
         self.avatar.position = Vector(10, 10)
         data: dict = self.avatar.to_json()
         avatar: Avatar = Avatar().from_json(data)
-        self.assertEqual(self.avatar.object_type, self.avatar.object_type)
-        self.assertEqual(self.avatar.score, self.avatar.score)
-        self.assertEqual(self.avatar.science_points, self.avatar.science_points)
-        self.assertEqual(str(self.avatar.position), str(self.avatar.position))
-        self.assertEqual(self.avatar.movement_speed, self.avatar.movement_speed)
-        self.assertEqual(self.avatar.drop_rate, self.avatar.drop_rate)
+        self.assertEqual(self.avatar.object_type, avatar.object_type)
+        self.assertEqual(self.avatar.score, avatar.score)
+        self.assertEqual(self.avatar.science_points, avatar.science_points)
+        self.assertEqual(str(self.avatar.position), str(avatar.position))
+        self.assertEqual(self.avatar.movement_speed, avatar.movement_speed)
+        self.assertEqual(self.avatar.drop_rate, avatar.drop_rate)
 
         other_tree: dict = self.avatar.get_tech_tree().to_json()
         for tech in self.avatar.get_tech_tree().tech_names():

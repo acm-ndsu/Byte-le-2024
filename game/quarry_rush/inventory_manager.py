@@ -1,11 +1,12 @@
 import random
 
-from game.common.enums import Company
+from game.common.enums import Company, ObjectType
+from game.common.game_object import GameObject
 
 from game.common.items.item import Item
 
 
-class InventoryManager(object):
+class InventoryManager(GameObject):
     """
     This class is used to manage Avatar inventories instead of the avatar instances doing so. This will only be
     created once in the project's lifespan, but is not enforced to be a singleton object.
@@ -14,6 +15,8 @@ class InventoryManager(object):
     __inventory_size: int = 50
 
     def __init__(self):
+        super().__init__()
+        self.object_type: ObjectType = ObjectType.INVENTORY_MANAGER
         self.__inventories: dict[Company, list[Item | None]] = {
             Company.CHURCH: self.create_empty_inventory(),
             Company.TURING: self.create_empty_inventory()
@@ -93,3 +96,13 @@ class InventoryManager(object):
                 
     def get_inventory(self, company: Company) -> list[Item | None]:
         return self.__inventories[company]
+
+    def to_json(self):
+        data: dict = super().to_json()
+        data['inventory_size'] = self.__inventory_size
+        data['inventories'] = self.__inventories
+
+    def from_json(self, data: dict):
+        super().from_json(data)
+        self.__inventory_size: int = data['inventory_size']
+        self.__inventories: dict[Company, list[Item | None]] = data['inventories']
