@@ -46,6 +46,10 @@ class Avatar(GameObject):
     @property
     def drop_rate(self):
         return self.__drop_rate
+    
+    @company.setter
+    def company(self, company: Company) -> None:
+        self.__company = company
 
     @score.setter
     def score(self, score: int) -> None:
@@ -212,6 +216,7 @@ class Avatar(GameObject):
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
+        data['company'] = self.company
         data['score'] = self.score
         data['science_points'] = self.science_points
         data['position'] = self.position.to_json() if self.position is not None else None
@@ -222,6 +227,7 @@ class Avatar(GameObject):
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
+        self.company: Company = data['company']
         self.score: int = data['score']
         self.science_points: int = data['science_points']
         self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
