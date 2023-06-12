@@ -1,3 +1,5 @@
+import random
+
 from game.common.enums import Company
 
 from game.common.items.item import Item
@@ -65,3 +67,28 @@ class InventoryManager(object):
                 inventory[i] = item
                 return True
         return False
+    
+    def take(self, item: Item, company: Company) -> bool:
+        """
+        Takes the given item away from the given player. If the item was successfully take, return True, else False.
+        """
+        inventory = self.__inventories[company]
+        
+        for i in range(0, self.__inventory_size):
+            if inventory[i].__eq__(item):
+                inventory[i] = None
+                return True
+        return False
+    
+    def steal(self, to_company: Company, from_company: Company, steal_rate: float) -> None:
+        """
+        Take items from from_company and give them to to_company based on the steal_rate
+        """
+        from_inventory = self.__inventories[from_company]
+        
+        r = random.random
+        
+        for item in list(filter(lambda i: i is not None, from_inventory)):
+            if r() <= steal_rate:
+                self.take(item, from_company)
+                self.give(item, to_company)
