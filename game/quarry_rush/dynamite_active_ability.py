@@ -3,14 +3,15 @@ from game.common.game_object import GameObject
 from typing import Self
 from game.quarry_rush.active_ability import ActiveAbility
 
+
 class DynamiteActiveAbility(ActiveAbility):
 
-    def __init__(self, name: str, cooldown: int, cooldown_tick: int):
+    def __init__(self, name: str):
         super().__init__()
         self.object_type = ObjectType.DYNAMITE_ACTIVE_ABILITY
         self.name = name
-        self.cooldown = cooldown
-        self.cooldown_tick = cooldown_tick
+        self.cooldown: int = 1
+        self.cooldown_tick: int = 0
 
 # name getter
     @property
@@ -53,8 +54,6 @@ class DynamiteActiveAbility(ActiveAbility):
         if cooldown_tick < 0:
             raise ValueError(f'{self.__class__.__name__}.cooldown_tick cannot be negative')
         self.__cooldown_tick = cooldown_tick
-
-# unlock from tech tree
 
 # place dynamite
 

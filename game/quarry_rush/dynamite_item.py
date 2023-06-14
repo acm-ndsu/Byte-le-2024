@@ -2,6 +2,7 @@ from game.utils.vector import Vector
 from game.common.items.item import Item
 from game.common.avatar import Avatar
 
+
 class DynamiteItem(Item):
     def __init__(self, value: int = 1, durability: int | None = None, quantity: int = 1, stack_size: int = 1,
                  position: Vector | None = None, name: str | None = None, blast_radius: int = 1,
@@ -27,7 +28,7 @@ class DynamiteItem(Item):
     # value setter
     @value.setter
     def value(self, value: int) -> None:
-        if value is None or not isinstance(value, int)
+        if value is None or not isinstance(value, int):
             raise ValueError(f'{self.__class__.__name__}.value must be an int')
         self.__value = value
 
@@ -36,7 +37,7 @@ class DynamiteItem(Item):
     def durability(self) -> int | None:
         return self.__durability
 
-    #durabiliy setter
+    # durability setter
     @durability.setter
     def durability(self, durability: int | None) -> None:
         if durability is not None and not isinstance(durability, int):
@@ -138,7 +139,7 @@ class DynamiteItem(Item):
 
     # detonate_turn setter
     @detonate_turn.setter
-    def detonate_turn(self, detonate_turn:int) -> None:
+    def detonate_turn(self, detonate_turn: int) -> None:
         if detonate_turn is None or not isinstance(detonate_turn, int):
             raise ValueError(f'{self.__class__.__name__}.blast_radius must be an int')
         self.__detonate_turn = detonate_turn
