@@ -10,6 +10,31 @@ from game.common.stations.occupiable_station import OccupiableStation
 from game.common.stations.station import Station
 from game.utils.vector import Vector
 
+class TrapQueue(GameObject):
+    def __init__(self):
+        super().__init__()
+        self.__traps = []
+        self.__max_traps = 10
+        
+    def add_trap(self, trap: Trap):
+        if len(self.__traps) >= self.__max_traps:
+            self.__traps = self.__traps[1:]
+        self.__traps += [trap]
+        
+    def detonate(self, inventory_manager: InventoryManager):
+        for i in range(0, len(self.__traps))[::-1]:
+            if self.__traps[i].detonate(inventory_manager):
+                self.__traps = self.__traps[:i] + self.__traps[i+1:]
+                
+    def to_json(self):
+        data = super().to_json()
+        data['traps'] = list(map(lambda t : t.to_json(), self.__traps))
+        return data
+        
+    def from_json(self, data: dict) -> Self:
+        super().from_json(data)
+        self.__traps = list(map(lambda sub_data : Trap().from_json(sub_data), data['traps']))
+        return self
 
 class GameBoard(GameObject):
     """
