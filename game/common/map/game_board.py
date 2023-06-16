@@ -28,12 +28,12 @@ class TrapQueue(GameObject):
                 
     def to_json(self):
         data = super().to_json()
-        data['traps'] = list(map(lambda t : t.to_json(), self.__traps))
+        data['traps'] = self.__traps
         return data
         
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.__traps = list(map(lambda sub_data : Trap().from_json(sub_data), data['traps']))
+        self.__traps = data['traps']
         return self
 
 class GameBoard(GameObject):
