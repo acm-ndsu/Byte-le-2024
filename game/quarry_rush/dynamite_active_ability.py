@@ -1,18 +1,19 @@
 from game.common.enums import ObjectType
-from game.common.game_object import GameObject
-from typing import Self
+from game.quarry_rush.active_ability import ActiveAbility
 from game.common.avatar import Avatar
+from game.quarry_rush.dynamite_item import DynamiteItem
+from game.common.map.game_board import GameBoard
 
 
-class ActiveAbility(GameObject):
+class DynamiteActiveAbility(ActiveAbility):
 
-    def __init__(self, name: str = "", avatar: Avatar | None = None, cooldown: int = 1, cooldown_tick: int = 0):
+    def __init__(self, name: str, avatar: Avatar | None = None):
         super().__init__()
-        self.object_type = ObjectType.ACTIVE_ABILITY
+        self.object_type = ObjectType.DYNAMITE_ACTIVE_ABILITY
         self.name = name
-        self.cooldown = cooldown
-        self.cooldown_tick = cooldown_tick
         self.avatar: Avatar | None = avatar
+        self.cooldown: int = 1
+        self.cooldown_tick: int = 0
 
 # name getter
     @property
@@ -33,7 +34,7 @@ class ActiveAbility(GameObject):
 
 # avatar setter
     @avatar.setter
-    def avatar(self, avatar: Avatar) -> None:
+    def avatar(self, avatar: Avatar | None) -> None:
         if avatar is not None and not isinstance(avatar, Avatar):
             raise ValueError(f'{self.__class__.__name__}.avatar must be Avatar or None')
         self.__avatar = avatar
@@ -68,39 +69,10 @@ class ActiveAbility(GameObject):
             raise ValueError(f'{self.__class__.__name__}.cooldown_tick cannot be negative')
         self.__cooldown_tick = cooldown_tick
 
-# is_useable will be a boolean checking to see if the object on cooldown is able to be used again
-    def is_useable(self) -> bool:
-        return self.cooldown_tick == 0
-
-# decrease cooldown, decrement cooldown: at the end of each turn it will have to be called for each avatar
-    def decrease_cooldown_tick(self):
-        self.__cooldown_tick -= 1  # calling the getter specifically
-        if self.cooldown_tick < 0:
-            self.cooldown_tick = 0  # so it cannot be negative
-
-# reset cooldown tick: resetting the cooldown tick
-    def reset_cooldown_tick(self):
-        self.cooldown_tick = self.cooldown
-
-# to json
-    def to_json(self) -> dict:
-        data: dict = super().to_json()
-        data['name'] = self.name
-        data['cooldown'] = self.cooldown
-        data['cooldown_tick'] = self.cooldown_tick
-        return data
-
-# from json
-    def from_json(self, data: dict) -> Self:
-        super().from_json(data)
-        self.name = data['name']
-        self.cooldown = data['cooldown']
-        self.cooldown_tick = data['cooldown_tick']
-        return self
-
-
-
-
-
+# place dynamite
+    def place_dynamite(self):
+        # creating a new item of dynamite
+        dynamite: DynamiteItem = DynamiteItem(position=self.avatar.position, avatar=self.avatar)
+        # wip
 
 
