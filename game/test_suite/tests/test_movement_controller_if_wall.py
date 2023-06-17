@@ -21,7 +21,7 @@ class TestMovementControllerIfWall(unittest.TestCase):
 
     def setUp(self) -> None:
         self.movement_controller = MovementController()
-        self.avatar = Avatar(Vector(2, 2), 1)
+        self.avatar = Avatar(position=Vector(2, 2))
         self.locations: dict[tuple[Vector]: list[GameObject]] = {
             (Vector(2, 2),): [self.avatar]
         }

@@ -20,7 +20,7 @@ class TestInitialization(unittest.TestCase):
 
     def setUp(self) -> None:
         self.item: Item = Item(10, 100)
-        self.avatar: Avatar = Avatar(None)
+        self.avatar: Avatar = Avatar()
         self.station: Station = Station(None)
         self.occupiable_station: OccupiableStation = OccupiableStation(None, None)
         self.tile: Tile = Tile(None)

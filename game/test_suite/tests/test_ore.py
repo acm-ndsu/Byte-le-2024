@@ -13,5 +13,5 @@ class TestAncientTech(unittest.TestCase):
     """
 
     def setUp(self) -> None:
-        self.avatar: Avatar = Avatar(None, 1)
+        self.avatar: Avatar = Avatar()
         self.Ancient_Tech: Ore = Ore()
