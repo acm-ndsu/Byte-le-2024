@@ -24,6 +24,7 @@ class TechTree(GameObject):
     [Note]: This class does not handle cost validation or taking research points away from the player
     """
     def __init__(self, player_functions: PlayerFunctions):
+        super().__init__()
         self.player_functions = player_functions
         self.tree = self.build_tree(player_functions)
         self.research('Mining Robotics')
