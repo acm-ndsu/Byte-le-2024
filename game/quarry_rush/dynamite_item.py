@@ -5,7 +5,7 @@ from game.common.avatar import Avatar
 
 class DynamiteItem(Item):
     def __init__(self, value: int = 1, durability: int | None = None, quantity: int = 1, stack_size: int = 1,
-                 position: Vector | None = None, name: str | None = None, blast_radius: int = 1,
+                 position: Vector | None = None, name: str | None = "Dynamite", blast_radius: int = 1,
                  avatar: Avatar | None = None, detonate_turn: int = 1):
         super().__init__()
         self.value: int = value
@@ -145,9 +145,26 @@ class DynamiteItem(Item):
         self.__detonate_turn = detonate_turn
 
     # detonate method
+    def detonate(self, current_turn: int):
+        if current_turn is self.__detonate_turn:
+            self.explode()
 
     # explode dynamite
     def explode(self):
+        above_tile: list[Vector] = [Vector(self.position.x, self.position.y - adjacent) for adjacent in
+                                    range(1, self.blast_radius + 1)]  # Getting tiles above
+        below_tile: list[Vector] = [Vector(self.position.x, self.position.y + adjacent) for adjacent in
+                                    range(1, self.blast_radius + 1)]  # Getting tiles below
+        left_tile: list[Vector] = [Vector(self.position.x - adjacent, self.position.y) for adjacent in
+                                   range(1, self.blast_radius + 1)]  # Getting tiles left
+        right_tile: list[Vector] = [Vector(self.position.x + adjacent, self.position.y) for adjacent in
+                                    range(1, self.blast_radius + 1)]  # Getting tiles right
+        # add all the tile lists together
+        adjacent_tiles: list[Vector] = above_tile + below_tile + left_tile + right_tile
+
+    # collection method
+    # wip?
+
 
 
 

@@ -1,6 +1,8 @@
 from game.common.enums import ObjectType
 from game.quarry_rush.active_ability import ActiveAbility
 from game.common.avatar import Avatar
+from game.quarry_rush.dynamite_item import DynamiteItem
+from game.common.map.game_board import GameBoard
 
 
 class DynamiteActiveAbility(ActiveAbility):
@@ -68,4 +70,9 @@ class DynamiteActiveAbility(ActiveAbility):
         self.__cooldown_tick = cooldown_tick
 
 # place dynamite
+    def place_dynamite(self):
+        # creating a new item of dynamite
+        dynamite: DynamiteItem = DynamiteItem(position=self.avatar.position, avatar=self.avatar)
+        # wip
+
 
