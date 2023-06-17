@@ -37,13 +37,13 @@ class InventoryManager(GameObject):
         total: int = 0
 
         for i in range(0, len(inventory)):
-            if inventory[i] is not None:
+            if inventory[i] is not None and inventory[i].science_point_value > 0:
                 total += inventory[i].science_point_value
                 inventory[i] = None
 
         return total
 
-    def cash_in_gold(self, company: Company) -> int:
+    def cash_in_points(self, company: Company) -> int:
         """
         Cashes in the points of every item in the appropriate inventory. Returns 0 if the given enum is incorrect.
         """
@@ -53,7 +53,7 @@ class InventoryManager(GameObject):
         total: int = 0
 
         for i in range(0, len(inventory)):
-            if inventory[i] is not None:
+            if inventory[i] is not None and inventory[i].value > 0:
                 total += inventory[i].value
                 inventory[i] = None
 
