@@ -25,7 +25,7 @@ class TestInventoryManager(unittest.TestCase):
     # Tests that cashing in points works
     def test_cash_points(self):
         self.manager.give(self.item_1, Company.CHURCH)
-        self.assertEqual(self.manager.cash_in_gold(Company.CHURCH), 5)
+        self.assertEqual(self.manager.cash_in_points(Company.CHURCH), 5)
 
     def test_inventory_manager_json(self):
         data: dict = self.manager.to_json()
