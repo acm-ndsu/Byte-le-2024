@@ -2,14 +2,16 @@ from game.common.enums import ObjectType
 from game.common.game_object import GameObject
 from typing import Self
 from game.quarry_rush.active_ability import ActiveAbility
+from game.common.avatar import Avatar
 
 
 class DynamiteActiveAbility(ActiveAbility):
 
-    def __init__(self, name: str):
+    def __init__(self, name: str, avatar: Avatar | None = None):
         super().__init__()
         self.object_type = ObjectType.DYNAMITE_ACTIVE_ABILITY
         self.name = name
+        self.avatar: Avatar | None = avatar
         self.cooldown: int = 1
         self.cooldown_tick: int = 0
 
@@ -24,6 +26,18 @@ class DynamiteActiveAbility(ActiveAbility):
         if name is None or not isinstance(name, str):
             raise ValueError(f'{self.__class__.__name__}.name must be a String')
         self.__name = name
+
+# avatar getter
+    @property
+    def avatar(self) -> Avatar:
+        return self.__avatar
+
+# avatar setter
+    @avatar.setter
+    def avatar(self, avatar: Avatar | None) -> None:
+        if avatar is not None and not isinstance(avatar, Avatar):
+            raise ValueError(f'{self.__class__.__name__}.avatar must be Avatar or None')
+        self.__avatar = avatar
 
 # The cooldown represents the amount of turns that the ability is unavailable.
 # cooldown getter
