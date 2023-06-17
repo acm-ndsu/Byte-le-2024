@@ -7,6 +7,7 @@ from game.common.stations.station import Station
 from game.common.stations.occupiable_station import OccupiableStation
 from game.common.map.tile import Tile
 from game.common.map.wall import Wall
+from game.quarry_rush.inventory_manager import InventoryManager
 from game.utils.vector import Vector
 from game.common.game_object import GameObject
 from game.common.map.game_board import GameBoard
@@ -20,7 +21,7 @@ class TestGameBoard(unittest.TestCase):
     def setUp(self) -> None:
         self.item: Item = Item(10)
         self.wall: Wall = Wall()
-        self.avatar: Avatar = Avatar(Vector(5, 5))
+        self.avatar: Avatar = Avatar(position=Vector(5, 5))
         self.locations: dict[tuple[Vector]:list[GameObject]] = {
             (Vector(1, 1),): [Station(None)],
             (Vector(1, 2), Vector(1, 3)): [OccupiableStation(self.item), Station(None)],
