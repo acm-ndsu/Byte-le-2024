@@ -144,7 +144,10 @@ class DynamiteItem(Item):
             raise ValueError(f'{self.__class__.__name__}.blast_radius must be an int')
         self.__detonate_turn = detonate_turn
 
-    
+    # detonate method
+
+    # explode dynamite
+    def explode(self):
 
 
 
