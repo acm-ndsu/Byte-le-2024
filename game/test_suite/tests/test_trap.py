@@ -1,37 +1,26 @@
 import unittest
 
-from game.quarry_rush.traps.trap import Trap
+from game.quarry_rush.traps.trap import *
 from game.common.avatar import Avatar
+from game.common.enums import Company
+from game.utils.vector import Vector
+from game.quarry_rush.inventory_manager import InventoryManager
 
 class TestTrap(unittest.TestCase):
     """
     This class is to test the generic trap class and its methods for the Byte-le 2024 game
     """
 
-    def setUp(self) -> None:
-        self.avatar = Avatar(None)
-        self.avatar2 = Avatar(None)
-        self.trap: Trap = Trap(False, 0.0, 0.0, self.avatar, 1, None, 1, 1, None, 'trap')
-    
-    # test set activated bool
-    def test_set_activated(self):
-        self.trap.activated = True
-        self.assertEqual(self.trap.activated, True)
-    
-    def test_set_activated_fail_none(self):
-        with self.assertRaises(ValueError) as e:
-            self.trap.activated = None
-        self.assertEqual(str(e.exception), 'Trap.activated must be a bool.')
+    opponent_position = Vector(2, 2)
 
-    def test_set_activated_fail(self):
-        with self.assertRaises(ValueError) as e:
-            self.trap.activated = 10
-        self.assertEqual(str(e.exception), 'Trap.activated must be a bool.')
+    def setUp(self) -> None:
+        self.inventory_manager = InventoryManager()
+        self.trap = Trap(0.0, 0.1, self.inventory_manager, Company.CHURCH, Company.TURING, lambda: self.opponent_position, Vector(0, 0))
 
     # test set detection_reduction
     def test_set_detection_reduction(self):
-        self.trap.detection_reduction = 0.1
-        self.assertEqual(self.trap.detection_reduction, 0.1)
+        self.trap.detection_reduction = 0.0
+        self.assertEqual(self.trap.detection_reduction, 0.0)
 
     def test_set_detection_reduction_fail_none(self):
         with self.assertRaises(ValueError) as e:
@@ -58,31 +47,121 @@ class TestTrap(unittest.TestCase):
             self.trap.steal_rate = 1
         self.assertEqual(str(e.exception), 'Trap.steal_rate must be a float.')
     
-    # test set owner
-    def test_set_owner(self):
-        self.trap.owner = self.avatar2
-        self.assertEqual(self.trap.owner, self.avatar2)
-    
-    def test_set_owner_fail_none(self):
+    # test set inventory manager
+    def test_set_inventory_manager_fail(self):
         with self.assertRaises(ValueError) as e:
-            self.trap.owner = None
-        self.assertEqual(str(e.exception), 'Trap.owner must be of type Avatar.')
+            self.trap.inventory_manager = 'Test'
+        self.assertEqual(str(e.exception), 'Trap.inventory_manager must be of type InventoryManager.')
 
-    def test_set_owner_fail(self):
+    def test_set_inventory_manager_fail_none(self):
         with self.assertRaises(ValueError) as e:
-            self.trap.owner = 'avatar'
-        self.assertEqual(str(e.exception), 'Trap.owner must be of type Avatar.')
+            self.trap.inventory_manager = None
+        self.assertEqual(str(e.exception), 'Trap.inventory_manager must be of type InventoryManager.')
+
+    def test_set_inventory_manager_fail_new(self):
+        with self.assertRaises(ValueError) as e:
+            self.trap.inventory_manager = InventoryManager()
+        self.assertEqual(str(e.exception), 'Trap.inventory_manager has already been set.')
+
+    # test set owner company
+    def test_set_owner_company(self):
+        self.trap.owner_company = Company.TURING
+        self.assertEqual(self.trap.owner_company, Company.TURING)
+
+    def test_set_owner_company_fail_none(self):
+        with self.assertRaises(ValueError) as e:
+            self.trap.owner_company = None
+        self.assertEqual(str(e.exception), 'Trap.owner_company must be of enum type Company.')
+
+    def test_set_owner_company_fail(self):
+        with self.assertRaises(ValueError) as e:
+            self.trap.owner_company = 123
+        self.assertEqual(str(e.exception), 'Trap.owner_company must be of enum type Company.')
+
+    # test set target company
+    def test_set_target_company(self):
+        self.trap.target_company = Company.CHURCH
+        self.assertEqual(self.trap.target_company, Company.CHURCH)
+
+    def test_set_target_company_none(self):
+        with self.assertRaises(ValueError) as e:
+            self.trap.target_company = None
+        self.assertEqual(str(e.exception), 'Trap.target_company must be of enum type Company.')
+
+    def test_set_target_company(self):
+        with self.assertRaises(ValueError) as e:
+            self.trap.target_company = 123
+        self.assertEqual(str(e.exception), 'Trap.target_company must be of enum type Company.')
+
+    # test set opponent_position
+    def test_set_opponent_position(self):
+        self.opponent_position = Vector(1, 1)
+        self.trap.opponent_position = lambda: self.opponent_position
+        self.assertEqual(self.trap.opponent_position(), self.opponent_position)
+        self.opponent_position = Vector(0, 0)
+        self.assertEqual(self.trap.opponent_position(), self.opponent_position)
+
+    def test_set_opponent_position_fail_none(self):
+        with self.assertRaises(ValueError) as e:
+            self.trap.opponent_position = None
+        self.assertEqual(str(e.exception), 'Trap.opponent_position must be of type Callable[[], Vector].')
+    
+    def test_set_opponent_position_fail(self):
+        with self.assertRaises(ValueError) as e:
+            self.trap.opponent_position = lambda: 12
+        self.assertEqual(str(e.exception), 'Trap.opponent_position must be of type Callable[[], Vector].')
+
+    # test in_range method
+    def test_in_range_false(self):
+        self.opponent_position = Vector(2, 2)
+        self.assertEqual(self.trap.in_range(), False)
+        self.opponent_position = Vector(2, 0)
+        self.assertEqual(self.trap.in_range(), False)
+        self.opponent_position = Vector(1, 1)
+        self.assertEqual(self.trap.in_range(), False)
+
+    def test_in_range_true(self):
+        self.opponent_position = Vector(1, 0)
+        self.assertEqual(self.trap.in_range(), True)
+        self.opponent_position = Vector(0 ,0)
+        self.assertEqual(self.trap.in_range(), True)
+
+    # test detonate method (should have same bool results as in_range method)
+    def test_detonate_false(self):
+        self.opponent_position = Vector(2, 2)
+        self.assertEqual(self.trap.detonate(), False)
+        self.opponent_position = Vector(2, 0)
+        self.assertEqual(self.trap.detonate(), False)
+        self.opponent_position = Vector(1, 1)
+        self.assertEqual(self.trap.detonate(), False)
+
+    def test_detonate_true(self):
+        self.opponent_position = Vector(1, 0)
+        self.assertEqual(self.trap.detonate(), True)
+        self.opponent_position = Vector(0 ,0)
+        self.assertEqual(self.trap.detonate(), True)
+
+    # test default of Landmine
+    def test_landmine(self):
+        self.landmine = Landmine(self.inventory_manager, Company.CHURCH, Company.TURING, lambda: self.opponent_position, Vector(1, 1))
+        self.assertEqual(self.landmine.detection_reduction, 0.0)
+        self.assertEqual(self.landmine.steal_rate, 0.1)
+
+    # test default of EMP
+    def test_EMP(self):
+        self.EMP = EMP(self.inventory_manager, Company.TURING, Company.CHURCH, lambda: self.opponent_position, Vector(2, 2))
+        self.assertEqual(self.EMP.detection_reduction, 0.1)
+        self.assertEqual(self.EMP.steal_rate, 0.2)
 
     # test json
     def test_trap_json(self):
         data: dict = self.trap.to_json()
-        """ 
-        Using from_json in the trap class requires four arguments to be passed, though they are not 
-        used in the from_json method and do not need to match, as long as they fit value type required.
-        """
-        trap: Trap = Trap(False, 0.1, 0.1, self.avatar2).from_json(data)
-        self.assertEqual(self.trap.object_type, trap.object_type)
-        self.assertEqual(self.trap.activated, trap.activated)
-        self.assertEqual(self.trap.detection_reduction, trap.detection_reduction)
-        self.assertEqual(self.trap.steal_rate, trap.steal_rate)
-
+        self.assertEqual(data['detection_reduction'], 0.0)
+        self.assertEqual(data['steal_rate'], 0.1)
+        # inventory_manager not a part of json as there is only one
+        with self.assertRaises(KeyError) as e:
+            self.assertEqual(data['inventory_manager'], InventoryManager())
+        self.assertEqual(str(e.exception), '\'inventory_manager\'')
+        self.assertEqual(data['owner_company'], Company.CHURCH)
+        self.assertEqual(data['target_company'], Company.TURING)
+        self.assertEqual(data['opponent_position'](), self.opponent_position)
