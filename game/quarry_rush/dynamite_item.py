@@ -1,13 +1,16 @@
+from game.common.enums import Company
 from game.utils.vector import Vector
 from game.common.items.item import Item
 from game.common.avatar import Avatar
+from game.quarry_rush.inventory_manager import InventoryManager
 
 
 class DynamiteItem(Item):
-    def __init__(self, value: int = 1, durability: int | None = None, quantity: int = 1, stack_size: int = 1,
+    def __init__(self, inventory_manager: InventoryManager, value: int = 1, durability: int | None = None, quantity: int = 1, stack_size: int = 1,
                  position: Vector | None = None, name: str | None = "Dynamite", blast_radius: int = 1,
-                 avatar: Avatar | None = None, detonate_turn: int = 1):
+                 owner_company: Company | None = None, detonate_turn: int = 1):
         super().__init__()
+        self.inventory_manager: InventoryManager = inventory_manager
         self.value: int = value
         self.__durability = None
         self.durability: int | None = durability
@@ -17,8 +20,23 @@ class DynamiteItem(Item):
         self.position: Vector | None = position
         self.name: str | None = name
         self.blast_radius: int = blast_radius
-        self.avatar: Avatar | None = avatar
+        self.owner_company: Company = owner_company
         self.detonate_turn: int = detonate_turn
+
+    # inventory manager getter
+    @property
+    def inventory_manager(self) -> InventoryManager:
+        return self.__inventory_manager
+
+    @inventory_manager.setter
+    def inventory_manager(self, inventory_manager: InventoryManager) -> None:
+        if inventory_manager is None or not isinstance(inventory_manager, InventoryManager):
+            raise ValueError(
+                f'{self.__class__.__name__}.inventory_manager must be of type InventoryManager.')
+        if hasattr(self, '__inventory_manager') and self.__inventory_manager is not None:
+            raise ValueError(
+                f'{self.__class__.__name__}.inventory_manager has already been set.')
+        self.__inventory_manager = inventory_manager
 
     # value getter
     @property
@@ -148,6 +166,8 @@ class DynamiteItem(Item):
     def detonate(self, current_turn: int):
         if current_turn is self.__detonate_turn:
             self.explode()
+            return True
+        return False
 
     # explode dynamite
     def explode(self):

@@ -9,7 +9,29 @@ from game.common.map.wall import Wall
 from game.common.stations.occupiable_station import OccupiableStation
 from game.common.stations.station import Station
 from game.quarry_rush.inventory_manager import InventoryManager
+from game.quarry_rush.dynamite_item import DynamiteItem
 from game.utils.vector import Vector
+
+
+class DynamiteList(GameObject):
+    def __init__(self):
+        self.__dynamite_list: list[DynamiteItem] = []
+
+    def add_dynamite(self, dynamite: DynamiteItem):
+        self.__dynamite_list.append(dynamite)
+
+    def detonate(self, inventory_manager: InventoryManager, ):
+        for dynamite in self.__dynamite_list:
+            dynamite.detonate()
+
+    def to_json(self) -> dict:
+        data: dict = super().to_json()
+        data['dynamite_list'] = self.__dynamite_list
+        return data
+
+    def from_json(self, data: dict) -> Self:
+        super().from_json(data)
+        self.__dynamite_list: list[DynamiteItem] = data['dynamite_list']
 
 
 class GameBoard(GameObject):
