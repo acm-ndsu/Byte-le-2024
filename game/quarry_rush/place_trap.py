@@ -6,10 +6,10 @@ class PlaceTrap(ActiveAbility):
 
     def __init__(self, name: str = "", cooldown: int = 1, cooldown_tick: int = 0, avatar: Avatar | None = None):
         super().__init__()
-        self.name = name
-        self.cooldown = cooldown
-        self.cooldown_tick = cooldown_tick
-        self.avatar = avatar
+        self.name: str = name
+        self.cooldown: int = cooldown
+        self.cooldown_tick: int = cooldown_tick
+        self.avatar: Avatar | None = avatar
 
     # getter for name
     @property
@@ -19,7 +19,7 @@ class PlaceTrap(ActiveAbility):
     # setter for name
     @name.setter
     def name(self, name: str) -> None:
-        if self.name is None or not isinstance(name, str):
+        if name is None or not isinstance(name, str):
             raise ValueError(f'{self.__class__.__name__}.name must be a String')
         self.__name = name
 
@@ -31,7 +31,7 @@ class PlaceTrap(ActiveAbility):
     # setter for cooldown
     @cooldown.setter
     def cooldown(self, cooldown: int) -> None:
-        if self.cooldown is None or not isinstance(cooldown, int):
+        if cooldown is None or not isinstance(cooldown, int):
             raise ValueError(f'{self.__class__.__name__}.cooldown must be an int')
         self.__cooldown = cooldown
 
@@ -43,7 +43,7 @@ class PlaceTrap(ActiveAbility):
     # setter for cooldown tick
     @cooldown_tick.setter
     def cooldown_tick(self, cooldown_tick: int) -> None:
-        if self.cooldown_tick is None or not isinstance(cooldown_tick, int):
+        if cooldown_tick is None or not isinstance(cooldown_tick, int):
             raise ValueError(f'{self.__class__.__name__}.cooldown_tick must be an int')
         self.__cooldown_tick = cooldown_tick
 
@@ -55,9 +55,17 @@ class PlaceTrap(ActiveAbility):
     # setter for avatar
     @avatar.setter
     def avatar(self, avatar: Avatar) -> None:
-        if self.avatar is not None and not isinstance(avatar, Avatar):
+        if avatar is not None and not isinstance(avatar, Avatar):
             raise ValueError(f'{self.__class__.__name__}.avatar must be Avatar or None')
         self.__avatar = avatar
+
+# method for place trap
+
+# cooldown decrease?
+
+# cooldown reset?
+
+# is use-able?
 
 
 
