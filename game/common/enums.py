@@ -36,6 +36,7 @@ class ObjectType(Enum):
     DYNAMITE_ACTIVE_ABILITY = auto()
 
 
+
 class ActionType(Enum):
     NONE = auto()
     MOVE_UP = auto()
