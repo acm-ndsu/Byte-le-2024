@@ -10,11 +10,12 @@ from game.common.stations.occupiable_station import OccupiableStation
 from game.common.stations.station import Station
 from game.quarry_rush.inventory_manager import InventoryManager
 from game.utils.vector import Vector
+from game.quarry_rush.traps.trap import Trap
 
 class TrapQueue(GameObject):
     def __init__(self):
         super().__init__()
-        self.__traps = []
+        self.__traps: list[Trap] = []
         self.__max_traps = 10
         
     def add_trap(self, trap: Trap):
