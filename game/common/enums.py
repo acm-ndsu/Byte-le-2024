@@ -32,6 +32,8 @@ class ObjectType(Enum):
     STATION_RECEIVER_EXAMPLE = auto()
     OCCUPIABLE_STATION_EXAMPLE = auto()
     ACTIVE_ABILITY = auto()
+    INVENTORY_MANAGER = auto()
+    DYNAMITE_ACTIVE_ABILITY = auto()
 
 
 class ActionType(Enum):
@@ -59,3 +61,9 @@ class ActionType(Enum):
     These last 10 enums are for selecting a slot from the Avatar class' inventory.
     You can add/remove these as needed for the purposes of your game. 
     """
+
+# Added for Quarry Rush
+
+class Company(Enum):
+    CHURCH = auto()
+    TURING = auto()
