@@ -98,12 +98,34 @@ class InventoryManager(GameObject):
     def get_inventory(self, company: Company) -> list[Item | None]:
         return self.__inventories[company]
 
+    def maybe_item_json(self, item: Item | None) -> dict | None:
+        if item is None:
+            return None
+        return item.to_json()
+    
+    def inventories_json(self) -> dict:
+        result: dict = {}
+        for key in self.__inventories:
+            result[key] = list(map(self.maybe_item_json, self.__inventories[key]))
+        return result
+            
+    def maybe_item_from_json(self, item: dict | None) -> Item | None:
+        if item is None:
+            return None
+        return Item().from_json(item)
+            
+    def from_inventories_json(self, data: dict) -> dict:
+        result: dict = {}
+        for key in data:
+            result[key] = list(map(self.maybe_item_from_json, data[key]))
+        return result
+
     def to_json(self):
         data: dict = super().to_json()
-        data['inventories'] = self.__inventories
+        data['inventories'] = self.inventories_json()
         return data
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.__inventories: dict[Company, list[Item | None]] = data['inventories']
+        self.__inventories: dict[Company, list[Item | None]] = self.from_inventories_json(data['inventories'])
         return self

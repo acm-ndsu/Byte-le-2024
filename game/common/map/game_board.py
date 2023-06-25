@@ -28,14 +28,17 @@ class TrapQueue(GameObject):
             if self.__traps[i].detonate(inventory_manager):
                 self.__traps = self.__traps[:i] + self.__traps[i+1:]
                 
+    def size(self) -> int:
+        return len(self.__traps)
+                
     def to_json(self):
         data = super().to_json()
-        data['traps'] = self.__traps
+        data['traps'] = list(map(lambda t : t.to_json(), self.__traps))
         return data
         
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.__traps = data['traps']
+        self.__traps = list(map(lambda t : Trap().from_json(t), data['traps']))
         return self
 
 class GameBoard(GameObject):
@@ -143,6 +146,8 @@ class GameBoard(GameObject):
         self.locations: dict | None = locations
         self.walled: bool = walled
         self.inventory_manager: InventoryManager = InventoryManager()
+        self.church_trap_queue = TrapQueue()
+        self.turing_trap_queue = TrapQueue()
 
     @property
     def seed(self) -> int:
@@ -289,6 +294,9 @@ class GameBoard(GameObject):
                                     self.locations.values()] if self.locations is not None else None
         data["walled"] = self.walled
         data['event_active'] = self.event_active
+        data['inventory_manager'] = self.inventory_manager.to_json()
+        data['church_trap_queue'] = self.church_trap_queue.to_json()
+        data['turing_trap_queue'] = self.turing_trap_queue.to_json()
         return data
 
     def generate_event(self, start: int, end: int) -> None:
@@ -322,4 +330,7 @@ class GameBoard(GameObject):
         self.event_active: int = data['event_active']
         self.game_map: list[list[Tile]] = [
             [Tile().from_json(tile) for tile in y] for y in temp] if temp is not None else None
+        self.inventory_manager: InventoryManager = InventoryManager().from_json(data['inventory_manager'])
+        self.church_trap_queue: TrapQueue = TrapQueue().from_json(data['church_trap_queue'])
+        self.turing_trap_queue: TrapQueue = TrapQueue().from_json(data['turing_trap_queue'])
         return self
