@@ -7,7 +7,7 @@ from game.common.map.game_board import GameBoard
 
 class DynamiteActiveAbility(ActiveAbility):
 
-    def __init__(self, name: str, avatar: Avatar | None = None):
+    def __init__(self, name: str = "", avatar: Avatar | None = None):
         super().__init__()
         self.object_type = ObjectType.DYNAMITE_ACTIVE_ABILITY
         self.name = name
