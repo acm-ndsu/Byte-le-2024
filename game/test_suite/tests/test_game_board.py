@@ -12,6 +12,9 @@ from game.common.map.game_board import GameBoard, TrapQueue
 from game.quarry_rush.traps.trap import Landmine
 from game.quarry_rush.inventory_manager import InventoryManager
 from game.common.enums import Company
+from game.common.map.game_board import GameBoard, DynamiteList
+from game.quarry_rush.dynamite_item import DynamiteItem
+from game.quarry_rush.inventory_manager import InventoryManager
 
 
 class TestGameBoard(unittest.TestCase):
@@ -108,3 +111,11 @@ class TestGameBoard(unittest.TestCase):
         for i in range(0, 10):
             trap_queue.add_trap(Landmine(inventory_manager=InventoryManager(), owner_company=Company.CHURCH, target_company=Company.TURING, opponent_position=lambda : Vector(), position=Vector()))
         self.assertEqual(trap_queue.size(), 10)
+
+    # Testing dynamite list
+    def test_dynamite_list_not_none(self):
+        self.assertIsNotNone(self.game_board.dynamite_list)
+
+    # def test_dynamite_list_add(self):
+    #     self.game_board.dynamite_list.add_dynamite(DynamiteItem(InventoryManager()))
+    #     self.assertEqual(self.game_board.dynamite_list, 1)
