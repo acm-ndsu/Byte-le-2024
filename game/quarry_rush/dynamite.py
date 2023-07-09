@@ -4,11 +4,12 @@ from game.quarry_rush.inventory_manager import InventoryManager
 from typing import Self
 
 
+# , inventory_manager: InventoryManager
 class Dynamite(GameObject):
-    def __init__(self, inventory_manager: InventoryManager, position: Vector | None = None,
+    def __init__(self, position: Vector | None = None,
                  blast_radius: int = 1, detonate_turn: int = 1):
         super().__init__()
-        self.inventory_manager: InventoryManager = inventory_manager
+        # self.inventory_manager: InventoryManager = inventory_manager
         self.position: Vector | None = position
         self.blast_radius: int = blast_radius
         self.detonate_turn: int = detonate_turn
@@ -84,7 +85,7 @@ class Dynamite(GameObject):
         adjacent_tiles: list[Vector] = above_tile + below_tile + left_tile + right_tile
 
     # collection method - not yet, foods still cooking
-    # wip?
+    # wip
 
     # to json
     def to_json(self) -> dict:
