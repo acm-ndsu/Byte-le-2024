@@ -1,8 +1,9 @@
 import unittest
 from game.quarry_rush.dynamite_active_ability import DynamiteActiveAbility
-from game.common.avatar import Avatar
+from game.utils.vector import Vector
 
-# add test for jsons and object type and position
+
+# need test for place dynamite method when done
 class TestDynamiteActiveAbility(unittest.TestCase):
 
     """
@@ -80,8 +81,33 @@ class TestDynamiteActiveAbility(unittest.TestCase):
             self.dynamite_active_ability.cooldown_tick = -1
         self.assertEqual(str(e.exception), 'DynamiteActiveAbility.cooldown_tick cannot be negative')
 
+    # test: position
+    def test_dynamite_active_ability_set_position(self):
+        self.dynamite_active_ability.position = Vector(10, 10)
+        self.assertEqual(str(self.dynamite_active_ability.position), str(Vector(10, 10)))
+
+    # test: position none
+    def test_dynamite_active_ability_set_position_None(self):
+        self.dynamite_active_ability.position = None
+        self.assertEqual(self.dynamite_active_ability.position, None)
+
+    # fail test: position cannot be anything else
+    def test_dynamite_active_ability_set_position_fail(self):
+        with self.assertRaises(ValueError) as e:
+            self.dynamite_active_ability.position = 10
+        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.position must be a Vector or None.')
+
     # test for place dynamite
 
+    # test: json
+    def test_dynamite_active_ability_json(self):
+        data: dict = self.dynamite_active_ability.to_json()
+        dynamite_active_ability: DynamiteActiveAbility = DynamiteActiveAbility().from_json(data)
+        self.assertEqual(self.dynamite_active_ability.name, dynamite_active_ability.name)
+        self.assertEqual(self.dynamite_active_ability.cooldown, dynamite_active_ability.cooldown)
+        self.assertEqual(self.dynamite_active_ability.cooldown_tick, dynamite_active_ability.cooldown_tick)
+        self.assertEqual(self.dynamite_active_ability.object_type, dynamite_active_ability.object_type)
+        self.assertEqual(str(self.dynamite_active_ability.position), str(dynamite_active_ability.position))
 
 
 

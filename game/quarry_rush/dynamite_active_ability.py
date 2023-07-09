@@ -1,13 +1,12 @@
 from game.common.enums import ObjectType
 from game.quarry_rush.active_ability import ActiveAbility
-from game.quarry_rush.dynamite import Dynamite
 from game.utils.vector import Vector
 from typing import Self
 
 
 class DynamiteActiveAbility(ActiveAbility):
 
-    def __init__(self,  position: Vector, name: str = ""):
+    def __init__(self,  position: Vector | None = None, name: str = ""):
         super().__init__()
         self.object_type = ObjectType.DYNAMITE_ACTIVE_ABILITY
         self.position: Vector = position
@@ -77,8 +76,6 @@ class DynamiteActiveAbility(ActiveAbility):
             # wherever that player called place dynamite it will place the dynamite at that position
     # in this case, when the place dynamite is called
         # step 1: we need to get the current position of the player
-
-
 
 # to json
     def to_json(self) -> dict:
