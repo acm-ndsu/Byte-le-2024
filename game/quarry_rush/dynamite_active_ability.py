@@ -1,7 +1,7 @@
 from game.common.enums import ObjectType
 from game.quarry_rush.active_ability import ActiveAbility
 from game.common.avatar import Avatar
-from game.quarry_rush.dynamite_item import DynamiteItem
+from game.quarry_rush.dynamite import DynamiteItem
 from game.common.map.game_board import GameBoard
 
 
