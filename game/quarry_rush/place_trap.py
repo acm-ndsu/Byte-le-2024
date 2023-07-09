@@ -59,13 +59,9 @@ class PlaceTrap(ActiveAbility):
             raise ValueError(f'{self.__class__.__name__}.avatar must be Avatar or None')
         self.__avatar = avatar
 
-# method for place trap
+    # method for place trap
 
-# cooldown decrease?
 
-# cooldown reset?
-
-# is use-able?
 
 
 
