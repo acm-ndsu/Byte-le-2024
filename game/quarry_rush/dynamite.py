@@ -83,7 +83,7 @@ class Dynamite(GameObject):
         # add all the tile lists together
         adjacent_tiles: list[Vector] = above_tile + below_tile + left_tile + right_tile
 
-    # collection method
+    # collection method - not yet, foods still cooking
     # wip?
 
     # to json
