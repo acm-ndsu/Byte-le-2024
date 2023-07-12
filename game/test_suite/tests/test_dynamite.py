@@ -1,11 +1,9 @@
-import struct
 import unittest
 from game.quarry_rush.dynamite import Dynamite
 from game.utils.vector import Vector
-from game.common.enums import ObjectType
 
 
-# need to collection method, test inventory_manager,  explode,   json
+# need to test collection method<-wip, test inventory_manager<-dont know how,  explode<-its own file
 class TestDynamite(unittest.TestCase):
     """
     This is a class that tests the class dynamite item
@@ -17,17 +15,17 @@ class TestDynamite(unittest.TestCase):
         self.detonate_turn: int = 1
 
     # test: position
-    def test_dynamite_set_position(self):
+    def test_dynamite_position(self):
         self.dynamite.position = Vector(10, 10)
         self.assertEqual(str(self.dynamite.position), str(Vector(10, 10)))
 
     # test: position none
-    def test_dynamite_set_position_None(self):
+    def test_dynamite_position_None(self):
         self.dynamite.position = None
         self.assertEqual(self.dynamite.position, None)
 
     # fail test: position cannot be anything else
-    def fail_test_dynamite_set_position(self):
+    def fail_test_dynamite_position(self):
         with self.assertRaises(ValueError) as e:
             self.dynamite.position = 10
         self.assertEqual(str(e.exception), 'Dynamite.position must be a Vector or None.')
@@ -66,6 +64,13 @@ class TestDynamite(unittest.TestCase):
             self.dynamite.detonate_turn = ""
         self.assertEqual(str(e.exception), 'Dynamite.blast_radius must be an int.')
 
+    # test: json
+    def test_dynamite_json(self):
+        data: dict = self.dynamite.to_json()
+        dynamite: Dynamite = Dynamite().from_json(data)
+        self.assertEqual(str(self.dynamite.position), str(dynamite.position))
+        self.assertEqual(self.dynamite.blast_radius, dynamite.blast_radius)
+        self.assertEqual(self.dynamite.detonate_turn, dynamite.detonate_turn)
 
 
 
