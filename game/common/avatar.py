@@ -264,6 +264,7 @@ class Avatar(GameObject):
     def to_json(self) -> dict:
         data: dict = super().to_json()
         data['held_index'] = self.__held_index
+        data['held_item'] = self.held_item.to_json() if self.held_item is not None else None
         data['score'] = self.score
         data['position'] = self.position.to_json() if self.position is not None else None
         data['inventory'] = self.inventory
