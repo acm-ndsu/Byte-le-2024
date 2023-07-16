@@ -3,7 +3,7 @@ from game.quarry_rush.dynamite import Dynamite
 from game.utils.vector import Vector
 
 
-# need to test collection method<-wip, test inventory_manager<-dont know how,  explode<-its own file
+# need to test collection method<-later, test inventory_manager<-later,  explode<-its own file
 class TestDynamite(unittest.TestCase):
     """
     This is a class that tests the class dynamite item
@@ -63,6 +63,8 @@ class TestDynamite(unittest.TestCase):
         with self.assertRaises(ValueError) as e:
             self.dynamite.detonate_turn = ""
         self.assertEqual(str(e.exception), 'Dynamite.blast_radius must be an int.')
+
+    # test inventory manager - later
 
     # test: json
     def test_dynamite_json(self):

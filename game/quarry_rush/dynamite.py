@@ -4,7 +4,6 @@ from game.quarry_rush.inventory_manager import InventoryManager
 from typing import Self
 
 
-# , inventory_manager: InventoryManager
 class Dynamite(GameObject):
     def __init__(self, position: Vector | None = None,
                  blast_radius: int = 1, detonate_turn: int = 1):

@@ -68,6 +68,11 @@ class DynamiteActiveAbility(ActiveAbility):
             raise ValueError(f'{self.__class__.__name__}.cooldown_tick cannot be negative')
         self.__cooldown_tick = cooldown_tick
 
+    def place_dynamite(self):
+        
+
+
+
 # place dynamite
 #     def place_dynamite(self):
         # ex of how i think it will be used:
