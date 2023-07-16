@@ -124,6 +124,7 @@ class MasterController(Controller):
                     pass
         # checks event logic at the end of round
         # self.handle_events(clients)
+        
 
     # comment out for now, nothing is in place for event types yet
     # def handle_events(self, clients):

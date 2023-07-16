@@ -25,7 +25,7 @@ class TrapQueue(GameObject):
         
     def detonate(self, inventory_manager: InventoryManager):
         for i in range(0, len(self.__traps))[::-1]:
-            if self.__traps[i].detonate(inventory_manager):
+            if self.__traps[i].detonate():
                 self.__traps = self.__traps[:i] + self.__traps[i+1:]
                 
     def size(self) -> int:
@@ -334,3 +334,8 @@ class GameBoard(GameObject):
         self.church_trap_queue: TrapQueue = TrapQueue().from_json(data['church_trap_queue'])
         self.turing_trap_queue: TrapQueue = TrapQueue().from_json(data['turing_trap_queue'])
         return self
+
+    def trap_detonation_control(self):
+        self.church_trap_queue.detonate(self.inventory_manager)
+        self.turing_trap_queue.detonate(self.inventory_manager)
+        
