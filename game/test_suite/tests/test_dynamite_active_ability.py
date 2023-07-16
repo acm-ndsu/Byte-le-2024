@@ -3,7 +3,6 @@ from game.quarry_rush.dynamite_active_ability import DynamiteActiveAbility
 from game.utils.vector import Vector
 
 
-# need test for place dynamite method when done
 class TestDynamiteActiveAbility(unittest.TestCase):
 
     """
@@ -97,7 +96,22 @@ class TestDynamiteActiveAbility(unittest.TestCase):
             self.dynamite_active_ability.position = 10
         self.assertEqual(str(e.exception), 'DynamiteActiveAbility.position must be a Vector or None.')
 
-    # test for place dynamite
+    # test: for placing dynamite
+    def test_placing_dynamite(self):
+        self.dynamite_active_ability.placing_dynamite = False
+        self.assertEqual(self.dynamite_active_ability.placing_dynamite, False)
+
+    # fail test: placing dynamite cant be none
+    def test_placing_dynamite_none_fail(self):
+        with self.assertRaises(ValueError) as e:
+            self.dynamite_active_ability.placing_dynamite = None
+        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.placing_dynamite must be a bool.')
+
+    # fail test: placing dynamite cant be anything else
+    def test_placing_dynamite_str_fail(self):
+        with self.assertRaises(ValueError) as e:
+            self.dynamite_active_ability.placing_dynamite = None
+        self.assertEqual(str(e.exception), "DynamiteActiveAbility.placing_dynamite must be a bool.")
 
     # test: json
     def test_dynamite_active_ability_json(self):

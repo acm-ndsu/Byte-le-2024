@@ -13,6 +13,7 @@ class DynamiteActiveAbility(ActiveAbility):
         self.name = name
         self.cooldown: int = 1
         self.cooldown_tick: int = 0
+        self.placing_dynamite: bool = False  # this is a boolean check to see if the avatar is placing down dynamite
 
 # name getter
     @property
@@ -68,19 +69,17 @@ class DynamiteActiveAbility(ActiveAbility):
             raise ValueError(f'{self.__class__.__name__}.cooldown_tick cannot be negative')
         self.__cooldown_tick = cooldown_tick
 
-    def place_dynamite(self):
-        
+# placing dynamite getter
+    @property
+    def placing_dynamite(self) -> bool:
+        return self.__placing_dynamite
 
-
-
-# place dynamite
-#     def place_dynamite(self):
-        # ex of how i think it will be used:
-        # player walks up to a specific location,
-            # calls place dynamite to place the dynamite
-            # wherever that player called place dynamite it will place the dynamite at that position
-    # in this case, when the place dynamite is called
-        # step 1: we need to get the current position of the player
+# placing dynamite setter
+    @placing_dynamite.setter
+    def placing_dynamite(self, placing_dynamite: bool):
+        if placing_dynamite is None or not isinstance(placing_dynamite, bool):
+            raise ValueError(f'{self.__class__.__name__}.placing_dynamite must be a bool.')
+        self.__placing_dynamite = placing_dynamite
 
 # to json
     def to_json(self) -> dict:
@@ -90,6 +89,7 @@ class DynamiteActiveAbility(ActiveAbility):
         data['name'] = self.name
         data['cooldown'] = self.cooldown
         data['cooldown_tick'] = self.cooldown_tick
+        data['placing_dynamite'] = self.placing_dynamite
         return data
 
 # from json
@@ -100,5 +100,6 @@ class DynamiteActiveAbility(ActiveAbility):
         self.name = data['name']
         self.cooldown = data['cooldown']
         self.cooldown_tick = data['cooldown_tick']
+        self.placing_dynamite = data['placing_dynamite']
         return self
 
