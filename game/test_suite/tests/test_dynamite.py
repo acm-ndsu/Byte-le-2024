@@ -1,6 +1,7 @@
 import unittest
 from game.quarry_rush.dynamite import Dynamite
 from game.utils.vector import Vector
+from game.quarry_rush.inventory_manager import InventoryManager
 
 
 # need to test collection method<-later, test inventory_manager<-later,  explode<-its own file
@@ -10,7 +11,7 @@ class TestDynamite(unittest.TestCase):
     """
 
     def setUp(self) -> None:
-        self.dynamite: Dynamite = Dynamite()
+        self.dynamite: Dynamite = Dynamite(InventoryManager())
         self.blast_radius: int = 1
         self.detonate_turn: int = 1
 
@@ -69,7 +70,7 @@ class TestDynamite(unittest.TestCase):
     # test: json
     def test_dynamite_json(self):
         data: dict = self.dynamite.to_json()
-        dynamite: Dynamite = Dynamite().from_json(data)
+        dynamite: Dynamite = Dynamite(InventoryManager()).from_json(data)
         self.assertEqual(str(self.dynamite.position), str(dynamite.position))
         self.assertEqual(self.dynamite.blast_radius, dynamite.blast_radius)
         self.assertEqual(self.dynamite.detonate_turn, dynamite.detonate_turn)

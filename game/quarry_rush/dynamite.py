@@ -5,10 +5,10 @@ from typing import Self
 
 
 class Dynamite(GameObject):
-    def __init__(self, position: Vector | None = None,
+    def __init__(self, inventory_manager: InventoryManager, position: Vector | None = None,
                  blast_radius: int = 1, detonate_turn: int = 1):
         super().__init__()
-        self.inventory_manager: InventoryManager
+        self.inventory_manager: InventoryManager = inventory_manager
         self.position: Vector | None = position
         self.blast_radius: int = blast_radius
         self.detonate_turn: int = detonate_turn
