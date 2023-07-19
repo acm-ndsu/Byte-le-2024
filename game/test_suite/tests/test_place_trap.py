@@ -14,7 +14,7 @@ class TestPlaceTrap(unittest.TestCase):
         self.place_trap = PlaceTrap()
         self.name: str = ""
         self.cooldown: int = 1
-        # self.cooldown_tick: int = 1       do i need this?     do i need to add avatar as well?
+        self.cooldown_tick: int = 1
 
     # test name
     def test_name(self):

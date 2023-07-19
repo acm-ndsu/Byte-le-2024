@@ -1,5 +1,6 @@
 from game.quarry_rush.active_ability import ActiveAbility
 from game.common.avatar import Avatar
+from typing import Self
 
 
 class PlaceTrap(ActiveAbility):
@@ -47,22 +48,33 @@ class PlaceTrap(ActiveAbility):
             raise ValueError(f'{self.__class__.__name__}.cooldown_tick must be an int')
         self.__cooldown_tick = cooldown_tick
 
-    # getter for avatar
+    # avatar getter
     @property
     def avatar(self) -> Avatar:
         return self.__avatar
 
-    # setter for avatar
+    # avatar setter
     @avatar.setter
     def avatar(self, avatar: Avatar) -> None:
         if avatar is not None and not isinstance(avatar, Avatar):
             raise ValueError(f'{self.__class__.__name__}.avatar must be Avatar or None')
         self.__avatar = avatar
 
-    # method for place trap
+    # to json
+    def to_json(self) -> dict:
+        data: dict = super().to_json()
+        data['name'] = self.name
+        data['cooldown'] = self.cooldown
+        data['cooldown_tick'] = self.cooldown_tick
+        return data
 
-
-
+    # from json
+    def from_json(self, data: dict) -> Self:
+        super().from_json(data)
+        self.name = data['name']
+        self.cooldown = data['cooldown']
+        self.cooldown_tick = data['cooldown_tick']
+        return self
 
 
 
