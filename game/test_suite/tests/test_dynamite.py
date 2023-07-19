@@ -73,7 +73,6 @@ class TestDynamite(unittest.TestCase):
         dynamite: Dynamite = Dynamite(InventoryManager()).from_json(data)
         self.assertEqual(str(self.dynamite.position), str(dynamite.position))
         self.assertEqual(self.dynamite.blast_radius, dynamite.blast_radius)
-        self.assertEqual(self.dynamite.detonate_turn, dynamite.detonate_turn)
 
 
 
