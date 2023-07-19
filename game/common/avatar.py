@@ -22,6 +22,7 @@ class Avatar(GameObject):
         self.__abilities: dict = self.__create_abilities_dict()  # used to manage unlocking new abilities
         self.__tech_tree: TechTree = self.__create_tech_tree()  # the tech tree cannot be set; made private for security
         self.__company: Company = company
+        self.place_dynamite: bool = False
 
     @property
     def company(self) -> Company:
@@ -213,6 +214,10 @@ class Avatar(GameObject):
     def get_all_tech_names(self) -> list[str]:
         """Returns a list of all possible tech names in a Tech Tree."""
         return self.__tech_tree.tech_names()
+
+    def place_dynamite(self) -> bool:
+        avatar.position
+        return True
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
