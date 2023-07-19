@@ -22,7 +22,8 @@ class Avatar(GameObject):
         self.__abilities: dict = self.__create_abilities_dict()  # used to manage unlocking new abilities
         self.__tech_tree: TechTree = self.__create_tech_tree()  # the tech tree cannot be set; made private for security
         self.__company: Company = company
-        self.place_dynamite: bool = False
+        self.place_dynamite: bool = False  # bool for if avatar wants to place dynamite - set to false (i.e. don't want to place)
+        self.place_trap: bool = True  # bool for if avatar wants to place trap - set to false (i.e. don't want to place)
 
     @property
     def company(self) -> Company:
@@ -215,8 +216,13 @@ class Avatar(GameObject):
         """Returns a list of all possible tech names in a Tech Tree."""
         return self.__tech_tree.tech_names()
 
+    # if avatar calls place dynamite, set to true, i.e. they want to place dynamite
     def place_dynamite(self) -> bool:
-        avatar.position
+        # avatar.position
+        return True
+
+    # if avatar calls place trap, set to true, i.e. they want to place trap
+    def palce_trap(self) -> bool:
         return True
 
     def to_json(self) -> dict:
