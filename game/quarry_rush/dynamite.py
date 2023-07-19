@@ -5,13 +5,12 @@ from typing import Self
 
 
 class Dynamite(GameObject):
-    def __init__(self, inventory_manager: InventoryManager, position: Vector | None = None,
-                 blast_radius: int = 1, detonate_turn: int = 1):
+    def __init__(self, inventory_manager: InventoryManager, position: Vector | None = None, blast_radius: int = 1):
         super().__init__()
         self.inventory_manager: InventoryManager = inventory_manager
         self.position: Vector | None = position
         self.blast_radius: int = blast_radius
-        self.detonate_turn: int = detonate_turn
+        self.fuse: int = 1
 
     # inventory manager getter
     @property
@@ -53,22 +52,13 @@ class Dynamite(GameObject):
             raise ValueError(f'{self.__class__.__name__}.blast_radius must be an int.')
         self.__blast_radius: int = blast_radius
 
-    # detonate_turn getter
-    @property
-    def detonate_turn(self) -> int:
-        return self.__detonate_turn
-
-    # detonate_turn setter
-    @detonate_turn.setter
-    def detonate_turn(self, detonate_turn: int) -> None:
-        if detonate_turn is None or not isinstance(detonate_turn, int):
-            raise ValueError(f'{self.__class__.__name__}.blast_radius must be an int')
-        self.__detonate_turn = detonate_turn
-
     # detonate method
-    def detonate(self, current_turn: int):
-        if current_turn is self.__detonate_turn:
-            self.explode()
+    def detonate(self, inventory_manager: InventoryManager):
+        self.fuse -= 1
+        if self.fuse <= 0:
+            # do the detonation
+            return True
+        return False
 
     # explode dynamite
     def explode(self):
@@ -89,18 +79,14 @@ class Dynamite(GameObject):
     # to json
     def to_json(self) -> dict:
         data: dict = super().to_json()
-        data['inventory_manager'] = self.inventory_manager.to_json()
         data['position'] = self.position.to_json() if self.position is not None else None
         data['blast_radius'] = self.blast_radius
-        data['detonate_turn'] = self.detonate_turn
         return data
 
     # from json
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.inventory_manager: InventoryManager = InventoryManager().from_json(data['inventory_manager'])
         self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
         self.blast_radius: int = data['blast_radius']
-        self.detonate_turn: int = data['detonate_turn']
         return self
 
