@@ -349,7 +349,7 @@ class Avatar(GameObject):
         return True
 
     # if avatar calls place trap, set to true, i.e. they want to place trap
-    def palce_trap(self) -> bool:
+    def place_trap(self) -> bool:
         return True
 
     def to_json(self) -> dict:
