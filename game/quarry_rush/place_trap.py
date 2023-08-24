@@ -1,16 +1,15 @@
 from game.quarry_rush.active_ability import ActiveAbility
-from game.common.avatar import Avatar
 from typing import Self
 
 
 class PlaceTrap(ActiveAbility):
 
-    def __init__(self, name: str = "", cooldown: int = 1, cooldown_tick: int = 0, avatar: Avatar | None = None):
+    def __init__(self, name: str = "", cooldown: int = 1, cooldown_tick: int = 0):
         super().__init__()
         self.name: str = name
         self.cooldown: int = cooldown
         self.cooldown_tick: int = cooldown_tick
-        self.avatar: Avatar | None = avatar
+        self.placing_trap: bool = False
 
     # getter for name
     @property
@@ -48,17 +47,17 @@ class PlaceTrap(ActiveAbility):
             raise ValueError(f'{self.__class__.__name__}.cooldown_tick must be an int')
         self.__cooldown_tick = cooldown_tick
 
-    # avatar getter
+    # placing dynamite getter
     @property
-    def avatar(self) -> Avatar:
-        return self.__avatar
+    def placing_trap(self) -> bool:
+        return self.__placing_trap
 
-    # avatar setter
-    @avatar.setter
-    def avatar(self, avatar: Avatar) -> None:
-        if avatar is not None and not isinstance(avatar, Avatar):
-            raise ValueError(f'{self.__class__.__name__}.avatar must be Avatar or None')
-        self.__avatar = avatar
+    # placing dynamite setter
+    @placing_trap.setter
+    def placing_trap(self, placing_trap: bool):
+        if placing_trap is None or not isinstance(placing_trap, bool):
+            raise ValueError(f'{self.__class__.__name__}.placing_trap must be a bool.')
+        self.__placing_trap = placing_trap
 
     # to json
     def to_json(self) -> dict:
@@ -66,6 +65,7 @@ class PlaceTrap(ActiveAbility):
         data['name'] = self.name
         data['cooldown'] = self.cooldown
         data['cooldown_tick'] = self.cooldown_tick
+        data['placing_trap'] = self.placing_trap
         return data
 
     # from json
@@ -74,6 +74,7 @@ class PlaceTrap(ActiveAbility):
         self.name = data['name']
         self.cooldown = data['cooldown']
         self.cooldown_tick = data['cooldown_tick']
+        self.placing_trap = data['placing_trap']
         return self
 
 
