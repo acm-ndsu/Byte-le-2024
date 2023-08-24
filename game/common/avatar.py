@@ -7,6 +7,8 @@ from game.quarry_rush.tech import TechInfo
 from game.utils.vector import Vector
 from game.quarry_rush.tech_tree import TechTree
 from game.quarry_rush.player_functions import PlayerFunctions
+from game.quarry_rush.dynamite_active_ability import DynamiteActiveAbility
+from game.quarry_rush.place_trap import PlaceTrap
 
 
 class Avatar(GameObject):
@@ -149,8 +151,10 @@ class Avatar(GameObject):
         self.__abilities: dict = self.__create_abilities_dict()  # used to manage unlocking new abilities
         self.__tech_tree: TechTree = self.__create_tech_tree()  # the tech tree cannot be set; made private for security
         self.__company: Company = company
-        self.place_dynamite: bool = False  # bool for if avatar wants to place dynamite - set to false (i.e. don't want to place)
-        self.place_trap: bool = True  # bool for if avatar wants to place trap - set to false (i.e. don't want to place)
+        self.dynamite_active_ability: DynamiteActiveAbility = DynamiteActiveAbility()
+        self.place_trap: PlaceTrap = PlaceTrap()
+        self.placing_trap: bool = False
+        self.placing_dynamite: bool = False
 
     @property
     def company(self) -> Company:
@@ -175,7 +179,7 @@ class Avatar(GameObject):
     @property
     def drop_rate(self):
         return self.__drop_rate
-    
+
     @company.setter
     def company(self, company: Company) -> None:
         self.__company = company
@@ -344,13 +348,16 @@ class Avatar(GameObject):
         return self.__tech_tree.tech_names()
 
     # if avatar calls place dynamite, set to true, i.e. they want to place dynamite
-    def place_dynamite(self) -> bool:
-        # avatar.position
-        return True
+    def placing_dynamite(self) -> bool:
+        # This method will be called in the unlock_dynamite method in the else statement for when it's to be used
+        self.placing_dynamite = self.dynamite_active_ability.use()  # sets the avatar's bool reference
+        return self.placing_dynamite  # return the bool reference to know to place dynamite
 
     # if avatar calls place trap, set to true, i.e. they want to place trap
-    def place_trap(self) -> bool:
-        return True
+    def placing_trap(self) -> bool:
+        # This method will be called in the landmine and EMP methods in the else statement for when it's to be used
+        self.placing_trap = self.place_trap.use()  # sets the avatar's bool reference
+        return self.placing_trap  # return the bool reference to know to place dynamite
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
