@@ -99,12 +99,12 @@ class TestActiveAbility(unittest.TestCase):
         self.assertEqual(str(e.exception), 'ActiveAbility.cooldown_tick cannot be negative')
 
     # test is_useable: 0 = true
-    def test_is_useale_true(self):
+    def test_is_useable_true(self):
         self.active_ability.cooldown_tick = 0
         self.assertEqual(self.active_ability.is_useable(), True)
 
     # test is_useable: any other number = false
-    def test_is_useale_false(self):
+    def test_is_useable_false(self):
         self.active_ability.cooldown_tick = 1
         self.assertEqual(self.active_ability.is_useable(), False)
 

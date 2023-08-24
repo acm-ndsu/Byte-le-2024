@@ -88,6 +88,7 @@ class ActiveAbility(GameObject):
         data['name'] = self.name
         data['cooldown'] = self.cooldown
         data['cooldown_tick'] = self.cooldown_tick
+        data['avatar'] = self.avatar
         return data
 
 # from json
@@ -96,6 +97,7 @@ class ActiveAbility(GameObject):
         self.name = data['name']
         self.cooldown = data['cooldown']
         self.cooldown_tick = data['cooldown_tick']
+        self.avatar = data['avatar']
         return self
 
 
