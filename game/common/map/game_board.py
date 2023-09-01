@@ -336,6 +336,6 @@ class GameBoard(GameObject):
         return self
 
     def trap_detonation_control(self):
-        self.church_trap_queue.detonate(self.inventory_manager)
-        self.turing_trap_queue.detonate(self.inventory_manager)
+        self.church_trap_queue.detonate()
+        self.turing_trap_queue.detonate()
         
