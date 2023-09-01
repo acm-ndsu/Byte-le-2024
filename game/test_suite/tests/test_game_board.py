@@ -13,7 +13,7 @@ from game.quarry_rush.traps.trap import Landmine
 from game.quarry_rush.inventory_manager import InventoryManager
 from game.common.enums import Company
 from game.common.map.game_board import GameBoard, DynamiteList
-from game.quarry_rush.dynamite_item import DynamiteItem
+from game.quarry_rush.dynamite import Dynamite
 from game.quarry_rush.inventory_manager import InventoryManager
 
 
@@ -104,7 +104,7 @@ class TestGameBoard(unittest.TestCase):
         self.assertIsNotNone(self.game_board.turing_trap_queue)
         
     def test_add_trap(self):
-        trap_queue = TrapQueue()
+        trap_queue = TrapQueue(self.game_board.inventory_manager)
         self.assertEqual(trap_queue.size(), 0)
         trap_queue.add_trap(Landmine(inventory_manager=InventoryManager(), owner_company=Company.CHURCH, target_company=Company.TURING, opponent_position=lambda : Vector(), position=Vector()))
         self.assertEqual(trap_queue.size(), 1)
@@ -112,10 +112,25 @@ class TestGameBoard(unittest.TestCase):
             trap_queue.add_trap(Landmine(inventory_manager=InventoryManager(), owner_company=Company.CHURCH, target_company=Company.TURING, opponent_position=lambda : Vector(), position=Vector()))
         self.assertEqual(trap_queue.size(), 10)
 
-    # Testing dynamite list
+    # Testing dynamite list ------------------------------------------------------------------------------------------
     def test_dynamite_list_not_none(self):
         self.assertIsNotNone(self.game_board.dynamite_list)
 
-    # def test_dynamite_list_add(self):
-    #     self.game_board.dynamite_list.add_dynamite(DynamiteItem(InventoryManager()))
-    #     self.assertEqual(self.game_board.dynamite_list, 1)
+    def test_dynamite_list_add_and_size(self):
+        self.game_board.dynamite_list.add_dynamite(Dynamite(self.game_board.inventory_manager))
+        self.assertEqual(self.game_board.dynamite_list.size(), 1)
+
+    def test_dynamite_list_detonate(self):
+        self.game_board.dynamite_list.add_dynamite(Dynamite(self.game_board.inventory_manager))
+        self.game_board.dynamite_list.detonate()
+        self.assertEqual(self.game_board.dynamite_list.size(), 0)
+
+    def test_dynamite_list_json(self):
+        for x in range(1):  # add 2 dynamite to the dynamite list
+            self.game_board.dynamite_list.add_dynamite(Dynamite(self.game_board.inventory_manager))
+
+        data: dict = self.game_board.dynamite_list.to_json()
+        dynamite_list: DynamiteList = DynamiteList(self.game_board.inventory_manager).from_json(data)
+
+        # check the size is correct
+        self.assertEqual(dynamite_list.size(), self.game_board.dynamite_list.size())
