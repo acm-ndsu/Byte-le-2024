@@ -23,7 +23,7 @@ class TrapQueue(GameObject):
             self.__traps = self.__traps[1:]
         self.__traps += [trap]
         
-    def detonate(self, inventory_manager: InventoryManager):
+    def detonate(self):
         for i in range(0, len(self.__traps))[::-1]:
             if self.__traps[i].detonate():
                 self.__traps = self.__traps[:i] + self.__traps[i+1:]
