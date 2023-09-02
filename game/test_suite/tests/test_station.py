@@ -13,6 +13,13 @@ from game.common.enums import ObjectType
 
 # class that tests stations and its methods
 class TestStation(unittest.TestCase):
+    """
+    `Test Station Example Notes:`
+
+        This class tests the different methods in the Station Example class. This is used to show how Stations could
+        work and how they can be tested.
+    """
+
     def setUp(self) -> None:
         self.station = Station()
         self.item = Item(10, None, 2, 64)

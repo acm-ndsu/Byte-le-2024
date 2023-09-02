@@ -9,24 +9,38 @@ from game.utils.vector import Vector
 
 class InteractController(Controller):
     """
-    The Interact Controller manages the actions the player tries to execute. As the game is played, a player can
-    interact with their surrounding, adjacent stations and the space they're currently standing on.
+    `Interact Controller Notes:`
 
-    x x x x x x
-    x         x
-    x   o     x
-    x o P o   x
-    x   o     x
-    x x x x x x
+        The Interact Controller manages the actions the player tries to execute. As the game is played, a player can
+        interact with surrounding, adjacent stations and the space they're currently standing on.
 
-    The given visual shows how players can interact. "P" represents the player; "o" represents the spaces that can be
-    interacted with (included where the "P" is); and "x" represents the walls and map border.
+        Example:
+        ::
+            x x x x x x
+            x         x
+            x   O     x
+            x O A O   x
+            x   O     x
+            x x x x x x
+
+        The given visual shows what players can interact with. "A" represents the avatar; "O" represents the spaces
+        that can be interacted with (including where the "A" is); and "x" represents the walls and map border.
+
+        These interactions are managed by using the provided ActionType enums in the enums.py file.
     """
 
     def __init__(self):
         super().__init__()
 
-    def handle_actions(self, action: ActionType, client: Player, world: GameBoard):
+    def handle_actions(self, action: ActionType, client: Player, world: GameBoard) -> None:
+        """
+        Given the ActionType for interacting in a direction, the Player's avatar will engage with the object.
+        :param action:
+        :param client:
+        :param world:
+        :return: None
+        """
+
         # match interaction type with x and y
         vector: Vector
         match action:

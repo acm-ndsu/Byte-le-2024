@@ -1,4 +1,5 @@
-# byte_engine
+# Byte Engine
+
 Revamped base game engine for use in NDACM Byte-le Royale games.
 Changes made in 2023.
 
@@ -12,18 +13,23 @@ Changes made in 2023.
 * Item Class
     * The item class has many parameters that can be used in a few different ways to allow
     for flexibility.
+
     * Value:
       * This allows for an item to have a value of some sort. This can be used to determine
       points gained for collecting the item, or its sell price. The meaning can change depending 
       on the project.
+      
     * Durability:
       * Durability can represent how many uses an item has. What happens after is determined by 
       the development team.
+    
     * Quantity:
       * This allows for consolidating and representing multiple items in a single item object.
+
     * Stack Size:
       * Stack Size determines how many item objects can be consolidated together into a single 
       object at once. This can be thought of as a denominator in a fraction.
+    
     * Reference the Item class for further documentation.
 
 
@@ -31,13 +37,16 @@ Changes made in 2023.
   * GameBoard Seed Parameter
     * There is a new parameter in the GameBoard class that allows 
     a specific seed to be set. This can be used to help with testing during game development.
+    
   * Map Size Parameter
     * This is a Vector object that is not used as a coordinate, but the dimensions of the 
     entire game map. Vectors are explained later.
+    
   * Locations Parameter
     * This parameter allows for user-defined specifications of where to put certain GameObjects 
     on the game map. It is an extensive system used to do this, so refer to the file for 
     further documentation.
+
   * Walled Parameter
     * This is a boolean that determines whether to place Wall objects on the border of the game 
     map.
@@ -62,9 +71,11 @@ Changes made in 2023.
 * Stations
   * Station Class
     * The Station represents a basic Station. They can contain items and be interacted with.
+    
   * Occupiable Station
     * Occupiable Stations represent basic Station objects that can be occupied by another 
     GameObject.
+    
   * Example Classes
     * The occupiable_station_example, station_example, and station_receiver_example classes 
     are provided to show how their respective files can be used. These can be deleted or used
@@ -79,16 +90,20 @@ Changes made in 2023.
 * Avatar Class
   * The Avatar class is newly implemented in this version of the byte-engine and includes
   many new features.
+  
   * Position:
     * The Avatar class has a parameter called "position" which is a Vector object (explained 
     later in this document). This simply stores the Avatar's coordinate on the game map.
+    
   * Inventory:
     * There is an inventory system implemented in the Avatar class now. You are able to specify 
     the max size of it, and there are methods that are used to pick up items, take items from 
     other objects, and drop the Avatar's held item.
+    
   * Held Item:
     * The held item of an Avatar is an item that the Avatar has in their inventory. This is done 
     by using enums. Reference the enums.py file for more information.
+    
   * These changes are provided to allow for development to go smoothly. Developers are not obliged 
   to use nor keep any of these changes. The inventory system and any other aspect of the class may be 
   modified or removed as necessary for game development.
@@ -111,6 +126,7 @@ Changes made in 2023.
     * The Avatar class represents the character that is in the game. The Avatar is 
     what moves around, interacts with other GameObjects, gains points, and whatever else 
     the developers implement.
+
   * Player:
     * The Player object encapsulates the Avatar class and represents the physical 
     people competing in the competition. This is why it has parameters such as team_name.
@@ -122,12 +138,15 @@ Changes made in 2023.
 * Controllers
   * Interact Controller Class
     * This class controls how players interact with the environment and other GameObjects.
+  
   * Inventory Controller Class
     * This class controls how players select a certain item in their inventory to then 
     become their held item.
+  
   * Master Controller Class
     * This controller is used to manage what happens in each turn and update the 
     overarching information of the game's state.
+  
   * Movement Controller Class
     * This class manages moving the player through the game board by using the given enums.
 

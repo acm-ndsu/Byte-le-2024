@@ -11,4 +11,10 @@ class StationReceiverExample(Station):
         self.object_type = ObjectType.STATION_RECEIVER_EXAMPLE
 
     def take_action(self, avatar: Avatar) -> None:
+        """
+            In this example of what a type of station could do, the station takes the avatars held item and takes it for
+            its own.
+            :param avatar:
+            :return:
+        """
         self.held_item = avatar.drop_held_item()

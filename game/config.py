@@ -2,6 +2,11 @@ import os
 
 from game.common.enums import *
 
+"""
+This file is important for configuring settings for the project. All parameters in this file have comments to explain 
+what they do already. Refer to this file to clear any confusion, and make any changes as necessary.
+"""
+
 # Runtime settings / Restrictions --------------------------------------------------------------------------------------
 # The engine requires these to operate
 MAX_TICKS = 500                                     # max number of ticks the server will run regardless of game state
@@ -23,7 +28,13 @@ MAX_CLIENTS_CONTINUE = None                         # maximum number of clients 
 SET_NUMBER_OF_CLIENTS_CONTINUE = 2                  # required number of clients to continue running the game; should be None when MIN_CLIENTS or MAX_CLIENTS are used
 
 ALLOWED_MODULES = ["game.client.user_client",       # modules that clients are specifically allowed to access
-                   "game.common.enums"]
+                   "game.common.enums",
+                   "numpy",
+                   "scipy",
+                   "pandas",
+                   "itertools",
+                   "functools",
+                   ]
 
 RESULTS_FILE_NAME = "results.json"                                  # Name and extension of results file
 RESULTS_DIR = os.path.join(os.getcwd(), "logs")                     # Location of the results file

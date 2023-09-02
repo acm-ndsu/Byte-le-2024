@@ -6,7 +6,11 @@ from game.common.items.item import Item
 
 class TestAvatarInventory(unittest.TestCase):
     """
-    This class is to test the Avatar class' inventory and how it functions.
+    `Test Avatar Inventory Notes:`
+
+        This class tests the different methods in the Avatar class related to the inventory system. This is its own
+        file since the inventory system has a lot of functionality. Look extensively at the different cases that are
+        tested to better understand how it works if there is still confusion.
     """
 
     def setUp(self) -> None:
@@ -73,19 +77,24 @@ class TestAvatarInventory(unittest.TestCase):
     # Tests when an item is being taken away
     def test_take(self):
         """
-        When this test is performed, it works properly, but because the Item class is used and is very generic, it
-        may not seem to be the case. However, it does work in the end. The first item in the inventory has its
-        quantity decrease to 2 after the take method is executed. Then, the helper method, clean_inventory,
-        consolidates all similar Items with each other. This means that inventory[1] will add its quantity to
-        inventory[0], making it have a quantity of 5; inventory[1] now has a quantity of 4 instead of 7. Then,
-        inventory[2] will add its quantity to inventory[1], making it have a quantity of 7; inventory[2] now has a
-        quantity of 7.
+        `Take method test:`
+            When this test is performed, it works properly, but because the Item class is used and is very generic, it
+            may not seem to be the case. However, it does work in the end. The first item in the inventory has its
+            quantity decrease to 2 after the take method is executed. Then, the helper method, clean_inventory,
+            consolidates all similar Items with each other. This means that inventory[1] will add its quantity to
+            inventory[0], making it have a quantity of 5; inventory[1] now has a quantity of 4 instead of 7. Then,
+            inventory[2] will add its quantity to inventory[1], making it have a quantity of 7; inventory[2] now has a
+            quantity of 7.
 
-        TL;DR
-        When the take method is used, it will work properly with more specific Item classes being created to
-        consolidate the same Item object types together
+            -----
 
-        When more subclasses of Item are created, more specific tests can be created if needed.
+            To recap:
+            When the take method is used, it will work properly with more specific Item classes being created to
+            consolidate the same Item object types together
+
+            -----
+
+            When more subclasses of Item are created, more specific tests can be created if needed.
         """
 
         self.avatar: Avatar = Avatar(None, 3)

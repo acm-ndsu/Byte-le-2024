@@ -7,10 +7,12 @@ from game.common.map.game_board import GameBoard
 
 class InventoryController(Controller):
     """
-    The Inventory Controller is how player's can manage and interact with their inventory. When given the enum to
-    select an item from a slot in the inventory, that will then become the held item.
+    `Interact Controller Notes:`
 
-    If an enum is passed in that is not within the range of the inventory size, an error will be thrown.
+        The Inventory Controller is how player's can manage and interact with their inventory. When given the enum to
+        select an item from a slot in the inventory, that will then become the held item.
+
+        If an enum is passed in that is not within the range of the inventory size, an error will be thrown.
     """
 
     def __init__(self):

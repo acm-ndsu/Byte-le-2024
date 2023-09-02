@@ -7,6 +7,11 @@ from game.common.avatar import Avatar
 
 
 class TestPlayer(unittest.TestCase):
+    """
+    `Test Player Notes:`
+
+        This class tests the different methods in the Player class.
+    """
 
     def setUp(self) -> None:
         self.object_type: ObjectType = ObjectType.PLAYER

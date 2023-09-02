@@ -10,10 +10,15 @@ from typing import Self
 
 class Tile(Occupiable):
     """
-    This object exists to encapsulate all objects that could be placed on the gameboard.
+    `Tile Class Notes:`
 
-    Tiles will represent things like the floor in the game. They inherit from Occupiable, which allows for tiles to
-    have certain GameObjects and the avatar in it.
+        The Tile class exists to encapsulate all objects that could be placed on the gameboard.
+
+        Tiles will represent things like the floor in the game. They inherit from Occupiable, which allows for tiles to
+        have certain GameObjects and the avatar on it.
+
+        If the game being developed requires different tiles with special properties, future classes may be added and
+        inherit from this class.
     """
     def __init__(self, occupied_by: GameObject = None):
         super().__init__()

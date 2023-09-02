@@ -13,6 +13,13 @@ from game.common.game_object import GameObject
 
 
 class TestMovementControllerIfWall(unittest.TestCase):
+    """
+    `Test Movement Controller if Wall Notes:`
+
+        This class tests the Movement Controller *specifically* for when there are walls -- or other impassable
+        objects -- near the Avatar.
+    """
+
     def setUp(self) -> None:
         self.movement_controller = MovementController()
         self.avatar = Avatar(Vector(2, 2), 1)

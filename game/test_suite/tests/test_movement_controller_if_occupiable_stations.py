@@ -12,6 +12,13 @@ from game.common.stations.station import Station
 
 
 class TestMovementControllerIfOccupiableStations(unittest.TestCase):
+    """
+    `Test Movement Controller with Occupiable Stations that are Occupied Notes:`
+
+        This class tests the different methods in the Movement Controller and that the Avatar can't move onto an
+        Occupiable Station that is occupied by an unoccupiable object (e.g., a Wall or Station object).
+    """
+
     def setUp(self) -> None:
         self.movement_controller = MovementController()
 

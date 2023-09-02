@@ -2,13 +2,19 @@ from game.common.action import Action
 from game.common.game_object import GameObject
 from game.common.avatar import Avatar
 from game.common.enums import *
+from game.client.user_client import UserClient
 
 
 class Player(GameObject):
     """
-    The Player class is what represents the team that's competing. The player can contain a list of Actions to
-    execute each turn. The avatar is what's used to execute actions (e.g., interacting with stations, picking up
-    items, etc.).
+    `Player Class Notes:`
+
+    -----
+
+        The Player class is what represents the team that's competing. The player can contain a list of Actions to
+        execute each turn. The avatar is what's used to execute actions (e.g., interacting with stations, picking up
+        items, etc.). For more details on the difference between the Player and Avatar classes, refer to the README
+        document.
     """
     def __init__(self, code: object | None = None, team_name: str | None = None, actions: list[ActionType] = [],
                  avatar: Avatar | None = None):
@@ -17,7 +23,7 @@ class Player(GameObject):
         self.functional: bool = True
         # self.error: object | None = None  # error is not used
         self.team_name: str | None = team_name
-        self.code: object = code
+        self.code: UserClient | None = code
         # self.action: Action = action
         self.actions: list[ActionType] = actions
         self.avatar: Avatar | None = avatar

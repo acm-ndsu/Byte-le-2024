@@ -10,7 +10,9 @@ from game.common.enums import ObjectType
 
 class TestTile(unittest.TestCase):
     """
-    This class is to test the Tile class and its methods.
+    `Test Tile Notes:`
+
+        This class tests the different methods in the Tile class.
     """
     def setUp(self) -> None:
         self.tile: Tile = Tile()

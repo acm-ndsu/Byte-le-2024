@@ -3,9 +3,12 @@ from game.common.enums import *
 
 class Action:
     """
-    This class encapsulates the different actions a player can execute while playing the game.
-    NOTE: This is not currently implemented in this version of the engine. If you want more complex actions, you can
-    use this class for Objects instead of the enums.
+    `Action Class:`
+
+        This class encapsulates the different actions a player can execute while playing the game.
+
+        **NOTE**: This is not currently implemented in this version of the Byte Engine. If you want more complex
+        actions, you can use this class for Objects instead of the enums.
     """
 
     def __init__(self):

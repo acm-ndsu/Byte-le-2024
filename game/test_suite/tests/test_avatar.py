@@ -7,7 +7,9 @@ from game.utils.vector import Vector
 
 class TestAvatar(unittest.TestCase):
     """
-    This class is to test the Avatar class and its methods.
+    `Test Avatar Notes:`
+
+        This class tests the different methods in the Avatar class.
     """
 
     def setUp(self) -> None:

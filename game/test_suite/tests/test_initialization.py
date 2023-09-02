@@ -12,7 +12,10 @@ from game.utils.vector import Vector
 
 class TestInitialization(unittest.TestCase):
     """
-    This class is to test the initialization of different Objects.
+    `Test Avatar Notes:`
+
+        This class tests the instantiation of different Objects within the project. Recall that every new class created
+        needs a respective ObjectType enum created for it.
     """
 
     def setUp(self) -> None:

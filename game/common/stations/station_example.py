@@ -11,4 +11,10 @@ class StationExample(Station):
         self.object_type = ObjectType.STATION_EXAMPLE
 
     def take_action(self, avatar: Avatar) -> Item | None:
+        """
+            In this example of what a station could do, the avatar picks up the item from this station to show the
+            station's purpose.
+            :param avatar:
+            :return:
+        """
         avatar.pick_up(self.held_item)

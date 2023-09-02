@@ -7,8 +7,13 @@ import unittest
 
 class TestExample(unittest.TestCase):  # Your test class is a subclass of unittest.Testcase, this is important
     """
-    This is a mock test class to model tests after.
-    The setUp method MUST be in camel-case. Everything else can be in snake_case as normal.
+    `Test Example Notes:`
+
+        This is a mock test class to model tests after.
+        The setUp method MUST be in camel-case for every test file. Everything else can be in snake_case as normal.
+
+        The command to run tests is:
+            ``python -m game.test_suite.runner``
     """
 
     def setUp(self):  # This method is used to set up anything you wish to test prior to every test method below.

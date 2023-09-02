@@ -1,9 +1,8 @@
 from enum import Enum, auto
 
-
 """
-The use of the enum structure is to make is easier to execute certain tasks. It also helps with identifying 
-types of Objects throughout the project. 
+**NOTE:** The use of the enum structure is to make is easier to execute certain tasks. It also helps with
+identifying types of Objects throughout the project.
 
 When developing the game, add any extra enums as necessary.
 """
@@ -13,7 +12,6 @@ class DebugLevel(Enum):
     CLIENT = auto()
     CONTROLLER = auto()
     ENGINE = auto()
-
 
 class ObjectType(Enum):
     NONE = auto()

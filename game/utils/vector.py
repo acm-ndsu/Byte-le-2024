@@ -4,6 +4,64 @@ from typing import Self, Tuple
 
 
 class Vector(GameObject):
+    """
+    `Vector Class Notes:`
+
+    This class is used universally in the project to handle anything related to coordinates. There are a few useful
+    methods here to help in a few situations.
+
+    -----
+
+    Add Vectors Method:
+        This method will take two Vector objects, combine their (x, y) coordinates, and return a new Vector object.
+
+        Example:
+            vector_1: (1, 1)
+            vector_2: (1, 1)
+
+            Result:
+            vector_result: (2, 2)
+
+    -----
+
+    Add to Vector method:
+        This method will take a different Vector object and add it to the current Self reference; that is, this method
+        belongs to a Vector object and is not static.
+
+        Example:
+            self_vector: (0, 0)
+            vector_1: (1, 3)
+
+            Result:
+            self_vector: (1, 3)
+
+    -----
+
+    Add X and Add Y methods:
+        These methods act similarly to the ``add_vector()`` method, but instead of changing both the x and y, these
+        methods change their respective variables.
+
+        Add X Example:
+            self_vector: (0, 0)
+            vector_1: (1, 3)
+
+            Result:
+            self_vector: (1, 0)
+
+        Add Y Example:
+            self_vector: (0, 0)
+            vector_1: (1, 3)
+
+            Result:
+            self_vector: (0, 3)
+
+    -----
+
+    As Tuple Method:
+        This method returns a tuple of the Vector object in the form of (x, y). This is to help with storing it easily
+        or accessing it in an immutable structure.
+    """
+
     def __init__(self, x: int = 0, y: int = 0):
         super().__init__()
         self.object_type: ObjectType = ObjectType.VECTOR
@@ -31,7 +89,7 @@ class Vector(GameObject):
         self.__y = y
 
     @staticmethod
-    def add_vectors(vector_1: Self, vector_2: Self) -> Self:
+    def add_vectors(vector_1: 'Vector', vector_2: 'Vector') -> 'Vector':
         new_x: int = vector_1.x + vector_2.x
         new_y: int = vector_1.y + vector_2.y
         return Vector(new_x, new_y)

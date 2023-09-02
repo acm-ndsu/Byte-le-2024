@@ -14,7 +14,14 @@ from game.common.map.game_board import GameBoard
 
 class TestGameBoard(unittest.TestCase):
     """
-    This class is to test the GameBoard class and its methods *without* the map being generated.
+    `Test Gameboard Without Generation Notes:`
+
+        This class tests the different methods in the Gameboard class when the map is *not* generated.
+    """
+    """
+    `Test Avatar Notes:`
+
+        This class tests the different methods in the Avatar class.
     """
     def setUp(self) -> None:
         self.item: Item = Item(10, None)

@@ -13,6 +13,13 @@ from game.common.game_object import GameObject
 
 
 class TestMovementControllerIfStations(unittest.TestCase):
+    """
+    `Test Movement Controller with Stations Notes:`
+
+        This class tests the different methods in the Movement Controller and that the Avatar can't move onto a Station
+        object (an example of an impassable object).
+    """
+
     def setUp(self) -> None:
         self.movement_controller = MovementController()
         # (1, 0), (2, 0), (0, 1), (0, 2), (1, 3), (2, 3), (3, 1), (3, 2)

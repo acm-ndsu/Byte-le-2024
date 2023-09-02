@@ -10,7 +10,10 @@ from game.common.enums import ObjectType
 
 class TestOccupiableStation(unittest.TestCase):
     """
-    This class is to test the OccupiableStation class and its methods.
+    `Test Item Notes:`
+
+        This class tests the different methods in the OccupiableStation class and ensures the objects that occupy them
+        are properly set.
     """
 
     def setUp(self) -> None:

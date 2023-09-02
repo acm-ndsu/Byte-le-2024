@@ -10,7 +10,9 @@ from game.common.map.game_board import GameBoard
 
 class TestInventoryController(unittest.TestCase):
     """
-    This class is to test the InventoryController class and its methods.
+    `Test Inventory Controller Notes:`
+
+        This class tests the different methods in the Avatar class' inventory.
     """
 
     def setUp(self) -> None:

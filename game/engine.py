@@ -1,10 +1,12 @@
-from datetime import datetime
 import importlib
 import json
-import os
-import sys
-import traceback
 import logging
+import sys
+import threading
+import traceback
+from datetime import datetime
+
+from tqdm import tqdm
 
 from game.common.map.game_board import GameBoard
 from game.common.player import Player
@@ -13,8 +15,7 @@ from game.controllers.master_controller import MasterController
 from game.utils.helpers import write_json_file
 from game.utils.thread import Thread, CommunicationThread
 from game.utils.validation import verify_code, verify_num_clients
-
-from tqdm import tqdm
+from game.client.user_client import UserClient
 
 
 class Engine:
@@ -92,7 +93,7 @@ class Engine:
                         f'Player is using "open" which is forbidden.')
 
                 # Attempt creation of the client object
-                obj = None
+                obj: UserClient | None = None
                 try:
                     # Import client's code
                     im = importlib.import_module(f'{filename}', CLIENT_DIRECTORY)
@@ -171,7 +172,6 @@ class Engine:
             world = json.load(json_file)
             world['game_board'] = GameBoard().from_json(world['game_board'])
         self.world = world
-
 
     # Sits on top of all actions that need to happen before the player takes their turn
     def pre_tick(self):
@@ -259,7 +259,8 @@ class Engine:
         else:
             data = self.master_controller.create_turn_log(self.clients, self.tick_number)
 
-        write_json_file(data, os.path.join(LOGS_DIR, f'turn_{self.tick_number:04d}.json'))
+        threading.Thread(target=write_json_file,
+                         args=(data, os.path.join(LOGS_DIR, f'turn_{self.tick_number:04d}.json'))).start()
 
         # Perform a game over check
         if self.master_controller.game_over:
@@ -300,7 +301,7 @@ class Engine:
             # Flush standard out
             sys.stdout.flush()
 
-            os._exit(0)
+            # os._exit(0)
 
     # Debug print statement
     def debug(*args):

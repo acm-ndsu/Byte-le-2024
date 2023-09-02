@@ -4,6 +4,10 @@ from game.config import ALLOWED_MODULES
 
 
 def verify_code(filename, already_string=False):
+    """
+    This file is used to verify a client's code. It helps to prevent certain attempts at purposefully interfering with the
+    code and competition.
+    """
     contents = None
 
     if already_string:

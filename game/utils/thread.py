@@ -3,6 +3,13 @@ import traceback
 
 
 class Thread(threading.Thread):
+    """
+    `Thread Class Notes:`
+        Threads are how the engine communicates with user clients. These Threads are built to catch errors. If an error
+        is caught, it will be logged, but the program will continue to run.
+
+        If multithreading is needed for whatever reason, this class would be used for that.
+    """
     def __init__(self, func, args):
         threading.Thread.__init__(self)
         self.args = args
@@ -17,6 +24,19 @@ class Thread(threading.Thread):
 
 
 class CommunicationThread(Thread):
+    """
+    `Communication Thread Class Notes:`
+
+        Communication Threads are bulkier than normal Threads. It also has error catching functionality, but tends
+        to be used for single-use, single-variable communication.
+
+        For example, if a client tries to use malicious code in any methods, a Communication Thread is used to check
+        any given parameters and throw an error if the type needed does not match what is given.
+
+        Communication Threads use a nested class to make the return value of the Communication Thread private. It helps
+        to keep things secure. This is now achieved through getter and setter decorators. Since the code here was
+        written long ago, the structure is different. For future note, use getter and setter decorators as needed.
+    """
     def __init__(self, func, args=None, variable_type=None):
         super().__init__(func, args)
         self.type = variable_type

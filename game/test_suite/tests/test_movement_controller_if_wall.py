@@ -13,6 +13,12 @@ from game.common.game_object import GameObject
 
 
 class TestMovementControllerIfWall(unittest.TestCase):
+    """
+    `Test Movement Controller with Stations Notes:`
+
+        This class tests the different methods in the Movement Controller and that the Avatar can't pass Wall objects.
+    """
+
     def setUp(self) -> None:
         self.movement_controller = MovementController()
         self.avatar = Avatar(Vector(2, 2), 1)

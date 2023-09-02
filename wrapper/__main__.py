@@ -4,6 +4,7 @@ from game.engine import Engine
 from game.utils.generate_game import generate
 import game.config
 import argparse
+from visualizer.main import ByteVisualiser
 
 if __name__ == '__main__':
     # Setup Primary Parser
@@ -27,6 +28,14 @@ if __name__ == '__main__':
     
     run_subpar.add_argument('-quiet', '-q', action='store_true', default=False,
                             dest='q_bool', help='Runs your AI... quietly :)')
+
+
+    # Visualizer Subparser and optionals
+    vis_subpar = spar.add_parser('visualize', aliases=['v'],
+                                 help='Runs the visualizer! "v -h" shows more options')
+
+    all_subpar = spar.add_parser('gen,run,vis', aliases=['grv'],
+                                 help='Generate, Run, Visualize! "grv -h" shows more options')
 
     # Parse Command Line
     par_args = par.parse_args()
@@ -57,6 +66,17 @@ if __name__ == '__main__':
 
         engine = Engine(quiet)
         engine.loop()
+
+    elif action in ['visualize', 'v']:
+        visualiser = ByteVisualiser()
+        visualiser.loop()
+
+    elif action in ['gen,run,vis', 'grv']:
+        generate()
+        engine = Engine(False)
+        engine.loop()
+        visualiser = ByteVisualiser()
+        visualiser.loop()
 
     # Print help if no arguments are passed
     if len(sys.argv) == 1:

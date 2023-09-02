@@ -8,88 +8,140 @@ from game.utils.vector import Vector
 
 class Avatar(GameObject):
     """
-    Notes for the inventory:
+    `Avatar Inventory Notes:`
 
-    The avatar's inventory is a list of items. Each item has a quantity and a stack_size (the max amount of an
-    item that can be held in a stack. Think of the Minecraft inventory).
+        The avatar's inventory is a list of items. Each item has a quantity and a stack_size (the max amount of an
+        item that can be held in a stack. Think of the Minecraft inventory).
 
-    This upcoming example is just to facilitate understanding the concept. The Dispensing Station concept that will
-    be mentioned is completely optional to implement if you desire. The Dispensing Station is used to help with the
-    explanation.
+        This upcoming example is just to facilitate understanding the concept. The Dispensing Station concept that will
+        be mentioned is completely optional to implement if you desire. The Dispensing Station is used to help with the
+        explanation.
 
-    ----
+        ----
 
-    Items:
-        Every Item has a quantity and a stack_size. The quantity is how much of the Item the player *currently* has.
-        The stack_size is the max of that Item that can be in a stack. For example, if the quantity is 5, and the
-        stack_size is 5 (5/5), the item cannot be added to that stack
+        **Items:**
+            Every Item has a quantity and a stack_size. The quantity is how much of the Item the player *currently* has.
+            The stack_size is the max of that Item that can be in a stack. For example, if the quantity is 5, and the
+            stack_size is 5 (5/5), the item cannot be added to that stack
 
-    Picking up items:
-    Example 1:
-        When you pick up an item (which will now be referred to as picked_up_item), picked_up_item has a given
-        quantity. In this case, let's say the quantity of picked_up_item is 2.
+        -----
 
-        Imagine you already have this item in your inventory (which will now be referred to as inventory_item),
-        and inventory_item has a quantity of 1 and a stack_size of 10 (think of this as a fraction: 1/10).
+        **Picking up items:**
 
-        When you pick up picked_up_item, inventory_item will be checked.
-        If picked_up_item's quantity + inventory_item < stack_size, it'll be added without issue.
-        Remember, for this example: picked_up_item quantity is 2, and inventory_item quantity is 1, and stack_size
-        is 10.
-            Inventory_item quantity before picking up: 1/10
-                2 + 1 < 10 --> True
-            Inventory_item quantity after picking up: 3/10
+            Example 1:
+                When you pick up an item (which will now be referred to as picked_up_item), picked_up_item has a given
+                quantity. In this case, let's say the quantity of picked_up_item is 2.
 
-    ----
+                Imagine you already have this item in your inventory (which will now be referred to as inventory_item),
+                and inventory_item has a quantity of 1 and a stack_size of 10 (think of this as a fraction: 1/10).
 
-    Example 2:
-        For the next two examples, the total inventory size will be considered.
+                When you pick up picked_up_item, inventory_item will be checked.
+                If picked_up_item's quantity + inventory_item < stack_size, it'll be added without issue.
+                Remember, for this example: picked_up_item quantity is 2, and inventory_item quantity is 1, and
+                stack_size is 10.
 
-        Let's say inventory_item has quantity 4 and a stack_size of 5. Now say that picked_up_item has quantity 3.
-        Recall: if picked_up_item's quantity + inventory_item < stack_size, it will be added without issue
-            Inventory_item quantity before picking up: 4/5
-                3 + 4 < 5 --> False
+                    Inventory_item quantity before picking up: 1/10
+                    ::
+                        2 + 1 < 10 --> True
+                    Inventory_item quantity after picking up: 3/10
 
-        What do we do in this situation? If you want to add picked_up_item to inventory_item and there is an
-        overflow of quantity, that is handled for you.
+            ----
 
-        Let's say that your inventory size (which will now be referred to as max_inventory_size) is 5. You already
-        have inventory_item in there that has a quantity of 4 and a stack_size of 5. An image of the inventory is
-        below. 'None' is used to help show the max_inventory_size. Inventory_item quantity and stack_size will be
-        listed in parentheses as a fraction.
-            Inventory:
-            [inventory_item (4/5), None, None, None, None]
+            Example 2:
+                For the next two examples, the total inventory size will be considered.
 
-        Now we will add picked_up_item and its quantity of 3:
-            Inventory before:
-            [inventory_item (4/5), None, None, None, None]
+                Let's say inventory_item has quantity 4 and a stack_size of 5. Now say that picked_up_item has
+                quantity 3.
 
-            3 + 4 < 5 --> False
+                Recall: if picked_up_item's quantity + inventory_item < stack_size, it will be added without issue
+
+                    Inventory_item quantity before picking up: 4/5
+                    ::
+                        3 + 4 < 5 --> False
+
+                What do we do in this situation? If you want to add picked_up_item to inventory_item and there is an
+                overflow of quantity, that is handled for you.
+
+                Let's say that your inventory size (which will now be referred to as max_inventory_size) is 5. You
+                already have inventory_item in there that has a quantity of 4 and a stack_size of 5. An image of the
+                inventory is below. 'None' is used to help show the max_inventory_size. Inventory_item quantity and
+                stack_size will be listed in parentheses as a fraction.
+                ::
+                    Inventory:
+                    [
+                        inventory_item (4/5),
+                        None,
+                        None,
+                        None,
+                        None
+                    ]
+
+                Now we will add picked_up_item and its quantity of 3:
+                ::
+                    Inventory before:
+                    [
+                        inventory_item (4/5),
+                        None,
+                        None,
+                        None,
+                        None
+                    ]
+
+                    3 + 4 < 5 --> False
+
                 inventory_item (4/5) will now be inventory_item (5/5)
-                picked_up_item now has a quantity of 2
+                picked_up_item now has a quantity of 2 instead of 3
                 Since we have a surplus, we will append the same item with a quantity of 2 in the inventory.
+                ::
+                    The result is:
+                    [
+                        inventory_item (5/5),
+                        inventory_item (2/5),
+                        None,
+                        None,
+                        None
+                    ]
 
-            The result is:
-            [inventory_item (5/5), inventory_item (2/5), None, None, None]
+            ----
 
-    ----
-    Example 3:
+            Example 3:
+            For this last example, assume your inventory looks like this:
+            ::
+                [
+                    inventory_item (5/5),
+                    inventory_item (5/5),
+                    inventory_item (5/5),
+                    inventory_item (5/5),
+                    inventory_item (4/5)
+                ]
 
-        For this last example, assume your inventory looks like this:
-        [inventory_item (5/5), inventory_item (5/5) inventory_item (5/5) inventory_item (5/5), inventory_item (4/5)]
+            You can only fit one more inventory_item into the last stack before the inventory is full.
+            Let's say that picked_up_item has quantity of 3 again.
+            ::
+                Inventory before:
+                [
+                    inventory_item (5/5),
+                    inventory_item (5/5),
+                    inventory_item (5/5),
+                    inventory_item (5/5),
+                    inventory_item (4/5)
+                ]
 
-        You can only fit one more inventory_item into the last stack before the inventory is full.
-        Let's say that picked_up_item has quantity of 3 again.
+                    3 + 4 < 5 --> False
 
-        Inventory before:
-        [inventory_item (5/5), inventory_item (5/5) inventory_item (5/5) inventory_item (5/5), inventory_item (4/5)]
-            3 + 4 < 5 --> False
             inventory_item (4/5) will now be inventory_item (5/5)
             picked_up_item now has a quantity of 2
             However, despite the surplus, we cannot add it into our inventory, so the remaining quantity of
             picked_up_item is left where it was first found.
-        Inventory after:
-        [inventory_item (5/5), inventory_item (5/5) inventory_item (5/5) inventory_item (5/5), inventory_item (5/5)]
+            ::
+                Inventory after:
+                [
+                    inventory_item (5/5),
+                    inventory_item (5/5),
+                    inventory_item (5/5),
+                    inventory_item (5/5),
+                    inventory_item (5/5)
+                ]
     """
 
     def __init__(self, position: Vector | None = None, max_inventory_size: int = 10):
@@ -173,13 +225,13 @@ class Avatar(GameObject):
     def __clean_inventory(self) -> None:
         """
         This method is used to manage the inventory. Whenever an item has a quantity of 0, it will set that item object
-            to None since it doesn't exist in the inventory anymore. Otherwise, if there are multiple instances of an
-            item in the inventory, and they can be consolidated, this method does that.
+        to None since it doesn't exist in the inventory anymore. Otherwise, if there are multiple instances of an
+        item in the inventory, and they can be consolidated, this method does that.
 
         Example: In inventory[0], there is a stack of gold with a quantity and stack_size of 5. In inventory[1], there
-            is another stack of gold with quantity of 3, stack size of 5. If you want to take away 4 gold, inventory[0]
-            will have quantity 1, and inventory[1] will have quantity 3. Then, when clean_inventory is called, it will
-            consolidate the two. This mean that inventory[0] will have quantity 4 and inventory[1] will be set to None.
+        is another stack of gold with quantity of 3, stack size of 5. If you want to take away 4 gold, inventory[0]
+        will have quantity 1, and inventory[1] will have quantity 3. Then, when clean_inventory is called, it will
+        consolidate the two. This mean that inventory[0] will have quantity 4 and inventory[1] will be set to None.
         :return: None
         """
 
@@ -196,18 +248,12 @@ class Avatar(GameObject):
         """
         Call this method when a station is taking the held item from the avatar.
 
-        ----
-
         This method can be modified more for different scenarios where the held item would be dropped
-            (e.g., you make a game where being attacked forces you to drop your held item).
-
-        ----
+        (e.g., you make a game where being attacked forces you to drop your held item).
 
         If you want the held item to go somewhere specifically and not become None, that can be changed too.
 
-        ----
-
-        Make sure to keep clean inventory in this method.
+        Make sure to keep clean_inventory() in this method.
         """
         # The held item will be taken from the avatar will be replaced with None in the inventory
         held_item = self.held_item
@@ -220,20 +266,14 @@ class Avatar(GameObject):
     def take(self, item: Item | None) -> Item | None:
         """
         To use this method, pass in an item object. Whatever this item's quantity is will be the amount subtracted from
-            the avatar's inventory. For example, if the item in the inventory is has a quantity of 5 and this method is
-            called with the parameter having a quantity of 2, the item in the inventory will have a quantity of 3.
-
-        ----
+        the avatar's inventory. For example, if the item in the inventory is has a quantity of 5 and this method is
+        called with the parameter having a quantity of 2, the item in the inventory will have a quantity of 3.
 
         Furthermore, when this method is called and the potential item is taken away, the clean_inventory method is
-            called. It will consolidate all similar items together to ensure that the inventory is clean.
-
-        ----
+        called. It will consolidate all similar items together to ensure that the inventory is clean.
 
         Reference test_avatar_inventory.py and the clean_inventory method for further documentation on this method and
-            how the inventory is managed.
-
-        ----
+        how the inventory is managed.
 
         :param item:
         :return: Item or None

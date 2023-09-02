@@ -10,8 +10,16 @@ from typing import Self
 # create station object that contains occupied_by
 class OccupiableStation(Occupiable, Station):
     """
-    Occupiable Stations are stations that can have things in them, including the player. These can be created to have
-    items the player can take, or it can be occupied by any other GameObject.
+    `OccupiableStation Class Notes:`
+
+        Occupiable Station objects inherit from both the Occupiable and Station classes. This allows for other objects to
+        be "on top" of the Occupiable Station. For example, an Avatar object can be on top of this object. Since Stations
+        can contain items, items can be stored in this object too.
+
+        Any GameObject or Item can be in an Occupiable Station.
+
+        Occupiable Station Example is a small file that shows an example of how this class can be
+        used. The example class can be deleted or expanded upon if necessary.
     """
     def __init__(self, held_item: Item | None = None, occupied_by: GameObject | None = None):
         super().__init__(occupied_by=occupied_by, held_item=held_item)

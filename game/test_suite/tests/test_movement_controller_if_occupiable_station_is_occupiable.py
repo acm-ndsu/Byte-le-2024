@@ -12,6 +12,13 @@ from game.common.stations.station import Station
 
 
 class TestMovementControllerIfOccupiableStationIsOccupiable(unittest.TestCase):
+    """
+    `Test Movement Controller if Occupiable Stations are Occupiable Notes:`
+
+        This class tests the different methods in the Movement Controller class and the Avatar moving onto Occupiable
+        Stations so that the Avatar can occupy it.
+    """
+
     def setUp(self) -> None:
         self.movement_controller = MovementController()
 
@@ -49,5 +56,3 @@ def test_move_left(self):
 def test_move_right(self):
     self.movement_controller.handle_actions(ActionType.MOVE_RIGHT, self.client, self.game_board)
     self.assertEqual((str(self.client.avatar.position)), str(Vector(2, 1)))
-
-

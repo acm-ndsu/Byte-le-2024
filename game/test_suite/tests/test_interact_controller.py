@@ -19,7 +19,9 @@ from game.common.enums import ObjectType
 
 class TestInteractController(unittest.TestCase):
     """
-    This class is to test the InteractController class and its methods.
+    `Test Avatar Notes:`
+
+        This class tests the different methods in the InteractController class.
     """
 
     def setUp(self) -> None:

@@ -7,7 +7,9 @@ from game.common.enums import ObjectType
 
 class TestItem(unittest.TestCase):
     """
-    This class is to test the Item class and its methods.
+    `Test Item Notes:`
+
+        This class tests the different methods in the Item class.
     """
 
     def setUp(self) -> None:

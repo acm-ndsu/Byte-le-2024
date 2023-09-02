@@ -7,8 +7,16 @@ import logging
 
 class Controller:
     """
-    This class is a super class for every controller type that's necessary. Refer to the other controller files for
-    a more detailed description on how they work.
+    `Controller Class Notes:`
+
+        This is a super class for every controller type that is necessary for inheritance. Think of it as the GameObject
+        class for Controllers.
+
+        The handle_actions method is important and will specify what each controller does when interacting with the
+        Player object's avatar.
+
+        Refer to the other controller files for a more detailed description on how they work.
+        If more controllers are ever needed, add them to facilitate the flow of the game.
     """
     def __init__(self):
         self.debug_level = DebugLevel.CONTROLLER

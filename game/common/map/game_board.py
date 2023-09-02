@@ -13,14 +13,16 @@ from game.utils.vector import Vector
 
 class GameBoard(GameObject):
     """
-    Notes for creating the GameBoard:
+    `GameBoard Class Notes:`
 
-    map_size:
-        map_size is a Vector object, allowing you to specify the size of the x, y plane of the game board.
+    Map Size:
+    ---------
+        map_size is a Vector object, allowing you to specify the size of the (x, y) plane of the game board.
         For example, a Vector object with an 'x' of 5 and a 'y' of 7 will create a board 5 tiles wide and
-        7 tiles long
+        7 tiles long.
 
         Example:
+        ::
             _ _ _ _ _  y = 0
             |       |
             |       |
@@ -30,46 +32,52 @@ class GameBoard(GameObject):
             |       |
             _ _ _ _ _  y = 6
 
-    -----------------------------------------------------------------------------------------------------------
+    -----
 
-    locations:
-        This is the bulkiest part of the generation. The locations field is a dictionary with a key
-        being a tuple of Vectors, and the value being a list of GameObjects (the key is a tuple to prevent issues
-        with the generation system). This is used to assign the given GameObjects the given coordinates
-        via the Vectors. This is done in two ways:
+    Locations:
+    ----------
+        This is the bulkiest part of the generation.
 
-            Statically:
-                If you want a GameObject to be at a specific coordinate, ensure that the key-value pair is
-                ONE Vector and ONE GameObject.
-                An example of this would be the following:
-                    locations = {(vector_2_4) : [station_0]}
+        The locations field is a dictionary with a key of a tuple of Vectors, and the value being a list of
+        GameObjects (the key **must** be a tuple instead of a list because Python requires dictionary keys to be
+        immutable).
 
-                In this example, vector_2_4 contains the coordinates (2, 4). (Note that this naming convention
-                isn't necessary, but was used to help with the concept). Furthermore, station_0 is the
-                GameObject that will be at coordinates (2, 4).
+        This is used to assign the given GameObjects the given coordinates via the Vectors. This is done in two ways:
 
-            Dynamically:
-                If you want to assign multiple GameObjects to different coordinates, use a key-value
-                pair of any length. NOTE: The length of the tuple and list MUST be equal, otherwise it will not work.
-                In this case, the assignments will be random. An example of this would be the following:
-                    locations =
-                        {
-                            (vector_0_0, vector_1_1, vector_2_2) : [station_0, station_1, station_2]
-                        }
+        Statically:
+            If you want a GameObject to be at a specific coordinate, ensure that the key-value pair is
+            *ONE* Vector and *ONE* GameObject.
+            An example of this would be the following:
+            ::
+                locations = { (vector_2_4) : [station_0] }
 
-                (Note that the tuple and list both have a length of 3).
-                When this is passed in, the three different vectors containing coordinates (0, 0), (1, 1), or
-                (2, 2) will be randomly assigned station_0, station_1, or station_2.
+            In this example, vector_2_4 contains the coordinates (2, 4). (Note that this naming convention
+            isn't necessary, but was used to help with the concept). Furthermore, station_0 is the
+            GameObject that will be at coordinates (2, 4).
 
-                Therefore:
-                If station_0 is randomly assigned at (1, 1),
-                station_1 could be at (2, 2),
-                then station_2 will be at (0, 0).
-                This is just one case of what could happen.
+        Dynamically:
+            If you want to assign multiple GameObjects to different coordinates, use a key-value
+            pair of any length.
+
+            **NOTE**: The length of the tuple and list *MUST* be equal, otherwise it will not
+            work. In this case, the assignments will be random. An example of this would be the following:
+            ::
+                locations =
+                {
+                    (vector_0_0, vector_1_1, vector_2_2) : [station_0, station_1, station_2]
+                }
+
+            (Note that the tuple and list both have a length of 3).
+
+            When this is passed in, the three different vectors containing coordinates (0, 0), (1, 1), or
+            (2, 2) will be randomly assigned station_0, station_1, or station_2.
+
+            If station_0 is randomly assigned at (1, 1), station_1 could be at (2, 2), then station_2 will be at (0, 0).
+            This is just one case of what could happen.
 
         Lastly, another example will be shown to explain that you can combine both static and
         dynamic assignments in the same dictionary:
-
+        ::
             locations =
                 {
                     (vector_0_0) : [station_0],
@@ -81,24 +89,27 @@ class GameBoard(GameObject):
         station_1 and vector_0_1. However, for vector_1_1, vector_1_2, and vector_1_3, they will randomly
         be assigned station_2, station_3, and station_4.
 
-    -----------------------------------------------------------------------------------------------------------
+    -----
 
-    walled:
+    Walled:
+    -------
         This is simply a bool value that will create a wall barrier on the boundary of the game_board. If
         walled is True, the wall will be created for you.
 
         For example, let the dimensions of the map be (5, 7). There will be wall Objects horizontally across
-        x = 0 and x = 4. There will also be wall Objects vertically at y = 0 and y = 6.
+        x = 0 and x = 4. There will also be wall Objects vertically at y = 0 and y = 6
 
         Below is a visual example of this, with 'x' being where the wall Objects are.
 
-        x x x x x   y = 0
-        x       x
-        x       x
-        x       x
-        x       x
-        x       x
-        x x x x x   y = 6
+        Example:
+        ::
+            x x x x x   y = 0
+            x       x
+            x       x
+            x       x
+            x       x
+            x       x
+            x x x x x   y = 6
     """
 
     def __init__(self, seed: int | None = None, map_size: Vector = Vector(),

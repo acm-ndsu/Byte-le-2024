@@ -14,7 +14,12 @@ from game.common.map.game_board import GameBoard
 
 class TestGameBoard(unittest.TestCase):
     """
-    This class is to test the GameBoard class and its methods with the map being generated.
+    `Test Gameboard Notes:`
+
+        This class tests the different methods in the Gameboard class. This file is worthwhile to look at to understand
+        the GamebBoard class better if there is still confusion on it.
+
+        *This class tests the Gameboard specifically when the map is generated.*
     """
 
     def setUp(self) -> None:
