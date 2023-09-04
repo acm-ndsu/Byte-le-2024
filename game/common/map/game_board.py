@@ -15,21 +15,20 @@ from game.quarry_rush.traps.trap import Trap
 
 
 class TrapQueue(GameObject):
-    def __init__(self, inventory_manager: InventoryManager):  # needed Inv. manager passed in from GameBoard
+    def __init__(self):
         super().__init__()
         self.__traps: list[Trap] = []
         self.__max_traps = 10
-        self.__inventory_manager: InventoryManager = inventory_manager
 
     def add_trap(self, trap: Trap):
         if len(self.__traps) >= self.__max_traps:
             self.__traps = self.__traps[1:]
         self.__traps += [trap]
-
-    def detonate(self, inventory_manager: InventoryManager):
+        
+    def detonate(self):
         for i in range(0, len(self.__traps))[::-1]:
-            if self.__traps[i].detonate(inventory_manager):
-                self.__traps = self.__traps[:i] + self.__traps[i + 1:]
+            if self.__traps[i].detonate():
+                self.__traps = self.__traps[:i] + self.__traps[i+1:]
 
     def size(self) -> int:
         return len(self.__traps)
@@ -375,3 +374,8 @@ class GameBoard(GameObject):
         self.turing_trap_queue: TrapQueue = TrapQueue(self.inventory_manager).from_json(data['turing_trap_queue'])
         self.dynamite_list = DynamiteList(self.inventory_manager).from_json(data['dynamite_list'])
         return self
+
+    def trap_detonation_control(self):
+        self.church_trap_queue.detonate()
+        self.turing_trap_queue.detonate()
+        
