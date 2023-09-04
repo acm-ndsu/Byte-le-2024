@@ -10,7 +10,6 @@ from game.utils.vector import Vector
 from game.common.game_object import GameObject
 from game.common.map.game_board import GameBoard, TrapQueue
 from game.quarry_rush.traps.trap import Landmine, EMP
-from game.quarry_rush.inventory_manager import InventoryManager
 from game.common.enums import Company
 from game.common.map.game_board import GameBoard, DynamiteList
 from game.quarry_rush.dynamite import Dynamite
@@ -142,7 +141,7 @@ class TestGameBoard(unittest.TestCase):
         self.assertEqual(self.game_board.dynamite_list.size(), 0)
 
     def test_dynamite_list_json(self):
-        for x in range(1):  # add 2 dynamite to the dynamite list
+        for x in range(2):  # add 2 dynamite to the dynamite list
             self.game_board.dynamite_list.add_dynamite(Dynamite(self.game_board.inventory_manager))
 
         data: dict = self.game_board.dynamite_list.to_json()
@@ -150,3 +149,8 @@ class TestGameBoard(unittest.TestCase):
 
         # check the size is correct
         self.assertEqual(dynamite_list.size(), self.game_board.dynamite_list.size())
+
+        for x in range(self.game_board.dynamite_list.size()):
+            dyn_1: Dynamite = self.game_board.dynamite_list.get_from_list(x)
+            dyn_2: Dynamite = dynamite_list.get_from_list(x)
+            self.assertEqual(dyn_1.to_json(), dyn_2.to_json())

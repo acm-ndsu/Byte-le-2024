@@ -66,6 +66,9 @@ class DynamiteList(GameObject):
     def size(self) -> int:
         return len(self.__dynamite_list)
 
+    def get_from_list(self, index: int) -> Dynamite:
+        return self.__dynamite_list[index]
+
     def to_json(self) -> dict:
         data: dict = super().to_json()
         data['dynamite_items'] = list(map(lambda dynamite: dynamite.to_json(), self.__dynamite_list))
@@ -183,8 +186,8 @@ class GameBoard(GameObject):
         self.locations: dict | None = locations
         self.walled: bool = walled
         self.inventory_manager: InventoryManager = InventoryManager()
-        self.church_trap_queue = TrapQueue(self.inventory_manager)
-        self.turing_trap_queue = TrapQueue(self.inventory_manager)
+        self.church_trap_queue = TrapQueue()
+        self.turing_trap_queue = TrapQueue()
         self.dynamite_list: DynamiteList = DynamiteList(self.inventory_manager)
 
     @property
@@ -370,8 +373,8 @@ class GameBoard(GameObject):
         self.game_map: list[list[Tile]] = [
             [Tile().from_json(tile) for tile in y] for y in temp] if temp is not None else None
         self.inventory_manager: InventoryManager = InventoryManager().from_json(data['inventory_manager'])
-        self.church_trap_queue: TrapQueue = TrapQueue(self.inventory_manager).from_json(data['church_trap_queue'])
-        self.turing_trap_queue: TrapQueue = TrapQueue(self.inventory_manager).from_json(data['turing_trap_queue'])
+        self.church_trap_queue: TrapQueue = TrapQueue().from_json(data['church_trap_queue'])
+        self.turing_trap_queue: TrapQueue = TrapQueue().from_json(data['turing_trap_queue'])
         self.dynamite_list = DynamiteList(self.inventory_manager).from_json(data['dynamite_list'])
         return self
 
