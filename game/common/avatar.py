@@ -152,7 +152,6 @@ class Avatar(GameObject):
         self.__tech_tree: TechTree = self.__create_tech_tree()  # the tech tree cannot be set; made private for security
         self.__company: Company = company
         self.dynamite_active_ability: DynamiteActiveAbility = DynamiteActiveAbility()
-        self.place_trap: PlaceTrap = PlaceTrap()
         self.placing_trap: bool = False
         self.placing_dynamite: bool = False
 
@@ -273,6 +272,7 @@ class Avatar(GameObject):
         # otherwise, use the Dynamite ability
         else:
             pass  # will be implemented later as development progresses
+            # call placing_dynamite() to place dynamite
 
     def __unlock_landmines(self) -> None:
         # If the player hasn't unlocked Landmines, set the abilities value to true and research it
