@@ -1,6 +1,5 @@
 import unittest
-from game.quarry_rush.active_ability import ActiveAbility
-from game.common.avatar import Avatar
+from game.quarry_rush.ability.active_ability import ActiveAbility
 
 
 class TestActiveAbility(unittest.TestCase):

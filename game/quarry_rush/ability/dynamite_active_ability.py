@@ -1,6 +1,5 @@
 from game.common.enums import ObjectType
-from game.quarry_rush.active_ability import ActiveAbility
-from game.utils.vector import Vector
+from game.quarry_rush.ability.active_ability import ActiveAbility
 from typing import Self
 
 
