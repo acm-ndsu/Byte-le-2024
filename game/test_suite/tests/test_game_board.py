@@ -9,7 +9,7 @@ from game.common.map.wall import Wall
 from game.utils.vector import Vector
 from game.common.game_object import GameObject
 from game.common.map.game_board import GameBoard, TrapQueue
-from game.quarry_rush.traps.trap import Landmine
+from game.quarry_rush.traps.trap import Landmine, EMP
 from game.quarry_rush.inventory_manager import InventoryManager
 from game.common.enums import Company
 
@@ -102,9 +102,22 @@ class TestGameBoard(unittest.TestCase):
         
     def test_add_trap(self):
         trap_queue = TrapQueue()
+
         self.assertEqual(trap_queue.size(), 0)
         trap_queue.add_trap(Landmine(inventory_manager=InventoryManager(), owner_company=Company.CHURCH, target_company=Company.TURING, opponent_position=lambda : Vector(), position=Vector()))
         self.assertEqual(trap_queue.size(), 1)
         for i in range(0, 10):
             trap_queue.add_trap(Landmine(inventory_manager=InventoryManager(), owner_company=Company.CHURCH, target_company=Company.TURING, opponent_position=lambda : Vector(), position=Vector()))
         self.assertEqual(trap_queue.size(), 10)
+        
+    def test_trap_detonator_controller(self):
+        self.game_board.turing_trap_queue.add_trap(Landmine(inventory_manager=InventoryManager(), owner_company=Company.TURING, target_company=Company.CHURCH, opponent_position=lambda : Vector(), position=Vector()))
+        self.game_board.turing_trap_queue.add_trap(EMP(inventory_manager=InventoryManager(), owner_company=Company.TURING, target_company=Company.CHURCH, opponent_position=lambda : Vector(), position=Vector(4,7)))
+        self.game_board.church_trap_queue.add_trap(Landmine(inventory_manager=InventoryManager(), owner_company=Company.CHURCH, target_company=Company.TURING, opponent_position=lambda : Vector(5,5), position=Vector()))
+        self.assertEqual(self.game_board.turing_trap_queue.size(), 2)
+        self.assertEqual(self.game_board.church_trap_queue.size(), 1)
+        self.game_board.trap_detonation_control()
+        self.assertEqual(self.game_board.turing_trap_queue.size(), 1)
+        self.assertEqual(self.game_board.church_trap_queue.size(), 1)
+
+        
