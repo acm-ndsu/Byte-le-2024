@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
 
-from game.quarry_rush.avatar.player_functions import AvatarFunctions
+from game.quarry_rush.avatar.avatar_functions import AvatarFunctions
 from game.quarry_rush.tech.tech_tree import TechTree
 
 class TestTechTree(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestTechTree(unittest.TestCase):
         self.mock_unlock_landmines = Mock()
         self.mock_unlock_emps = Mock()
         self.mock_unlock_trap_detection = Mock()
-        self.player_functions = AvatarFunctions(increase_movement=self.mock_increase_movement,
+        self.avatar_functions = AvatarFunctions(increase_movement=self.mock_increase_movement,
                                                 increase_mining=self.mock_increase_mining,
                                                 unlock_movement_overdrive=self.mock_unlock_movement_overdrive,
                                                 unlock_mining_overdrive=self.mock_unlock_mining_overdrive,
@@ -23,7 +23,7 @@ class TestTechTree(unittest.TestCase):
                                                 unlock_emps=self.mock_unlock_emps,
                                                 unlock_trap_detection=self.mock_unlock_trap_detection)
         
-        self.tech_tree = TechTree(self.player_functions)
+        self.tech_tree = TechTree(self.avatar_functions)
         
     def test_tech_names(self):
         names = self.tech_tree.tech_names()
@@ -104,4 +104,4 @@ class TestTechTree(unittest.TestCase):
         result = self.tech_tree.to_json()
         for tech in self.tech_tree.tech_names():
             self.assertEqual(result[tech], self.tech_tree.is_researched(tech))
-        self.assertEqual(self.player_functions, result['player_functions'])
+        self.assertEqual(self.avatar_functions, result['avatar_functions'])
