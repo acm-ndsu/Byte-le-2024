@@ -429,4 +429,6 @@ class GameBoard(GameObject):
     def trap_detonation_control(self):
         self.church_trap_queue.detonate(self.inventory_manager)
         self.turing_trap_queue.detonate(self.inventory_manager)
-        
+
+    def dynamite_detonation_control(self):
+        self.dynamite_list.detonate(self.inventory_manager)
