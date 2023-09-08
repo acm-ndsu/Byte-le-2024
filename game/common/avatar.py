@@ -123,54 +123,23 @@ class Avatar(GameObject):
         self.drop_rate += amt
 
     def __unlock_overdrive_movement(self) -> None:
-        # If the player hasn't unlocked Overdrive Movement, set the abilities value to true and research it
-        if not self.__abilities['Overdrive Movement']:
-            self.__abilities['Overdrive Movement'] = True
-        # otherwise, use the Overdrive Movement ability
-        else:
-            pass  # will be implemented later as development progresses
+        self.__abilities['Overdrive Movement'] = True
 
     def __unlock_overdrive_mining(self) -> None:
-        # If the player hasn't unlocked Overdrive Mining, set the abilities value to true and research it
-        if not self.__abilities['Overdrive Mining']:
-            self.__abilities['Overdrive Mining'] = True
-        # otherwise, use the Overdrive Mining ability
-        else:
-            pass  # will be implemented later as development progresses
+        self.__abilities['Overdrive Mining'] = True
 
     def __unlock_dynamite(self) -> None:
-        # If the player hasn't unlocked Dynamite, set the abilities value to true and research it
-        if not self.__abilities['Dynamite']:
-            self.__abilities['Dynamite'] = True
-        # otherwise, use the Dynamite ability
-        else:
-            pass  # will be implemented later as development progresses
-            # call placing_dynamite() to place dynamite
+        self.__abilities['Dynamite'] = True
 
     def __unlock_landmines(self) -> None:
-        # If the player hasn't unlocked Landmines, set the abilities value to true and research it
-        if not self.__abilities['Landmines']:
-            self.__abilities['Landmines'] = True
-        # otherwise, use the Landmine ability
-        else:
-            pass  # will be implemented later as development progresses
+        self.__abilities['Landmines'] = True
 
     def __unlock_emps(self) -> None:
-        # If the player hasn't unlocked EMPs or Trap Detection, set the abilities value to true and research it
-        if not self.__abilities['EMPs'] and not self.__abilities['Trap Detection']:
-            self.__abilities['EMPs'] = True
-            self.__abilities['Landmines'] = False  # Landmines will be locked again since player upgraded from them
-        # otherwise, use the EMP ability
-        else:
-            pass  # will be implemented later as development progresses
+        self.__abilities['EMPs'] = True
+        self.__abilities['Landmines'] = False
 
     def __unlock_trap_detection(self) -> None:
-        # If the player hasn't unlocked Trap Detection or EMPs, set the abilities value to true and research it
-        if not self.__abilities['Trap Detection'] and not self.__abilities['EMPs']:
-            self.__abilities['Trap Detection'] = True
-        # otherwise, use the Trap Detection ability
-        else:
-            pass  # will be implemented later as development progresses
+        self.__abilities['Trap Detection'] = True
 
     # Helper method to create a dictionary that stores bool values for which abilities the player unlocked
     def __create_abilities_dict(self) -> dict:
