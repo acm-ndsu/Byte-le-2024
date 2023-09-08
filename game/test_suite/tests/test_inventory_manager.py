@@ -2,8 +2,7 @@ import unittest
 
 from game.common.enums import Company
 from game.common.items.item import Item
-from game.quarry_rush.inventory_manager import InventoryManager
-from game.utils.vector import Vector
+from game.quarry_rush.avatar.inventory_manager import InventoryManager
 
 
 class TestInventoryManager(unittest.TestCase):

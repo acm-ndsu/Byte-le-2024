@@ -1,5 +1,5 @@
 import unittest
-from game.quarry_rush.dynamite_active_ability import DynamiteActiveAbility
+from game.quarry_rush.ability.dynamite_active_ability import DynamiteActiveAbility
 from game.utils.vector import Vector
 
 

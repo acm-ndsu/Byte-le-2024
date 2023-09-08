@@ -1,5 +1,5 @@
 import unittest
-from game.quarry_rush.place_trap import PlaceTrap
+from game.quarry_rush.ability.place_trap import PlaceTrap
 from game.common.avatar import Avatar
 
 

@@ -1,9 +1,9 @@
 import unittest
 
-from game.quarry_rush.traps.trap import *
+from game.quarry_rush.entity.placeable.trap import *
 from game.common.enums import Company
 from game.utils.vector import Vector
-from game.quarry_rush.inventory_manager import InventoryManager
+from game.quarry_rush.avatar.inventory_manager import InventoryManager
 
 
 class TestTrap(unittest.TestCase):

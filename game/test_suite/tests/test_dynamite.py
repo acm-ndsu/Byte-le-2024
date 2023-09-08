@@ -1,5 +1,5 @@
 import unittest
-from game.quarry_rush.dynamite import Dynamite
+from game.quarry_rush.entity.placeable.dynamite import Dynamite
 from game.utils.vector import Vector
 
 

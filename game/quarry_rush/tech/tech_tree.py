@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import Callable, TypeVar, Generic, Self
-from game.quarry_rush.tech import Tech, techs, TechInfo
-from game.quarry_rush.player_functions import PlayerFunctions
+from game.quarry_rush.tech.tech import Tech, techs, TechInfo
+from game.quarry_rush.avatar.avatar_functions import AvatarFunctions
 from functools import reduce
 from game.common.game_object import GameObject
 
@@ -23,10 +23,10 @@ class TechTree(GameObject):
 
     [Note]: This class does not handle cost validation or taking research points away from the player
     """
-    def __init__(self, player_functions: PlayerFunctions):
+    def __init__(self, avatar_functions: AvatarFunctions):
         super().__init__()
-        self.player_functions = player_functions
-        self.tree = self.build_tree(player_functions)
+        self.avatar_functions = avatar_functions
+        self.tree = self.build_tree(avatar_functions)
         self.research('Mining Robotics')
         
     def tech_names(self) -> list[str]:
@@ -92,11 +92,11 @@ class TechTree(GameObject):
             return (tree.value[0].point_value if tree.value[1] else 0) + sum(map(tree_score, tree.subs))
         return tree_score(self.tree)
         
-    def build_tree(self, player_functions: PlayerFunctions) -> Tree[tuple[Tech, bool]]:
+    def build_tree(self, avatar_functions: AvatarFunctions) -> Tree[tuple[Tech, bool]]:
         """
         This handles putting the techs together into the proper tree structure
         """
-        this_techs = techs(player_functions=player_functions)
+        this_techs = techs(avatar_functions=avatar_functions)
         
         tree: Tree[tuple[Tech, bool]] = Tree(
             value=this_techs['Mining Robotics'],
@@ -156,12 +156,12 @@ class TechTree(GameObject):
         result: dict = {}
         for tech in self.tech_names():
             result[tech] = self.is_researched(tech)
-        result['player_functions'] = self.player_functions
+        result['avatar_functions'] = self.avatar_functions
         return result
 
     def from_json(self, data: dict) -> Self:
-        self.player_functions = data['player_functions']
-        self.tree = self.build_tree(self.player_functions)
+        self.avatar_functions = data['avatar_functions']
+        self.tree = self.build_tree(self.avatar_functions)
         def set_researched(tree: Tree[tuple[Tech, bool]]) -> None:
             tree.value = (tree.value[0], data[tree.value[0].name])
             for sub in tree.subs:

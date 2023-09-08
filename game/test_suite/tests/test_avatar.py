@@ -2,7 +2,6 @@ import unittest
 
 from game.common.avatar import Avatar
 from game.common.items.item import Item
-from game.quarry_rush.tech_tree import TechTree
 from game.utils.vector import Vector
 
 
@@ -219,4 +218,4 @@ class TestAvatar(unittest.TestCase):
         other_tree: dict = self.avatar.get_tech_tree().to_json()
         for tech in self.avatar.get_tech_tree().tech_names():
             self.assertEqual(other_tree[tech], self.avatar.get_tech_tree().is_researched(tech))
-        self.assertEqual(self.avatar.get_tech_tree().player_functions, other_tree['player_functions'])
+        self.assertEqual(self.avatar.get_tech_tree().avatar_functions, other_tree['avatar_functions'])

@@ -1,10 +1,7 @@
 import unittest
 
 from game.common.avatar import Avatar
-from game.common.items.item import Item
-from game.common.items.ore import Ore
-from game.utils.vector import Vector
-from game.common.enums import ObjectType
+from game.quarry_rush.entity.ore import Ore
 
 
 class TestAncientTech(unittest.TestCase):
