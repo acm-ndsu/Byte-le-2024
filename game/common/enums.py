@@ -34,6 +34,8 @@ class ObjectType(Enum):
     ACTIVE_ABILITY = auto()
     INVENTORY_MANAGER = auto()
     DYNAMITE_ACTIVE_ABILITY = auto()
+    DYNAMITE = auto()
+
 
 
 class ActionType(Enum):

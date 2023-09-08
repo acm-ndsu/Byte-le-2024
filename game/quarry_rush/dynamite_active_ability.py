@@ -1,19 +1,18 @@
 from game.common.enums import ObjectType
 from game.quarry_rush.active_ability import ActiveAbility
-from game.common.avatar import Avatar
-from game.quarry_rush.dynamite_item import DynamiteItem
-from game.common.map.game_board import GameBoard
+from game.utils.vector import Vector
+from typing import Self
 
 
 class DynamiteActiveAbility(ActiveAbility):
 
-    def __init__(self, name: str, avatar: Avatar | None = None):
+    def __init__(self, name: str = ""):
         super().__init__()
         self.object_type = ObjectType.DYNAMITE_ACTIVE_ABILITY
         self.name = name
-        self.avatar: Avatar | None = avatar
         self.cooldown: int = 1
-        self.cooldown_tick: int = 0
+        self.fuse: int = 0
+        self.placing_dynamite: bool = False  # this is a boolean check to see if the avatar is placing down dynamite
 
 # name getter
     @property
@@ -26,18 +25,6 @@ class DynamiteActiveAbility(ActiveAbility):
         if name is None or not isinstance(name, str):
             raise ValueError(f'{self.__class__.__name__}.name must be a String')
         self.__name = name
-
-# avatar getter
-    @property
-    def avatar(self) -> Avatar:
-        return self.__avatar
-
-# avatar setter
-    @avatar.setter
-    def avatar(self, avatar: Avatar | None) -> None:
-        if avatar is not None and not isinstance(avatar, Avatar):
-            raise ValueError(f'{self.__class__.__name__}.avatar must be Avatar or None')
-        self.__avatar = avatar
 
 # The cooldown represents the amount of turns that the ability is unavailable.
 # cooldown getter
@@ -57,22 +44,47 @@ class DynamiteActiveAbility(ActiveAbility):
 # cooldown tick is the time it takes before the ability is able to be used again
 # cooldown tick getter
     @property
-    def cooldown_tick(self) -> int:
-        return self.__cooldown_tick
+    def fuse(self) -> int:
+        return self.__fuse
 
 # cooldown tick setter
-    @cooldown_tick.setter
-    def cooldown_tick(self, cooldown_tick: int) -> None:
-        if cooldown_tick is None or not isinstance(cooldown_tick, int):
-            raise ValueError(f'{self.__class__.__name__}.cooldown_tick must be an int')
-        if cooldown_tick < 0:
-            raise ValueError(f'{self.__class__.__name__}.cooldown_tick cannot be negative')
-        self.__cooldown_tick = cooldown_tick
+    @fuse.setter
+    def fuse(self, fuse: int) -> None:
+        if fuse is None or not isinstance(fuse, int):
+            raise ValueError(f'{self.__class__.__name__}.fuse must be an int')
+        if fuse < 0:
+            raise ValueError(f'{self.__class__.__name__}.fuse cannot be negative')
+        self.__fuse = fuse
 
-# place dynamite
-    def place_dynamite(self):
-        # creating a new item of dynamite
-        dynamite: DynamiteItem = DynamiteItem(position=self.avatar.position, avatar=self.avatar)
-        # wip
+# placing dynamite getter
+    @property
+    def placing_dynamite(self) -> bool:
+        return self.__placing_dynamite
 
+# placing dynamite setter
+    @placing_dynamite.setter
+    def placing_dynamite(self, placing_dynamite: bool):
+        if placing_dynamite is None or not isinstance(placing_dynamite, bool):
+            raise ValueError(f'{self.__class__.__name__}.placing_dynamite must be a bool.')
+        self.__placing_dynamite = placing_dynamite
+
+# to json
+    def to_json(self) -> dict:
+        data: dict = super().to_json()
+        data['object_type'] = self.object_type
+        data['name'] = self.name
+        data['cooldown'] = self.cooldown
+        data['fuse'] = self.fuse
+        data['placing_dynamite'] = self.placing_dynamite
+        return data
+
+# from json
+    def from_json(self, data: dict) -> Self:
+        super().from_json(data)
+        self.object_type = data['object_type']
+        self.name = data['name']
+        self.cooldown = data['cooldown']
+        self.fuse = data['fuse']
+        self.placing_dynamite = data['placing_dynamite']
+        return self
 
