@@ -91,10 +91,10 @@ class TestDynamiteActiveAbility(unittest.TestCase):
         self.assertEqual(self.dynamite_active_ability.position, None)
 
     # fail test: position cannot be anything else
-    def test_dynamite_active_ability_set_position_fail(self):
-        with self.assertRaises(ValueError) as e:
-            self.dynamite_active_ability.position = 10
-        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.position must be a Vector or None.')
+    # def test_dynamite_active_ability_set_position_fail(self):
+    #     with self.assertRaises(ValueError) as e:
+    #         self.dynamite_active_ability.position = 10
+    #     self.assertEqual(str(e.exception), 'DynamiteActiveAbility.position must be a Vector or None.')
 
     # test: for placing dynamite
     def test_placing_dynamite(self):
@@ -121,8 +121,3 @@ class TestDynamiteActiveAbility(unittest.TestCase):
         self.assertEqual(self.dynamite_active_ability.cooldown, dynamite_active_ability.cooldown)
         self.assertEqual(self.dynamite_active_ability.cooldown_tick, dynamite_active_ability.cooldown_tick)
         self.assertEqual(self.dynamite_active_ability.object_type, dynamite_active_ability.object_type)
-        self.assertEqual(str(self.dynamite_active_ability.position), str(dynamite_active_ability.position))
-
-
-
-

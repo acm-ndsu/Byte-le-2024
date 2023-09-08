@@ -1,16 +1,30 @@
 from game.common.enums import ObjectType
 from game.quarry_rush.active_ability import ActiveAbility
+from game.utils.vector import Vector
 from typing import Self
 
 
 class DynamiteActiveAbility(ActiveAbility):
 
-    def __init__(self, cooldown: int = 1, fuse: int = 0):
+    def __init__(self, name: str = ""):
         super().__init__()
         self.object_type = ObjectType.DYNAMITE_ACTIVE_ABILITY
+        self.name = name
         self.cooldown: int = 1
         self.cooldown_tick: int = 0
         self.placing_dynamite: bool = False  # this is a boolean check to see if the avatar is placing down dynamite
+
+# name getter
+    @property
+    def name(self) -> str:
+        return self.__name
+
+# name setter
+    @name.setter
+    def name(self, name: str) -> None:
+        if name is None or not isinstance(name, str):
+            raise ValueError(f'{self.__class__.__name__}.name must be a String')
+        self.__name = name
 
 # The cooldown represents the amount of turns that the ability is unavailable.
 # cooldown getter
@@ -58,6 +72,7 @@ class DynamiteActiveAbility(ActiveAbility):
     def to_json(self) -> dict:
         data: dict = super().to_json()
         data['object_type'] = self.object_type
+        data['name'] = self.name
         data['cooldown'] = self.cooldown
         data['cooldown_tick'] = self.cooldown_tick
         data['placing_dynamite'] = self.placing_dynamite
@@ -67,6 +82,7 @@ class DynamiteActiveAbility(ActiveAbility):
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
         self.object_type = data['object_type']
+        self.name = data['name']
         self.cooldown = data['cooldown']
         self.cooldown_tick = data['cooldown_tick']
         self.placing_dynamite = data['placing_dynamite']
