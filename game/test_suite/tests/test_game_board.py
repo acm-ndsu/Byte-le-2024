@@ -10,8 +10,8 @@ from game.common.map.game_board import TrapQueue
 from game.common.map.wall import Wall
 from game.common.stations.occupiable_station import OccupiableStation
 from game.common.stations.station import Station
-from game.quarry_rush.dynamite import Dynamite
-from game.quarry_rush.traps.trap import Landmine, EMP
+from game.quarry_rush.entity.placeable.dynamite import Dynamite
+from game.quarry_rush.entity.placeable.trap import Landmine, EMP
 from game.utils.vector import Vector
 
 
