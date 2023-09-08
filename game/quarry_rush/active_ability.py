@@ -42,7 +42,7 @@ class ActiveAbility(GameObject):
         self.__fuse = fuse
 
 # use will be a boolean checking to see if the object on cooldown is able to be used again
-    def use(self) -> bool:
+    def is_useable(self) -> bool:
         if self.fuse == 0:
             self.fuse = self.cooldown
             return True
@@ -61,7 +61,6 @@ class ActiveAbility(GameObject):
 # to json
     def to_json(self) -> dict:
         data: dict = super().to_json()
-        data['name'] = self.name
         data['cooldown'] = self.cooldown
         data['fuse'] = self.fuse
         return data
@@ -69,7 +68,6 @@ class ActiveAbility(GameObject):
 # from json
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.name = data['name']
         self.cooldown = data['cooldown']
         self.fuse = data['fuse']
         return self
