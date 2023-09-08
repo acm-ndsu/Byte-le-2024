@@ -1,5 +1,5 @@
 from typing import Callable
-from game.quarry_rush.player_functions import PlayerFunctions
+from game.quarry_rush.avatar.player_functions import AvatarFunctions
 
 class Tech:
     """
@@ -22,7 +22,7 @@ class TechInfo:
         self.cost = cost
         self.point_value = point_value
         
-def techs(player_functions: PlayerFunctions) -> dict[str, Tech]:
+def techs(player_functions: AvatarFunctions) -> dict[str, Tech]:
     """
     Creates the techs for a specific player
     """

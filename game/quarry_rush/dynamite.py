@@ -1,6 +1,6 @@
 from game.utils.vector import Vector
 from game.common.game_object import GameObject
-from game.quarry_rush.inventory_manager import InventoryManager
+from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from typing import Self
 
 

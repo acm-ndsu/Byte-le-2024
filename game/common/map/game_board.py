@@ -8,7 +8,7 @@ from game.common.map.tile import Tile
 from game.common.map.wall import Wall
 from game.common.stations.occupiable_station import OccupiableStation
 from game.common.stations.station import Station
-from game.quarry_rush.inventory_manager import InventoryManager
+from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from game.quarry_rush.dynamite import Dynamite
 from game.utils.vector import Vector
 from game.quarry_rush.traps.trap import Trap

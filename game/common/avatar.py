@@ -5,7 +5,7 @@ from game.common.game_object import GameObject
 from game.quarry_rush.tech.tech import TechInfo
 from game.utils.vector import Vector
 from game.quarry_rush.tech.tech_tree import TechTree
-from game.quarry_rush.player_functions import PlayerFunctions
+from game.quarry_rush.avatar.player_functions import AvatarFunctions
 from game.quarry_rush.dynamite_active_ability import DynamiteActiveAbility
 
 
@@ -104,7 +104,7 @@ class Avatar(GameObject):
 
     # Helper method to create the tech tree
     def __create_tech_tree(self) -> TechTree:
-        player_functions = PlayerFunctions(increase_movement=self.__increase_movement,  # change number for balance
+        player_functions = AvatarFunctions(increase_movement=self.__increase_movement,  # change number for balance
                                            increase_mining=self.__increase_drop_rate,  # change number for balance
                                            unlock_movement_overdrive=self.__unlock_overdrive_movement,
                                            unlock_mining_overdrive=self.__unlock_overdrive_mining,

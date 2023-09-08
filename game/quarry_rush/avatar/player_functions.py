@@ -1,6 +1,6 @@
 from typing import Callable
 
-class PlayerFunctions:
+class AvatarFunctions:
     """
     This class is used as an interface for creating a tech tree
 

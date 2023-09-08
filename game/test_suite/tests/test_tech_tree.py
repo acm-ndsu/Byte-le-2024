@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
 
-from game.quarry_rush.player_functions import PlayerFunctions
+from game.quarry_rush.avatar.player_functions import AvatarFunctions
 from game.quarry_rush.tech.tech_tree import TechTree
 
 class TestTechTree(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestTechTree(unittest.TestCase):
         self.mock_unlock_landmines = Mock()
         self.mock_unlock_emps = Mock()
         self.mock_unlock_trap_detection = Mock()
-        self.player_functions = PlayerFunctions(increase_movement=self.mock_increase_movement,
+        self.player_functions = AvatarFunctions(increase_movement=self.mock_increase_movement,
                                                 increase_mining=self.mock_increase_mining,
                                                 unlock_movement_overdrive=self.mock_unlock_movement_overdrive,
                                                 unlock_mining_overdrive=self.mock_unlock_mining_overdrive,

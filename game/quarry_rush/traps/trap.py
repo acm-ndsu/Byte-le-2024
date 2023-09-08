@@ -1,7 +1,7 @@
 from game.common.items.item import Item
 from game.utils.vector import Vector
 from game.common.enums import Company
-from game.quarry_rush.inventory_manager import InventoryManager
+from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from typing import Self
 from typing import Callable
 
