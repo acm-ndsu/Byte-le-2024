@@ -7,7 +7,6 @@ from typing import Callable
 
 
 class Trap(Item):
-
     """
     Class inheriting the Item class that is the generic for traps placed on the game_board
     Added values:   detection_reduction, steal_rate, inventory_manager, owner_company, target_company, opponent_position
@@ -18,14 +17,14 @@ class Trap(Item):
                     if so, remove trap from game_board trap queue to remove it from the game.
     """
 
-    def __init__(self, detection_reduction: float, steal_rate: float, inventory_manager: InventoryManager, owner_company: Company, target_company: Company, opponent_position: Callable[[], Vector], position: Vector):
+    def __init__(self, detection_reduction: float = 0.0, steal_rate: float = 0.0,
+                 owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
+                 opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
         super().__init__(position=position)
         # value subtracting from default 5% detection rate
         self.detection_reduction: float = detection_reduction
         # rate for stealing items from opposing avatar when trap detonates (if none, pass 0.0)
         self.steal_rate: float = steal_rate
-        # the used Inventory Manager for the game
-        self.inventory_manager: InventoryManager = inventory_manager
         # company of the owner of the trap
         self.owner_company: Company = owner_company
         # company of the target
@@ -41,15 +40,11 @@ class Trap(Item):
     @property
     def steal_rate(self) -> float:
         return self.__steal_rate
-    
-    @property
-    def inventory_manager(self) -> InventoryManager:
-        return self.__inventory_manager
-    
+
     @property
     def owner_company(self) -> Company:
         return self.__owner_company
-    
+
     @property
     def target_company(self) -> Company:
         return self.__target_company
@@ -85,16 +80,6 @@ class Trap(Item):
 
         self.__opponent_position = opponent_position
 
-    @inventory_manager.setter
-    def inventory_manager(self, inventory_manager: InventoryManager) -> None:
-        if inventory_manager is None or not isinstance(inventory_manager, InventoryManager):
-            raise ValueError(
-                f'{self.__class__.__name__}.inventory_manager must be of type InventoryManager.')
-        if hasattr(self, '_Trap__inventory_manager') and self.__inventory_manager is not None:
-            raise ValueError(
-                f'{self.__class__.__name__}.inventory_manager has already been set.')
-        self.__inventory_manager = inventory_manager
-
     @owner_company.setter
     def owner_company(self, owner_company: Company) -> None:
         if owner_company is None or not isinstance(owner_company, Company):
@@ -119,13 +104,13 @@ class Trap(Item):
         return False
 
     # detonation method, calls in_range and steal to detonate trap
-    def detonate(self) -> bool:
+    def detonate(self, inventory_manager: InventoryManager) -> bool:
         # check if opposing player is in range with in_range method
         # if in_range returns True, run rest of method
         # use steal method from inventory_manager class
         # will be removed by game_board if returns True
         if self.in_range() == True:
-            self.inventory_manager.steal(self.owner_company, self.target_company, self.steal_rate)
+            inventory_manager.steal(self.owner_company, self.target_company, self.steal_rate)
             return True
         return False
 
@@ -147,15 +132,19 @@ class Trap(Item):
         self.target_company: Company = data['target_company']
         self.opponent_position: Callable[[], Vector] = data['opponent_position']
         return self
-    
+
+
 # default classes for Landmine and EMP with existing detection_reduction and steal_rate
-    
+
 class Landmine(Trap):
 
-    def __init__(self, inventory_manager: InventoryManager, owner_company: Company, target_company: Company, opponent_position: Callable[[], Vector], position: Vector):
-        super().__init__(0.0, 0.1, inventory_manager, owner_company, target_company, opponent_position, position)
+    def __init__(self, owner_company: Company, target_company: Company,
+                 opponent_position: Callable[[], Vector], position: Vector):
+        super().__init__(0.0, 0.1, owner_company, target_company, opponent_position, position)
+
 
 class EMP(Trap):
 
-    def __init__(self, inventory_manager: InventoryManager, owner_company: Company, target_company: Company, opponent_position: Callable[[], Vector], position: Vector):
-        super().__init__(0.1, 0.2, inventory_manager, owner_company, target_company, opponent_position, position)
+    def __init__(self, owner_company: Company, target_company: Company,
+                 opponent_position: Callable[[], Vector], position: Vector):
+        super().__init__(0.1, 0.2, owner_company, target_company, opponent_position, position)

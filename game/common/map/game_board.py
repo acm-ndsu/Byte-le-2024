@@ -25,9 +25,9 @@ class TrapQueue(GameObject):
             self.__traps = self.__traps[1:]
         self.__traps += [trap]
         
-    def detonate(self):
+    def detonate(self, inventory_manager: InventoryManager):
         for i in range(0, len(self.__traps))[::-1]:
-            if self.__traps[i].detonate():
+            if self.__traps[i].detonate(inventory_manager):
                 self.__traps = self.__traps[:i] + self.__traps[i+1:]
 
     def size(self) -> int:
@@ -50,17 +50,16 @@ class DynamiteList(GameObject):
     map is balanced by the cooldown given by the active ability. There won't be a max size for this.
     """
 
-    def __init__(self, inventory_manager: InventoryManager):
+    def __init__(self):
         super().__init__()
         self.__dynamite_list: list[Dynamite] = []
-        self.__inventory_manager: InventoryManager = inventory_manager
 
     def add_dynamite(self, dynamite: Dynamite):
         self.__dynamite_list.append(dynamite)
 
-    def detonate(self):
+    def detonate(self, inventory_manager: InventoryManager):
         for dynamite in self.__dynamite_list:
-            if dynamite.detonate(self.__inventory_manager):
+            if dynamite.detonate(inventory_manager):
                 self.__dynamite_list.remove(dynamite)
 
     def size(self) -> int:
@@ -76,7 +75,7 @@ class DynamiteList(GameObject):
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.__dynamite_list: list[Dynamite] = list(map(lambda d: Dynamite(self.__inventory_manager).from_json(d),
+        self.__dynamite_list: list[Dynamite] = list(map(lambda d: Dynamite().from_json(d),
                                                         data['dynamite_items']))
         return self
 
@@ -182,13 +181,13 @@ class GameBoard(GameObject):
         self.object_type: ObjectType = ObjectType.GAMEBOARD
         self.event_active: int | None = None
         self.map_size: Vector = map_size
-        # when passing Vectors as a tuple, end the tuple of Vectors with a comma, so it is recognized as a tuple
+        # when passing Vectors as a tuple, end the tuple of Vectors with a comma so it is recognized as a tuple
         self.locations: dict | None = locations
         self.walled: bool = walled
         self.inventory_manager: InventoryManager = InventoryManager()
         self.church_trap_queue = TrapQueue()
         self.turing_trap_queue = TrapQueue()
-        self.dynamite_list: DynamiteList = DynamiteList(self.inventory_manager)
+        self.dynamite_list: DynamiteList = DynamiteList()
 
     @property
     def seed(self) -> int:
@@ -375,10 +374,10 @@ class GameBoard(GameObject):
         self.inventory_manager: InventoryManager = InventoryManager().from_json(data['inventory_manager'])
         self.church_trap_queue: TrapQueue = TrapQueue().from_json(data['church_trap_queue'])
         self.turing_trap_queue: TrapQueue = TrapQueue().from_json(data['turing_trap_queue'])
-        self.dynamite_list = DynamiteList(self.inventory_manager).from_json(data['dynamite_list'])
+        self.dynamite_list = DynamiteList().from_json(data['dynamite_list'])
         return self
 
     def trap_detonation_control(self):
-        self.church_trap_queue.detonate()
-        self.turing_trap_queue.detonate()
+        self.church_trap_queue.detonate(self.inventory_manager)
+        self.turing_trap_queue.detonate(self.inventory_manager)
         

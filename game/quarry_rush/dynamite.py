@@ -5,28 +5,11 @@ from typing import Self
 
 
 class Dynamite(GameObject):
-    def __init__(self, inventory_manager: InventoryManager, position: Vector | None = None, blast_radius: int = 1):
+    def __init__(self, position: Vector | None = None, blast_radius: int = 1):
         super().__init__()
-        self.inventory_manager: InventoryManager = inventory_manager
         self.position: Vector | None = position
         self.blast_radius: int = blast_radius
         self.fuse: int = 1
-
-    # inventory manager getter
-    @property
-    def inventory_manager(self) -> InventoryManager:
-        return self.__inventory_manager
-
-    # inventory manager setter
-    @inventory_manager.setter
-    def inventory_manager(self, inventory_manager: InventoryManager) -> None:
-        if inventory_manager is None or not isinstance(inventory_manager, InventoryManager):
-            raise ValueError(
-                f'{self.__class__.__name__}.inventory_manager must be of type InventoryManager.')
-        if hasattr(self, '__inventory_manager') and self.__inventory_manager is not None:
-            raise ValueError(
-                f'{self.__class__.__name__}.inventory_manager has already been set.')
-        self.__inventory_manager = inventory_manager
 
     # position getter
     @property
@@ -89,4 +72,3 @@ class Dynamite(GameObject):
         self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
         self.blast_radius: int = data['blast_radius']
         return self
-
