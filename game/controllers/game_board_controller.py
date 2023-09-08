@@ -12,19 +12,14 @@ class GameBoardController(Controller):
     def __init__(self):
         super().__init__()
 
-    def pre_tick(self, client: Player, world: GameBoard, current_tick: int):
+    def pre_tick(self, world: GameBoard) -> None:
         """
         This method will be called before the actions that need to take place during a turn.
         """
+        world.dynamite_detonation_control()
 
-        # Uncomment this for when the dynamite list is completed
-        # world.dynamite_list.detonate(current_tick)
-        pass
-
-    def post_tick(self, client: Player, world: GameBoard):
+    def post_tick(self, world: GameBoard) -> None:
         """
         This method will be called after all the actions of a turn are completed.
         """
-        
-        # world.detonate_traps()
-        pass
+        world.trap_detonation_control()
