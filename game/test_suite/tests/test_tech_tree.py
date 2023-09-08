@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import Mock
 
 from game.quarry_rush.player_functions import PlayerFunctions
-from game.quarry_rush.tech_tree import TechTree
+from game.quarry_rush.tech.tech_tree import TechTree
 
 class TestTechTree(unittest.TestCase):
     def setUp(self):

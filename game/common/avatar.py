@@ -2,13 +2,11 @@ from typing import Self
 
 from game.common.enums import ObjectType, Company
 from game.common.game_object import GameObject
-from game.common.items.item import Item
-from game.quarry_rush.tech import TechInfo
+from game.quarry_rush.tech.tech import TechInfo
 from game.utils.vector import Vector
-from game.quarry_rush.tech_tree import TechTree
+from game.quarry_rush.tech.tech_tree import TechTree
 from game.quarry_rush.player_functions import PlayerFunctions
 from game.quarry_rush.dynamite_active_ability import DynamiteActiveAbility
-from game.quarry_rush.place_trap import PlaceTrap
 
 
 class Avatar(GameObject):

@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import Callable, TypeVar, Generic, Self
-from game.quarry_rush.tech import Tech, techs, TechInfo
+from game.quarry_rush.tech.tech import Tech, techs, TechInfo
 from game.quarry_rush.player_functions import PlayerFunctions
 from functools import reduce
 from game.common.game_object import GameObject

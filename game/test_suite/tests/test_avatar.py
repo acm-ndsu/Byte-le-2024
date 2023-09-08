@@ -2,7 +2,6 @@ import unittest
 
 from game.common.avatar import Avatar
 from game.common.items.item import Item
-from game.quarry_rush.tech_tree import TechTree
 from game.utils.vector import Vector
 
 
