@@ -9,37 +9,76 @@ from game.common.map.wall import Wall
 from game.common.stations.occupiable_station import OccupiableStation
 from game.common.stations.station import Station
 from game.quarry_rush.inventory_manager import InventoryManager
+from game.quarry_rush.dynamite import Dynamite
 from game.utils.vector import Vector
 from game.quarry_rush.traps.trap import Trap
+
 
 class TrapQueue(GameObject):
     def __init__(self):
         super().__init__()
         self.__traps: list[Trap] = []
         self.__max_traps = 10
-        
+
     def add_trap(self, trap: Trap):
         if len(self.__traps) >= self.__max_traps:
             self.__traps = self.__traps[1:]
         self.__traps += [trap]
         
-    def detonate(self):
+    def detonate(self, inventory_manager: InventoryManager):
         for i in range(0, len(self.__traps))[::-1]:
-            if self.__traps[i].detonate():
+            if self.__traps[i].detonate(inventory_manager):
                 self.__traps = self.__traps[:i] + self.__traps[i+1:]
-                
+
     def size(self) -> int:
         return len(self.__traps)
-                
+
     def to_json(self):
         data = super().to_json()
-        data['traps'] = list(map(lambda t : t.to_json(), self.__traps))
+        data['traps'] = list(map(lambda t: t.to_json(), self.__traps))
         return data
-        
+
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.__traps = list(map(lambda t : Trap().from_json(t), data['traps']))
+        self.__traps = list(map(lambda t: Trap().from_json(t), data['traps']))
         return self
+
+
+class DynamiteList(GameObject):
+    """
+    A list for storing dynamite on the game_board. It is different from the TrapQueue because placing dynamite on the
+    map is balanced by the cooldown given by the active ability. There won't be a max size for this.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.__dynamite_list: list[Dynamite] = []
+
+    def add_dynamite(self, dynamite: Dynamite):
+        self.__dynamite_list.append(dynamite)
+
+    def detonate(self, inventory_manager: InventoryManager):
+        for dynamite in self.__dynamite_list:
+            if dynamite.detonate(inventory_manager):
+                self.__dynamite_list.remove(dynamite)
+
+    def size(self) -> int:
+        return len(self.__dynamite_list)
+
+    def get_from_list(self, index: int) -> Dynamite:
+        return self.__dynamite_list[index]
+
+    def to_json(self) -> dict:
+        data: dict = super().to_json()
+        data['dynamite_items'] = list(map(lambda dynamite: dynamite.to_json(), self.__dynamite_list))
+        return data
+
+    def from_json(self, data: dict) -> Self:
+        super().from_json(data)
+        self.__dynamite_list: list[Dynamite] = list(map(lambda d: Dynamite().from_json(d),
+                                                        data['dynamite_items']))
+        return self
+
 
 class GameBoard(GameObject):
     """
@@ -148,6 +187,7 @@ class GameBoard(GameObject):
         self.inventory_manager: InventoryManager = InventoryManager()
         self.church_trap_queue = TrapQueue()
         self.turing_trap_queue = TrapQueue()
+        self.dynamite_list: DynamiteList = DynamiteList()
 
     @property
     def seed(self) -> int:
@@ -297,6 +337,7 @@ class GameBoard(GameObject):
         data['inventory_manager'] = self.inventory_manager.to_json()
         data['church_trap_queue'] = self.church_trap_queue.to_json()
         data['turing_trap_queue'] = self.turing_trap_queue.to_json()
+        data['dynamite_list'] = self.dynamite_list.to_json()
         return data
 
     def generate_event(self, start: int, end: int) -> None:
@@ -320,9 +361,9 @@ class GameBoard(GameObject):
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        temp = data["game_map"]
-        self.seed: int | None = data["seed"]
-        self.map_size: Vector = Vector().from_json(data["map_size"])
+        temp = data['game_map']
+        self.seed: int | None = data['seed']
+        self.map_size: Vector = Vector().from_json(data['map_size'])
         self.locations: dict[tuple[Vector]:list[GameObject]] = {
             tuple(map(lambda vec: Vector().from_json(vec), k)): [self.__from_json_helper(obj) for obj in v] for k, v in
             zip(data["location_vectors"], data["location_objects"])} if data["location_vectors"] is not None else None
@@ -333,9 +374,10 @@ class GameBoard(GameObject):
         self.inventory_manager: InventoryManager = InventoryManager().from_json(data['inventory_manager'])
         self.church_trap_queue: TrapQueue = TrapQueue().from_json(data['church_trap_queue'])
         self.turing_trap_queue: TrapQueue = TrapQueue().from_json(data['turing_trap_queue'])
+        self.dynamite_list = DynamiteList().from_json(data['dynamite_list'])
         return self
 
     def trap_detonation_control(self):
-        self.church_trap_queue.detonate()
-        self.turing_trap_queue.detonate()
+        self.church_trap_queue.detonate(self.inventory_manager)
+        self.turing_trap_queue.detonate(self.inventory_manager)
         
