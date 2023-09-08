@@ -9,7 +9,7 @@ class DynamiteActiveAbility(ActiveAbility):
         super().__init__()
         self.object_type = ObjectType.DYNAMITE_ACTIVE_ABILITY
         self.cooldown: int = 1
-        self.cooldown_tick: int = 0
+        self.fuse: int = 0
         self.placing_dynamite: bool = False  # this is a boolean check to see if the avatar is placing down dynamite
 
 # The cooldown represents the amount of turns that the ability is unavailable.
@@ -30,17 +30,17 @@ class DynamiteActiveAbility(ActiveAbility):
 # cooldown tick is the time it takes before the ability is able to be used again
 # cooldown tick getter
     @property
-    def cooldown_tick(self) -> int:
-        return self.__cooldown_tick
+    def fuse(self) -> int:
+        return self.__fuse
 
 # cooldown tick setter
-    @cooldown_tick.setter
-    def cooldown_tick(self, cooldown_tick: int) -> None:
-        if cooldown_tick is None or not isinstance(cooldown_tick, int):
-            raise ValueError(f'{self.__class__.__name__}.cooldown_tick must be an int')
-        if cooldown_tick < 0:
-            raise ValueError(f'{self.__class__.__name__}.cooldown_tick cannot be negative')
-        self.__cooldown_tick = cooldown_tick
+    @fuse.setter
+    def fuse(self, fuse: int) -> None:
+        if fuse is None or not isinstance(fuse, int):
+            raise ValueError(f'{self.__class__.__name__}.fuse must be an int')
+        if fuse < 0:
+            raise ValueError(f'{self.__class__.__name__}.fuse cannot be negative')
+        self.__fuse = fuse
 
 # placing dynamite getter
     @property
@@ -59,7 +59,7 @@ class DynamiteActiveAbility(ActiveAbility):
         data: dict = super().to_json()
         data['object_type'] = self.object_type
         data['cooldown'] = self.cooldown
-        data['cooldown_tick'] = self.cooldown_tick
+        data['fuse'] = self.fuse
         data['placing_dynamite'] = self.placing_dynamite
         return data
 
@@ -68,7 +68,7 @@ class DynamiteActiveAbility(ActiveAbility):
         super().from_json(data)
         self.object_type = data['object_type']
         self.cooldown = data['cooldown']
-        self.cooldown_tick = data['cooldown_tick']
+        self.fuse = data['fuse']
         self.placing_dynamite = data['placing_dynamite']
         return self
 
