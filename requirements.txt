@@ -6,3 +6,4 @@ opencv-python~=4.8.0.76
 Sphinx~=7.0.1
 Myst-Parser~=2.0.0
 furo~=2023.7.26
+SQLAlchemy~=2.0.2
