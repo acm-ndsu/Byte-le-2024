@@ -1,7 +1,7 @@
 from sqlalchemy import LargeBinary, Boolean, ForeignKey, Integer, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 
-from server.models.base import Base
+from .base import Base
 
 
 class Run(Base):

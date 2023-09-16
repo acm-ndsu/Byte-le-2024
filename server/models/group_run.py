@@ -3,8 +3,8 @@ from __future__ import annotations
 from sqlalchemy import Boolean, Integer, String, DateTime
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 
-from server.models.base import Base
-from server.models.run import Run
+from .base import Base
+from .run import Run
 
 
 class GroupRun(Base):

@@ -1,7 +1,7 @@
 from sqlalchemy import CheckConstraint, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from server.models.base import Base
+from .base import Base
 from uuid import uuid4
 
 

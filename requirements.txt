@@ -13,4 +13,4 @@ Myst-Parser~=2.0.0
 furo~=2023.7.26
 SQLAlchemy~=2.0.2
 pydantic~=2.3.0
-fastapi~=0.103.1
+fastapi[all]~=0.103.1

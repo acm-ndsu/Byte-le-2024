@@ -1,7 +1,7 @@
 from sqlalchemy import Integer, CheckConstraint, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from server.models.base import Base
+from .base import Base
 
 
 class University(Base):
