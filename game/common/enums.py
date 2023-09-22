@@ -1,17 +1,19 @@
 from enum import Enum, auto
 
 """
-**NOTE:** The use of the enum structure is to make is easier to execute certain tasks. It also helps with
-identifying types of Objects throughout the project.
+The use of the enum structure is to make is easier to execute certain tasks. It also helps with identifying 
+types of Objects throughout the project. 
 
 When developing the game, add any extra enums as necessary.
 """
+
 
 class DebugLevel(Enum):
     NONE = auto()
     CLIENT = auto()
     CONTROLLER = auto()
     ENGINE = auto()
+
 
 class ObjectType(Enum):
     NONE = auto()
@@ -30,11 +32,10 @@ class ObjectType(Enum):
     STATION_RECEIVER_EXAMPLE = auto()
     OCCUPIABLE_STATION_EXAMPLE = auto()
     ACTIVE_ABILITY = auto()
-    DYNAMITE_ITEM = auto()
-    DYNAMITE_ACTIVE_ABILITY = auto()
     INVENTORY_MANAGER = auto()
+    DYNAMITE_ACTIVE_ABILITY = auto()
     DYNAMITE = auto()
-
+    ORE_OCCUPIABLE_STATION = auto()
 
 
 class ActionType(Enum):
@@ -62,6 +63,7 @@ class ActionType(Enum):
     These last 10 enums are for selecting a slot from the Avatar class' inventory.
     You can add/remove these as needed for the purposes of your game. 
     """
+
 
 # Added for Quarry Rush
 
