@@ -1,10 +1,10 @@
 from game.utils.vector import Vector
-from game.common.game_object import GameObject
+from game.common.map.occupiable import Occupiable
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from typing import Self
 
 
-class Dynamite(GameObject):
+class Dynamite(Occupiable):
     def __init__(self, position: Vector | None = None, blast_radius: int = 1):
         super().__init__()
         self.position: Vector | None = position

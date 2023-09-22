@@ -11,7 +11,14 @@ class TestDynamiteActiveAbility(unittest.TestCase):
     # set up
     def setUp(self) -> None:
         self.dynamite_active_ability = DynamiteActiveAbility()
+        self.name: str = ""
         self.cooldown: int = 1
+
+    # test: name
+    def test_name(self):
+        self.name = ""
+        self.dynamite_active_ability.name = ""
+        self.assertEqual(self.dynamite_active_ability.name, self.name)
 
     # test: cooldown
     def test_cooldown(self):

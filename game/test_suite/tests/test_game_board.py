@@ -83,7 +83,9 @@ class TestGameBoard(unittest.TestCase):
         self.assertTrue(
             all(map(lambda occupiable_station: isinstance(occupiable_station[1][0], OccupiableStation),
                     occupiable_stations)))
-        self.assertEqual(len(occupiable_stations), 4)
+        objects_stacked: [[GameObject]] = [x[1] for x in occupiable_stations]
+        objects_unstacked: [GameObject] = [x for xs in objects_stacked for x in xs]
+        self.assertEqual(len(objects_unstacked), 4)
 
     # test that get_objects works correctly with avatar
     def test_get_objects_avatar(self):

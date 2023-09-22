@@ -1,12 +1,13 @@
 from game.common.items.item import Item
 from game.utils.vector import Vector
 from game.common.enums import Company
+from game.common.map.occupiable import Occupiable
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from typing import Self
 from typing import Callable
 
 
-class Trap(Item):
+class Trap(Occupiable):
     """
     Class inheriting the Item class that is the generic for traps placed on the game_board
     Added values:   detection_reduction, steal_rate, inventory_manager, owner_company, target_company, opponent_position
@@ -99,7 +100,7 @@ class Trap(Item):
         # find distance between trap position and opponent_position using method from vector class
         # if distance is less than or equal to maximum distance, then return True, else, False
         opponent_position = self.opponent_position()
-        if Vector.distance(self.position, opponent_position) <= 1:
+        if Vector.distance(opponent_position) <= 1:
             return True
         return False
 
@@ -109,7 +110,7 @@ class Trap(Item):
         # if in_range returns True, run rest of method
         # use steal method from inventory_manager class
         # will be removed by game_board if returns True
-        if self.in_range() == True:
+        if self.in_range():
             inventory_manager.steal(self.owner_company, self.target_company, self.steal_rate)
             return True
         return False
