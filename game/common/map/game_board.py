@@ -1,5 +1,5 @@
 import random
-from typing import Self
+from typing import Self, Callable
 
 from game.common.avatar import Avatar
 from game.common.enums import *
@@ -175,11 +175,11 @@ class GameBoard(GameObject):
         if locations is not None and not isinstance(locations, dict):
             raise ValueError("Locations must be a dict. The key must be a tuple of Vector Objects, and the "
                              "value a list of GameObject.")
-        if locations is not None:
-            for k, v in locations.items():
-                if len(k) != len(v):
-                    raise ValueError("Cannot set the locations for the game_board. A key has a different "
-                                     "length than its key.")
+        # if locations is not None:
+        #     for k, v in locations.items():
+        #         if len(k) != len(v):
+        #             raise ValueError("Cannot set the locations for the game_board. A key has a different "
+        #                              "length than its key.")
 
         self.__locations = locations
 
@@ -212,20 +212,42 @@ class GameBoard(GameObject):
 
     def __populate_map(self) -> None:
         for k, v in self.locations.items():
-            if len(k) != len(v) or (len(k) == 0 or len(v) == 0):  # Key-Value lengths must be > 0 and equal
-                raise ValueError("A key-value pair from game_board.locations has mismatching lengths. "
-                                 "They must be the same length, regardless of size.")
+            if len(k) == 0 or len(v) == 0:  # Key-Value lengths must be > 0 and equal
+                raise ValueError("A key-value pair from game_board.locations has a length of 0. ")
 
             # random.sample returns a randomized list which is used in __help_populate()
             j = random.sample(k, k=len(k))
             self.__help_populate(j, v)
 
-    def __help_populate(self, vector_list: list[Vector], v: list[GameObject]) -> None:
-        for j, i in zip(vector_list, v):
-            if isinstance(i, Avatar):  # If the GameObject is an Avatar, assign it the coordinate position
-                i.position = j
+    def __occupied_filter(self, game_object_list: list[GameObject]) -> list[GameObject]:
+        """
+        A helper method that returns a list of game objects that have the 'occupied_by' attribute.
+        :param game_object_list:
+        :return: a list of game object
+        """
+        return [game_object for game_object in game_object_list if hasattr(game_object, 'occupied_by')]
 
-            temp_tile: GameObject = self.game_map[j.y][j.x]
+    def __help_populate(self, vector_list: list[Vector], game_object_list: list[GameObject]) -> None:
+        """
+        A helper method that helps populate the game map.
+        :param vector_list:
+        :param game_object_list:
+        :return: None
+        """
+
+        zipped_list: [tuple[list[Vector], list[GameObject]]] = list(zip(vector_list, game_object_list))
+        last_vec: Vector = zipped_list[-1][0]
+
+        remaining_objects: list[GameObject] | None = self.__occupied_filter(game_object_list[len(zipped_list):]) \
+            if len(self.__occupied_filter(game_object_list)) > len(zipped_list) \
+            else None
+
+        # Will cap at smallest list when zipping two together
+        for vector, game_object in zipped_list:
+            if isinstance(game_object, Avatar):  # If the GameObject is an Avatar, assign it the coordinate position
+                game_object.position = vector
+
+            temp_tile: GameObject = self.game_map[vector.y][vector.x]
 
             while hasattr(temp_tile.occupied_by, 'occupied_by'):
                 temp_tile = temp_tile.occupied_by
@@ -233,7 +255,23 @@ class GameBoard(GameObject):
             if temp_tile is None:
                 raise ValueError("Last item on the given tile doesn't have the 'occupied_by' attribute.")
 
-            temp_tile.occupied_by = i
+            temp_tile.occupied_by = game_object
+
+        if remaining_objects is None:
+            return
+
+        # stack remaining game_objects on last vector
+        temp_tile: GameObject = self.game_map[last_vec.y][last_vec.x]
+
+        while hasattr(temp_tile.occupied_by, 'occupied_by'):
+            temp_tile = temp_tile.occupied_by
+
+        for game_object in remaining_objects:
+            if temp_tile is None:
+                raise ValueError("Last item on the given tile doesn't have the 'occupied_by' attribute.")
+
+            temp_tile.occupied_by = game_object
+            temp_tile = temp_tile.occupied_by
 
     def get_objects(self, look_for: ObjectType) -> list[tuple[Vector, list[GameObject]]]:
         to_return: list[tuple[Vector, list[GameObject]]] = list()

@@ -29,6 +29,8 @@ class TestGameBoard(unittest.TestCase):
         self.locations: dict[tuple[Vector]:list[GameObject]] = {
             (Vector(1, 1),): [Station(None)],
             (Vector(1, 2), Vector(1, 3)): [OccupiableStation(self.item), Station(None)],
+            (Vector(2, 2), Vector(2, 3)): [OccupiableStation(self.item), OccupiableStation(self.item), OccupiableStation(self.item), OccupiableStation(self.item)],
+            (Vector(3, 1), Vector(3, 2), Vector(3, 3)): [OccupiableStation(self.item), Station(None)],
             (Vector(5, 5),): [self.avatar],
             (Vector(5, 6),): [self.wall]
         }
@@ -69,14 +71,23 @@ class TestGameBoard(unittest.TestCase):
     def test_get_objects_station(self):
         stations: list[tuple[Vector, list[Station]]] = self.game_board.get_objects(ObjectType.STATION)
         self.assertTrue(all(map(lambda station: isinstance(station[1][0], Station), stations)))
-        self.assertEqual(len(stations), 2)
+        self.assertEqual(len(stations), 3)
 
     # test that get_objects works correctly with occupiable stations
     def test_get_objects_occupiable_station(self):
         occupiable_stations: list[tuple[Vector, list[OccupiableStation]]] = self.game_board.get_objects(ObjectType.OCCUPIABLE_STATION)
         self.assertTrue(
             all(map(lambda occupiable_station: isinstance(occupiable_station[1][0], OccupiableStation), occupiable_stations)))
-        self.assertEqual(len(occupiable_stations), 1)
+        objects_stacked = [x[1] for x in occupiable_stations]
+        objects_unstacked = [x for xs in objects_stacked for x in xs]
+        self.assertEqual(len(objects_unstacked), 6)
+
+    def test_get_objects_occupiable_station_2(self):
+        occupiable_stations: list[tuple[Vector, list[OccupiableStation]]] = self.game_board.get_objects(ObjectType.OCCUPIABLE_STATION)
+        self.assertTrue(any(map(lambda vec_list: len(vec_list[1]) == 3, occupiable_stations)))
+        objects_stacked = [x[1] for x in occupiable_stations]
+        objects_unstacked = [x for xs in objects_stacked for x in xs]
+        self.assertEqual(len(objects_unstacked), 6)
 
     # test that get_objects works correctly with avatar
     def test_get_objects_avatar(self):

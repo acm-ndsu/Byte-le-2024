@@ -72,18 +72,6 @@ class TestGameBoard(unittest.TestCase):
         self.assertEqual(str(e.exception), 'Locations must be a dict. The key must be a tuple of Vector Objects, '
                                            'and the value a list of GameObject.')
 
-    def test_locations_fail_len(self):
-        with self.assertRaises(ValueError) as e:
-            self.locations = {
-                (Vector(1, 1),): [],
-                (Vector(1, 2), Vector(1, 3)): [OccupiableStation(self.item), Station(None)],
-                (Vector(5, 5),): [Station(None)],
-                (Vector(5, 6),): [self.wall]
-            }
-            self.game_board.locations = self.locations
-        self.assertEqual(str(e.exception), 'Cannot set the locations for the game_board. A key has a different length '
-                                           'than its key.')
-
     # test walled
     def test_walled(self):
         self.game_board.walled = True
