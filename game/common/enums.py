@@ -33,7 +33,6 @@ class ObjectType(Enum):
     DYNAMITE_ITEM = auto()
     DYNAMITE_ACTIVE_ABILITY = auto()
     INVENTORY_MANAGER = auto()
-    DYNAMITE_ACTIVE_ABILITY = auto()
     DYNAMITE = auto()
 
 
