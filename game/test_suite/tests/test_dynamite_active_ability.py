@@ -11,26 +11,7 @@ class TestDynamiteActiveAbility(unittest.TestCase):
     # set up
     def setUp(self) -> None:
         self.dynamite_active_ability = DynamiteActiveAbility()
-        self.name: str = ""
         self.cooldown: int = 1
-
-    # test: name
-    def test_name(self):
-        self.name = ""
-        self.dynamite_active_ability.name = ""
-        self.assertEqual(self.dynamite_active_ability.name, self.name)
-
-    # fail test: name CANT be null
-    def test_name_fail_null(self):
-        with self.assertRaises(ValueError) as e:
-            self.dynamite_active_ability.name = None
-        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.name must be a String')
-
-    # fail test: name cant be anything else
-    def test_name_fail_int(self):
-        with self.assertRaises(ValueError) as e:
-            self.dynamite_active_ability.name = 1
-        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.name must be a String')
 
     # test: cooldown
     def test_cooldown(self):
@@ -117,7 +98,6 @@ class TestDynamiteActiveAbility(unittest.TestCase):
     def test_dynamite_active_ability_json(self):
         data: dict = self.dynamite_active_ability.to_json()
         dynamite_active_ability: DynamiteActiveAbility = DynamiteActiveAbility().from_json(data)
-        self.assertEqual(self.dynamite_active_ability.name, dynamite_active_ability.name)
         self.assertEqual(self.dynamite_active_ability.cooldown, dynamite_active_ability.cooldown)
         self.assertEqual(self.dynamite_active_ability.fuse, dynamite_active_ability.fuse)
         self.assertEqual(self.dynamite_active_ability.object_type, dynamite_active_ability.object_type)
