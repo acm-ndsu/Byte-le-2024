@@ -2,6 +2,7 @@ from game.common.avatar import Avatar
 from game.common.game_object import GameObject
 from game.common.enums import ObjectType
 from game.common.items.item import Item
+from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from typing import Self
 
 
@@ -37,8 +38,9 @@ class Station(GameObject):
             raise ValueError(f'{self.__class__.__name__}.held_item must be an Item or None, not {held_item}.')
         self.__item = held_item
 
-    # base of take action method, defined in classes that extend Station (StationExample demonstrates this) 
-    def take_action(self, avatar: Avatar) -> Item | None:
+    # base of take action method, defined in classes that extend Station (StationExample demonstrates this)
+    # InventoryManager added to this method for Byte-le 2024
+    def take_action(self, avatar: Avatar, inventory_manager: InventoryManager) -> Item | None:
         pass
 
     # json methods
