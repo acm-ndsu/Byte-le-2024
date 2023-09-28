@@ -1,11 +1,17 @@
 from json import load
+from game.utils.vector import Vector
+from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
+from game.quarry_rush.entity.ore import Ore
+from game.quarry_rush.entity.ancient_tech import Ancient_Tech
 import random as rand
 from perlin_noise import PerlinNoise
 
 class CollectableGenerator:
     
     board_size = 22 # This includes the borders. Field is 20x20 
-    threshold = 0.3 # Threshold of 0 will have every tile filled with ore, threshold of 1 will have no tiles with ore
+    copium_count = 100 # This is the number of copium that should be generated
+    special_count = 50 # This is the number of each special ore that should be generated (50 means 50 lambdium and 50 turite)
+    ancient_tech_count = 100 # This is the number of ancient tech that should be generated
     
     def __init__(self, seed: int = rand.randint(0, 8675309)):
         f = open('game/quarry_rush/map/collectable/collectable_weights.json')
@@ -23,50 +29,60 @@ class CollectableGenerator:
         Returns a 2D list of bools describing where to put copium.
         Will not overlap with walls or bases.
         '''
-        # TODO use perlin noise
-        return self.map_threshold(self.adjust(self.layer(self.__copium_weights, self.generate_random_noise())))
+        noise_map = self.adjust(self.layer(self.__copium_weights, self.generate_perlin_noise()))
+        threshold = sorted([x for row in noise_map for x in row])[-self.copium_count]
+        return self.map_threshold(threshold, noise_map)
     
     def generate_lambdium(self) -> list[list[bool]]:
         '''
         Returns a 2D list of bools describing where to put lambdium.
         Will not overlap with walls or bases.
         '''
-        # TODO use perlin noise
-        return self.map_threshold(self.adjust(self.layer(self.__lambdium_weights, self.generate_random_noise())))
+        noise_map = self.adjust(self.layer(self.__lambdium_weights, self.generate_perlin_noise()))
+        threshold = sorted([x for row in noise_map for x in row])[-self.special_count]
+        return self.map_threshold(threshold, noise_map)
     
     def generate_turite(self) -> list[list[bool]]:
         '''
         Returns a 2D list of bools describing where to put turite.
         Will not overlap with walls or bases.
         '''
-        # TODO use perlin noise
-        return self.map_threshold(self.adjust(self.layer(self.__turite_weights, self.generate_random_noise())))
+        noise_map = self.adjust(self.layer(self.__turite_weights, self.generate_perlin_noise()))
+        threshold = sorted([x for row in noise_map for x in row])[-self.special_count]
+        return self.map_threshold(threshold, noise_map)
     
     def generate_ancient_tech(self) -> list[list[bool]]:
         '''
         Returns a 2D list of bools describing where to put ancient tech.
         Will not overlap with walls or bases.
         '''
-        # TODO use perlin noise
-        return self.map_threshold(self.adjust(self.layer(self.__ancient_tech_weights, self.generate_random_noise())))
+        noise_map = self.adjust(self.layer(self.__ancient_tech_weights, self.generate_random_noise()))
+        threshold = sorted([x for row in noise_map for x in row])[-self.ancient_tech_count]
+        return self.map_threshold(threshold, noise_map)
     
-    def generate_all(self):
-        # generate lambdium
-        # generate turite
-        # TODO: handle overlap between lambdium and turite
-        # generate ancient tech
-        # generate copium
+    def generate_all(self) -> dict[Vector, OreOccupiableStation]:
+        copium_map = self.generate_copium()
+        lambdium_map = self.generate_lambdium()
+        turite_map = self.generate_turite()
+        ancient_tech_map = self.generate_ancient_tech()
         
-        # stuff cannot override stuff from previous step(s) in this section of the algorithm
-        # put lambdium and turite into result map
-        # TODO: should ancient tech be allowed to overlap? if not, put ancient tech into result map
-        # put copium into result map
-        
-        # return result map
-        pass
+        # TODO Ancient Tech doesn't work with OreOccupiableStation
+        # TODO Figure out how to deal with value fields
+        result: dict[Vector, OreOccupiableStation] = {}
+        for (y, x) in [(y, x) for y in range(100) for x in range(100)]:
+            if copium_map[y][x]:
+                result[Vector(x=x, y=y)] = OreOccupiableStation(Ore(value=5))
+            if lambdium_map[y][x]:
+                result[Vector(x=x, y=y)] = OreOccupiableStation(Ore(value=10))
+            if turite_map[y][x]:
+                result[Vector(x=x, y=y)] = OreOccupiableStation(Ore(value=10))
+            if ancient_tech_map[y][x]:
+                result[Vector(x=x, y=y)] = OreOccupiableStation(Ancient_Tech(science_point_value=10))
+        return result
     
     def generate_random_noise(self) -> list[list[float]]:
         rand.seed(self.__seed)
+        self.__seed += 1
         raw = [[rand.random() for x in range(self.board_size)] for y in range(self.board_size)]
         return self.adjust(raw)
         
@@ -90,9 +106,9 @@ class CollectableGenerator:
         '''
         return [[layer1[y][x] * layer2[y][x] for x in self.board_size] for y in self.board_size]
     
-    def map_threshold(self, weight_map: list[list[float]]) -> list[list[bool]]:
+    def map_threshold(self, threshold: float, weight_map: list[list[float]]) -> list[list[bool]]:
         '''
         Takes a weight map and returns a new map of booleans where the value is True if the
         value in the original map is >= the threshold
         '''
-        return list(map(lambda xs : list(map(lambda x : x >= self.threshold, xs)), weight_map))
+        return list(map(lambda xs : list(map(lambda x : x >= threshold, xs)), weight_map))
