@@ -5,7 +5,7 @@ from game.common.avatar import Avatar
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from game.common.enums import Company
 from game.utils.vector import Vector
-from game.quarry_rush.entity.ore import Ore
+from game.quarry_rush.entity.ores import Ore
 
 
 class TestCompanyStation(unittest.TestCase):

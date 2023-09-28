@@ -1,6 +1,6 @@
 import unittest
 
-from game.quarry_rush.entity.ore import Ore
+from game.quarry_rush.entity.ores import Ore
 
 
 class TestOre(unittest.TestCase):

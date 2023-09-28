@@ -8,7 +8,7 @@ from game.common.player import Player
 from game.controllers.movement_controller import MovementController
 from game.utils.vector import Vector
 from game.common.stations.station import Station
-from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
+from game.quarry_rush.station.ore_occupiable_stations import OreOccupiableStation
 
 
 class TestOreOccupiableStation(unittest.TestCase):
