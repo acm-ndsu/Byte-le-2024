@@ -29,8 +29,8 @@ class Station(GameObject):
             raise ValueError(f'{self.__class__.__name__}.held_item must be an Item or None, not {held_item}.')
         self.__item = held_item
 
-    # base of take action method, defined in classes that extend Station (StationExample demonstrates this)
-    def take_action(self, avatar: Avatar, inventory_manager: InventoryManager = None) -> Item | None:
+    # InventoryManager added to this method for Byte-le 2024
+    def take_action(self, avatar: Avatar, inventory_manager: InventoryManager) -> Item | None:
         pass
 
     # json methods
