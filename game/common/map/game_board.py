@@ -11,7 +11,7 @@ from game.common.stations.station import Station
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from game.quarry_rush.entity.placeable.dynamite import Dynamite
 from game.utils.vector import Vector
-from game.quarry_rush.entity.placeable.trap import Trap
+from game.quarry_rush.entity.placeable.traps import Trap
 
 
 class TrapQueue(GameObject):
