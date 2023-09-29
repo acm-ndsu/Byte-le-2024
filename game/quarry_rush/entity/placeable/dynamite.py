@@ -1,15 +1,21 @@
 from game.utils.vector import Vector
-from game.common.map.occupiable import Occupiable
+from game.common.stations.occupiable_station import OccupiableStation
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
+from game.common.enums import *
 from typing import Self
 
 
-class Dynamite(Occupiable):
+class Dynamite(OccupiableStation):
+    """
+    Dynamite is a class that represents the dynamite an Avatar can place on the ground. It inherits from Occupiable
+    Station to permit Avatar instances to walk on them.
+    """
     def __init__(self, position: Vector | None = None, blast_radius: int = 1):
         super().__init__()
         self.position: Vector | None = position
         self.blast_radius: int = blast_radius
         self.fuse: int = 1
+        self.object_type = ObjectType.DYNAMITE
 
     # position getter
     @property
