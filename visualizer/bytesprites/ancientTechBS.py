@@ -6,7 +6,7 @@ from visualizer.bytesprites.bytesprite import ByteSprite
 from game.utils.vector import Vector
 
 
-class ExampleTileBS(ByteSprite):
+class AncientTechBS(ByteSprite):
     def __init__(self, screen: pyg.Surface):
         super().__init__(screen, os.path.join(os.getcwd(), 'visualizer/dummy_sprites/ancient_tech.png'), 1, None, 15)
 

@@ -6,7 +6,7 @@ from visualizer.bytesprites.bytesprite import ByteSprite
 from game.utils.vector import Vector
 
 
-class ExampleTileBS(ByteSprite):
+class TuriteBS(ByteSprite):
     def __init__(self, screen: pyg.Surface):
         super().__init__(screen, os.path.join(os.getcwd(), 'visualizer/dummy_sprites/turite.png'), 1, None, 11)
 
