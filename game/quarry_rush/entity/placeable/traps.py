@@ -1,12 +1,12 @@
-from game.common.items.item import Item
+from game.common.stations.occupiable_station import OccupiableStation
 from game.utils.vector import Vector
-from game.common.enums import Company
+from game.common.enums import *
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from typing import Self
 from typing import Callable
 
 
-class Trap(Item):
+class Trap(OccupiableStation):
     """
     Class inheriting the Item class that is the generic for traps placed on the game_board
     Added values:   detection_reduction, steal_rate, inventory_manager, owner_company, target_company, opponent_position
@@ -20,7 +20,7 @@ class Trap(Item):
     def __init__(self, detection_reduction: float = 0.0, steal_rate: float = 0.0,
                  owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
                  opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
-        super().__init__(position=position)
+        super().__init__()
         # value subtracting from default 5% detection rate
         self.detection_reduction: float = detection_reduction
         # rate for stealing items from opposing avatar when trap detonates (if none, pass 0.0)
@@ -31,6 +31,10 @@ class Trap(Item):
         self.target_company: Company = target_company
         # function that returns Vector of opponent position
         self.opponent_position: Callable[[], Vector] = opponent_position
+        # the position of the trap
+        self.position: Vector = position
+        # assigning the object type
+        self.object_type: ObjectType = ObjectType.TRAP
 
     # getter methods
     @property
@@ -109,7 +113,7 @@ class Trap(Item):
         # if in_range returns True, run rest of method
         # use steal method from inventory_manager class
         # will be removed by game_board if returns True
-        if self.in_range() == True:
+        if self.in_range():
             inventory_manager.steal(self.owner_company, self.target_company, self.steal_rate)
             return True
         return False
@@ -141,10 +145,11 @@ class Landmine(Trap):
     def __init__(self, owner_company: Company, target_company: Company,
                  opponent_position: Callable[[], Vector], position: Vector):
         super().__init__(0.0, 0.1, owner_company, target_company, opponent_position, position)
-
+        self.object_type: ObjectType = ObjectType.LANDMINE
 
 class EMP(Trap):
 
     def __init__(self, owner_company: Company, target_company: Company,
                  opponent_position: Callable[[], Vector], position: Vector):
         super().__init__(0.1, 0.2, owner_company, target_company, opponent_position, position)
+        self.object_type: ObjectType = ObjectType.EMP
