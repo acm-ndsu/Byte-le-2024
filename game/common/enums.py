@@ -44,6 +44,9 @@ class ObjectType(Enum):
     DYNAMITE_ACTIVE_ABILITY = auto()        # 26
     DYNAMITE = auto()                       # 27
     ORE_OCCUPIABLE_STATION = auto()         # 28
+    TRAP = auto()                           # 29
+    LANDMINE = auto()                       # 30
+    EMP = auto()                            # 31
 
 
 class ActionType(Enum):
