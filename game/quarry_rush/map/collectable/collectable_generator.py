@@ -1,8 +1,8 @@
 from json import load
 from game.utils.vector import Vector
-from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
-from game.quarry_rush.entity.ore import Ore
-from game.quarry_rush.entity.ancient_tech import Ancient_Tech
+from game.quarry_rush.station.ore_occupiable_stations import OreOccupiableStation, CopiumOccupiableStation, LambdiumOccupiableStation, TuriteOccupiableStation
+from game.quarry_rush.entity.ores import Ore
+from game.quarry_rush.station.ancient_tech_occupiable_station import AncientTechOccupiableStation
 import random as rand
 from perlin_noise import PerlinNoise
 
@@ -66,18 +66,16 @@ class CollectableGenerator:
         turite_map = self.generate_turite()
         ancient_tech_map = self.generate_ancient_tech()
         
-        # TODO Ancient Tech doesn't work with OreOccupiableStation
-        # TODO Figure out how to deal with value fields
         result: dict[Vector, OreOccupiableStation] = {}
         for (y, x) in [(y, x) for y in range(100) for x in range(100)]:
             if copium_map[y][x]:
-                result[Vector(x=x, y=y)] = OreOccupiableStation(Ore(value=5))
+                result[Vector(x=x, y=y)] = CopiumOccupiableStation()
             if lambdium_map[y][x]:
-                result[Vector(x=x, y=y)] = OreOccupiableStation(Ore(value=10))
+                result[Vector(x=x, y=y)] = LambdiumOccupiableStation()
             if turite_map[y][x]:
-                result[Vector(x=x, y=y)] = OreOccupiableStation(Ore(value=10))
+                result[Vector(x=x, y=y)] = TuriteOccupiableStation()
             if ancient_tech_map[y][x]:
-                result[Vector(x=x, y=y)] = OreOccupiableStation(Ancient_Tech(science_point_value=10))
+                result[Vector(x=x, y=y)] = AncientTechOccupiableStation()
         return result
     
     def generate_random_noise(self) -> list[list[float]]:
