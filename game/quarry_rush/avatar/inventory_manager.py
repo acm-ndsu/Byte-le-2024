@@ -59,6 +59,11 @@ class InventoryManager(GameObject):
 
         return total
 
+    def cash_in_all(self, company: Company) -> None:
+        """Runs both cash in methods: cash_in_science, cash_in_points"""
+        self.cash_in_points(company)
+        self.cash_in_science(company)
+
     def give(self, item: Item, company: Company) -> bool:
         """
         Give the selected player the given item. If the item was successfully given to the player, return True,
@@ -97,6 +102,15 @@ class InventoryManager(GameObject):
 
     def get_inventory(self, company: Company) -> list[Item | None]:
         return self.__inventories[company]
+
+    def is_empty(self, company: Company) -> bool:
+        """
+        Returns True if first index is None, returns False otherwise
+        """
+        if self.__inventories[company][0] is None:
+            return True
+        else:
+            return False
 
     def maybe_item_json(self, item: Item | None) -> dict | None:
         if item is None:

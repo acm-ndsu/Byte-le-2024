@@ -1,6 +1,6 @@
 import unittest
 
-from game.quarry_rush.entity.placeable.trap import *
+from game.quarry_rush.entity.placeable.traps import *
 from game.common.enums import Company
 from game.utils.vector import Vector
 from game.quarry_rush.avatar.inventory_manager import InventoryManager

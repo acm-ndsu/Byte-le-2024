@@ -3,6 +3,8 @@
 *.json
 *.pyz
 
+!game/quarry_rush/map/game_location/game_location.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
