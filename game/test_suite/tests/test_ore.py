@@ -1,14 +1,16 @@
 import unittest
 
-from game.common.avatar import Avatar
-from game.quarry_rush.entity.ore import Ore
+from game.quarry_rush.entity.ores import Ore
 
 
-class TestAncientTech(unittest.TestCase):
+class TestOre(unittest.TestCase):
     """
-    This class is to test the AncientTech class and its methods.
+    This class is here to test the Ore class.
     """
 
     def setUp(self) -> None:
-        self.avatar: Avatar = Avatar()
-        self.Ancient_Tech: Ore = Ore()
+        self.ore: Ore = Ore()
+
+    def test_ore(self) -> None:
+        self.assertEqual(Ore().object_type, self.ore.object_type)
+
