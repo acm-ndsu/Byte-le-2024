@@ -8,7 +8,7 @@ from game.utils.vector import Vector
 
 class ExampleTileBS(ByteSprite):
     def __init__(self, screen: pyg.Surface):
-        super().__init__(screen, os.path.join(os.getcwd(), 'visualizer/dummy_sprites/landmine.png'), 1, None, 30)
+        super().__init__(screen, os.path.join(os.getcwd(), 'visualizer/dummy_sprites/station.png'), 1, None, 14)
 
     def update(self, data: dict, layer: int, pos: Vector) -> None:
         super().update(data, layer, pos)
