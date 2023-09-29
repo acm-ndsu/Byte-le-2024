@@ -1,11 +1,12 @@
 from enum import Enum, auto
 
 """
-**NOTE:** The use of the enum structure is to make is easier to execute certain tasks. It also helps with
-identifying types of Objects throughout the project.
+The use of the enum structure is to make is easier to execute certain tasks. It also helps with identifying 
+types of Objects throughout the project. 
 
 When developing the game, add any extra enums as necessary.
 """
+
 
 class DebugLevel(Enum):
     NONE = auto()
@@ -13,28 +14,36 @@ class DebugLevel(Enum):
     CONTROLLER = auto()
     ENGINE = auto()
 
-class ObjectType(Enum):
-    NONE = auto()
-    ACTION = auto()
-    PLAYER = auto()
-    AVATAR = auto()
-    GAMEBOARD = auto()
-    VECTOR = auto()
-    TILE = auto()
-    WALL = auto()
-    ITEM = auto()
-    OCCUPIABLE = auto()
-    STATION = auto()
-    OCCUPIABLE_STATION = auto()
-    STATION_EXAMPLE = auto()
-    STATION_RECEIVER_EXAMPLE = auto()
-    OCCUPIABLE_STATION_EXAMPLE = auto()
-    ACTIVE_ABILITY = auto()
-    DYNAMITE_ITEM = auto()
-    DYNAMITE_ACTIVE_ABILITY = auto()
-    INVENTORY_MANAGER = auto()
-    DYNAMITE = auto()
 
+class ObjectType(Enum):
+    NONE = auto()                           # 1
+    ACTION = auto()                         # 2
+    PLAYER = auto()                         # 3
+    AVATAR = auto()                         # 4
+    GAMEBOARD = auto()                      # 5
+    VECTOR = auto()                         # 6
+    TILE = auto()                           # 7
+    WALL = auto()                           # 8
+    ITEM = auto()                           # 9
+    ORE = auto()                            # 10
+    LAMBDIUM = auto()                       # 11
+    TURITE = auto()                         # 12
+    COPIUM = auto()                         # 13
+    OCCUPIABLE = auto()                     # 14
+    ANCIENT_TECH = auto()                   # 15
+    STATION = auto()                        # 16
+    OCCUPIABLE_STATION = auto()             # 17
+    LAMBDIUM_OCCUPIABLE_STATION = auto()    # 18
+    TURITE_OCCUPIABLE_STATION = auto()      # 19
+    COPIUM_OCCUPIABLE_STATION = auto()      # 20
+    STATION_EXAMPLE = auto()                # 21
+    STATION_RECEIVER_EXAMPLE = auto()       # 22
+    OCCUPIABLE_STATION_EXAMPLE = auto()     # 23
+    ACTIVE_ABILITY = auto()                 # 24
+    INVENTORY_MANAGER = auto()              # 25
+    DYNAMITE_ACTIVE_ABILITY = auto()        # 26
+    DYNAMITE = auto()                       # 27
+    ORE_OCCUPIABLE_STATION = auto()         # 28
 
 
 class ActionType(Enum):
@@ -62,6 +71,7 @@ class ActionType(Enum):
     These last 10 enums are for selecting a slot from the Avatar class' inventory.
     You can add/remove these as needed for the purposes of your game. 
     """
+
 
 # Added for Quarry Rush
 

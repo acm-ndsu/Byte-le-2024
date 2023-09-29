@@ -9,17 +9,8 @@ from typing import Self
 # create Station object from GameObject that allows item to be contained in it
 class Station(GameObject):
     """
-    `Station Class Notes:`
-
-        Station objects inherit from GameObject and can contain Item objects in them.
-
-        Players can interact with Stations in different ways by using the ``take_action()`` method. Whatever is specified
-        in this method will control how players interact with the station. The Avatar and Item classes have methods that
-        go through this process. Refer to them for more details.
-
-        The Occupiable Station Example class demonstrates an avatar object receiving the station's stored item. The
-        Station Receiver Example class demonstrates an avatar depositing its held item into a station. These are simple
-        ideas for how stations can be used. These can be heavily added onto for more creative uses!
+    A Station is an Object that inherits from GameObject. Stations are able to contain Items in them. Players can
+    interact with Stations to receive the items. (Refer to avatar.py and item.py to see how this works).
     """
 
     def __init__(self, held_item: Item | None = None, **kwargs):
@@ -38,7 +29,6 @@ class Station(GameObject):
             raise ValueError(f'{self.__class__.__name__}.held_item must be an Item or None, not {held_item}.')
         self.__item = held_item
 
-    # base of take action method, defined in classes that extend Station (StationExample demonstrates this)
     # InventoryManager added to this method for Byte-le 2024
     def take_action(self, avatar: Avatar, inventory_manager: InventoryManager) -> Item | None:
         pass
