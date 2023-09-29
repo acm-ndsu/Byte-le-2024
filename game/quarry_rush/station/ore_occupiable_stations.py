@@ -33,6 +33,7 @@ class LambdiumOccupiableStation(OreOccupiableStation):
     """
     def __init__(self, held_item: Lambdium | None = Lambdium()):
         super().__init__(held_item=held_item)
+        self.object_type = ObjectType.LAMBDIUM_OCCUPIABLE_STATION
 
 
 class TuriteOccupiableStation(OreOccupiableStation):
@@ -41,6 +42,7 @@ class TuriteOccupiableStation(OreOccupiableStation):
     """
     def __init__(self, held_item: Turite | None = Turite()):
         super().__init__(held_item=held_item)
+        self.object_type = ObjectType.TURITE_OCCUPIABLE_STATION
 
 
 class CopiumOccupiableStation(OreOccupiableStation):
@@ -49,3 +51,4 @@ class CopiumOccupiableStation(OreOccupiableStation):
     """
     def __init__(self, held_item: Copium | None = Copium()):
         super().__init__(held_item=held_item)
+        self.object_type = ObjectType.COPIUM_OCCUPIABLE_STATION
