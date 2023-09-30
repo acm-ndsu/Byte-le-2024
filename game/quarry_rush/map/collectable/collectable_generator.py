@@ -102,7 +102,7 @@ class CollectableGenerator:
         '''
         Layers two weight maps on top of each other by multiplying each index individually
         '''
-        return [[layer1[y][x] * layer2[y][x] for x in self.board_size] for y in self.board_size]
+        return [[layer1[y][x] * layer2[y][x] for x in range(self.board_size)] for y in range(self.board_size)]
     
     def map_threshold(self, threshold: float, weight_map: list[list[float]]) -> list[list[bool]]:
         '''
