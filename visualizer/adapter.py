@@ -6,6 +6,14 @@ from typing import Callable, Any
 from visualizer.bytesprites.exampleTileBS import ExampleTileBS
 from visualizer.bytesprites.exampleWallBS import ExampleWallBS
 from visualizer.bytesprites.exampleBS import ExampleBS
+from visualizer.bytesprites.ancientTechBS import AncientTechBS
+from visualizer.bytesprites.copiumBS import CopiumBS
+from visualizer.bytesprites.dynamiteBS import DynamiteBS
+from visualizer.bytesprites.empsBS import EmpsBS
+from visualizer.bytesprites.lambdiumBS import LambdiumBS
+from visualizer.bytesprites.landmineBS import LandmineBS
+from visualizer.bytesprites.stationBS import StationBS
+from visualizer.bytesprites.turiteBS import TuriteBS
 from game.utils.vector import Vector
 from visualizer.utils.text import Text
 from visualizer.utils.button import Button, ButtonColors
@@ -84,6 +92,14 @@ class Adapter:
         self.populate_bytesprite.add(ExampleTileBS(self.screen))
         self.populate_bytesprite.add(ExampleWallBS(self.screen))
         self.populate_bytesprite.add(ExampleBS(self.screen))
+        self.populate_bytesprite.add(AncientTechBS(self.screen))
+        self.populate_bytesprite.add(CopiumBS(self.screen))
+        self.populate_bytesprite.add(DynamiteBS(self.screen))
+        self.populate_bytesprite.add(EmpsBS(self.screen))
+        self.populate_bytesprite.add(LambdiumBS(self.screen))
+        self.populate_bytesprite.add(LandmineBS(self.screen))
+        self.populate_bytesprite.add(StationBS(self.screen))
+        self.populate_bytesprite.add(TuriteBS(self.screen))
         return self.populate_bytesprite.copy()
 
     def render(self) -> None:

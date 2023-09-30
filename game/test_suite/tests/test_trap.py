@@ -150,3 +150,7 @@ class TestTrap(unittest.TestCase):
         self.assertEqual(data['owner_company'], Company.CHURCH)
         self.assertEqual(data['target_company'], Company.TURING)
         self.assertEqual(data['opponent_position'](), self.opponent_position)
+
+        # To test the object type, need to make a new Trap object
+        trap: Trap = Trap().from_json(data)
+        self.assertEqual(trap.object_type, self.trap.object_type)
