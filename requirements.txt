@@ -7,3 +7,4 @@ Sphinx~=7.0.1
 Myst-Parser~=2.0.0
 furo~=2023.7.26
 SQLAlchemy~=2.0.2
+perlin-noise~=1.12.0
