@@ -3,7 +3,7 @@ import random
 from game.common.enums import Company, ObjectType
 from game.common.game_object import GameObject
 from game.common.items.item import Item
-from game.quarry_rush.entity.ores import Ore, Lambdium, Turite, Copium
+from game.quarry_rush.entity.ores import Lambdium, Turite
 
 from typing import Self
 
@@ -43,7 +43,7 @@ class InventoryManager(GameObject):
         """
         inventory: list[Item | None] = self.__inventories[company]
         def value(item: Item | None) -> int:
-            if not isinstance(item, Ore):
+            if item is None:
                 return 0
             devaluation = 0.3
             if isinstance(item, Lambdium):
