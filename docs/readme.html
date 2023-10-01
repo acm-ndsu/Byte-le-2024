@@ -1,0 +1,429 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+
+    <!-- Generated with Sphinx 7.0.1 and Furo 2023.07.26 -->
+        <title>README File - Byte Engine 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Byte Engine 1.0.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">Byte Engine 1.0.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="readme-file">
+<h1>README File<a class="headerlink" href="#readme-file" title="Permalink to this heading">#</a></h1>
+<p># Byte Engine</p>
+<p>Revamped base game engine for use in NDACM Byte-le Royale games.
+Changes made in 2023.</p>
+<p>## Important Changes</p>
+<ul>
+<li><p>Overall Change
+* Every file is now type hinted to facilitate the coding process. For future development,
+type hint any changes made for the same reason.</p></li>
+<li><dl>
+<dt>Item Class</dt><dd><ul class="simple">
+<li><p>The item class has many parameters that can be used in a few different ways to allow</p></li>
+</ul>
+<p>for flexibility.</p>
+<ul class="simple">
+<li><p>Value:
+* This allows for an item to have a value of some sort. This can be used to determine
+points gained for collecting the item, or its sell price. The meaning can change depending
+on the project.</p></li>
+<li><p>Durability:
+* Durability can represent how many uses an item has. What happens after is determined by
+the development team.</p></li>
+<li><p>Quantity:
+* This allows for consolidating and representing multiple items in a single item object.</p></li>
+<li><p>Stack Size:
+* Stack Size determines how many item objects can be consolidated together into a single
+object at once. This can be thought of as a denominator in a fraction.</p></li>
+<li><p>Reference the Item class for further documentation.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>GameBoard Class
+* GameBoard Seed Parameter</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>There is a new parameter in the GameBoard class that allows</p></li>
+</ul>
+<p>a specific seed to be set. This can be used to help with testing during game development.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Map Size Parameter
+* This is a Vector object that is not used as a coordinate, but the dimensions of the
+entire game map. Vectors are explained later.</p></li>
+<li><p>Locations Parameter
+* This parameter allows for user-defined specifications of where to put certain GameObjects
+on the game map. It is an extensive system used to do this, so refer to the file for
+further documentation.</p></li>
+<li><p>Walled Parameter
+* This is a boolean that determines whether to place Wall objects on the border of the game
+map.</p></li>
+</ul>
+</li>
+<li><p>Occupiable Class
+* A new class was implemented called Occupiable. This class inherits from GameObject and
+allows for other GameObjects to “stack” on top of one another. As long as an object inherits
+this class, it can allow for many objects to be located on the same Tile.</p></li>
+<li><p>Tile Class
+* The Tile class inherits from Occupiable, allowing for other GameObjects to stack on top of
+it. A Tile can be used to represent the floor or any other basic object in the game.</p></li>
+<li><p>Wall Class
+* The Wall class is a GameObject that represent an impassable object. Use this object to help
+define the borders of the game map.</p></li>
+<li><p>Stations
+* Station Class</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The Station represents a basic Station. They can contain items and be interacted with.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Occupiable Station
+* Occupiable Stations represent basic Station objects that can be occupied by another
+GameObject.</p></li>
+<li><p>Example Classes
+* The occupiable_station_example, station_example, and station_receiver_example classes
+are provided to show how their respective files can be used. These can be deleted or used
+as templates on how to expand on their functionality.</p></li>
+</ul>
+</li>
+<li><p>Action Class
+* This is a class to represent the actions a player takes each turn in object form. This is
+not implemented in this version of the engine since enums are primarily used.</p></li>
+<li><p>Avatar Class
+* The Avatar class is newly implemented in this version of the byte-engine and includes
+many new features.</p>
+<ul class="simple">
+<li><p>Position:
+* The Avatar class has a parameter called “position” which is a Vector object (explained
+later in this document). This simply stores the Avatar’s coordinate on the game map.</p></li>
+<li><p>Inventory:
+* There is an inventory system implemented in the Avatar class now. You are able to specify
+the max size of it, and there are methods that are used to pick up items, take items from
+other objects, and drop the Avatar’s held item.</p></li>
+<li><p>Held Item:
+* The held item of an Avatar is an item that the Avatar has in their inventory. This is done
+by using enums. Reference the enums.py file for more information.</p></li>
+<li><p>These changes are provided to allow for development to go smoothly. Developers are not obliged</p></li>
+</ul>
+<p>to use nor keep any of these changes. The inventory system and any other aspect of the class may be
+modified or removed as necessary for game development.</p>
+</li>
+<li><p>Enums File
+* This file has every significant object being represented as an enum. There are also enums
+that help with the avatar’s inventory system. Refer to the file for a note on this.</p></li>
+<li><p>Player Class
+* The player class now receives a list of ActionType enums to allow for multiple actions
+to happen in one turn. The enum representation can be replaced with the Action object
+if needed.</p></li>
+<li><p>Avatar VS Player Classes
+* These two classes are often confused with each other. Here are their differences.
+* Avatar:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The Avatar class represents the character that is in the game. The Avatar is</p></li>
+</ul>
+<p>what moves around, interacts with other GameObjects, gains points, and whatever else
+the developers implement.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Player:
+* The Player object encapsulates the Avatar class and represents the physical
+people competing in the competition. This is why it has parameters such as team_name.
+It is also why the controllers take a Player object as a parameter and not an Avatar
+object; it helps manage the information gathered for the individual competitors/teams for
+the final results.</p></li>
+</ul>
+</li>
+<li><p>Controllers
+* Interact Controller Class</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>This class controls how players interact with the environment and other GameObjects.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Inventory Controller Class
+* This class controls how players select a certain item in their inventory to then
+become their held item.</p></li>
+<li><p>Master Controller Class
+* This controller is used to manage what happens in each turn and update the
+overarching information of the game’s state.</p></li>
+<li><p>Movement Controller Class
+* This class manages moving the player through the game board by using the given enums.</p></li>
+</ul>
+</li>
+<li><p>Generate Game File
+* This file has a single method that’s used to generate the game map. The
+generation is slow, so call the method when needed. Change the initialized
+GameBoard object’s parameters as necessary for the project.</p></li>
+<li><p>Vector Class
+* The Vector class is used to simplify handling coordinates.
+Some new implementations include ways to increase the values of an already existing Vector,
+adding two Vectors to create a new one, and returning the Vector’s information as
+a tuple.</p></li>
+<li><p>Config File
+* The most notable change in this file is MAX_NUMBER_OF_ACTIONS_PER_TURN. It is used for
+allowing multiple actions to be taken in one turn. Adjust as necessary.</p></li>
+</ul>
+<p>## Development Notes</p>
+<ul class="simple">
+<li><p>Type Hinting
+* Type hinting is very useful in Python because it prevents any confusion on
+what type an object is supposed to be, what value a method returns, etc. Make
+sure to type hint any and everything to eliminate any confusion.</p></li>
+<li><p>Planning
+* When planning, it’s suggested to write out pseudocode, create UMLs, and any
+other documentation that will help with the process. It is easy to forget what
+is discussed between meetings without a plan.
+* Write everything that should be implemented,
+what files need to be created, their purpose in the project, and more. UML diagrams
+help see how classes will interact and inherit from each other.
+* Lastly, documentation is a great method to stay organized too. Having someone to
+write what is discussed in meetings can be useful; you won’t easily lose track of
+what’s discussed.</p></li>
+</ul>
+<p>## How to run</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>bash
+.build.bat - will build your code (compile, pretty much)</p>
+<p>python .launcher.pyz g - will generate a map</p>
+<p>python .launcher.pyz r - will run the game
+<a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+<p>## Required Python Version</p>
+<ul class="simple">
+<li><p>Requires Python 3.11 due to type of Self</p></li>
+</ul>
+<p>## Test Suite Commands:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">python</span> <span class="pre">-m</span> <span class="pre">game.test_suite.runner</span>
+<span class="pre">`</span></code></p>
+<p>## Manual</p>
+<p>[Usage Manual](<a class="reference external" href="https://docs.google.com/document/d/1MGxvq5V9yGJbsbcBgDM26LugPbtQGlyNiaUOmjn85sc/edit?usp=sharing">https://docs.google.com/document/d/1MGxvq5V9yGJbsbcBgDM26LugPbtQGlyNiaUOmjn85sc/edit?usp=sharing</a>)</p>
+<p>Referenced Examples - <a class="reference external" href="https://github.com/topoftheyear/Byte-le-Game-Examples">https://github.com/topoftheyear/Byte-le-Game-Examples</a></p>
+<p>## Previous Byte-le Competitions</p>
+<p>2018 - Dungeon Delvers - <a class="reference external" href="https://github.com/jghibiki/Byte-le-Royale-2018">https://github.com/jghibiki/Byte-le-Royale-2018</a></p>
+<p>2019 - Space Denizen - <a class="reference external" href="https://github.com/topoftheyear/Byte-le-Royale-2019">https://github.com/topoftheyear/Byte-le-Royale-2019</a></p>
+<p>2020 - Disaster Dispatcher - <a class="reference external" href="https://github.com/PixPanz/byte_le_royale_2020">https://github.com/PixPanz/byte_le_royale_2020</a></p>
+<p>2021 - Traveling Trailsmen - <a class="reference external" href="https://github.com/PixPanz/byte_le_royale_2021">https://github.com/PixPanz/byte_le_royale_2021</a></p>
+<p>2022 - FarTech - <a class="reference external" href="https://github.com/HagenSR/byte_le_royale_2022">https://github.com/HagenSR/byte_le_royale_2022</a></p>
+<p>2023 - Undercooked - <a class="reference external" href="https://github.com/amanda-f-ndsu/byte_le_royale_2023">https://github.com/amanda-f-ndsu/byte_le_royale_2023</a></p>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Ian King
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
+</html>

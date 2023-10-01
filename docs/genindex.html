@@ -1,0 +1,954 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+
+    <!-- Generated with Sphinx 7.0.1 and Furo 2023.07.26 --><title>Index - Byte Engine 1.0.0 documentation</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Byte Engine 1.0.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">Byte Engine 1.0.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="game.html">Game Package Contents</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Game Package Contents</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="game.common.html">Common Package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Common Package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="game.common.items.html">Items Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="game.common.map.html">Map Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="game.common.stations.html">Stations Package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="game.controllers.html">Controllers Package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="game.test_suite.html">Test Suite Package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Test Suite Package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="game.test_suite.tests.html">Tests Package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="game.utils.html">Utils Package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<section class="genindex-section">
+  <h1 id="index">Index</h1>
+  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a></div>
+</section>
+<section id="A" class="genindex-section">
+  <h2>A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.common.html#game.common.action.Action">Action (class in game.common.action)</a>
+</li>
+        <li><a href="game.common.html#game.common.enums.ActionType">ActionType (class in game.common.enums)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.utils.html#game.utils.vector.Vector.as_tuple">as_tuple() (game.utils.vector.Vector method)</a>
+</li>
+        <li><a href="game.common.html#game.common.avatar.Avatar">Avatar (class in game.common.avatar)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.utils.html#game.utils.thread.CommunicationThread">CommunicationThread (class in game.utils.thread)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.controllers.html#game.controllers.controller.Controller">Controller (class in game.controllers.controller)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="D" class="genindex-section">
+  <h2>D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.common.html#game.common.enums.DebugLevel">DebugLevel (class in game.common.enums)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.common.html#game.common.avatar.Avatar.drop_held_item">drop_held_item() (game.common.avatar.Avatar method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    game.common.action
+
+        <ul>
+          <li><a href="game.common.html#module-game.common.action">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.avatar
+
+        <ul>
+          <li><a href="game.common.html#module-game.common.avatar">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.enums
+
+        <ul>
+          <li><a href="game.common.html#module-game.common.enums">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.game_object
+
+        <ul>
+          <li><a href="game.common.html#module-game.common.game_object">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.items.item
+
+        <ul>
+          <li><a href="game.common.items.html#module-game.common.items.item">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.map.game_board
+
+        <ul>
+          <li><a href="game.common.map.html#module-game.common.map.game_board">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.map.occupiable
+
+        <ul>
+          <li><a href="game.common.map.html#module-game.common.map.occupiable">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.map.tile
+
+        <ul>
+          <li><a href="game.common.map.html#module-game.common.map.tile">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.map.wall
+
+        <ul>
+          <li><a href="game.common.map.html#module-game.common.map.wall">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.player
+
+        <ul>
+          <li><a href="game.common.html#module-game.common.player">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.stations.occupiable_station
+
+        <ul>
+          <li><a href="game.common.stations.html#module-game.common.stations.occupiable_station">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.stations.occupiable_station_example
+
+        <ul>
+          <li><a href="game.common.stations.html#module-game.common.stations.occupiable_station_example">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.stations.station
+
+        <ul>
+          <li><a href="game.common.stations.html#module-game.common.stations.station">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.stations.station_example
+
+        <ul>
+          <li><a href="game.common.stations.html#module-game.common.stations.station_example">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.common.stations.station_receiver_example
+
+        <ul>
+          <li><a href="game.common.stations.html#module-game.common.stations.station_receiver_example">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.controllers.controller
+
+        <ul>
+          <li><a href="game.controllers.html#module-game.controllers.controller">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.controllers.interact_controller
+
+        <ul>
+          <li><a href="game.controllers.html#module-game.controllers.interact_controller">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.controllers.inventory_controller
+
+        <ul>
+          <li><a href="game.controllers.html#module-game.controllers.inventory_controller">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.controllers.master_controller
+
+        <ul>
+          <li><a href="game.controllers.html#module-game.controllers.master_controller">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.controllers.movement_controller
+
+        <ul>
+          <li><a href="game.controllers.html#module-game.controllers.movement_controller">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.runner
+
+        <ul>
+          <li><a href="game.test_suite.html#module-game.test_suite.runner">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_avatar
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_avatar">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_avatar_inventory
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_avatar_inventory">module</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    game.test_suite.tests.test_example
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_example">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_game_board
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_game_board">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_game_board_no_gen
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_game_board_no_gen">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_initialization
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_initialization">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_interact_controller
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_interact_controller">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_inventory_controller
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_inventory_controller">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_item
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_item">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_master_controller
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_master_controller">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_movement_controller
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_movement_controller_if_occupiable_station_is_occupiable
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller_if_occupiable_station_is_occupiable">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_movement_controller_if_occupiable_stations
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller_if_occupiable_stations">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_movement_controller_if_stations
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller_if_stations">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_movement_controller_if_wall
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller_if_wall">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_occupiable_station
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_occupiable_station">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_player
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_player">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_station
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_station">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.test_suite.tests.test_tile
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_tile">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.utils.generate_game
+
+        <ul>
+          <li><a href="game.utils.html#module-game.utils.generate_game">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.utils.helpers
+
+        <ul>
+          <li><a href="game.utils.html#module-game.utils.helpers">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.utils.thread
+
+        <ul>
+          <li><a href="game.utils.html#module-game.utils.thread">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.utils.validation
+
+        <ul>
+          <li><a href="game.utils.html#module-game.utils.validation">module</a>
+</li>
+        </ul></li>
+        <li>
+    game.utils.vector
+
+        <ul>
+          <li><a href="game.utils.html#module-game.utils.vector">module</a>
+</li>
+        </ul></li>
+        <li><a href="game.common.map.html#game.common.map.game_board.GameBoard">GameBoard (class in game.common.map.game_board)</a>
+</li>
+        <li><a href="game.common.html#game.common.game_object.GameObject">GameObject (class in game.common.game_object)</a>
+</li>
+        <li><a href="game.utils.html#game.utils.generate_game.generate">generate() (in module game.utils.generate_game)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="H" class="genindex-section">
+  <h2>H</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.controllers.html#game.controllers.interact_controller.InteractController.handle_actions">handle_actions() (game.controllers.interact_controller.InteractController method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="I" class="genindex-section">
+  <h2>I</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.controllers.html#game.controllers.interact_controller.InteractController">InteractController (class in game.controllers.interact_controller)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.controllers.html#game.controllers.inventory_controller.InventoryController">InventoryController (class in game.controllers.inventory_controller)</a>
+</li>
+        <li><a href="game.common.items.html#game.common.items.item.Item">Item (class in game.common.items.item)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.controllers.html#game.controllers.master_controller.MasterController">MasterController (class in game.controllers.master_controller)</a>
+</li>
+        <li>
+    module
+
+        <ul>
+          <li><a href="game.common.html#module-game.common.action">game.common.action</a>
+</li>
+          <li><a href="game.common.html#module-game.common.avatar">game.common.avatar</a>
+</li>
+          <li><a href="game.common.html#module-game.common.enums">game.common.enums</a>
+</li>
+          <li><a href="game.common.html#module-game.common.game_object">game.common.game_object</a>
+</li>
+          <li><a href="game.common.items.html#module-game.common.items.item">game.common.items.item</a>
+</li>
+          <li><a href="game.common.map.html#module-game.common.map.game_board">game.common.map.game_board</a>
+</li>
+          <li><a href="game.common.map.html#module-game.common.map.occupiable">game.common.map.occupiable</a>
+</li>
+          <li><a href="game.common.map.html#module-game.common.map.tile">game.common.map.tile</a>
+</li>
+          <li><a href="game.common.map.html#module-game.common.map.wall">game.common.map.wall</a>
+</li>
+          <li><a href="game.common.html#module-game.common.player">game.common.player</a>
+</li>
+          <li><a href="game.common.stations.html#module-game.common.stations.occupiable_station">game.common.stations.occupiable_station</a>
+</li>
+          <li><a href="game.common.stations.html#module-game.common.stations.occupiable_station_example">game.common.stations.occupiable_station_example</a>
+</li>
+          <li><a href="game.common.stations.html#module-game.common.stations.station">game.common.stations.station</a>
+</li>
+          <li><a href="game.common.stations.html#module-game.common.stations.station_example">game.common.stations.station_example</a>
+</li>
+          <li><a href="game.common.stations.html#module-game.common.stations.station_receiver_example">game.common.stations.station_receiver_example</a>
+</li>
+          <li><a href="game.controllers.html#module-game.controllers.controller">game.controllers.controller</a>
+</li>
+          <li><a href="game.controllers.html#module-game.controllers.interact_controller">game.controllers.interact_controller</a>
+</li>
+          <li><a href="game.controllers.html#module-game.controllers.inventory_controller">game.controllers.inventory_controller</a>
+</li>
+          <li><a href="game.controllers.html#module-game.controllers.master_controller">game.controllers.master_controller</a>
+</li>
+          <li><a href="game.controllers.html#module-game.controllers.movement_controller">game.controllers.movement_controller</a>
+</li>
+          <li><a href="game.test_suite.html#module-game.test_suite.runner">game.test_suite.runner</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_avatar">game.test_suite.tests.test_avatar</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_avatar_inventory">game.test_suite.tests.test_avatar_inventory</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_example">game.test_suite.tests.test_example</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_game_board">game.test_suite.tests.test_game_board</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_game_board_no_gen">game.test_suite.tests.test_game_board_no_gen</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_initialization">game.test_suite.tests.test_initialization</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_interact_controller">game.test_suite.tests.test_interact_controller</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_inventory_controller">game.test_suite.tests.test_inventory_controller</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_item">game.test_suite.tests.test_item</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_master_controller">game.test_suite.tests.test_master_controller</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller">game.test_suite.tests.test_movement_controller</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller_if_occupiable_station_is_occupiable">game.test_suite.tests.test_movement_controller_if_occupiable_station_is_occupiable</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller_if_occupiable_stations">game.test_suite.tests.test_movement_controller_if_occupiable_stations</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller_if_stations">game.test_suite.tests.test_movement_controller_if_stations</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller_if_wall">game.test_suite.tests.test_movement_controller_if_wall</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_occupiable_station">game.test_suite.tests.test_occupiable_station</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_player">game.test_suite.tests.test_player</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_station">game.test_suite.tests.test_station</a>
+</li>
+          <li><a href="game.test_suite.tests.html#module-game.test_suite.tests.test_tile">game.test_suite.tests.test_tile</a>
+</li>
+          <li><a href="game.utils.html#module-game.utils.generate_game">game.utils.generate_game</a>
+</li>
+          <li><a href="game.utils.html#module-game.utils.helpers">game.utils.helpers</a>
+</li>
+          <li><a href="game.utils.html#module-game.utils.thread">game.utils.thread</a>
+</li>
+          <li><a href="game.utils.html#module-game.utils.validation">game.utils.validation</a>
+</li>
+          <li><a href="game.utils.html#module-game.utils.vector">game.utils.vector</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.controllers.html#game.controllers.movement_controller.MovementController">MovementController (class in game.controllers.movement_controller)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="O" class="genindex-section">
+  <h2>O</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.common.html#game.common.enums.ObjectType">ObjectType (class in game.common.enums)</a>
+</li>
+        <li><a href="game.common.map.html#game.common.map.occupiable.Occupiable">Occupiable (class in game.common.map.occupiable)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.common.stations.html#game.common.stations.occupiable_station.OccupiableStation">OccupiableStation (class in game.common.stations.occupiable_station)</a>
+</li>
+        <li><a href="game.common.stations.html#game.common.stations.occupiable_station_example.OccupiableStationExample">OccupiableStationExample (class in game.common.stations.occupiable_station_example)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.common.html#game.common.player.Player">Player (class in game.common.player)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.utils.html#game.utils.thread.CommunicationThread.run">run() (game.utils.thread.CommunicationThread method)</a>
+
+        <ul>
+          <li><a href="game.utils.html#game.utils.thread.Thread.run">(game.utils.thread.Thread method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.common.html#game.common.enums.ActionType.SELECT_SLOT_9">SELECT_SLOT_9 (game.common.enums.ActionType attribute)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_avatar.TestAvatar.setUp">setUp() (game.test_suite.tests.test_avatar.TestAvatar method)</a>
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_avatar_inventory.TestAvatarInventory.setUp">(game.test_suite.tests.test_avatar_inventory.TestAvatarInventory method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_example.TestExample.setUp">(game.test_suite.tests.test_example.TestExample method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_game_board.TestGameBoard.setUp">(game.test_suite.tests.test_game_board.TestGameBoard method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_game_board_no_gen.TestGameBoard.setUp">(game.test_suite.tests.test_game_board_no_gen.TestGameBoard method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_initialization.TestInitialization.setUp">(game.test_suite.tests.test_initialization.TestInitialization method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_interact_controller.TestInteractController.setUp">(game.test_suite.tests.test_interact_controller.TestInteractController method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_inventory_controller.TestInventoryController.setUp">(game.test_suite.tests.test_inventory_controller.TestInventoryController method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_item.TestItem.setUp">(game.test_suite.tests.test_item.TestItem method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_master_controller.TestMasterController.setUp">(game.test_suite.tests.test_master_controller.TestMasterController method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller.TestMovementControllerIfWall.setUp">(game.test_suite.tests.test_movement_controller.TestMovementControllerIfWall method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_occupiable_station_is_occupiable.TestMovementControllerIfOccupiableStationIsOccupiable.setUp">(game.test_suite.tests.test_movement_controller_if_occupiable_station_is_occupiable.TestMovementControllerIfOccupiableStationIsOccupiable method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_occupiable_stations.TestMovementControllerIfOccupiableStations.setUp">(game.test_suite.tests.test_movement_controller_if_occupiable_stations.TestMovementControllerIfOccupiableStations method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_stations.TestMovementControllerIfStations.setUp">(game.test_suite.tests.test_movement_controller_if_stations.TestMovementControllerIfStations method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_wall.TestMovementControllerIfWall.setUp">(game.test_suite.tests.test_movement_controller_if_wall.TestMovementControllerIfWall method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_occupiable_station.TestOccupiableStation.setUp">(game.test_suite.tests.test_occupiable_station.TestOccupiableStation method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_player.TestPlayer.setUp">(game.test_suite.tests.test_player.TestPlayer method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_station.TestStation.setUp">(game.test_suite.tests.test_station.TestStation method)</a>
+</li>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_tile.TestTile.setUp">(game.test_suite.tests.test_tile.TestTile method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.common.stations.html#game.common.stations.station.Station">Station (class in game.common.stations.station)</a>
+</li>
+        <li><a href="game.common.stations.html#game.common.stations.station_example.StationExample">StationExample (class in game.common.stations.station_example)</a>
+</li>
+        <li><a href="game.common.stations.html#game.common.stations.station_receiver_example.StationReceiverExample">StationReceiverExample (class in game.common.stations.station_receiver_example)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.common.html#game.common.avatar.Avatar.take">take() (game.common.avatar.Avatar method)</a>
+</li>
+        <li><a href="game.common.stations.html#game.common.stations.occupiable_station_example.OccupiableStationExample.take_action">take_action() (game.common.stations.occupiable_station_example.OccupiableStationExample method)</a>
+
+        <ul>
+          <li><a href="game.common.stations.html#game.common.stations.station_example.StationExample.take_action">(game.common.stations.station_example.StationExample method)</a>
+</li>
+          <li><a href="game.common.stations.html#game.common.stations.station_receiver_example.StationReceiverExample.take_action">(game.common.stations.station_receiver_example.StationReceiverExample method)</a>
+</li>
+        </ul></li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_avatar_inventory.TestAvatarInventory.test_take">test_take() (game.test_suite.tests.test_avatar_inventory.TestAvatarInventory method)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_avatar.TestAvatar">TestAvatar (class in game.test_suite.tests.test_avatar)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_avatar_inventory.TestAvatarInventory">TestAvatarInventory (class in game.test_suite.tests.test_avatar_inventory)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_example.TestExample">TestExample (class in game.test_suite.tests.test_example)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_game_board.TestGameBoard">TestGameBoard (class in game.test_suite.tests.test_game_board)</a>
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_game_board_no_gen.TestGameBoard">(class in game.test_suite.tests.test_game_board_no_gen)</a>
+</li>
+        </ul></li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_initialization.TestInitialization">TestInitialization (class in game.test_suite.tests.test_initialization)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_interact_controller.TestInteractController">TestInteractController (class in game.test_suite.tests.test_interact_controller)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_inventory_controller.TestInventoryController">TestInventoryController (class in game.test_suite.tests.test_inventory_controller)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_item.TestItem">TestItem (class in game.test_suite.tests.test_item)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_master_controller.TestMasterController">TestMasterController (class in game.test_suite.tests.test_master_controller)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_occupiable_station_is_occupiable.TestMovementControllerIfOccupiableStationIsOccupiable">TestMovementControllerIfOccupiableStationIsOccupiable (class in game.test_suite.tests.test_movement_controller_if_occupiable_station_is_occupiable)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_occupiable_stations.TestMovementControllerIfOccupiableStations">TestMovementControllerIfOccupiableStations (class in game.test_suite.tests.test_movement_controller_if_occupiable_stations)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_stations.TestMovementControllerIfStations">TestMovementControllerIfStations (class in game.test_suite.tests.test_movement_controller_if_stations)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller.TestMovementControllerIfWall">TestMovementControllerIfWall (class in game.test_suite.tests.test_movement_controller)</a>
+
+        <ul>
+          <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_wall.TestMovementControllerIfWall">(class in game.test_suite.tests.test_movement_controller_if_wall)</a>
+</li>
+        </ul></li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_occupiable_station.TestOccupiableStation">TestOccupiableStation (class in game.test_suite.tests.test_occupiable_station)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_player.TestPlayer">TestPlayer (class in game.test_suite.tests.test_player)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_station.TestStation">TestStation (class in game.test_suite.tests.test_station)</a>
+</li>
+        <li><a href="game.test_suite.tests.html#game.test_suite.tests.test_tile.TestTile">TestTile (class in game.test_suite.tests.test_tile)</a>
+</li>
+        <li><a href="game.utils.html#game.utils.thread.Thread">Thread (class in game.utils.thread)</a>
+</li>
+        <li><a href="game.common.map.html#game.common.map.tile.Tile">Tile (class in game.common.map.tile)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="V" class="genindex-section">
+  <h2>V</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.utils.html#game.utils.vector.Vector">Vector (class in game.utils.vector)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.utils.html#game.utils.validation.verify_code">verify_code() (in module game.utils.validation)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="W" class="genindex-section">
+  <h2>W</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.common.map.html#game.common.map.wall.Wall">Wall (class in game.common.map.wall)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="game.utils.html#game.utils.helpers.write_json_file">write_json_file() (in module game.utils.helpers)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Ian King
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
+</html>
