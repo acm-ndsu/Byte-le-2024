@@ -8,10 +8,10 @@ from perlin_noise import PerlinNoise
 
 class CollectableGenerator:
     
-    board_size = 22 # This includes the borders. Field is 20x20 
-    copium_count = 100 # This is the number of copium that should be generated
-    special_count = 50 # This is the number of each special ore that should be generated (50 means 50 lambdium and 50 turite)
-    ancient_tech_count = 100 # This is the number of ancient tech that should be generated
+    __board_size = 22 # This includes the borders. Field is 20x20 
+    __copium_count = 100 # This is the number of copium that should be generated
+    __special_count = 50 # This is the number of each special ore that should be generated (50 means 50 lambdium and 50 turite)
+    __ancient_tech_count = 100 # This is the number of ancient tech that should be generated
     
     def __init__(self, seed: int = rand.randint(0, 8675309)):
         f = open('game/quarry_rush/map/collectable/collectable_weights.json')
@@ -30,7 +30,7 @@ class CollectableGenerator:
         Will not overlap with walls or bases.
         '''
         noise_map = self.adjust(self.layer(self.__copium_weights, self.generate_perlin_noise()))
-        threshold = sorted([x for row in noise_map for x in row])[-self.copium_count]
+        threshold = sorted([x for row in noise_map for x in row])[-self.__copium_count]
         return self.map_threshold(threshold, noise_map)
     
     def generate_lambdium(self) -> list[list[bool]]:
@@ -39,7 +39,7 @@ class CollectableGenerator:
         Will not overlap with walls or bases.
         '''
         noise_map = self.adjust(self.layer(self.__lambdium_weights, self.generate_perlin_noise()))
-        threshold = sorted([x for row in noise_map for x in row])[-self.special_count]
+        threshold = sorted([x for row in noise_map for x in row])[-self.__special_count]
         return self.map_threshold(threshold, noise_map)
     
     def generate_turite(self) -> list[list[bool]]:
@@ -48,7 +48,7 @@ class CollectableGenerator:
         Will not overlap with walls or bases.
         '''
         noise_map = self.adjust(self.layer(self.__turite_weights, self.generate_perlin_noise()))
-        threshold = sorted([x for row in noise_map for x in row])[-self.special_count]
+        threshold = sorted([x for row in noise_map for x in row])[-self.__special_count]
         return self.map_threshold(threshold, noise_map)
     
     def generate_ancient_tech(self) -> list[list[bool]]:
@@ -57,7 +57,7 @@ class CollectableGenerator:
         Will not overlap with walls or bases.
         '''
         noise_map = self.adjust(self.layer(self.__ancient_tech_weights, self.generate_random_noise()))
-        threshold = sorted([x for row in noise_map for x in row])[-self.ancient_tech_count]
+        threshold = sorted([x for row in noise_map for x in row])[-self.__ancient_tech_count]
         return self.map_threshold(threshold, noise_map)
     
     def generate_all(self) -> dict[Vector, OreOccupiableStation]:
@@ -81,13 +81,13 @@ class CollectableGenerator:
     def generate_random_noise(self) -> list[list[float]]:
         rand.seed(self.__seed)
         self.__seed += 1
-        raw = [[rand.random() for x in range(self.board_size)] for y in range(self.board_size)]
+        raw = [[rand.random() for x in range(self.__board_size)] for y in range(self.__board_size)]
         return self.adjust(raw)
         
     def generate_perlin_noise(self) -> list[list[float]]:
         noise = PerlinNoise(octaves=8, seed=self.__seed)
         self.__seed += 1
-        return self.adjust([[noise([x/22, y/22]) for x in range(self.board_size)] for y in range(self.board_size)])
+        return self.adjust([[noise([x/22, y/22]) for x in range(self.__board_size)] for y in range(self.__board_size)])
     
     def adjust(self, raw: list[list[float]]) -> list[list[float]]:
         '''
@@ -102,7 +102,7 @@ class CollectableGenerator:
         '''
         Layers two weight maps on top of each other by multiplying each index individually
         '''
-        return [[layer1[y][x] * layer2[y][x] for x in range(self.board_size)] for y in range(self.board_size)]
+        return [[layer1[y][x] * layer2[y][x] for x in range(self.__board_size)] for y in range(self.__board_size)]
     
     def map_threshold(self, threshold: float, weight_map: list[list[float]]) -> list[list[bool]]:
         '''
