@@ -3,6 +3,7 @@
 *.json
 *.pyz
 
+!collectable_weights.json
 !game/quarry_rush/map/game_location/game_location.json
 
 # Byte-compiled / optimized / DLL files
