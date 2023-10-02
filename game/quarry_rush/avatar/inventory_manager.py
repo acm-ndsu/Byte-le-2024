@@ -53,14 +53,15 @@ class InventoryManager(GameObject):
             return item.value
         return sum(map(value, inventory))
 
-    def cash_in_all(self, company: Company) -> None:
+    def cash_in_all(self, company: Company) -> tuple[int, int]:
         """
         Runs both cash in methods: cash_in_science, cash_in_points.
         Removes all items from the appropriate inventory.
         """
-        self.cash_in_points(company)
-        self.cash_in_science(company)
+        points = self.cash_in_points(company)
+        science = self.cash_in_science(company)
         self.__inventories[company] = self.create_empty_inventory()
+        return (points, science)
 
     def give(self, item: Item, company: Company) -> bool:
         """
