@@ -10,14 +10,7 @@ class Config:
     __BACKGROUND_COLOR: (int, int, int) = 0, 0, 0
     __GAME_BOARD_MARGIN_LEFT: int = 440
     __GAME_BOARD_MARGIN_TOP: int = 100
-    __SIDEBAR_TOP_DIMENSIONS: Vector = Vector(x=1366, y=80)  # width, height
-    __SIDEBAR_BOTTOM_DIMENSIONS: Vector = Vector(x=1366, y=80)
-    __SIDEBAR_LEFT_DIMENSIONS: Vector = Vector(x=200, y=768)
-    __SIDEBAR_RIGHT_DIMENSIONS: Vector = Vector(x=200, y=768)
-    __SIDEBAR_TOP_PADDING: int = 5  # how much space there is around it
-    __SIDEBAR_BOTTOM_PADDING: int = 5
-    __SIDEBAR_LEFT_PADDING: int = 5
-    __SIDEBAR_RIGHT_PADDING: int = 5
+    __VISUALIZE_HELD_ITEMS: bool = True
 
     # if you have an animation, this will be the number of frames the animation goes through for each turn
     @property
@@ -59,36 +52,8 @@ class Config:
         return self.__GAME_BOARD_MARGIN_TOP
 
     @property
-    def SIDEBAR_TOP_DIMENSIONS(self) -> Vector:
-        return self.__SIDEBAR_TOP_DIMENSIONS
-
-    @property
-    def SIDEBAR_BOTTOM_DIMENSIONS(self) -> Vector:
-        return self.__SIDEBAR_BOTTOM_DIMENSIONS
-
-    @property
-    def SIDEBAR_LEFT_DIMENSIONS(self) -> Vector:
-        return self.__SIDEBAR_LEFT_DIMENSIONS
-
-    @property
-    def SIDEBAR_RIGHT_DIMENSIONS(self) -> Vector:
-        return self.__SIDEBAR_RIGHT_DIMENSIONS
-
-    @property
-    def SIDEBAR_TOP_PADDING(self) -> int:
-        return self.__SIDEBAR_TOP_PADDING
-
-    @property
-    def SIDEBAR_BOTTOM_PADDING(self) -> int:
-        return self.__SIDEBAR_BOTTOM_PADDING
-
-    @property
-    def SIDEBAR_LEFT_PADDING(self) -> int:
-        return self.__SIDEBAR_LEFT_PADDING
-
-    @property
-    def SIDEBAR_RIGHT_PADDING(self) -> int:
-        return self.__SIDEBAR_RIGHT_PADDING
+    def VISUALIZE_HELD_ITEMS(self) -> bool:
+        return self.__VISUALIZE_HELD_ITEMS
 
 
 
