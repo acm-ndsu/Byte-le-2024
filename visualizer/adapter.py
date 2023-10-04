@@ -3,9 +3,6 @@ import random
 import pygame
 from game.config import *
 from typing import Callable, Any
-from visualizer.bytesprites.exampleTileBS import ExampleTileBS
-from visualizer.bytesprites.exampleWallBS import ExampleWallBS
-from visualizer.bytesprites.exampleBS import ExampleBS
 from visualizer.bytesprites.ancientTechBS import AncientTechBS
 from visualizer.bytesprites.copiumBS import CopiumBS
 from visualizer.bytesprites.dynamiteBS import DynamiteBS
@@ -14,6 +11,9 @@ from visualizer.bytesprites.lambdiumBS import LambdiumBS
 from visualizer.bytesprites.landmineBS import LandmineBS
 from visualizer.bytesprites.stationBS import StationBS
 from visualizer.bytesprites.turiteBS import TuriteBS
+from visualizer.bytesprites.exampleTileBS import TileBytespriteFactoryExample
+from visualizer.bytesprites.exampleWallBS import WallBytespriteFactoryExample
+from visualizer.bytesprites.exampleBS import AvatarBytespriteFactoryExample
 from game.utils.vector import Vector
 from visualizer.utils.text import Text
 from visualizer.utils.button import Button, ButtonColors
@@ -87,20 +87,13 @@ class Adapter:
     def recalc_animation(self, turn_log: dict) -> None:
         self.turn_number = turn_log['tick']
 
-    def populate_bytesprites(self) -> pygame.sprite.Group:
+    def populate_bytesprite_factories(self) -> dict[int: Callable[[pygame.Surface], ByteSprite]]:
         # Instantiate all bytesprites for each object ands add them here
-        self.populate_bytesprite.add(ExampleTileBS(self.screen))
-        self.populate_bytesprite.add(ExampleWallBS(self.screen))
-        self.populate_bytesprite.add(ExampleBS(self.screen))
-        self.populate_bytesprite.add(AncientTechBS(self.screen))
-        self.populate_bytesprite.add(CopiumBS(self.screen))
-        self.populate_bytesprite.add(DynamiteBS(self.screen))
-        self.populate_bytesprite.add(EmpsBS(self.screen))
-        self.populate_bytesprite.add(LambdiumBS(self.screen))
-        self.populate_bytesprite.add(LandmineBS(self.screen))
-        self.populate_bytesprite.add(StationBS(self.screen))
-        self.populate_bytesprite.add(TuriteBS(self.screen))
-        return self.populate_bytesprite.copy()
+        return {
+            4: AvatarBytespriteFactoryExample().create_bytesprite,
+            7: TileBytespriteFactoryExample().create_bytesprite,
+            8: WallBytespriteFactoryExample().create_bytesprite,
+        }
 
     def render(self) -> None:
         # self.button.render()

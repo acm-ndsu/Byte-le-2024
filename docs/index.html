@@ -1,0 +1,895 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Game Package Contents" href="game.html" />
+
+    <!-- Generated with Sphinx 7.0.1 and Furo 2023.07.26 -->
+        <title>Byte Engine 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=369552022d0b975c8e74270ce6eabe0fb7978f24" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">Byte Engine 1.0.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  
+  
+  <span class="sidebar-brand-text">Byte Engine 1.0.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="game.html">Game Package Contents</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Game Package Contents</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="game.common.html">Common Package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Common Package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="game.common.items.html">Items Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="game.common.map.html">Map Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="game.common.stations.html">Stations Package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="game.controllers.html">Controllers Package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="game.test_suite.html">Test Suite Package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Test Suite Package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="game.test_suite.tests.html">Tests Package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="game.utils.html">Utils Package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="welcome-to-ndacm-s-byte-engine-documentation">
+<h1>Welcome to NDACM’s Byte Engine Documentation!<a class="headerlink" href="#welcome-to-ndacm-s-byte-engine-documentation" title="Permalink to this heading">#</a></h1>
+<p>NDSU’s ACM chapter hosts an annual competition called “Byte-le Royale.” This competition was created by Riley Conlin,
+Jordan Goetze, Jacob Baumann, Ajay Brown, and Nick Hilger. It promotes working with others and developing critical
+thinking skills, while challenging competitors under a time limit.</p>
+<p>This project provides the framework for developing games for Byte-le. The README document is attached to this page.
+Refer to that for additional info to what’s here!</p>
+<section id="readme-document">
+<h2>README Document<a class="headerlink" href="#readme-document" title="Permalink to this heading">#</a></h2>
+<section id="byte-engine">
+<h3>Byte Engine<a class="headerlink" href="#byte-engine" title="Permalink to this heading">#</a></h3>
+<p>Revamped base game engine for use in NDACM Byte-le Royale games.
+Changes made in 2023.</p>
+<section id="important-changes">
+<h4>Important Changes<a class="headerlink" href="#important-changes" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Overall Change</p>
+<ul>
+<li><p>Every file is now type hinted to facilitate the coding process. For future development,
+type hint any changes made for the same reason.</p></li>
+</ul>
+</li>
+<li><p>Item Class</p>
+<ul>
+<li><p>The item class has many parameters that can be used in a few different ways to allow
+for flexibility.</p></li>
+<li><p>Value:</p>
+<ul>
+<li><p>This allows for an item to have a value of some sort. This can be used to determine
+points gained for collecting the item, or its sell price. The meaning can change depending
+on the project.</p></li>
+</ul>
+</li>
+<li><p>Durability:</p>
+<ul>
+<li><p>Durability can represent how many uses an item has. What happens after is determined by
+the development team.</p></li>
+</ul>
+</li>
+<li><p>Quantity:</p>
+<ul>
+<li><p>This allows for consolidating and representing multiple items in a single item object.</p></li>
+</ul>
+</li>
+<li><p>Stack Size:</p>
+<ul>
+<li><p>Stack Size determines how many item objects can be consolidated together into a single
+object at once. This can be thought of as a denominator in a fraction.</p></li>
+</ul>
+</li>
+<li><p>Reference the Item class for further documentation.</p></li>
+</ul>
+</li>
+<li><p>GameBoard Class</p>
+<ul>
+<li><p>GameBoard Seed Parameter</p>
+<ul>
+<li><p>There is a new parameter in the GameBoard class that allows
+a specific seed to be set. This can be used to help with testing during game development.</p></li>
+</ul>
+</li>
+<li><p>Map Size Parameter</p>
+<ul>
+<li><p>This is a Vector object that is not used as a coordinate, but the dimensions of the
+entire game map. Vectors are explained later.</p></li>
+</ul>
+</li>
+<li><p>Locations Parameter</p>
+<ul>
+<li><p>This parameter allows for user-defined specifications of where to put certain GameObjects
+on the game map. It is an extensive system used to do this, so refer to the file for
+further documentation.</p></li>
+</ul>
+</li>
+<li><p>Walled Parameter</p>
+<ul>
+<li><p>This is a boolean that determines whether to place Wall objects on the border of the game
+map.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Occupiable Class</p>
+<ul>
+<li><p>A new class was implemented called Occupiable. This class inherits from GameObject and
+allows for other GameObjects to “stack” on top of one another. As long as an object inherits
+this class, it can allow for many objects to be located on the same Tile.</p></li>
+</ul>
+</li>
+<li><p>Tile Class</p>
+<ul>
+<li><p>The Tile class inherits from Occupiable, allowing for other GameObjects to stack on top of
+it. A Tile can be used to represent the floor or any other basic object in the game.</p></li>
+</ul>
+</li>
+<li><p>Wall Class</p>
+<ul>
+<li><p>The Wall class is a GameObject that represent an impassable object. Use this object to help
+define the borders of the game map.</p></li>
+</ul>
+</li>
+<li><p>Stations</p>
+<ul>
+<li><p>Station Class</p>
+<ul>
+<li><p>The Station represents a basic Station. They can contain items and be interacted with.</p></li>
+</ul>
+</li>
+<li><p>Occupiable Station</p>
+<ul>
+<li><p>Occupiable Stations represent basic Station objects that can be occupied by another
+GameObject.</p></li>
+</ul>
+</li>
+<li><p>Example Classes</p>
+<ul>
+<li><p>The occupiable_station_example, station_example, and station_receiver_example classes
+are provided to show how their respective files can be used. These can be deleted or used
+as templates on how to expand on their functionality.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Action Class</p>
+<ul>
+<li><p>This is a class to represent the actions a player takes each turn in object form. This is
+not implemented in this version of the engine since enums are primarily used.</p></li>
+</ul>
+</li>
+<li><p>Avatar Class</p>
+<ul>
+<li><p>The Avatar class is newly implemented in this version of the byte-engine and includes
+many new features.</p></li>
+<li><p>Position:</p>
+<ul>
+<li><p>The Avatar class has a parameter called “position” which is a Vector object (explained
+later in this document). This simply stores the Avatar’s coordinate on the game map.</p></li>
+</ul>
+</li>
+<li><p>Inventory:</p>
+<ul>
+<li><p>There is an inventory system implemented in the Avatar class now. You are able to specify
+the max size of it, and there are methods that are used to pick up items, take items from
+other objects, and drop the Avatar’s held item.</p></li>
+</ul>
+</li>
+<li><p>Held Item:</p>
+<ul>
+<li><p>The held item of an Avatar is an item that the Avatar has in their inventory. This is done
+by using enums. Reference the enums.py file for more information.</p></li>
+</ul>
+</li>
+<li><p>These changes are provided to allow for development to go smoothly. Developers are not obliged
+to use nor keep any of these changes. The inventory system and any other aspect of the class may be
+modified or removed as necessary for game development.</p></li>
+</ul>
+</li>
+<li><p>Enums File</p>
+<ul>
+<li><p>This file has every significant object being represented as an enum. There are also enums
+that help with the avatar’s inventory system. Refer to the file for a note on this.</p></li>
+</ul>
+</li>
+<li><p>Player Class</p>
+<ul>
+<li><p>The player class now receives a list of ActionType enums to allow for multiple actions
+to happen in one turn. The enum representation can be replaced with the Action object
+if needed.</p></li>
+</ul>
+</li>
+<li><p>Avatar VS Player Classes</p>
+<ul>
+<li><p>These two classes are often confused with each other. Here are their differences.</p></li>
+<li><p>Avatar:</p>
+<ul>
+<li><p>The Avatar class represents the character that is in the game. The Avatar is
+what moves around, interacts with other GameObjects, gains points, and whatever else
+the developers implement.</p></li>
+</ul>
+</li>
+<li><p>Player:</p>
+<ul>
+<li><p>The Player object encapsulates the Avatar class and represents the physical
+people competing in the competition. This is why it has parameters such as team_name.
+It is also why the controllers take a Player object as a parameter and not an Avatar
+object; it helps manage the information gathered for the individual competitors/teams for
+the final results.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Controllers</p>
+<ul>
+<li><p>Interact Controller Class</p>
+<ul>
+<li><p>This class controls how players interact with the environment and other GameObjects.</p></li>
+</ul>
+</li>
+<li><p>Inventory Controller Class</p>
+<ul>
+<li><p>This class controls how players select a certain item in their inventory to then
+become their held item.</p></li>
+</ul>
+</li>
+<li><p>Master Controller Class</p>
+<ul>
+<li><p>This controller is used to manage what happens in each turn and update the
+overarching information of the game’s state.</p></li>
+</ul>
+</li>
+<li><p>Movement Controller Class</p>
+<ul>
+<li><p>This class manages moving the player through the game board by using the given enums.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Generate Game File</p>
+<ul>
+<li><p>This file has a single method that’s used to generate the game map. The
+generation is slow, so call the method when needed. Change the initialized
+GameBoard object’s parameters as necessary for the project.</p></li>
+</ul>
+</li>
+<li><p>Vector Class</p>
+<ul>
+<li><p>The Vector class is used to simplify handling coordinates.
+Some new implementations include ways to increase the values of an already existing Vector,
+adding two Vectors to create a new one, and returning the Vector’s information as
+a tuple.</p></li>
+</ul>
+</li>
+<li><p>Config File</p>
+<ul>
+<li><p>The most notable change in this file is MAX_NUMBER_OF_ACTIONS_PER_TURN. It is used for
+allowing multiple actions to be taken in one turn. Adjust as necessary.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="development-notes">
+<h4>Development Notes<a class="headerlink" href="#development-notes" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Type Hinting</p>
+<ul>
+<li><p>Type hinting is very useful in Python because it prevents any confusion on
+what type an object is supposed to be, what value a method returns, etc. Make
+sure to type hint any and everything to eliminate any confusion.</p></li>
+</ul>
+</li>
+<li><p>Planning</p>
+<ul>
+<li><p>When planning, it’s suggested to write out pseudocode, create UMLs, and any
+other documentation that will help with the process. It is easy to forget what
+is discussed between meetings without a plan.</p></li>
+<li><p>Write everything that should be implemented,
+what files need to be created, their purpose in the project, and more. UML diagrams
+help see how classes will interact and inherit from each other.</p></li>
+<li><p>Lastly, documentation is a great method to stay organized too. Having someone to
+write what is discussed in meetings can be useful; you won’t easily lose track of
+what’s discussed.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="how-to-run">
+<h4>How to run<a class="headerlink" href="#how-to-run" title="Permalink to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="se">\b</span>uild.bat<span class="w"> </span>-<span class="w"> </span>will<span class="w"> </span>build<span class="w"> </span>your<span class="w"> </span>code<span class="w"> </span><span class="o">(</span>compile,<span class="w"> </span>pretty<span class="w"> </span>much<span class="o">)</span>
+
+python<span class="w"> </span>.<span class="se">\l</span>auncher.pyz<span class="w"> </span>g<span class="w"> </span>-<span class="w"> </span>will<span class="w"> </span>generate<span class="w"> </span>a<span class="w"> </span>map
+
+python<span class="w"> </span>.<span class="se">\l</span>auncher.pyz<span class="w"> </span>r<span class="w"> </span>-<span class="w"> </span>will<span class="w"> </span>run<span class="w"> </span>the<span class="w"> </span>game
+</pre></div>
+</div>
+</section>
+<section id="required-python-version">
+<h4>Required Python Version<a class="headerlink" href="#required-python-version" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Requires Python 3.11 due to type of Self</p></li>
+</ul>
+</section>
+<section id="test-suite-commands">
+<h4>Test Suite Commands:<a class="headerlink" href="#test-suite-commands" title="Permalink to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>game.test_suite.runner
+</pre></div>
+</div>
+</section>
+<section id="manual">
+<h4>Manual<a class="headerlink" href="#manual" title="Permalink to this heading">#</a></h4>
+<p><a class="reference external" href="https://docs.google.com/document/d/1MGxvq5V9yGJbsbcBgDM26LugPbtQGlyNiaUOmjn85sc/edit?usp=sharing">Usage Manual</a></p>
+<p>Referenced Examples - https://github.com/topoftheyear/Byte-le-Game-Examples</p>
+</section>
+<section id="previous-byte-le-competitions">
+<h4>Previous Byte-le Competitions<a class="headerlink" href="#previous-byte-le-competitions" title="Permalink to this heading">#</a></h4>
+<p>2018 - Dungeon Delvers - https://github.com/jghibiki/Byte-le-Royale-2018</p>
+<p>2019 - Space Denizen - https://github.com/topoftheyear/Byte-le-Royale-2019</p>
+<p>2020 - Disaster Dispatcher - https://github.com/PixPanz/byte_le_royale_2020</p>
+<p>2021 - Traveling Trailsmen - https://github.com/PixPanz/byte_le_royale_2021</p>
+<p>2022 - FarTech - https://github.com/HagenSR/byte_le_royale_2022</p>
+<p>2023 - Undercooked - https://github.com/amanda-f-ndsu/byte_le_royale_2023</p>
+</section>
+</section>
+<hr class="docutils" />
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="game.html">Game Package Contents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="game.common.html">Common Package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="game.common.items.html">Items Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.common.items.html#module-game.common.items.item">Item Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.common.items.html#game.common.items.item.Item"><code class="docutils literal notranslate"><span class="pre">Item</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.common.map.html">Map Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.common.map.html#module-game.common.map.game_board">Gameboard Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.common.map.html#game.common.map.game_board.GameBoard"><code class="docutils literal notranslate"><span class="pre">GameBoard</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.common.map.html#module-game.common.map.occupiable">Occupiable Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.common.map.html#game.common.map.occupiable.Occupiable"><code class="docutils literal notranslate"><span class="pre">Occupiable</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.common.map.html#module-game.common.map.tile">Tile Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.common.map.html#game.common.map.tile.Tile"><code class="docutils literal notranslate"><span class="pre">Tile</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.common.map.html#module-game.common.map.wall">Wall Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.common.map.html#game.common.map.wall.Wall"><code class="docutils literal notranslate"><span class="pre">Wall</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.common.stations.html">Stations Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.common.stations.html#module-game.common.stations.occupiable_station">Occupiable Station Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.common.stations.html#game.common.stations.occupiable_station.OccupiableStation"><code class="docutils literal notranslate"><span class="pre">OccupiableStation</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.common.stations.html#module-game.common.stations.occupiable_station_example">Occupiable Station Example Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.common.stations.html#game.common.stations.occupiable_station_example.OccupiableStationExample"><code class="docutils literal notranslate"><span class="pre">OccupiableStationExample</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.common.stations.html#game.common.stations.occupiable_station_example.OccupiableStationExample.take_action"><code class="docutils literal notranslate"><span class="pre">OccupiableStationExample.take_action()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.common.stations.html#module-game.common.stations.station">Station Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.common.stations.html#game.common.stations.station.Station"><code class="docutils literal notranslate"><span class="pre">Station</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.common.stations.html#module-game.common.stations.station_example">Station Example Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.common.stations.html#game.common.stations.station_example.StationExample"><code class="docutils literal notranslate"><span class="pre">StationExample</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.common.stations.html#game.common.stations.station_example.StationExample.take_action"><code class="docutils literal notranslate"><span class="pre">StationExample.take_action()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.common.stations.html#module-game.common.stations.station_receiver_example">Station Receiver Example Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.common.stations.html#game.common.stations.station_receiver_example.StationReceiverExample"><code class="docutils literal notranslate"><span class="pre">StationReceiverExample</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.common.stations.html#game.common.stations.station_receiver_example.StationReceiverExample.take_action"><code class="docutils literal notranslate"><span class="pre">StationReceiverExample.take_action()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.common.html#module-game.common.action">Action Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.common.html#game.common.action.Action"><code class="docutils literal notranslate"><span class="pre">Action</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.common.html#module-game.common.avatar">Avatar Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.common.html#game.common.avatar.Avatar"><code class="docutils literal notranslate"><span class="pre">Avatar</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.common.html#game.common.avatar.Avatar.drop_held_item"><code class="docutils literal notranslate"><span class="pre">Avatar.drop_held_item()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="game.common.html#game.common.avatar.Avatar.take"><code class="docutils literal notranslate"><span class="pre">Avatar.take()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.common.html#enums-file">Enums File</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.common.html#game.common.enums.ActionType"><code class="docutils literal notranslate"><span class="pre">ActionType</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.common.html#game.common.enums.ActionType.SELECT_SLOT_9"><code class="docutils literal notranslate"><span class="pre">ActionType.SELECT_SLOT_9</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.common.html#game.common.enums.DebugLevel"><code class="docutils literal notranslate"><span class="pre">DebugLevel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="game.common.html#game.common.enums.ObjectType"><code class="docutils literal notranslate"><span class="pre">ObjectType</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.common.html#module-game.common.game_object">GameObject Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.common.html#game.common.game_object.GameObject"><code class="docutils literal notranslate"><span class="pre">GameObject</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.common.html#module-game.common.player">Player Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.common.html#game.common.player.Player"><code class="docutils literal notranslate"><span class="pre">Player</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="game.controllers.html">Controllers Package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="game.controllers.html#module-game.controllers.controller">Controller Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.controllers.html#game.controllers.controller.Controller"><code class="docutils literal notranslate"><span class="pre">Controller</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.controllers.html#module-game.controllers.interact_controller">Interact Controller Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.controllers.html#game.controllers.interact_controller.InteractController"><code class="docutils literal notranslate"><span class="pre">InteractController</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.controllers.html#game.controllers.interact_controller.InteractController.handle_actions"><code class="docutils literal notranslate"><span class="pre">InteractController.handle_actions()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.controllers.html#module-game.controllers.inventory_controller">Inventory Controller Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.controllers.html#game.controllers.inventory_controller.InventoryController"><code class="docutils literal notranslate"><span class="pre">InventoryController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.controllers.html#module-game.controllers.master_controller">Master Controller Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.controllers.html#game.controllers.master_controller.MasterController"><code class="docutils literal notranslate"><span class="pre">MasterController</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.controllers.html#module-game.controllers.movement_controller">Movement Controller Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.controllers.html#game.controllers.movement_controller.MovementController"><code class="docutils literal notranslate"><span class="pre">MovementController</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="game.test_suite.html">Test Suite Package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="game.test_suite.tests.html">Tests Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_example">Test Example File</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_example.TestExample"><code class="docutils literal notranslate"><span class="pre">TestExample</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_example.TestExample.setUp"><code class="docutils literal notranslate"><span class="pre">TestExample.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_avatar">Test Avatar Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_avatar.TestAvatar"><code class="docutils literal notranslate"><span class="pre">TestAvatar</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_avatar.TestAvatar.setUp"><code class="docutils literal notranslate"><span class="pre">TestAvatar.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_avatar_inventory">Test Avatar Inventory</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_avatar_inventory.TestAvatarInventory"><code class="docutils literal notranslate"><span class="pre">TestAvatarInventory</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_avatar_inventory.TestAvatarInventory.setUp"><code class="docutils literal notranslate"><span class="pre">TestAvatarInventory.setUp()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_avatar_inventory.TestAvatarInventory.test_take"><code class="docutils literal notranslate"><span class="pre">TestAvatarInventory.test_take()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_game_board">Test Gameboard Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_game_board.TestGameBoard"><code class="docutils literal notranslate"><span class="pre">TestGameBoard</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_game_board.TestGameBoard.setUp"><code class="docutils literal notranslate"><span class="pre">TestGameBoard.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_game_board_no_gen">Test Gameboard (No Generation)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_game_board_no_gen.TestGameBoard"><code class="docutils literal notranslate"><span class="pre">TestGameBoard</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_game_board_no_gen.TestGameBoard.setUp"><code class="docutils literal notranslate"><span class="pre">TestGameBoard.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_initialization">Test Initialization File</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_initialization.TestInitialization"><code class="docutils literal notranslate"><span class="pre">TestInitialization</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_initialization.TestInitialization.setUp"><code class="docutils literal notranslate"><span class="pre">TestInitialization.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_interact_controller">Test Interact Controller File</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_interact_controller.TestInteractController"><code class="docutils literal notranslate"><span class="pre">TestInteractController</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_interact_controller.TestInteractController.setUp"><code class="docutils literal notranslate"><span class="pre">TestInteractController.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_inventory_controller">Test Inventory Controller Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_inventory_controller.TestInventoryController"><code class="docutils literal notranslate"><span class="pre">TestInventoryController</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_inventory_controller.TestInventoryController.setUp"><code class="docutils literal notranslate"><span class="pre">TestInventoryController.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_item">Test Item Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_item.TestItem"><code class="docutils literal notranslate"><span class="pre">TestItem</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_item.TestItem.setUp"><code class="docutils literal notranslate"><span class="pre">TestItem.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_master_controller">Test Master Controller Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_master_controller.TestMasterController"><code class="docutils literal notranslate"><span class="pre">TestMasterController</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_master_controller.TestMasterController.setUp"><code class="docutils literal notranslate"><span class="pre">TestMasterController.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller">Test Movement Controller Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller.TestMovementControllerIfWall"><code class="docutils literal notranslate"><span class="pre">TestMovementControllerIfWall</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller.TestMovementControllerIfWall.setUp"><code class="docutils literal notranslate"><span class="pre">TestMovementControllerIfWall.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller_if_occupiable_station_is_occupiable">Test Movement Controller with Occupiable Stations the Avatar can Occupy</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_occupiable_station_is_occupiable.TestMovementControllerIfOccupiableStationIsOccupiable"><code class="docutils literal notranslate"><span class="pre">TestMovementControllerIfOccupiableStationIsOccupiable</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_occupiable_station_is_occupiable.TestMovementControllerIfOccupiableStationIsOccupiable.setUp"><code class="docutils literal notranslate"><span class="pre">TestMovementControllerIfOccupiableStationIsOccupiable.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller_if_occupiable_stations">Test Movement Controller with Occupiable Stations</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_occupiable_stations.TestMovementControllerIfOccupiableStations"><code class="docutils literal notranslate"><span class="pre">TestMovementControllerIfOccupiableStations</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_occupiable_stations.TestMovementControllerIfOccupiableStations.setUp"><code class="docutils literal notranslate"><span class="pre">TestMovementControllerIfOccupiableStations.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller_if_stations">Test Movement Controller with Stations the Avatar Occupy</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_stations.TestMovementControllerIfStations"><code class="docutils literal notranslate"><span class="pre">TestMovementControllerIfStations</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_stations.TestMovementControllerIfStations.setUp"><code class="docutils literal notranslate"><span class="pre">TestMovementControllerIfStations.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_movement_controller_if_wall">Test Movement Controller with Walls</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_wall.TestMovementControllerIfWall"><code class="docutils literal notranslate"><span class="pre">TestMovementControllerIfWall</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_movement_controller_if_wall.TestMovementControllerIfWall.setUp"><code class="docutils literal notranslate"><span class="pre">TestMovementControllerIfWall.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_occupiable_station">Test Occupiable Station Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_occupiable_station.TestOccupiableStation"><code class="docutils literal notranslate"><span class="pre">TestOccupiableStation</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_occupiable_station.TestOccupiableStation.setUp"><code class="docutils literal notranslate"><span class="pre">TestOccupiableStation.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_player">Test Player Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_player.TestPlayer"><code class="docutils literal notranslate"><span class="pre">TestPlayer</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_player.TestPlayer.setUp"><code class="docutils literal notranslate"><span class="pre">TestPlayer.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_station">Test Station Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_station.TestStation"><code class="docutils literal notranslate"><span class="pre">TestStation</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_station.TestStation.setUp"><code class="docutils literal notranslate"><span class="pre">TestStation.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.test_suite.tests.html#module-game.test_suite.tests.test_tile">Test Tile Class</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_tile.TestTile"><code class="docutils literal notranslate"><span class="pre">TestTile</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="game.test_suite.tests.html#game.test_suite.tests.test_tile.TestTile.setUp"><code class="docutils literal notranslate"><span class="pre">TestTile.setUp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.test_suite.html#module-game.test_suite.runner">Runner.py File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="game.utils.html">Utils Package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="game.utils.html#module-game.utils.generate_game">Generate Game</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.utils.html#game.utils.generate_game.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.utils.html#module-game.utils.helpers">Helpers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.utils.html#game.utils.helpers.write_json_file"><code class="docutils literal notranslate"><span class="pre">write_json_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.utils.html#module-game.utils.thread">Thread</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.utils.html#game.utils.thread.CommunicationThread"><code class="docutils literal notranslate"><span class="pre">CommunicationThread</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.utils.html#game.utils.thread.CommunicationThread.run"><code class="docutils literal notranslate"><span class="pre">CommunicationThread.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="game.utils.html#game.utils.thread.Thread"><code class="docutils literal notranslate"><span class="pre">Thread</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.utils.html#game.utils.thread.Thread.run"><code class="docutils literal notranslate"><span class="pre">Thread.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.utils.html#module-game.utils.validation">Validation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.utils.html#game.utils.validation.verify_code"><code class="docutils literal notranslate"><span class="pre">verify_code()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="game.utils.html#module-game.utils.vector">Vector</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="game.utils.html#game.utils.vector.Vector"><code class="docutils literal notranslate"><span class="pre">Vector</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="game.utils.html#game.utils.vector.Vector.as_tuple"><code class="docutils literal notranslate"><span class="pre">Vector.as_tuple()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<hr class="docutils" />
+<section id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="game.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Game Package Contents</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Ian King
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Welcome to NDACM’s Byte Engine Documentation!</a><ul>
+<li><a class="reference internal" href="#readme-document">README Document</a><ul>
+<li><a class="reference internal" href="#byte-engine">Byte Engine</a><ul>
+<li><a class="reference internal" href="#important-changes">Important Changes</a></li>
+<li><a class="reference internal" href="#development-notes">Development Notes</a></li>
+<li><a class="reference internal" href="#how-to-run">How to run</a></li>
+<li><a class="reference internal" href="#required-python-version">Required Python Version</a></li>
+<li><a class="reference internal" href="#test-suite-commands">Test Suite Commands:</a></li>
+<li><a class="reference internal" href="#manual">Manual</a></li>
+<li><a class="reference internal" href="#previous-byte-le-competitions">Previous Byte-le Competitions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
+</html>
