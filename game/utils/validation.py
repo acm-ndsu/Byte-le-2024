@@ -1,3 +1,4 @@
+import parsec
 import re
 
 from game.config import ALLOWED_MODULES

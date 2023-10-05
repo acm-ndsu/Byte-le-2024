@@ -3,6 +3,7 @@ import random
 from game.common.enums import Company, ObjectType
 from game.common.game_object import GameObject
 from game.common.items.item import Item
+from game.quarry_rush.entity.ores import Lambdium, Turite
 
 from typing import Self
 
@@ -31,38 +32,36 @@ class InventoryManager(GameObject):
         Cashes in the science points of every item in the appropriate inventory. Returns 0 if the given enum is
         incorrect.
         """
-
-        inventory = self.__inventories[company]
-
-        total: int = 0
-
-        for i in range(0, len(inventory)):
-            if inventory[i] is not None and inventory[i].science_point_value > 0:
-                total += inventory[i].science_point_value
-                inventory[i] = None
-
-        return total
+        inventory: list[Item | None] = self.__inventories[company]
+        def value(item: Item | None) -> int:
+            return 0 if item is None else item.science_point_value
+        return sum(map(value, inventory))
 
     def cash_in_points(self, company: Company) -> int:
         """
         Cashes in the points of every item in the appropriate inventory. Returns 0 if the given enum is incorrect.
         """
+        inventory: list[Item | None] = self.__inventories[company]
+        def value(item: Item | None) -> int:
+            if item is None:
+                return 0
+            devaluation = 0.3
+            if isinstance(item, Lambdium):
+                return item.value if company == Company.CHURCH else round(item.value * devaluation)
+            if isinstance(item, Turite):
+                return item.value if company == Company.TURING else round(item.value * devaluation)
+            return item.value
+        return sum(map(value, inventory))
 
-        inventory = self.__inventories[company]
-
-        total: int = 0
-
-        for i in range(0, len(inventory)):
-            if inventory[i] is not None and inventory[i].value > 0:
-                total += inventory[i].value
-                inventory[i] = None
-
-        return total
-
-    def cash_in_all(self, company: Company) -> None:
-        """Runs both cash in methods: cash_in_science, cash_in_points"""
-        self.cash_in_points(company)
-        self.cash_in_science(company)
+    def cash_in_all(self, company: Company) -> tuple[int, int]:
+        """
+        Runs both cash in methods: cash_in_science, cash_in_points.
+        Removes all items from the appropriate inventory.
+        """
+        points = self.cash_in_points(company)
+        science = self.cash_in_science(company)
+        self.__inventories[company] = self.create_empty_inventory()
+        return (points, science)
 
     def give(self, item: Item, company: Company) -> bool:
         """

@@ -1,0 +1,10 @@
+Client Package
+===================
+
+User Client
+-----------
+
+.. automodule:: game.client.user_client
+   :members:
+   :no-undoc-members:
+   :show-inheritance:

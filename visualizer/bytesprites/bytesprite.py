@@ -1,4 +1,6 @@
-import pygame
+from __future__ import annotations
+from typing import Callable
+
 import pygame as pyg
 
 from visualizer.config import Config
@@ -16,10 +18,12 @@ class ByteSprite(pyg.sprite.Sprite):
     image: pyg.Surface
     __frame_index: int  # Selects the sprite from the spritesheet to be used. Used for animation
     __config: Config = Config()
+    __update_function: Callable[[dict, int, Vector, list[list[pyg.Surface]]], list[pyg.Surface]]
 
     # make sure that all inherited classes constructors only take screen as a parameter
-    def __init__(self, screen: pyg.Surface, filename: str, num_of_states: int, colorkey: pyg.Color | None = None,
-                 object_type: int = 0, layer: int = 0, top_left: Vector = Vector(0, 0)):
+    def __init__(self, screen: pyg.Surface, filename: str, num_of_states: int, object_type: int,
+                 update_function: Callable[[dict, int, Vector, list[list[pyg.Surface]]], list[pyg.Surface]],
+                 colorkey: pyg.Color | None = None, layer: int = 0, top_left: Vector = Vector(0, 0)):
         # Add implementation here for selecting the sprite sheet to use
         super().__init__()
         self.spritesheet_parser: SpriteSheet = SpriteSheet(filename)
@@ -34,7 +38,7 @@ class ByteSprite(pyg.sprite.Sprite):
             [pyg.transform.scale(frame, self.rect.size) for frame in
              sheet] for sheet in self.spritesheets]
 
-
+        self.update_function = update_function
 
         self.active_sheet: list[pyg.Surface] = self.spritesheets[0]
         self.object_type: int = object_type
@@ -64,6 +68,10 @@ class ByteSprite(pyg.sprite.Sprite):
     @property
     def screen(self) -> pyg.Surface:
         return self.__screen
+
+    @property
+    def update_function(self) -> Callable[[dict, int, Vector, list[list[pyg.Surface]]], list[pyg.Surface]]:
+        return self.__update_function
 
     @active_sheet.setter
     def active_sheet(self, sheet: list[pyg.Surface]) -> None:
@@ -112,6 +120,12 @@ class ByteSprite(pyg.sprite.Sprite):
             raise ValueError(f'{self.__class__.__name__}.screen must be a pyg.Screen object.')
         self.__screen = screen
 
+    @update_function.setter
+    def update_function(self, update_function: Callable[[dict, int, Vector, list[list[pyg.Surface]]], list[pyg.Surface]]) -> None:
+        if update_function is None or not isinstance(update_function, Callable):
+            raise ValueError(f'{self.__class__.__name__}.update_function must be a Callable object.')
+        self.__update_function = update_function
+
     # Inherit this method to implement sprite logic
     def update(self, data: dict, layer: int, pos: Vector) -> None:
 
@@ -120,8 +134,13 @@ class ByteSprite(pyg.sprite.Sprite):
             pos.x * self.__config.TILE_SIZE * self.__config.SCALE + self.__config.GAME_BOARD_MARGIN_LEFT,
             pos.y * self.__config.TILE_SIZE * self.__config.SCALE + self.__config.GAME_BOARD_MARGIN_TOP)
 
+        self.update_function(data, layer, pos, self.spritesheets)
+        self.set_image_and_render()
+
     # Call this method at the end of the implemented logic and for each frame
     def set_image_and_render(self):
         self.image = self.active_sheet[self.__frame_index]
         self.__frame_index = (self.__frame_index + 1) % self.__config.NUMBER_OF_FRAMES_PER_TURN
         self.screen.blit(self.image, self.rect)
+
+

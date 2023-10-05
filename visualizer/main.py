@@ -33,7 +33,7 @@ class ByteVisualiser:
         self.clock: pygame.time.Clock = pygame.time.Clock()
 
         self.tick: int = 0
-        self.bytesprite_templates: pygame.sprite.Group = pygame.sprite.Group()
+        self.bytesprite_factories: dict[int: Callable[[pygame.Surface], ByteSprite]] = {}
         self.bytesprite_map: [[[ByteSprite]]] = list()
 
         self.default_frame_rate: int = self.config.FRAME_RATE
@@ -45,11 +45,12 @@ class ByteVisualiser:
         size: tuple[int, int] = (self.config.SCREEN_SIZE.x, self.config.SCREEN_SIZE.y)
         # Scale for video saving (division can be adjusted, higher division = lower quality)
         self.scaled: tuple[int, int] = (size[0] // 2, size[1] // 2)
-        self.writer: cv2.VideoWriter = cv2.VideoWriter("out.mp4", cv2.VideoWriter_fourcc(*'H264'), self.default_frame_rate, self.scaled)
+        self.writer: cv2.VideoWriter = cv2.VideoWriter("out.mp4", cv2.VideoWriter_fourcc(*'H264'),
+                                                       self.default_frame_rate, self.scaled)
 
     def load(self) -> None:
         self.turn_logs: dict = logs_to_dict()
-        self.bytesprite_templates = self.adapter.populate_bytesprites()
+        self.bytesprite_factories = self.adapter.populate_bytesprite_factories()
 
     def prerender(self) -> None:
         self.screen.fill(self.config.BACKGROUND_COLOR)
@@ -162,8 +163,9 @@ class ByteVisualiser:
                     # Call render logic on bytesprite
                     self.bytesprite_map[y][x][z].update(temp_tile, z, Vector(y=y, x=x))
                     # increase iteration
-                    temp_tile = temp_tile.get('occupied_by') if temp_tile.get(
-                        'occupied_by') is not None else temp_tile.get('held_item')
+                    temp_tile = temp_tile.get('occupied_by') if temp_tile.get('occupied_by') is not None \
+                        else (temp_tile.get('held_item') if self.config.VISUALIZE_HELD_ITEMS
+                              else None)
                     z += 1
 
                 # clean up additional layers
@@ -181,20 +183,18 @@ class ByteVisualiser:
 
     # Create bytesprite at current tile ran in recalc_animation method
     def __create_bytesprite(self, x: int, y: int, z: int, temp_tile: dict | None) -> None:
-        if self.bytesprite_map[y][x][z] is None or self.bytesprite_map[y][x][z].object_type != temp_tile[
-            'object_type']:
-            if len(self.bytesprite_templates.sprites()) == 0:
-                raise ValueError(f'must provide bytesprites for visualization!')
-            sprite_class: ByteSprite | None = next(t for t in self.bytesprite_templates.sprites() if
-                                                   isinstance(t, ByteSprite) and t.object_type == temp_tile[
-                                                       'object_type'])
+        if self.bytesprite_map[y][x][z] is None or \
+                self.bytesprite_map[y][x][z].object_type != temp_tile['object_type']:
+            if len(self.bytesprite_factories) == 0:
+                raise ValueError(f'must provide bytesprite factories for visualization!')
             # Check that a bytesprite template exists for current object type
-            if sprite_class is None:
+            factory_function: Callable[[pygame.Surface], ByteSprite] | None = self.bytesprite_factories.get(temp_tile['object_type'])
+            if factory_function is None:
                 raise ValueError(
                     f'Must provide a bytesprite for each object type! Missing object_type: {temp_tile["object_type"]}')
 
             # Instantiate a new bytesprite on current layer
-            self.bytesprite_map[y][x][z] = sprite_class.__class__(self.screen)
+            self.bytesprite_map[y][x][z] = factory_function(self.screen)
 
     # Additional layer clean up method ran in recalc_animation method
     def __clean_up_layers(self, x: int, y: int, z: int) -> None:
@@ -205,7 +205,7 @@ class ByteVisualiser:
         row: list
         tile: list
         sprite: ByteSprite
-        [[[sprite.set_image_and_render() for sprite in tile] for tile in row] for row in self.bytesprite_map]
+        [sprite.set_image_and_render() for row in self.bytesprite_map for tile in row for sprite in tile]
 
     def postrender(self) -> None:
         self.adapter.clean_up()
