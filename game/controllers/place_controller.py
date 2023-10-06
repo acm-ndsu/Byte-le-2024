@@ -1,11 +1,13 @@
-from game.common.player import Player
-from game.common.map.game_board import GameBoard
-from game.common.map.tile import Tile
 from game.common.enums import *
+from game.common.game_object import GameObject
+from game.common.map.game_board import GameBoard
+from game.common.map.occupiable import Occupiable
+from game.common.map.tile import Tile
+from game.common.player import Player
 from game.controllers.controller import Controller
 from game.quarry_rush.entity.placeable.dynamite import Dynamite
-from game.quarry_rush.entity.placeable.trap import *
-from game.quarry_rush.avatar.inventory_manager import InventoryManager
+from game.quarry_rush.entity.placeable.traps import Landmine, EMP
+from game.utils.vector import Vector
 
 
 class PlaceController(Controller):
@@ -19,19 +21,23 @@ class PlaceController(Controller):
         # depending on the action type, the type of placeable entity is placed on the map with the avatar occupying it
         match action:
             case ActionType.PLACE_DYNAMITE:
-                if client.avatar.can_place_dynamite():
-                    dynamite: Dynamite = Dynamite()
-                    dynamite.occupied_by = client.avatar
-                    tile.occupied_by = dynamite
+                self.__place_dyanmite(client, tile)
             case ActionType.PLACE_LANDMINE:
-                if client.avatar.can_place_trap():
-                    landmine: Landmine = Landmine()  # need to figure out constructor
-                    landmine.occupied_by = client.avatar
-                    tile.occupied_by = landmine
+                self.__place_dyanmite(client, tile)
             case ActionType.PLACE_EMP:
-                if client.avatar.can_place_trap():
-                    emp: EMP = EMP()  # need to figure out constructor
-                    emp.occupied_by = client.avatar
-                    tile.occupied_by = emp
+                self.__place_emp(client, tile)
             case _:  # default case
                 return
+
+    def __place_dyanmite(self, client: Player, tile: Tile):
+        if client.avatar.can_place_dynamite():
+            tile.place_on_top_of_stack(Dynamite())
+
+    def __place_landmine(self, client: Player, tile: Tile):
+        if client.avatar.can_place_trap():
+            tile.place_on_top_of_stack(Landmine())
+            tile.place_on_top_of_stack(Landmine())
+
+    def __place_emp(self, client: Player, tile: Tile):
+        if client.avatar.can_place_trap():
+            tile.place_on_top_of_stack(EMP())

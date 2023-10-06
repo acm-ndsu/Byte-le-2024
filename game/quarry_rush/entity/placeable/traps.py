@@ -142,14 +142,15 @@ class Trap(OccupiableStation):
 
 class Landmine(Trap):
 
-    def __init__(self, owner_company: Company, target_company: Company,
-                 opponent_position: Callable[[], Vector], position: Vector):
+    def __init__(self, owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
+                 opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
         super().__init__(0.0, 0.1, owner_company, target_company, opponent_position, position)
         self.object_type: ObjectType = ObjectType.LANDMINE
 
+
 class EMP(Trap):
 
-    def __init__(self, owner_company: Company, target_company: Company,
-                 opponent_position: Callable[[], Vector], position: Vector):
+    def __init__(self, owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
+                 opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
         super().__init__(0.1, 0.2, owner_company, target_company, opponent_position, position)
         self.object_type: ObjectType = ObjectType.EMP
