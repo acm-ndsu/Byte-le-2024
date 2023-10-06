@@ -39,14 +39,17 @@ class ObjectType(Enum):
     STATION_EXAMPLE = auto()                # 21
     STATION_RECEIVER_EXAMPLE = auto()       # 22
     OCCUPIABLE_STATION_EXAMPLE = auto()     # 23
-    ACTIVE_ABILITY = auto()                 # 24
-    INVENTORY_MANAGER = auto()              # 25
-    DYNAMITE_ACTIVE_ABILITY = auto()        # 26
-    DYNAMITE = auto()                       # 27
-    ORE_OCCUPIABLE_STATION = auto()         # 28
-    TRAP = auto()                           # 29
-    LANDMINE = auto()                       # 30
-    EMP = auto()                            # 31
+    COMPANY_STATION = auto()                # 24
+    CHURCH_STATION = auto()                 # 25
+    TURING_STATION = auto()                 # 26
+    ACTIVE_ABILITY = auto()                 # 27
+    INVENTORY_MANAGER = auto()              # 28
+    DYNAMITE_ACTIVE_ABILITY = auto()        # 29
+    DYNAMITE = auto()                       # 30
+    ORE_OCCUPIABLE_STATION = auto()         # 31
+    TRAP = auto()                           # 32
+    LANDMINE = auto()                       # 33
+    EMP = auto()                            # 34
 
 
 class ActionType(Enum):
