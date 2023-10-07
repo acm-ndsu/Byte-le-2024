@@ -45,8 +45,13 @@ class ByteSprite(pyg.sprite.Sprite):
 
             Example:
 
-            On the left, the Rect's offset is depicted as being at (0, 0), meaning there is no offset. On the right,
-            the Rect is seen further to the right, showing its offset from the left corner of the screen.
+            On the left, the Rect's offset is depicted as being at (0, 0),  meaning there is no offset. A Rect object
+            has parameters that will determine the offset by passing in (x, y). The 'x' is the offset from the left
+            side, and the 'y' is the offset from the top. Therefore, passing in an (x, y) of (3, 2) in a Rect object
+            will move the object 3 units to the right, and 2 units down.
+
+            In the visual below, the left side shows a Rect at (0, 0) (i.e., no offset). The image on the right depicts
+            the Rect object further to the right, showing its offset from the left corner of the screen.
 
         Rect Example:
         ::
@@ -60,7 +65,7 @@ class ByteSprite(pyg.sprite.Sprite):
             -----------------------                 -----------------------
 
         Screen:
-            The screen also a PyGame.Screen object, so it simply represents an image of the screen itself.
+            The screen is also a PyGame.Screen object, so it simply represents an image of the screen itself.
 
         Image:
             The image is an individual sprite in a spritesheet.
@@ -68,27 +73,27 @@ class ByteSprite(pyg.sprite.Sprite):
         Frame Index:
             The frame index is an int that is used to determine which sprite to use from the active_sheet. For example,
             say the active_sheet is the first row in the ``ExampleSpritesheet.png``. If the frame_index is 1, the first
-            image will be used where the head is centered. If the frame_index is 3, the sprite used will be where the
-            head off to the right.
+            image will be used where the head is centered. If the frame_index is 3, the sprite will now have the head of
+            the Avatar in a different position than in frame_index 1.
 
         Config:
             This is an object reference to the ``config.py`` file. It's used to access the fixed values that are only
             accessed in the configurations of the file.
 
         Update Function:
-            The update function is a method that is assigned during instantiation of the Bytesprite. That function is
-            used to update which active_sheet is used depending on what is implemented in Bytesprite classes.
+            The update function is a method that is assigned during instantiation of the ByteSprite. That function is
+            used to update what the active_sheet is depending on what is implemented in ByteSprite classes.
 
             Examine the ``exampleBS.py`` file. In that implementation of the update method, it selects the active_sheet
-            based on a chain of if-statements. Then, in the ``create_bytesprite`` method, that implemented ``update``
-            method is passed into the returned Bytesprite object.
+            based on a chain of if statements. Next, in the ``create_bytesprite`` method, the implemented ``update``
+            method is passed into the returned ByteSprite object.
 
-            Now, in the Bytesprite object's update method, it will set the active_sheet to be based on what is returned
+            Now, in the ByteSprite object's update method, it will set the active_sheet to be based on what is returned
             from the BytespriteFactory's method.
 
-            To recap, first, a Bytesprite's update function depends on the BytespriteFactory's implementation. Then, the
+            To recap, first, a ByteSprite's update function depends on the BytespriteFactory's implementation. Then, the
             BytespriteFactory's implementation will return which sprite_sheet is supposed to be used. Finally, the
-            bytesprite's update function will take what is returned from the BytespriteFactory's method and assign
+            ByteSprite's update function will take what is returned from the BytespriteFactory's method and assign
             the active_sheet to be what is returned. The two work in tandem.
     """
 
