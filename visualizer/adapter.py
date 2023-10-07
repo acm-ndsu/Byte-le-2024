@@ -3,14 +3,6 @@ import random
 import pygame
 from game.config import *
 from typing import Callable, Any
-from visualizer.bytesprites.ancientTechBS import AncientTechBS
-from visualizer.bytesprites.copiumBS import CopiumBS
-from visualizer.bytesprites.dynamiteBS import DynamiteBS
-from visualizer.bytesprites.empsBS import EmpsBS
-from visualizer.bytesprites.lambdiumBS import LambdiumBS
-from visualizer.bytesprites.landmineBS import LandmineBS
-from visualizer.bytesprites.stationBS import StationBS
-from visualizer.bytesprites.turiteBS import TuriteBS
 from visualizer.bytesprites.exampleTileBS import TileBytespriteFactoryExample
 from visualizer.bytesprites.exampleWallBS import WallBytespriteFactoryExample
 from visualizer.bytesprites.exampleBS import AvatarBytespriteFactoryExample
