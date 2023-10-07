@@ -9,7 +9,6 @@ from visualizer.bytesprites.exampleBS import AvatarBytespriteFactoryExample
 from game.utils.vector import Vector
 from visualizer.utils.text import Text
 from visualizer.utils.button import Button, ButtonColors
-from visualizer.utils.sidebars import Sidebars
 from visualizer.bytesprites.bytesprite import ByteSprite
 from visualizer.templates.menu_templates import Basic, MenuTemplate
 from visualizer.templates.playback_template import PlaybackTemplate, PlaybackButtons
@@ -90,7 +89,6 @@ class Adapter:
     def render(self) -> None:
         # self.button.render()
         # any logic for rendering text, buttons, and other visuals
-        # to access sidebars do sidebars.[whichever sidebar you are doing]
         text = Text(self.screen, f'{self.turn_number} / {self.turn_max}', 48)
         text.rect.center = Vector.add_vectors(Vector(*self.screen.get_rect().midtop), Vector(0, 50)).as_tuple()
         text.render()
