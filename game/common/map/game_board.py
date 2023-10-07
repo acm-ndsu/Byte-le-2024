@@ -249,10 +249,10 @@ class GameBoard(GameObject):
 
             temp_tile: GameObject = self.game_map[vector.y][vector.x]
 
-            while hasattr(temp_tile.occupied_by, 'occupied_by'):
+            while temp_tile.occupied_by is not None and hasattr(temp_tile.occupied_by, 'occupied_by'):
                 temp_tile = temp_tile.occupied_by
 
-            if temp_tile is None:
+            if temp_tile.occupied_by is not None:
                 raise ValueError("Last item on the given tile doesn't have the 'occupied_by' attribute.")
 
             temp_tile.occupied_by = game_object
@@ -263,13 +263,12 @@ class GameBoard(GameObject):
         # stack remaining game_objects on last vector
         temp_tile: GameObject = self.game_map[last_vec.y][last_vec.x]
 
-        while hasattr(temp_tile.occupied_by, 'occupied_by'):
+        while temp_tile.occupied_by is not None and hasattr(temp_tile.occupied_by, 'occupied_by'):
             temp_tile = temp_tile.occupied_by
 
         for game_object in remaining_objects:
-            if temp_tile is None:
+            if not hasattr(temp_tile, 'occupied_by') or temp_tile.occupied_by is not None:
                 raise ValueError("Last item on the given tile doesn't have the 'occupied_by' attribute.")
-
             temp_tile.occupied_by = game_object
             temp_tile = temp_tile.occupied_by
 

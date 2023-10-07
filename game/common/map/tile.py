@@ -21,7 +21,7 @@ class Tile(Occupiable):
         inherit from this class.
     """
     def __init__(self, occupied_by: GameObject = None):
-        super().__init__()
+        super().__init__(occupied_by)
         self.object_type: ObjectType = ObjectType.TILE
 
     def from_json(self, data: dict) -> Self:

@@ -27,10 +27,7 @@ class TestMovementControllerIfStations(unittest.TestCase):
                                  Vector(3, 1), Vector(3, 2)): [Station(None), Station(None), Station(None),
                                                                Station(None), Station(None), Station(None),
                                                                Station(None), Station(None)]}
-
-        self.occ_station = OccupiableStation()
-        self.game_board = GameBoard(0, Vector(4, 4), self.locations, True)
-        self.wall = Wall()
+        self.game_board = GameBoard(0, Vector(4, 4), self.locations, False)
         # test movements up, down, left and right by starting with default 3,3 then know if it changes from there \/
         self.avatar = Avatar(Vector(2, 2), 1)
         self.client = Player(None, None, [], self.avatar)
