@@ -5,7 +5,6 @@ import os
 import numpy
 import pygame
 import cv2
-from PIL import Image
 
 import game.config
 from typing import Callable
@@ -42,10 +41,9 @@ class ByteVisualiser:
         self.paused: bool = False
         self.recording: bool = False
 
-        size: tuple[int, int] = (self.config.SCREEN_SIZE.x, self.config.SCREEN_SIZE.y)
         # Scale for video saving (division can be adjusted, higher division = lower quality)
-        self.scaled: tuple[int, int] = (size[0] // 2, size[1] // 2)
-        self.writer: cv2.VideoWriter = cv2.VideoWriter("out.mp4", cv2.VideoWriter_fourcc(*'H264'),
+        self.scaled: tuple[int, int] = (self.size.x // 2, self.size.y // 2)
+        self.writer: cv2.VideoWriter = cv2.VideoWriter("out.mp4", cv2.VideoWriter_fourcc(*'mp4v'),
                                                        self.default_frame_rate, self.scaled)
 
     def load(self) -> None:
@@ -122,13 +120,13 @@ class ByteVisualiser:
     # Method to deal with saving game to mp4 (called in render if save button pressed)
     def save_video(self) -> None:
         # Convert to PIL Image
-        new_image = pygame.image.tostring(self.screen.copy(), "RGBA", False)
-        new_image = Image.frombytes("RGBA", self.screen.get_rect().size, new_image)
-        # Scale image (using Bicubic, can be adjusted)
-        new_image.thumbnail(self.scaled, Image.BICUBIC)
+        new_image = pygame.surfarray.pixels3d(self.screen.copy())
+        # Rotate ndarray
+        new_image = new_image.swapaxes(1, 0)
+        # shrink size for recording
+        new_image = cv2.resize(new_image, self.scaled)
         # Convert to OpenCV Image with numpy
-        new_image = numpy.array(new_image)
-        new_image = cv2.cvtColor(new_image, cv2.COLOR_RGBA2BGRA)
+        new_image = cv2.cvtColor(new_image, cv2.COLOR_RGBA2BGR)
         # Write image and go to next turn
         self.writer.write(new_image)
 
@@ -302,7 +300,7 @@ class ByteVisualiser:
             if not in_phase:
                 break
             self.clock.tick(math.floor(self.default_frame_rate * self.playback_speed))
-
+        self.writer.release()
 
 if __name__ == '__main__':
     byte_visualiser: ByteVisualiser = ByteVisualiser()
