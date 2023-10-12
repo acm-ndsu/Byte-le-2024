@@ -71,7 +71,7 @@ class CollectableGenerator:
         ancient_tech_map = self.generate_ancient_tech()
 
         result: dict[tuple[Vector]: list[CollectableStation]] = {}
-        for (y, x) in [(y, x) for y in range(100) for x in range(100)]:
+        for (y, x) in [(y, x) for y in range(self.__board_size) for x in range(self.__board_size)]:
             stations: list[CollectableStation] = []
             if copium_map[y][x]:
                 stations.append(CopiumOccupiableStation())

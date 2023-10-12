@@ -1,4 +1,6 @@
 import unittest
+
+from game.common.enums import ObjectType
 from game.quarry_rush.station.company_station import ChurchStation, TuringStation
 from game.utils.vector import Vector
 from game.common.map.wall import Wall
@@ -73,3 +75,20 @@ class TestMapGenerator(unittest.TestCase):
             for av, bv in zip(y, j):
                 self.assertEqual(av.object_type, bv.object_type)
 
+        # check expected values for amount of ores and ancient tech
+        counts: dict[str, int] = {'copium': 0, 'turite': 0, 'lambdium': 0, 'ancient tech': 0}
+
+        for key in actual.keys():
+            if [z.object_type for z in actual[key]].__contains__(ObjectType.COPIUM_OCCUPIABLE_STATION):
+                counts['copium'] += 1
+            if [z.object_type for z in actual[key]].__contains__(ObjectType.LAMBDIUM_OCCUPIABLE_STATION):
+                counts['lambdium'] += 1
+            if [z.object_type for z in actual[key]].__contains__(ObjectType.TURITE_OCCUPIABLE_STATION):
+                counts['turite'] += 1
+            if [z.object_type for z in actual[key]].__contains__(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION):
+                counts['ancient tech'] += 1
+
+        self.assertEqual(100, counts['copium'])
+        self.assertEqual(50, counts['lambdium'])
+        self.assertEqual(50, counts['turite'])
+        self.assertEqual(100, counts['ancient tech'])

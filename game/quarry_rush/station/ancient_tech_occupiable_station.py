@@ -13,6 +13,7 @@ class AncientTechOccupiableStation(OccupiableStation):
 
     def __init__(self, held_item: AncientTech = AncientTech()):
         super().__init__(held_item=held_item)
+        self.object_type = ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION
 
     def take_action(self, avatar: Avatar, inventory_manager: InventoryManager) -> None:
         if InventoryManager is None:
