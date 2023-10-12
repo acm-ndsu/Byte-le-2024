@@ -2,6 +2,7 @@ from game.common.stations.occupiable_station import OccupiableStation
 from game.common.avatar import Avatar
 from game.common.enums import Company
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
+from game.common.enums import ObjectType
 from typing import Self
 
 
@@ -15,9 +16,11 @@ class CompanyStation(OccupiableStation):
     take_action: if the avatar's company matches the company of the station, the avatar can
     run cash_in_all
     """
+
     def __init__(self, company: Company):
         super().__init__()
         self.company: Company = company
+        self.object_type = ObjectType.COMPANY_STATION
 
     # company getter and setter methods
     @property
@@ -43,3 +46,19 @@ class CompanyStation(OccupiableStation):
         super().from_json(data)
         self.company: Company = data['company']
         return self
+
+
+class ChurchStation(CompanyStation):
+    """
+    Class to generate base stations for Church.
+    """
+    def __init__(self):
+        super().__init__(Company.CHURCH)
+
+
+class TuringStation(CompanyStation):
+    """
+    Class to generate base stations for Turing.
+    """
+    def __init__(self):
+        super().__init__(Company.TURING)
