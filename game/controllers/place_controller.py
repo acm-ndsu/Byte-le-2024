@@ -30,14 +30,16 @@ class PlaceController(Controller):
                 return
 
     def __place_dyanmite(self, client: Player, tile: Tile):
+        # calls the place_on_top method to place a dynamite on top of the occupied_by stack but below the Avatar
         if client.avatar.can_place_dynamite():
             tile.place_on_top_of_stack(Dynamite())
 
     def __place_landmine(self, client: Player, tile: Tile):
+        # calls the place_on_top method to place a landmine on top of the occupied_by stack but below the Avatar
         if client.avatar.can_place_trap():
-            tile.place_on_top_of_stack(Landmine())
             tile.place_on_top_of_stack(Landmine())
 
     def __place_emp(self, client: Player, tile: Tile):
+        # calls the place_on_top method to place a dynamite on top of the occupied_by stack but below the Avatar
         if client.avatar.can_place_trap():
             tile.place_on_top_of_stack(EMP())

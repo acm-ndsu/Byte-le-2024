@@ -11,6 +11,4 @@ class TestPlaceController(unittest.TestCase):
     This class is to test the TestPlaceController and placing Dynamite, Landmines, and EMPs on the GameBoard
     """
 
-    def setUp(self):
-        self.place_controller: PlaceController = PlaceController()
 

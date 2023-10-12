@@ -103,7 +103,7 @@ class Trap(OccupiableStation):
         # find distance between trap position and opponent_position using method from vector class
         # if distance is less than or equal to maximum distance, then return True, else, False
         opponent_position = self.opponent_position()
-        if Vector.distance(opponent_position) <= 1:
+        if self.position.distance(opponent_position) <= 1:
             return True
         return False
 

@@ -42,7 +42,8 @@ class Occupiable(GameObject):
 
         # Execute loop only if the object occupying self is an object (i.e., not none) and can also be occupied
         while temp_game_object.occupied_by is not None and hasattr(temp_game_object.occupied_by, 'occupied_by'):
-            temp_game_object = temp_game_object.occupied_by  # moves to the next thing in the stack of occupiable objects
+            # moves to the next thing in the stack of occupiable objects
+            temp_game_object = temp_game_object.occupied_by
 
         if temp_game_object.occupied_by is not None:
             if not isinstance(temp_game_object.occupied_by, Avatar) or not hasattr(game_object, 'occupied_by'):

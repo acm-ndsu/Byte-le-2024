@@ -7,6 +7,7 @@ from game.utils.vector import Vector
 from game.quarry_rush.tech.tech_tree import TechTree
 from game.quarry_rush.avatar.avatar_functions import AvatarFunctions
 from game.quarry_rush.ability.dynamite_active_ability import DynamiteActiveAbility
+from game.quarry_rush.ability.place_trap import PlaceTrap
 
 
 class Avatar(GameObject):

@@ -9,14 +9,14 @@ class TestGameBoardController(unittest.TestCase):
     """
 
     def setUp(self) -> None:
-        self.game_board_controller: GameBoardController = GameBoardController()
         self.game_board: GameBoard = GameBoard()
+        self.game_board_controller: GameBoardController = GameBoardController(self.game_board)
 
     def test_pre_tick(self) -> None:
         mock: Mock = Mock()
         self.game_board.dynamite_detonation_control = mock
 
-        self.game_board_controller.pre_tick(self.game_board)
+        self.game_board_controller.pre_tick()
 
         mock.assert_called_once()
 
@@ -24,6 +24,6 @@ class TestGameBoardController(unittest.TestCase):
         mock: Mock = Mock()
         self.game_board.trap_detonation_control = mock
 
-        self.game_board_controller.post_tick(self.game_board)
+        self.game_board_controller.post_tick()
 
         mock.assert_called_once()
