@@ -41,4 +41,3 @@ class Copium(Ore):
                  position: Vector | None = None):
         super().__init__(value, 0, quantity, stack_size, durability, position)
         self.object_type = ObjectType.COPIUM
-
