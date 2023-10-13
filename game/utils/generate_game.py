@@ -4,6 +4,7 @@ from game.utils.vector import Vector
 from game.config import *
 from game.utils.helpers import write_json_file
 from game.common.map.game_board import GameBoard
+from game.quarry_rush.map.map_generator import MapGenerator
 
 
 def generate(seed: int = random.randint(0, 1000000000)):
@@ -16,9 +17,10 @@ def generate(seed: int = random.randint(0, 1000000000)):
     """
 
     print('Generating game map...')
+    
+    map_generator = MapGenerator(seed=seed)
 
-    temp: GameBoard = GameBoard(seed, map_size=Vector(6, 6), locations={(Vector(1, 1),): [Avatar()],
-                                                                        (Vector(4, 4),): [Avatar()]}, walled=True)
+    temp: GameBoard = GameBoard(seed, map_size=Vector(22, 22), locations=map_generator.generate(), walled=True)
     temp.generate_map()
     data: dict = {'game_board': temp.to_json()}
     # for x in range(1, MAX_TICKS + 1):
