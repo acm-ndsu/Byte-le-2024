@@ -23,8 +23,8 @@ class CollectableGenerator:
         f.close()
 
         self.__copium_weights = collectable_weights['copium']
-        self.__lambdium_weights = collectable_weights['lambdium']
-        self.__turite_weights = collectable_weights['turite']
+        self.__lambdium_weights = collectable_weights['special']
+        self.__turite_weights = collectable_weights['special']
         self.__ancient_tech_weights = collectable_weights['ancient_tech']
         self.__seed = seed
 
