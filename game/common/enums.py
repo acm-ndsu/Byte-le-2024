@@ -64,21 +64,9 @@ class ActionType(Enum):
     INTERACT_LEFT = auto()
     INTERACT_RIGHT = auto()
     INTERACT_CENTER = auto()
-    SELECT_SLOT_0 = auto()
-    SELECT_SLOT_1 = auto()
-    SELECT_SLOT_2 = auto()
-    SELECT_SLOT_3 = auto()
-    SELECT_SLOT_4 = auto()
-    SELECT_SLOT_5 = auto()
-    SELECT_SLOT_6 = auto()
-    SELECT_SLOT_7 = auto()
-    SELECT_SLOT_8 = auto()
-    SELECT_SLOT_9 = auto()
-    """
-    These last 10 enums are for selecting a slot from the Avatar class' inventory.
-    You can add/remove these as needed for the purposes of your game. 
-    """
-
+    PLACE_DYNAMITE = auto()
+    PLACE_LANDMINE = auto()
+    PLACE_EMP = auto()
 
 # Added for Quarry Rush
 

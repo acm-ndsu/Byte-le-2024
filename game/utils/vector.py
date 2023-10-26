@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from game.common.game_object import GameObject
 from game.common.enums import ObjectType
 from typing import Self, Tuple
@@ -137,5 +139,5 @@ class Vector(GameObject):
     def negative(self) -> Self:
         return Vector(-self.x, -self.y)
     
-    def distance(self, other_vector: Self) -> int:
+    def distance(self, other_vector: Vector) -> int:
         return abs(self.x - other_vector.x) + abs(self.y - other_vector.y)

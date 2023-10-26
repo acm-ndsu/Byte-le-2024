@@ -1,6 +1,7 @@
-from game.common.player import Player
 from game.common.map.game_board import GameBoard
 from game.controllers.controller import Controller
+from game.common.avatar import Avatar
+from game.common.enums import ObjectType
 
 
 class GameBoardController(Controller):
@@ -9,17 +10,18 @@ class GameBoardController(Controller):
     be certain things that will only happen at the start or end of a turn.
     """
 
-    def __init__(self):
+    def __init__(self, world: GameBoard):
         super().__init__()
+        self.world: GameBoard = world
 
-    def pre_tick(self, world: GameBoard) -> None:
+    def pre_tick(self) -> None:
         """
         This method will be called before the actions that need to take place during a turn.
         """
-        world.dynamite_detonation_control()
+        self.world.dynamite_detonation_control()
 
-    def post_tick(self, world: GameBoard) -> None:
+    def post_tick(self) -> None:
         """
         This method will be called after all the actions of a turn are completed.
         """
-        world.trap_detonation_control()
+        self.world.trap_detonation_control()

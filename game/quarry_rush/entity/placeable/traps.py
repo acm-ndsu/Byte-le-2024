@@ -103,7 +103,7 @@ class Trap(OccupiableStation):
         # find distance between trap position and opponent_position using method from vector class
         # if distance is less than or equal to maximum distance, then return True, else, False
         opponent_position = self.opponent_position()
-        if Vector.distance(self.position, opponent_position) <= 1:
+        if self.position.distance(opponent_position) <= 1:
             return True
         return False
 
@@ -142,14 +142,15 @@ class Trap(OccupiableStation):
 
 class Landmine(Trap):
 
-    def __init__(self, owner_company: Company, target_company: Company,
-                 opponent_position: Callable[[], Vector], position: Vector):
+    def __init__(self, owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
+                 opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
         super().__init__(0.0, 0.1, owner_company, target_company, opponent_position, position)
         self.object_type: ObjectType = ObjectType.LANDMINE
 
+
 class EMP(Trap):
 
-    def __init__(self, owner_company: Company, target_company: Company,
-                 opponent_position: Callable[[], Vector], position: Vector):
+    def __init__(self, owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
+                 opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
         super().__init__(0.1, 0.2, owner_company, target_company, opponent_position, position)
         self.object_type: ObjectType = ObjectType.EMP

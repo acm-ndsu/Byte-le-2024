@@ -20,6 +20,7 @@ class Tile(Occupiable):
         If the game being developed requires different tiles with special properties, future classes may be added and
         inherit from this class.
     """
+
     def __init__(self, occupied_by: GameObject = None):
         super().__init__(occupied_by)
         self.object_type: ObjectType = ObjectType.TILE
@@ -41,5 +42,5 @@ class Tile(Occupiable):
             case ObjectType.WALL:
                 self.occupied_by: Wall = Wall().from_json(occupied_by)
             case _:
-                raise Exception(f'Could not parse occupied_by: {occupied_by}')                  
+                raise Exception(f'Could not parse occupied_by: {occupied_by}')
         return self
