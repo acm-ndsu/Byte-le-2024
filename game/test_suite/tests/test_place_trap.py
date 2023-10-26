@@ -12,27 +12,8 @@ class TestPlaceTrap(unittest.TestCase):
     # set up
     def setUp(self) -> None:
         self.place_trap = PlaceTrap()
-        self.name: str = ""
         self.cooldown: int = 1
         self.cooldown_tick: int = 1
-
-    # test name
-    def test_name(self):
-        self.name = ""
-        self.place_trap.name = ""
-        self.assertEqual(self.place_trap.name, self.name)
-
-    # fail test name cant be null
-    def fail_test_name_null(self):
-        with self.assertRaises(ValueError) as e:
-            self.place_trap.name = None
-        self.assertEqual(str(e.exception), 'PlaceTrap.name must be a String')
-
-    # fail test for name, cant be anything eles
-    def fail_test_name_int(self):
-        with self.assertRaises(ValueError) as e:
-            self.place_trap.name = 1
-        self.assertEqual(str(e.exception), 'PlaceTrap.name must be a String')
 
     # test cooldown
     def test_cooldown(self):
@@ -99,3 +80,12 @@ class TestPlaceTrap(unittest.TestCase):
         with self.assertRaises(ValueError) as e:
             self.place_trap.avatar = ""
         self.assertEqual(str(e.exception), 'PlaceTrap.avatar must be None or Avatar')
+
+    # testing the json
+    def test_json(self):
+        data: dict = self.place_trap.to_json()
+        place_trap: PlaceTrap = PlaceTrap().from_json(data)
+        self.assertEqual(self.place_trap.object_type, place_trap.object_type)
+        self.assertEqual(self.place_trap.placing_trap, place_trap.placing_trap)
+        self.assertEqual(self.place_trap.cooldown, place_trap.cooldown)
+        self.assertEqual(self.place_trap.cooldown_tick, place_trap.cooldown_tick)
