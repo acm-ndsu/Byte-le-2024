@@ -44,7 +44,6 @@ class ActiveAbility(GameObject):
 # use will be a boolean checking to see if the object on cooldown is able to be used again
     def is_useable(self) -> bool:
         if self.fuse == 0:
-            self.fuse = self.cooldown
             return True
         return False
 

@@ -325,9 +325,9 @@ class Avatar(GameObject):
         # This method will be called in the landmine and EMP methods in the else statement for when it's to be used
         return self.place_trap.is_useable()
 
-    def can_place_dynamite_or_trap(self):
+    def can_place_dynamite_or_trap(self) -> bool:
         # This method will return if the avatar can place anything at all
-        return self.can_place_trap() and self.can_place_dynamite()
+        return self.can_place_trap() or self.can_place_dynamite()
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
