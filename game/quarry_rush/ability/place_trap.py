@@ -1,27 +1,16 @@
 from game.quarry_rush.ability.active_ability import ActiveAbility
+from game.common.enums import ObjectType
 from typing import Self
 
 
 class PlaceTrap(ActiveAbility):
 
-    def __init__(self, name: str = "", cooldown: int = 1, cooldown_tick: int = 0):
+    def __init__(self, cooldown: int = 1, cooldown_tick: int = 0):
         super().__init__()
-        self.name: str = name
+        self.object_type: ObjectType = ObjectType.PLACE_TRAP
         self.cooldown: int = cooldown
         self.cooldown_tick: int = cooldown_tick
         self.placing_trap: bool = False
-
-    # getter for name
-    @property
-    def name(self) -> str:
-        return self.__name
-
-    # setter for name
-    @name.setter
-    def name(self, name: str) -> None:
-        if name is None or not isinstance(name, str):
-            raise ValueError(f'{self.__class__.__name__}.name must be a String')
-        self.__name = name
 
     # getter for cooldown
     @property
@@ -62,7 +51,6 @@ class PlaceTrap(ActiveAbility):
     # to json
     def to_json(self) -> dict:
         data: dict = super().to_json()
-        data['name'] = self.name
         data['cooldown'] = self.cooldown
         data['cooldown_tick'] = self.cooldown_tick
         data['placing_trap'] = self.placing_trap
@@ -71,11 +59,7 @@ class PlaceTrap(ActiveAbility):
     # from json
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.name = data['name']
         self.cooldown = data['cooldown']
         self.cooldown_tick = data['cooldown_tick']
         self.placing_trap = data['placing_trap']
         return self
-
-
-

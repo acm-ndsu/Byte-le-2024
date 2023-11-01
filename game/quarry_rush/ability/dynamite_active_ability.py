@@ -8,9 +8,10 @@ class DynamiteActiveAbility(ActiveAbility):
     def __init__(self, cooldown: int = 1, fuse: int = 0):
         super().__init__()
         self.object_type = ObjectType.DYNAMITE_ACTIVE_ABILITY
-        self.cooldown: int = 1
-        self.fuse: int = 0
-        self.placing_dynamite: bool = False  # this is a boolean check to see if the avatar is placing down dynamite
+        self.cooldown: int = cooldown
+        self.fuse: int = fuse
+        # this is a boolean check to see if the avatar is placing down dynamite
+        self.placing_dynamite: bool = False
 
 # The cooldown represents the amount of turns that the ability is unavailable.
 # cooldown getter
@@ -22,9 +23,9 @@ class DynamiteActiveAbility(ActiveAbility):
     @cooldown.setter
     def cooldown(self, cooldown: int) -> None:
         if cooldown is None or not isinstance(cooldown, int):
-            raise ValueError(f'{self.__class__.__name__}.cooldown must be an int')
+            raise ValueError(f'{self.__class__.__name__}.cooldown must be an int.')
         if cooldown < 0:
-            raise ValueError(f'{self.__class__.__name__}.cooldown cannot be negative')
+            raise ValueError(f'{self.__class__.__name__}.cooldown cannot be negative.')
         self.__cooldown = cooldown
 
 # cooldown tick is the time it takes before the ability is able to be used again
@@ -37,9 +38,9 @@ class DynamiteActiveAbility(ActiveAbility):
     @fuse.setter
     def fuse(self, fuse: int) -> None:
         if fuse is None or not isinstance(fuse, int):
-            raise ValueError(f'{self.__class__.__name__}.fuse must be an int')
+            raise ValueError(f'{self.__class__.__name__}.fuse must be an int.')
         if fuse < 0:
-            raise ValueError(f'{self.__class__.__name__}.fuse cannot be negative')
+            raise ValueError(f'{self.__class__.__name__}.fuse cannot be negative.')
         self.__fuse = fuse
 
 # placing dynamite getter
@@ -49,7 +50,7 @@ class DynamiteActiveAbility(ActiveAbility):
 
 # placing dynamite setter
     @placing_dynamite.setter
-    def placing_dynamite(self, placing_dynamite: bool):
+    def placing_dynamite(self, placing_dynamite: bool) -> None:
         if placing_dynamite is None or not isinstance(placing_dynamite, bool):
             raise ValueError(f'{self.__class__.__name__}.placing_dynamite must be a bool.')
         self.__placing_dynamite = placing_dynamite

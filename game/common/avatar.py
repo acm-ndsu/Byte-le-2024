@@ -152,7 +152,6 @@ class Avatar(GameObject):
         self.__company: Company = company
         self.dynamite_active_ability: DynamiteActiveAbility = DynamiteActiveAbility()
         self.place_trap: PlaceTrap = PlaceTrap()
-        self.placing_trap: bool = False
 
     @property
     def company(self) -> Company:
@@ -315,8 +314,7 @@ class Avatar(GameObject):
         """Returns a list of all possible tech names in a Tech Tree."""
         return self.__tech_tree.tech_names()
 
-    # Dynamite placing functionality
-
+    # Dynamite placing functionality ----------------------------------------------------------------------------------
     # if avatar calls place dynamite, set to true, i.e. they want to place dynamite
     def can_place_dynamite(self) -> bool:
         # This method will be called in the unlock_dynamite method in the else statement for when it's to be used
@@ -326,6 +324,10 @@ class Avatar(GameObject):
     def can_place_trap(self) -> bool:
         # This method will be called in the landmine and EMP methods in the else statement for when it's to be used
         return self.place_trap.is_useable()
+
+    def can_place_dynamite_or_trap(self) -> bool:
+        # This method will return if the avatar can place anything at all
+        return self.can_place_trap() or self.can_place_dynamite()
 
     def to_json(self) -> dict:
         data: dict = super().to_json()

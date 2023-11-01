@@ -16,41 +16,42 @@ class DebugLevel(Enum):
 
 
 class ObjectType(Enum):
-    NONE = auto()                               # 1
-    ACTION = auto()                             # 2
-    PLAYER = auto()                             # 3
-    AVATAR = auto()                             # 4
-    GAMEBOARD = auto()                          # 5
-    VECTOR = auto()                             # 6
-    TILE = auto()                               # 7
-    WALL = auto()                               # 8
-    ITEM = auto()                               # 9
-    ORE = auto()                                # 10
-    LAMBDIUM = auto()                           # 11
-    TURITE = auto()                             # 12
-    COPIUM = auto()                             # 13
-    OCCUPIABLE = auto()                         # 14
-    ANCIENT_TECH = auto()                       # 15
-    STATION = auto()                            # 16
-    OCCUPIABLE_STATION = auto()                 # 17
-    LAMBDIUM_OCCUPIABLE_STATION = auto()        # 18
-    TURITE_OCCUPIABLE_STATION = auto()          # 19
-    COPIUM_OCCUPIABLE_STATION = auto()          # 20
-    STATION_EXAMPLE = auto()                    # 21
-    STATION_RECEIVER_EXAMPLE = auto()           # 22
-    OCCUPIABLE_STATION_EXAMPLE = auto()         # 23
-    COMPANY_STATION = auto()                    # 24
-    CHURCH_STATION = auto()                     # 25
-    TURING_STATION = auto()                     # 26
-    ACTIVE_ABILITY = auto()                     # 27
-    INVENTORY_MANAGER = auto()                  # 28
-    DYNAMITE_ACTIVE_ABILITY = auto()            # 29
-    DYNAMITE = auto()                           # 30
-    ORE_OCCUPIABLE_STATION = auto()             # 31
-    ANCIENT_TECH_OCCUPIABLE_STATION = auto()    # 32
-    TRAP = auto()                               # 33
-    LANDMINE = auto()                           # 34
-    EMP = auto()                                # 35
+    NONE = auto()  # 1
+    ACTION = auto()  # 2
+    PLAYER = auto()  # 3
+    AVATAR = auto()  # 4
+    GAMEBOARD = auto()  # 5
+    VECTOR = auto()  # 6
+    TILE = auto()  # 7
+    WALL = auto()  # 8
+    ITEM = auto()  # 9
+    ORE = auto()  # 10
+    LAMBDIUM = auto()  # 11
+    TURITE = auto()  # 12
+    COPIUM = auto()  # 13
+    OCCUPIABLE = auto()  # 14
+    ANCIENT_TECH = auto()  # 15
+    STATION = auto()  # 16
+    OCCUPIABLE_STATION = auto()  # 17
+    LAMBDIUM_OCCUPIABLE_STATION = auto()  # 18
+    TURITE_OCCUPIABLE_STATION = auto()  # 19
+    COPIUM_OCCUPIABLE_STATION = auto()  # 20
+    STATION_EXAMPLE = auto()  # 21
+    STATION_RECEIVER_EXAMPLE = auto()  # 22
+    OCCUPIABLE_STATION_EXAMPLE = auto()  # 23
+    COMPANY_STATION = auto()  # 24
+    CHURCH_STATION = auto()  # 25
+    TURING_STATION = auto()  # 26
+    ACTIVE_ABILITY = auto()  # 27
+    INVENTORY_MANAGER = auto()  # 28
+    PLACE_TRAP = auto()  # 29
+    DYNAMITE_ACTIVE_ABILITY = auto()  # 30
+    DYNAMITE = auto()  # 31
+    ORE_OCCUPIABLE_STATION = auto()  # 32
+    ANCIENT_TECH_OCCUPIABLE_STATION = auto()  # 33
+    TRAP = auto()  # 34
+    LANDMINE = auto()  # 35
+    EMP = auto()  # 36
 
 
 class ActionType(Enum):
@@ -68,8 +69,8 @@ class ActionType(Enum):
     PLACE_LANDMINE = auto()
     PLACE_EMP = auto()
 
-# Added for Quarry Rush
 
+# Added for Quarry Rush
 class Company(Enum):
     CHURCH = auto()
     TURING = auto()
