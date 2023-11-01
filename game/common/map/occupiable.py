@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from game.common.avatar import Avatar
 from game.common.enums import ObjectType
 from game.common.game_object import GameObject
@@ -38,7 +40,7 @@ class Occupiable(GameObject):
         """
         This method will take in a GameObject and place it on top of the occupied_by stack of the Occupiable object.
         """
-        temp_game_object: Self = self
+        temp_game_object: GameObject = self
 
         # Execute loop only if the object occupying self is an object (i.e., not none) and can also be occupied
         while temp_game_object.occupied_by is not None and hasattr(temp_game_object.occupied_by, 'occupied_by'):
@@ -54,6 +56,57 @@ class Occupiable(GameObject):
         temp_game_object.occupied_by = game_object  # assign the last thing on top of the stack that is occupiable
 
         return True
+
+    def find_occupied_by(self, object_type: ObjectType | None = None) -> GameObject | None:
+        """
+        This method searches for the given ObjectType in the stack of occupied_by. If found, it returns that object;
+        None is returned otherwise.
+        """
+
+        # start on the first object in the stack that isn't this object
+        temp_game_object: GameObject = self.occupied_by
+
+        # only check if the object is None because we want to look through the entire stack of objects.
+        while temp_game_object is not None:
+            # if the object is what we want, return true
+            if temp_game_object.object_type == object_type:
+                return temp_game_object
+
+            # moves to the next thing in the stack of occupiable objects
+            temp_game_object = temp_game_object.occupied_by
+
+        # if the wanted object isn't found, return None
+        return None
+
+    
+
+    # def find_occupied_by(self, object_type: ObjectType | None = None, game_object: GameObject | None = None) -> \
+    #         GameObject | None:
+    #     """
+    #     This method takes a ObjectType and checks if this Occupiable object is occupied by it. If so, it returns the
+    #     object in the stack. If not, it returns None
+    #     """
+    #
+    #     # start on the first thing in the stack that isn't this object
+    #     temp_game_object: GameObject = self.occupied_by
+    #
+    #     print(f'FIRST OCCUPIED BY: {temp_game_object.object_type}')  # DELETE AFTER TESTS
+    #
+    #     while isinstance(temp_game_object, Occupiable) and temp_game_object.occupied_by is not None:
+    #         if temp_game_object.object_type == object_type or (game_object is not None and
+    #                                                            isinstance(temp_game_object, game_object.__class__)):
+    #             return temp_game_object  # return the object looked for
+    #
+    #         # checks that the game object is still an Occupiable for the while loop condition
+    #         if not isinstance(temp_game_object, Occupiable):
+    #             return None
+    #
+    #         # moves to the next thing in the stack of occupiable objects
+    #         temp_game_object = temp_game_object.occupied_by
+    #
+    #         print(f'NEXT OCCUPIED BY: {temp_game_object.object_type}')  # DELETE AFTER TESTS
+    #
+    #     return None
 
     def to_json(self) -> dict:
         data: dict = super().to_json()

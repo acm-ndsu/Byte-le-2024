@@ -1,11 +1,8 @@
 import unittest
 
-from game.common.stations.occupiable_station import OccupiableStation
-from game.common.stations.station import Station
 from game.common.map.wall import Wall
-from game.common.avatar import Avatar
-from game.common.items.item import Item
-from game.common.enums import ObjectType
+from game.common.stations.station import Station
+from game.quarry_rush.station.ore_occupiable_stations import *
 
 
 class TestOccupiableStation(unittest.TestCase):
@@ -51,6 +48,31 @@ class TestOccupiableStation(unittest.TestCase):
         with self.assertRaises(ValueError) as e:
             self.occupiable_station.occupied_by = self.item
         self.assertEqual(str(e.exception), 'OccupiableStation.occupied_by cannot be an Item.')
+
+    # test is_occupied_by_method
+    def test_is_occupied_by_method(self):
+        copium_station: CopiumOccupiableStation = CopiumOccupiableStation()
+        lambdium_station: LambdiumOccupiableStation = LambdiumOccupiableStation()
+        turite_station: TuriteOccupiableStation = TuriteOccupiableStation()
+
+        # set occupied by order: copium -> lambdium -> turite
+        lambdium_station.occupied_by = turite_station
+        copium_station.occupied_by = lambdium_station
+
+        # ensure everything is on top of copium, and copium is not on top of itself
+        self.assertEqual(copium_station.find_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION), lambdium_station)
+        self.assertEqual(copium_station.find_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION), turite_station)
+        self.assertFalse(copium_station.find_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION), None)
+
+        # ensure lambdium is only occupied by turite and nothing else
+        self.assertEqual(lambdium_station.find_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION), None)
+        self.assertEqual(lambdium_station.find_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION), turite_station)
+        self.assertFalse(lambdium_station.find_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION), None)
+
+        # ensure turite is occupied by nothing
+        self.assertEqual(turite_station.find_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION), None)
+        self.assertEqual(turite_station.find_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION), None)
+        self.assertFalse(turite_station.find_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION), None)
 
     # test json method
     def test_occ_json(self):
