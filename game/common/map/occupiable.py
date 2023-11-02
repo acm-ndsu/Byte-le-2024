@@ -57,7 +57,7 @@ class Occupiable(GameObject):
 
         return True
 
-    def find_occupied_by(self, object_type: ObjectType | None = None) -> GameObject | None:
+    def is_occupied_by(self, object_type: ObjectType | None = None) -> bool:
         """
         This method searches for the given ObjectType in the stack of occupied_by. If found, it returns that object;
         None is returned otherwise.
@@ -70,15 +70,66 @@ class Occupiable(GameObject):
         while temp_game_object is not None:
             # if the object is what we want, return true
             if temp_game_object.object_type == object_type:
-                return temp_game_object
+                return True
 
             # moves to the next thing in the stack of occupiable objects
             temp_game_object = temp_game_object.occupied_by
 
-        # if the wanted object isn't found, return None
+        # if the wanted object isn't found, return False
+        return False
+
+    def remove_from_occupied_by(self, object_type: ObjectType | None = None) -> GameObject | None:
+        """
+        This method will remove the first instance of the given ObjectType found in the occupied by stack.
+        """
+
+        current_game_object: GameObject = self
+
+        # variable to store what the next thing in the stack is. Either None or a GameObject
+        next_game_object: GameObject = current_game_object.occupied_by
+
+        while (current_game_object and next_game_object is not None) and \
+                current_game_object.occupied_by.object_type != object_type:
+            current_game_object = current_game_object.occupied_by
+            next_game_object = next_game_object.occupied_by
+
+        # at top of stack without finding wanted object
+        if next_game_object is None:
+            return None
+
+        if next_game_object.object_type == object_type:
+            # reassign the current game_object's occupied_by and return what the next game object is
+            current_game_object.occupied_by = next_game_object.occupied_by
+            return next_game_object
+
         return None
 
-    
+        # make references of the objects in the stack
+        # prev_game_object: GameObject = self  # used to keep track of reconnecting the stack after removing an object
+        #
+        # # the current is the occupied_by object to ensure we can have a previous and next object
+        # current_game_object: GameObject = self.occupied_by
+        #
+        # next_game_object: GameObject = self.occupied_by.occupied_by  # used to reference the next object in the stack
+        #
+        # # loop only when the current and next objects are not None and the current object type doesn't match the given
+        # while (current_game_object and next_game_object is not None) and current_game_object.object_type != object_type:
+        #     # shift all objects up the stack
+        #     prev_game_object = current_game_object
+        #     current_game_object = next_game_object
+        #     next_game_object = next_game_object.occupied_by
+        #
+        # if next_game_object is None and current_game_object is not None:
+        #     return current_game_object
+        #
+        # # reorder the occupied_by stack
+        # prev_game_object.occupied_by = next_game_object
+        #
+        # # return what was removed
+        # return current_game_object
+
+
+
 
     # def find_occupied_by(self, object_type: ObjectType | None = None, game_object: GameObject | None = None) -> \
     #         GameObject | None:
