@@ -88,7 +88,7 @@ class TestMapGenerator(unittest.TestCase):
             if [z.object_type for z in actual[key]].__contains__(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION):
                 counts['ancient tech'] += 1
 
-        self.assertEqual(100, counts['copium'])
-        self.assertEqual(50, counts['lambdium'])
-        self.assertEqual(50, counts['turite'])
-        self.assertEqual(100, counts['ancient tech'])
+        self.assertEqual(50, counts['copium'])
+        self.assertEqual(25, counts['lambdium'])
+        self.assertEqual(25, counts['turite'])
+        self.assertEqual(50, counts['ancient tech'])
