@@ -20,7 +20,7 @@ def generate(seed: int = random.randint(0, 1000000000)):
     
     map_generator = MapGenerator(seed=seed)
 
-    temp: GameBoard = GameBoard(seed, map_size=Vector(22, 22), locations=map_generator.generate(), walled=True)
+    temp: GameBoard = GameBoard(seed, map_size=Vector(14, 14), locations=map_generator.generate(), walled=True)
     temp.generate_map()
     data: dict = {'game_board': temp.to_json()}
     # for x in range(1, MAX_TICKS + 1):

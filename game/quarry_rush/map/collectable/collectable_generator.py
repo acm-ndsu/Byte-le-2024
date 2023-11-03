@@ -12,10 +12,10 @@ CollectableStation: TypeAlias = OreOccupiableStation | AncientTechOccupiableStat
 
 
 class CollectableGenerator:
-    __board_size = 22  # This includes the borders. Field is 20x20
-    __copium_count = 100  # This is the number of copium that should be generated
-    __special_count = 50  # This is the number of each special ore that should be generated (50 means 50 lambdium and 50 turite)
-    __ancient_tech_count = 100  # This is the number of ancient tech that should be generated
+    __board_size = 14  # This includes the borders. Field is 20x20
+    __copium_count = 50  # This is the number of copium that should be generated
+    __special_count = 25  # This is the number of each special ore that should be generated (50 means 50 lambdium and 50 turite)
+    __ancient_tech_count = 50  # This is the number of ancient tech that should be generated
 
     def __init__(self, seed: int = rand.randint(0, 8675309)):
         f = open('game/quarry_rush/map/collectable/collectable_weights.json')
@@ -95,7 +95,7 @@ class CollectableGenerator:
         noise = PerlinNoise(octaves=8, seed=self.__seed)
         self.__seed += 1
         return self.adjust(
-            [[noise([x / 22, y / 22]) for x in range(self.__board_size)] for y in range(self.__board_size)])
+            [[noise([x / self.__board_size, y / self.__board_size]) for x in range(self.__board_size)] for y in range(self.__board_size)])
 
     def adjust(self, raw: list[list[float]]) -> list[list[float]]:
         """
