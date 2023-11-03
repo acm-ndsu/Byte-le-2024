@@ -2,14 +2,9 @@ from __future__ import annotations
 
 from game.common.enums import *
 from game.common.map.game_board import GameBoard
-from game.common.map.tile import Tile
 from game.common.player import Player
 from game.controllers.controller import Controller
-from game.quarry_rush.entity.ores import Ore
-from game.quarry_rush.entity.placeable.dynamite import Dynamite
-from game.quarry_rush.entity.placeable.traps import Landmine, EMP, Trap
-from game.quarry_rush.station.ore_occupiable_stations import OreOccupiableStation
-from game.utils.vector import Vector
+from game.controllers.interact_controller import InteractController
 
 
 class MineController(Controller):
@@ -25,15 +20,6 @@ class MineController(Controller):
         will be taken, and it stops there. If no copium is found, None will be returned.
         """
 
-        avatar_pos: Vector = client.avatar.position
-
-        # add all adjacent and central tiles to a list in clockwise motion
-        adjacent_tiles: [Tile] = [world.game_map[avatar_pos.y][avatar_pos.x],  # center tile
-                                  world.game_map[avatar_pos.y - 1][avatar_pos.x],  # above tile
-                                  world.game_map[avatar_pos.y][avatar_pos.x + 1],  # right tile
-                                  world.game_map[avatar_pos.y + 1][avatar_pos.x],  # below tile
-                                  world.game_map[avatar_pos.y][avatar_pos.x - 1]]  # left tile
-
         ore_object_type: ObjectType
 
         match action:
@@ -48,12 +34,6 @@ class MineController(Controller):
             case _:  # default case
                 return
 
-        ore: Ore | None = None
-        for tile in adjacent_tiles:
-            if tile.is_occupied_by(ore_object_type):
-                ore_station: OreOccupiableStation = tile.remove_from_occupied_by(ore_object_type)
-                ore = ore_station.held_item  # found ore wanted
-                break
+        InteractController().handle_actions(ActionType.INTERACT_CENTER, client, world, ore_object_type)
 
-        # gives the ore to the player's inventory
-        world.inventory_manager.give(ore, client.avatar.company)
+        world.game_map[client.avatar.position.y][client.avatar.position.x].remove_from_occupied_by(ore_object_type)

@@ -57,7 +57,7 @@ class Occupiable(GameObject):
 
         return True
 
-    def is_occupied_by(self, object_type: ObjectType | None = None) -> bool:
+    def is_occupied_by(self, object_type: ObjectType) -> bool:
         """
         This method searches for the given ObjectType in the stack of occupied_by. If found, it returns that object;
         None is returned otherwise.
@@ -82,10 +82,33 @@ class Occupiable(GameObject):
         # if the wanted object isn't found, return False
         return False
 
+    def get_occupied_by(self, target: ObjectType | GameObject) -> GameObject | None:
+        """
+        Get the object in the occupied_by stack given either the ObjectType or GameObject. Returns the GameObject in
+        the stack, but None if it isn't there.
+        """
+        # start on the first object in the stack that isn't this object
+        temp_game_object: GameObject = self.occupied_by
+        while temp_game_object is not None:
+            if (isinstance(target, ObjectType) and temp_game_object.object_type == target) or \
+                    isinstance(target, GameObject) and isinstance(temp_game_object, target.__class__):
+                return temp_game_object
+
+            if isinstance(temp_game_object, Occupiable):
+                temp_game_object = temp_game_object.occupied_by
+            else:
+                return None
+
+        return temp_game_object
+
     def remove_from_occupied_by(self, object_type: ObjectType | None = None) -> GameObject | None:
         """
         This method will remove the first instance of the given ObjectType found in the occupied by stack.
         """
+
+        # if the object type isn't in the stack, return None
+        if not self.is_occupied_by(object_type):
+            return None
 
         current_game_object: GameObject = self
 

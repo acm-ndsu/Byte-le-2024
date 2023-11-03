@@ -33,11 +33,11 @@ class TestMineController(unittest.TestCase):
         }
 
         self.world: GameBoard = GameBoard(0, Vector(3, 3), self.locations, False)
-        self.client: Player = Player(None, None, [], self.avatar)
+        self.client: Player = Player(avatar=self.avatar)
         self.world.generate_map()
 
     # tests getting the material from underneath the avatar
-    def test_mining_center(self):
+    def test_mining(self):
         # remember that the game map is **(y, x)**, not (x, y)
         self.mine_controller.handle_actions(ActionType.MINE_ANCIENT_TECH, self.client, self.world)
         self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[0],
@@ -45,130 +45,11 @@ class TestMineController(unittest.TestCase):
 
         # ensure all tiles are the same except the center
         self.assertTrue(self.world.game_map[1][1].is_occupied_by(ObjectType.AVATAR) and not
-                        self.world.game_map[1][1].is_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[0][1].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[0][1].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[1][2].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[1][2].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[1][2].is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[1][0].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[2][1].is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION) and
-                        self.world.game_map[2][1].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-
-    # tests mining above the avatar
-    def test_mining_above(self):
-        self.mine_controller.handle_actions(ActionType.MINE_LAMBUIM, self.client, self.world)
-        self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[0],
-                                   Lambdium))
-
-        self.assertTrue(self.world.game_map[1][1].is_occupied_by(ObjectType.AVATAR) and
-                        self.world.game_map[1][1].is_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[0][1].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION) and not
-                        self.world.game_map[0][1].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[1][2].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[1][2].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[1][2].is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[1][0].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[2][1].is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION) and
-                        self.world.game_map[2][1].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-
-    # tests mining to the right of the avatar
-    def test_mining_right(self):
-        self.mine_controller.handle_actions(ActionType.MINE_TURITE, self.client, self.world)
-        self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[0],
-                                   Turite))
-
-        self.assertTrue(self.world.game_map[1][1].is_occupied_by(ObjectType.AVATAR) and
-                        self.world.game_map[1][1].is_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[0][1].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[0][1].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[1][2].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[1][2].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION) and not
-                        self.world.game_map[1][2].is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[1][0].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[2][1].is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION) and
-                        self.world.game_map[2][1].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-
-    # tests mining for the same ore twice to get it successfully
-    def test_mining_twice(self):
-        self.mine_controller.handle_actions(ActionType.MINE_TURITE, self.client, self.world)
-        self.mine_controller.handle_actions(ActionType.MINE_TURITE, self.client, self.world)
-        self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[0],
-                                   Turite),
-                        isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[1], Turite))
-
-        self.assertTrue(self.world.game_map[1][1].is_occupied_by(ObjectType.AVATAR) and
-                        self.world.game_map[1][1].is_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[0][1].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[0][1].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[1][2].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[1][2].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION) and not
-                        self.world.game_map[1][2].is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[1][0].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[2][1].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION) and not
-                        self.world.game_map[2][1].is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION))
-
-    # tests mining for the same ore 3 times to get it successfully
-    def test_mining_three_times(self):
-        self.mine_controller.handle_actions(ActionType.MINE_COPIUM, self.client, self.world)
-        self.mine_controller.handle_actions(ActionType.MINE_COPIUM, self.client, self.world)
-        self.mine_controller.handle_actions(ActionType.MINE_COPIUM, self.client, self.world)
-        self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[0],
-                                   Copium) and
-                        isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[1],
-                                   Copium) and
-                        isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[2],
-                                   Copium))
-
-        self.assertTrue(self.world.game_map[1][1].is_occupied_by(ObjectType.AVATAR) and
-                        self.world.game_map[1][1].is_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION))
-
-        self.assertTrue(not self.world.game_map[0][1].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[0][1].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[1][2].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[1][2].is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION) and not
-                        self.world.game_map[1][2].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(not self.world.game_map[1][0].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[2][1].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[2][1].is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION))
-
-    def test_mining_with_none(self):
-        self.mine_controller.handle_actions(ActionType.MINE_ANCIENT_TECH, self.client, self.world)
-        self.mine_controller.handle_actions(ActionType.MINE_ANCIENT_TECH, self.client, self.world)
-        self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[0],
-                                   AncientTech) and
-                        self.world.inventory_manager.get_inventory(self.avatar.company)[1] is None)
-
-        self.assertTrue(self.world.game_map[1][1].is_occupied_by(ObjectType.AVATAR) and not
         self.world.game_map[1][1].is_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION))
 
-        self.assertTrue(self.world.game_map[0][1].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[0][1].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[1][2].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[1][2].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION) and
-                        self.world.game_map[1][2].is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[1][0].is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION))
-
-        self.assertTrue(self.world.game_map[2][1].is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION) and
-                        self.world.game_map[2][1].is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
+    def test_mining_fail(self):
+        self.mine_controller.handle_actions(ActionType.MINE_ANCIENT_TECH, self.client, self.world)
+        self.mine_controller.handle_actions(ActionType.MINE_ANCIENT_TECH, self.client, self.world)
+        self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[0],
+                                   AncientTech))
+        self.assertTrue(self.world.inventory_manager.get_inventory(self.avatar.company)[1] is None)
