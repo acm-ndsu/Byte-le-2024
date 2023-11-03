@@ -23,19 +23,19 @@ class TestOccupiable(unittest.TestCase):
         self.game_board.generate_map()
 
     def test_search_by_occupiable_object_type(self):
-        assert (isinstance(self.game_board.game_map[0][1].get_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION),
+        self.assertTrue(isinstance(self.game_board.game_map[0][1].get_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION),
                            LambdiumOccupiableStation))
 
     def test_search_by_occupiable_by_game_object(self):
-        assert (isinstance(self.game_board.game_map[0][1].get_occupied_by(TuriteOccupiableStation()),
+        self.assertTrue(isinstance(self.game_board.game_map[0][1].get_occupied_by(TuriteOccupiableStation()),
                            TuriteOccupiableStation))
 
     def test_search_by_occupiable_object_type_not_present(self):
-        assert (self.game_board.game_map[0][1].get_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION) is None)
+        self.assertTrue(self.game_board.game_map[0][1].get_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION) is None)
 
     def test_search_by_occupiable_by_game_object_not_present(self):
-        assert (self.game_board.game_map[0][1].get_occupied_by(AncientTechOccupiableStation()) is None)
+        self.assertTrue(self.game_board.game_map[0][1].get_occupied_by(AncientTechOccupiableStation()) is None)
 
     def test_search_by_occupiable_by_game_object_general(self):
-        assert (isinstance(self.game_board.game_map[0][1].get_occupied_by(OccupiableStation()),
+        self.assertTrue(isinstance(self.game_board.game_map[0][1].get_occupied_by(OccupiableStation()),
                            OccupiableStation))
