@@ -68,6 +68,10 @@ class ActionType(Enum):
     PLACE_DYNAMITE = auto()
     PLACE_LANDMINE = auto()
     PLACE_EMP = auto()
+    MINE_LAMBUIM = auto()
+    MINE_COPIUM = auto()
+    MINE_TURITE = auto()
+    MINE_ANCIENT_TECH = auto()
 
 
 # Added for Quarry Rush

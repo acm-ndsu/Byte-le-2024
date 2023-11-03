@@ -1,8 +1,8 @@
 from game.common.enums import *
+from game.common.game_object import GameObject
 from game.controllers.controller import Controller
 from game.common.player import Player
 from game.common.stations.station import Station
-from game.common.items.item import Item
 from game.common.map.game_board import GameBoard
 from game.utils.vector import Vector
 
@@ -32,12 +32,13 @@ class InteractController(Controller):
     def __init__(self):
         super().__init__()
 
-    def handle_actions(self, action: ActionType, client: Player, world: GameBoard) -> None:
+    def handle_actions(self, action: ActionType, client: Player, world: GameBoard, target: GameObject | ObjectType = Station()) -> None:
         """
         Given the ActionType for interacting in a direction, the Player's avatar will engage with the object.
         :param action:
         :param client:
         :param world:
+        :param target:
         :return: None
         """
 
@@ -60,7 +61,8 @@ class InteractController(Controller):
         # find result in interaction
         vector.x += client.avatar.position.x
         vector.y += client.avatar.position.y
-        stat: Station = world.game_map[vector.y][vector.x].occupied_by
+
+        stat: Station | None = world.game_map[vector.y][vector.x].get_occupied_by(target)
 
         if stat is not None and isinstance(stat, Station):
-            stat.take_action(client.avatar)
+            stat.take_action(client.avatar, world.inventory_manager)
