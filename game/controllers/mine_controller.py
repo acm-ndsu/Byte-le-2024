@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from game.common.enums import *
 from game.common.map.game_board import GameBoard
 from game.common.map.tile import Tile
@@ -6,6 +8,7 @@ from game.controllers.controller import Controller
 from game.quarry_rush.entity.ores import Ore
 from game.quarry_rush.entity.placeable.dynamite import Dynamite
 from game.quarry_rush.entity.placeable.traps import Landmine, EMP, Trap
+from game.quarry_rush.station.ore_occupiable_stations import OreOccupiableStation
 from game.utils.vector import Vector
 
 
@@ -24,24 +27,33 @@ class MineController(Controller):
 
         avatar_pos: Vector = client.avatar.position
 
-        # add all adjacent tiles to a list
-        adjacent_tiles: [Tile] = [Vector.add_vectors(avatar_pos, Vector(0, 1)),
-                                  Vector.add_vectors(avatar_pos, Vector(0, -1)),
-                                  Vector.add_vectors(avatar_pos, Vector(1, 0)),
-                                  Vector.add_vectors(avatar_pos, Vector(-1, 0))]
+        # add all adjacent and central tiles to a list in clockwise motion
+        adjacent_tiles: [Tile] = [world.game_map[avatar_pos.y][avatar_pos.x],  # center tile
+                                  world.game_map[avatar_pos.y - 1][avatar_pos.x],  # above tile
+                                  world.game_map[avatar_pos.y][avatar_pos.x + 1],  # right tile
+                                  world.game_map[avatar_pos.y + 1][avatar_pos.x],  # below tile
+                                  world.game_map[avatar_pos.y][avatar_pos.x - 1]]  # left tile
 
-        ore: Ore
-        # match action:
-        #     case ActionType.MINE_COPIUM:
-        #
-        #     case ActionType.MINE_TURITE:
-        #         pass
-        #     case ActionType.MINE_LAMBUIM:
-        #         pass
-        #     case ActionType.MINE_ANCIENT_TECH:
-        #         pass
+        ore_object_type: ObjectType
 
-    # def find_ore(self, tiles: [Tile]):
-    #     for tile in tiles:
-    #         if tile.
+        match action:
+            case ActionType.MINE_COPIUM:
+                ore_object_type = ObjectType.COPIUM_OCCUPIABLE_STATION
+            case ActionType.MINE_TURITE:
+                ore_object_type = ObjectType.TURITE_OCCUPIABLE_STATION
+            case ActionType.MINE_LAMBUIM:
+                ore_object_type = ObjectType.LAMBDIUM_OCCUPIABLE_STATION
+            case ActionType.MINE_ANCIENT_TECH:
+                ore_object_type = ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION
+            case _:  # default case
+                return
 
+        ore: Ore | None = None
+        for tile in adjacent_tiles:
+            if tile.is_occupied_by(ore_object_type):
+                ore_station: OreOccupiableStation = tile.remove_from_occupied_by(ore_object_type)
+                ore = ore_station.held_item  # found ore wanted
+                break
+
+        # gives the ore to the player's inventory
+        world.inventory_manager.give(ore, client.avatar.company)

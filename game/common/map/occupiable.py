@@ -68,12 +68,16 @@ class Occupiable(GameObject):
 
         # only check if the object is None because we want to look through the entire stack of objects.
         while temp_game_object is not None:
+
             # if the object is what we want, return true
             if temp_game_object.object_type == object_type:
                 return True
 
-            # moves to the next thing in the stack of occupiable objects
-            temp_game_object = temp_game_object.occupied_by
+            if hasattr(temp_game_object, 'occupied_by'):
+                # moves to the next thing in the stack of occupiable objects
+                temp_game_object = temp_game_object.occupied_by
+            else:
+                return False  # if the object doesn't have the attribute, wanted object isn't in stack
 
         # if the wanted object isn't found, return False
         return False
