@@ -85,7 +85,7 @@ class Occupiable(GameObject):
     def get_occupied_by(self, target: ObjectType | GameObject) -> GameObject | None:
         """
         Get the object in the occupied_by stack given either the ObjectType or GameObject. Returns the GameObject in
-        the stack, but None if it isn't there.
+        the stack, but None if it isn't there. **This does NOT remove the GameObject.**
         """
         # start on the first object in the stack that isn't this object
         temp_game_object: GameObject = self.occupied_by

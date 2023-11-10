@@ -30,7 +30,7 @@ class PlaceController(Controller):
     def __place_dyanmite(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # calls the place_on_top method to place a dynamite on top of the occupied_by stack but below the Avatar
         if client.avatar.can_place_dynamite():
-            dynamite: Dynamite = Dynamite()
+            dynamite: Dynamite = Dynamite(position=client.avatar.position)
             tile.place_on_top_of_stack(dynamite)
             world.dynamite_list.add_dynamite(dynamite)
             client.avatar.dynamite_active_ability.reset_fuse()  # reset the ability's cooldown
@@ -38,14 +38,16 @@ class PlaceController(Controller):
     def __place_landmine(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # calls the place_on_top method to place a landmine on top of the occupied_by stack but below the Avatar
         if client.avatar.can_place_trap():
-            landmine: Landmine = Landmine()
+            landmine: Landmine = Landmine(owner_company=client.avatar.company,
+                                          target_company=self.__opposing_team(client), position=client.avatar.position)
             self.__add_to_trap_queue(client, world, landmine)
             tile.place_on_top_of_stack(Landmine())
 
     def __place_emp(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # calls the place_on_top method to place a dynamite on top of the occupied_by stack but below the Avatar
         if client.avatar.can_place_trap():
-            emp: EMP = EMP()
+            emp: EMP = EMP(owner_company=client.avatar.company,
+                           target_company=self.__opposing_team(client), position=client.avatar.position)
             self.__add_to_trap_queue(client, world, emp)
             tile.place_on_top_of_stack(emp)
 
@@ -61,3 +63,7 @@ class PlaceController(Controller):
                 world.turing_trap_queue.add_trap(placed_object)
             case _:
                 return
+
+    # Helper method to return the opposing team based on the avatar's company
+    def __opposing_team(self, client: Player) -> Company:
+        return Company.CHURCH if client.avatar.company is Company.TURING else Company.TURING
