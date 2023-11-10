@@ -32,6 +32,11 @@ class TrapQueue(GameObject):
                 remove_trap_at(self.__traps[i].position)
                 # remove trap from list of traps
                 self.__traps: list[Trap] = self.__traps[:i] + self.__traps[i+1:]
+                
+    def dequeue_trap_at(self, position: Vector):
+        for i in range(0, len(self.__traps))[::-1]:
+            if self.__traps[i].position.x == position.x and self.__traps[i].position.y == position.y:
+                self.__traps: list[Trap] = self.__traps[:1] + self.__traps[i+1:]
 
     def size(self) -> int:
         return len(self.__traps)
@@ -448,3 +453,8 @@ class GameBoard(GameObject):
 
     def dynamite_detonation_control(self):
         self.dynamite_list.detonate(self.inventory_manager, self.remove_dynamite_at)
+        
+    def defuse_trap_at(self, position: Vector) -> None:
+        self.remove_trap_at(position)
+        self.church_trap_queue.dequeue_trap_at(position)
+        self.turing_trap_queue.dequeue_trap_at(position)
