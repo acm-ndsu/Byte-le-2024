@@ -24,11 +24,14 @@ class TrapQueue(GameObject):
         if len(self.__traps) >= self.__max_traps:
             self.__traps = self.__traps[1:]
         self.__traps += [trap]
-        
-    def detonate(self, inventory_manager: InventoryManager):
+
+    def detonate(self, inventory_manager: InventoryManager, remove_trap_at: Callable[[Vector], None]):
         for i in range(0, len(self.__traps))[::-1]:
             if self.__traps[i].detonate(inventory_manager):
-                self.__traps = self.__traps[:i] + self.__traps[i+1:]
+                # call remove trap from game board method
+                remove_trap_at(self.__traps[i].position)
+                # remove trap from list of traps
+                self.__traps: list[Trap] = self.__traps[:i] + self.__traps[i+1:]
 
     def size(self) -> int:
         return len(self.__traps)
@@ -57,9 +60,12 @@ class DynamiteList(GameObject):
     def add_dynamite(self, dynamite: Dynamite):
         self.__dynamite_list.append(dynamite)
 
-    def detonate(self, inventory_manager: InventoryManager):
-        for dynamite in self.__dynamite_list:
+    def detonate(self, inventory_manager: InventoryManager, remove_dynamite_at: Callable[[Vector], None]):
+        for i in range(0, len(self.__dynamite_list))[::-1]:
+            dynamite: Dynamite = self.__dynamite_list[i]
             if dynamite.detonate(inventory_manager):
+                # call remove dynamite from game board method
+                remove_dynamite_at(dynamite.position)
                 self.__dynamite_list.remove(dynamite)
 
     def size(self) -> int:
@@ -425,9 +431,20 @@ class GameBoard(GameObject):
         self.dynamite_list = DynamiteList().from_json(data['dynamite_list'])
         return self
 
+    # removes trap from game_map based on position, method called in trap queue detonate method
+    def remove_trap_at(self, position: Vector) -> None:
+        tile: Tile = self.game_map[position.y][position.x]
+        tile.remove_from_occupied_by(ObjectType.LANDMINE)
+        tile.remove_from_occupied_by(ObjectType.EMP)
+
+    # removes dynamite from game_map based on position, method called in dynamite queue detonate methof
+    def remove_dynamite_at(self, position: Vector) -> None:
+        tile: Tile = self.game_map[position.y][position.x]
+        tile.remove_from_occupied_by(ObjectType.DYNAMITE)
+
     def trap_detonation_control(self):
-        self.church_trap_queue.detonate(self.inventory_manager)
-        self.turing_trap_queue.detonate(self.inventory_manager)
+        self.church_trap_queue.detonate(self.inventory_manager, self.remove_trap_at)
+        self.turing_trap_queue.detonate(self.inventory_manager, self.remove_trap_at)
 
     def dynamite_detonation_control(self):
-        self.dynamite_list.detonate(self.inventory_manager)
+        self.dynamite_list.detonate(self.inventory_manager, self.remove_dynamite_at)
