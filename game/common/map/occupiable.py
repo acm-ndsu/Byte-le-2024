@@ -131,6 +131,36 @@ class Occupiable(GameObject):
 
         return None
 
+    def remove_game_object_from_occupied_by(self, game_object: GameObject | None = None) -> GameObject | None:
+        """
+        This method will remove the first instance of the given ObjectType found in the occupied by stack.
+        """
+
+        # if the object type isn't in the stack, return None
+        if not self.is_occupied_by(game_object.object_type):
+            return None
+
+        current_game_object: GameObject = self
+
+        # variable to store what the next thing in the stack is. Either None or a GameObject
+        next_game_object: GameObject = current_game_object.occupied_by
+
+        while (current_game_object and next_game_object is not None) and \
+                current_game_object.occupied_by.object_type != game_object:
+            current_game_object = current_game_object.occupied_by
+            next_game_object = next_game_object.occupied_by
+
+        # at top of stack without finding wanted object
+        if next_game_object is None:
+            return None
+
+        if next_game_object is game_object:
+            # reassign the current game_object's occupied_by and return what the next game object is
+            current_game_object.occupied_by = next_game_object.occupied_by
+            return next_game_object
+
+        return None
+
         # make references of the objects in the stack
         # prev_game_object: GameObject = self  # used to keep track of reconnecting the stack after removing an object
         #

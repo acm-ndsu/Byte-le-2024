@@ -64,6 +64,16 @@ class TestDynamite(unittest.TestCase):
             self.dynamite.detonate_turn = ""
         self.assertEqual(str(e.exception), 'Dynamite.blast_radius must be an int.')
 
+    # test decrementing the fuse and if it can explode or not
+    def test_dynamite_can_explode(self):
+        self.assertFalse(self.dynamite.can_explode())
+
+        self.dynamite.decrement_fuse()
+        self.assertEqual(self.dynamite.fuse, 0)
+
+        self.assertTrue(self.dynamite.can_explode())
+
+
     # test inventory manager - later
 
     # test: json

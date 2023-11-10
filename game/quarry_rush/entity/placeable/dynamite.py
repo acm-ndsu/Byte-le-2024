@@ -1,6 +1,5 @@
 from game.utils.vector import Vector
 from game.common.stations.occupiable_station import OccupiableStation
-from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from game.common.enums import *
 from typing import Self
 
@@ -10,7 +9,7 @@ class Dynamite(OccupiableStation):
     Dynamite is a class that represents the dynamite an Avatar can place on the ground. It inherits from Occupiable
     Station to permit Avatar instances to walk on them.
     """
-    def __init__(self, position: Vector | None = None, blast_radius: int = 1):
+    def __init__(self, position: Vector | None = None, blast_radius: int = 0):
         super().__init__()
         self.position: Vector | None = position
         self.blast_radius: int = blast_radius
@@ -41,27 +40,34 @@ class Dynamite(OccupiableStation):
             raise ValueError(f'{self.__class__.__name__}.blast_radius must be an int.')
         self.__blast_radius: int = blast_radius
 
-    # detonate method
-    def detonate(self, inventory_manager: InventoryManager):
-        self.fuse -= 1
-        if self.fuse <= 0:
-            # do the detonation
-            return True
-        return False
+    def decrement_fuse(self) -> None:
+        self.fuse = max(self.fuse - 1, 0)
+
+    def can_explode(self) -> bool:
+        return self.fuse == 0
+
+    # # detonate method
+    # def detonate(self, inventory_manager: InventoryManager):
+    #     self.fuse -= 1
+    #     if self.fuse <= 0:
+    #         self.explode()
+    #         return True
+    #     return False
 
     # explode dynamite
-    def explode(self):
-        above_tile: list[Vector] = [Vector(self.position.x, self.position.y - adjacent) for adjacent in
-                                    range(1, self.blast_radius + 1)]  # Getting tiles above
-        below_tile: list[Vector] = [Vector(self.position.x, self.position.y + adjacent) for adjacent in
-                                    range(1, self.blast_radius + 1)]  # Getting tiles below
-        left_tile: list[Vector] = [Vector(self.position.x - adjacent, self.position.y) for adjacent in
-                                   range(1, self.blast_radius + 1)]  # Getting tiles left
-        right_tile: list[Vector] = [Vector(self.position.x + adjacent, self.position.y) for adjacent in
-                                    range(1, self.blast_radius + 1)]  # Getting tiles right
-        # add all the tile lists together
-        adjacent_tiles: list[Vector] = above_tile + below_tile + left_tile + right_tile
+    # def explode(self):
+        # above_tile: list[Vector] = [Vector(self.position.x, self.position.y - adjacent) for adjacent in
+        #                             range(1, self.blast_radius + 1)]  # Getting tiles above
+        # below_tile: list[Vector] = [Vector(self.position.x, self.position.y + adjacent) for adjacent in
+        #                             range(1, self.blast_radius + 1)]  # Getting tiles below
+        # left_tile: list[Vector] = [Vector(self.position.x - adjacent, self.position.y) for adjacent in
+        #                            range(1, self.blast_radius + 1)]  # Getting tiles left
+        # right_tile: list[Vector] = [Vector(self.position.x + adjacent, self.position.y) for adjacent in
+        #                             range(1, self.blast_radius + 1)]  # Getting tiles right
+        # # add all the tile lists together
+        # adjacent_tiles: list[Vector] = above_tile + below_tile + left_tile + right_tile
 
+    # def collect_ores(self):
     # collection method - not yet, foods still cooking
     # wip
 

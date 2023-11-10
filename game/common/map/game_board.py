@@ -57,10 +57,10 @@ class DynamiteList(GameObject):
     def add_dynamite(self, dynamite: Dynamite):
         self.__dynamite_list.append(dynamite)
 
-    def detonate(self, inventory_manager: InventoryManager):
-        for dynamite in self.__dynamite_list:
-            if dynamite.detonate(inventory_manager):
-                self.__dynamite_list.remove(dynamite)
+    # def detonate(self, inventory_manager: InventoryManager):
+    #     for dynamite in self.__dynamite_list:
+    #         if dynamite.detonate(inventory_manager):
+    #             self.__dynamite_list.remove(dynamite)
 
     def size(self) -> int:
         return len(self.__dynamite_list)
