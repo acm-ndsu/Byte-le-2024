@@ -9,12 +9,16 @@ class Dynamite(OccupiableStation):
     Dynamite is a class that represents the dynamite an Avatar can place on the ground. It inherits from Occupiable
     Station to permit Avatar instances to walk on them.
     """
-    def __init__(self, position: Vector | None = None, blast_radius: int = 0):
+    def __init__(self, position: Vector | None = None, blast_radius: int = 0, company: Company = Company.CHURCH):
         super().__init__()
         self.position: Vector | None = position
         self.blast_radius: int = blast_radius
         self.fuse: int = 1
-        self.object_type = ObjectType.DYNAMITE
+        self.object_type: ObjectType = ObjectType.DYNAMITE
+        self.company: Company = company
+
+        # property to be used for the visualizer mainly; will have a separate method for other uses in gameboard
+        self.can_explode = False
 
     # position getter
     @property
@@ -40,42 +44,56 @@ class Dynamite(OccupiableStation):
             raise ValueError(f'{self.__class__.__name__}.blast_radius must be an int.')
         self.__blast_radius: int = blast_radius
 
+    # can_explode getter
+    @property
+    def can_explode(self) -> bool:
+        return self.__can_explode
+
+    # can_explode setter
+    @can_explode.setter
+    def can_explode(self, can_explode: bool) -> None:
+        if can_explode is None or not isinstance(can_explode, int):
+            raise ValueError(f'{self.__class__.__name__}.can_explode must be a bool.')
+        self.__can_explode = can_explode
+
+    # company gettter
+    @property
+    def company(self) -> Company:
+        return self.__company
+
+    # company setter
+    @company.setter
+    def company(self, company: Company) -> None:
+        if company is None or not isinstance(company, Company):
+            raise ValueError(f'{self.__class__.__name__}.company must be a Company enum.')
+        self.__company = company
+
+
     def decrement_fuse(self) -> None:
         self.fuse = max(self.fuse - 1, 0)
+        self.can_explode = True if self.fuse == 0 else False
 
-    def can_explode(self) -> bool:
-        return self.fuse == 0
+    def is_fuse_at_0(self) -> bool:
+        """
+        Reassigns the bool value of can_explode and returns if the dynamite can explode or not
+        """
+        self.can_explode = True if self.fuse == 0 else False
+        return self.can_explode
 
-    # # detonate method
-    # def detonate(self, inventory_manager: InventoryManager):
-    #     self.fuse -= 1
-    #     if self.fuse <= 0:
-    #         self.explode()
-    #         return True
-    #     return False
-
-    # explode dynamite
-    # def explode(self):
-        # above_tile: list[Vector] = [Vector(self.position.x, self.position.y - adjacent) for adjacent in
-        #                             range(1, self.blast_radius + 1)]  # Getting tiles above
-        # below_tile: list[Vector] = [Vector(self.position.x, self.position.y + adjacent) for adjacent in
-        #                             range(1, self.blast_radius + 1)]  # Getting tiles below
-        # left_tile: list[Vector] = [Vector(self.position.x - adjacent, self.position.y) for adjacent in
-        #                            range(1, self.blast_radius + 1)]  # Getting tiles left
-        # right_tile: list[Vector] = [Vector(self.position.x + adjacent, self.position.y) for adjacent in
-        #                             range(1, self.blast_radius + 1)]  # Getting tiles right
-        # # add all the tile lists together
-        # adjacent_tiles: list[Vector] = above_tile + below_tile + left_tile + right_tile
-
-    # def collect_ores(self):
-    # collection method - not yet, foods still cooking
-    # wip
+    # detonate method
+    def detonate(self):
+        self.fuse -= 1
+        if self.fuse <= 0:
+            return True
+        return False
 
     # to json
     def to_json(self) -> dict:
         data: dict = super().to_json()
         data['position'] = self.position.to_json() if self.position is not None else None
         data['blast_radius'] = self.blast_radius
+        data['can_explode'] = self.can_explode
+        data['company'] = self.company
         return data
 
     # from json
@@ -83,4 +101,6 @@ class Dynamite(OccupiableStation):
         super().from_json(data)
         self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
         self.blast_radius: int = data['blast_radius']
+        self.can_explode: bool = data['can_explode']
+        self.company: Company = data['company']
         return self

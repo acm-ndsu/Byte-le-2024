@@ -50,7 +50,7 @@ class TestDynamiteController(unittest.TestCase):
             ObjectType.DYNAMITE)
 
         # the dynamite cannot explode yet because the tick isn't 0
-        self.assertFalse(dynamite.can_explode())
+        self.assertFalse(dynamite.can_explode)
 
     def test_explosion(self):
         # make sure the dynamite is placed properly
@@ -62,15 +62,15 @@ class TestDynamiteController(unittest.TestCase):
             ObjectType.DYNAMITE)
 
         # the dynamite cannot explode yet because the tick isn't 0
-        self.assertFalse(dynamite.can_explode())
+        self.assertFalse(dynamite.can_explode)
 
         dynamite.decrement_fuse()
 
         # dynamite can now explode
-        self.assertTrue(dynamite.can_explode())
+        self.assertTrue(dynamite.can_explode)
 
         # should add ores in the order: AncientTech -> Lambdium -> Copium -> Turite -> Lambium
-        self.dynamite_controller.handle_detonation(dynamite, self.client, self.world)
+        self.dynamite_controller.handle_detonation(dynamite, self.world)
 
         # inventory size should be 5, and check the order of the list is correct
         self.assertTrue(len(self.world.inventory_manager.get_inventory(self.avatar.company)), 5)
