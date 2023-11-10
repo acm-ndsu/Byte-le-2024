@@ -17,12 +17,10 @@ class Trap(OccupiableStation):
                     if so, remove trap from game_board trap queue to remove it from the game.
     """
 
-    def __init__(self, detection_reduction: float = 0.0, steal_rate: float = 0.0,
+    def __init__(self, steal_rate: float = 0.0,
                  owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
                  opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
         super().__init__()
-        # value subtracting from default 5% detection rate
-        self.detection_reduction: float = detection_reduction
         # rate for stealing items from opposing avatar when trap detonates (if none, pass 0.0)
         self.steal_rate: float = steal_rate
         # company of the owner of the trap
@@ -35,11 +33,6 @@ class Trap(OccupiableStation):
         self.position: Vector = position
         # assigning the object type
         self.object_type: ObjectType = ObjectType.TRAP
-
-    # getter methods
-    @property
-    def detection_reduction(self) -> float:
-        return self.__detection_reduction
 
     @property
     def steal_rate(self) -> float:
@@ -56,14 +49,6 @@ class Trap(OccupiableStation):
     @property
     def opponent_position(self) -> Callable[[], Vector]:
         return self.__opponent_position
-
-    # setter methods
-    @detection_reduction.setter
-    def detection_reduction(self, detection_reduction: float) -> None:
-        if detection_reduction is None or not isinstance(detection_reduction, float):
-            raise ValueError(
-                f'{self.__class__.__name__}.detection_reduction must be a float.')
-        self.__detection_reduction = detection_reduction
 
     @steal_rate.setter
     def steal_rate(self, steal_rate: float) -> None:
