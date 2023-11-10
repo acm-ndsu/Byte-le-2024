@@ -238,7 +238,7 @@ class Avatar(GameObject):
                                            unlock_dynamite=self.__unlock_dynamite,
                                            unlock_landmines=self.__unlock_landmines,
                                            unlock_emps=self.__unlock_emps,
-                                           unlock_trap_detection=self.__unlock_trap_detection)
+                                           unlock_trap_defusal=self.__unlock_trap_defusal)
         return TechTree(avatar_functions)
 
     def __increase_movement(self, amt: int) -> None:
@@ -263,8 +263,8 @@ class Avatar(GameObject):
         self.__abilities['EMPs'] = True
         self.__abilities['Landmines'] = False
 
-    def __unlock_trap_detection(self) -> None:
-        self.__abilities['Trap Detection'] = True
+    def __unlock_trap_defusal(self) -> None:
+        self.__abilities['Trap Defusal'] = True
 
     # Helper method to create a dictionary that stores bool values for which abilities the player unlocked
     def __create_abilities_dict(self) -> dict:
@@ -273,7 +273,7 @@ class Avatar(GameObject):
                      'Dynamite': False,
                      'Landmines': False,
                      'EMPs': False,
-                     'Trap Detection': False}
+                     'Trap Defusal': False}
         return abilities
 
     def buy_new_tech(self, tech_name: str) -> bool:
@@ -318,16 +318,19 @@ class Avatar(GameObject):
     # if avatar calls place dynamite, set to true, i.e. they want to place dynamite
     def can_place_dynamite(self) -> bool:
         # This method will be called in the unlock_dynamite method in the else statement for when it's to be used
-        return self.dynamite_active_ability.is_useable()
+        return self.__abilities['Dynamite'] and self.dynamite_active_ability.is_useable()
 
     # if avatar calls place trap, set to true, i.e. they want to place trap
     def can_place_trap(self) -> bool:
         # This method will be called in the landmine and EMP methods in the else statement for when it's to be used
-        return self.place_trap.is_useable()
+        return (self.__abilities['Landmines'] or self.__abilities['EMPs']) and self.place_trap.is_useable()
 
     def can_place_dynamite_or_trap(self) -> bool:
         # This method will return if the avatar can place anything at all
         return self.can_place_trap() or self.can_place_dynamite()
+    
+    def can_defuse_trap(self) -> bool:
+        return self.__abilities['Trap Defusal']
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
