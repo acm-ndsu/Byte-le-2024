@@ -138,7 +138,7 @@ class TechTree(GameObject):
                                             subs=[]
                                         ),
                                         Tree(
-                                            value=this_techs['Trap Detection'],
+                                            value=this_techs['Trap Defusal'],
                                             subs=[]
                                         )
                                     ]
