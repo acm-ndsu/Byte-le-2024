@@ -146,7 +146,7 @@ class Occupiable(GameObject):
         next_game_object: GameObject = current_game_object.occupied_by
 
         while (current_game_object and next_game_object is not None) and \
-                current_game_object.occupied_by.object_type != game_object:
+                current_game_object.occupied_by is not game_object:
             current_game_object = current_game_object.occupied_by
             next_game_object = next_game_object.occupied_by
 
