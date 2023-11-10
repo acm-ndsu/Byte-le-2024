@@ -88,7 +88,7 @@ class Trap(OccupiableStation):
         # find distance between trap position and opponent_position using method from vector class
         # if distance is less than or equal to maximum distance, then return True, else, False
         opponent_position = self.opponent_position()
-        if self.position.distance(opponent_position) <= 1:
+        if self.position.distance(opponent_position) <= 0:
             return True
         return False
 
@@ -106,7 +106,6 @@ class Trap(OccupiableStation):
     # json methods
     def to_json(self) -> dict:
         data: dict = super().to_json()
-        data['detection_reduction'] = self.detection_reduction
         data['steal_rate'] = self.steal_rate
         data['owner_company'] = self.owner_company
         data['target_company'] = self.target_company
@@ -115,7 +114,6 @@ class Trap(OccupiableStation):
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.detection_reduction: float = data['detection_reduction']
         self.steal_rate: float = data['steal_rate']
         self.owner_company: Company = data['owner_company']
         self.target_company: Company = data['target_company']
