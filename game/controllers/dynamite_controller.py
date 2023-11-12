@@ -35,13 +35,13 @@ class DynamiteController(Controller):
         for vector in adjacent_tiles:
             tile: Tile = world.game_map[vector.y][vector.x]
 
-            if tile.is_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION):
+            if tile.is_occupied_by_objcet_type(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION):
                 station = tile.remove_from_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION)
-            elif tile.is_occupied_by(self.__wanted_ore(dynamite.company)):
+            elif tile.is_occupied_by_objcet_type(self.__wanted_ore(dynamite.company)):
                 station = tile.remove_from_occupied_by(self.__wanted_ore(dynamite.company))
-            elif tile.is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION):
+            elif tile.is_occupied_by_objcet_type(ObjectType.COPIUM_OCCUPIABLE_STATION):
                 station = tile.remove_from_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION)
-            elif tile.is_occupied_by(self.__not_wanted_ore(dynamite.company)):
+            elif tile.is_occupied_by_objcet_type(self.__not_wanted_ore(dynamite.company)):
                 station = tile.remove_from_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION)
 
             if station is not None:
