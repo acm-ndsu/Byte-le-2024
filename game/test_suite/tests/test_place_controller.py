@@ -99,3 +99,33 @@ class TestPlaceController(unittest.TestCase):
         self.assertEqual(placed_emp.occupied_by, self.client.avatar)
 
         self.assertEqual(self.avatar.place_trap.cooldown, 1)  # double-check the ability cooldown reset
+
+    def test_placing_multiple_dynamite(self):
+        self.test_placing_dynamite()  # call previous test to set up test
+        self.place_controller.handle_actions(ActionType.PLACE_DYNAMITE, self.client, self.game_board)
+
+        # needed stack order: Copium -> Lambdium -> Turite -> Dynamite -> Avatar
+        self.assertEqual(self.copium_station.occupied_by, self.lambdium_station)
+        self.assertEqual(self.lambdium_station.occupied_by, self.turite_station)
+        self.assertTrue(isinstance(self.turite_station.occupied_by, Dynamite))
+        self.assertEqual(self.turite_station.occupied_by.occupied_by, self.avatar)
+
+    def test_placing_multiple_landmines(self):
+        self.test_placing_landmine()  # call previous test to set up test
+        self.place_controller.handle_actions(ActionType.PLACE_LANDMINE, self.client, self.game_board)
+
+        # needed stack order: Copium -> Lambdium -> Turite -> Landmine -> Avatar
+        self.assertEqual(self.copium_station.occupied_by, self.lambdium_station)
+        self.assertEqual(self.lambdium_station.occupied_by, self.turite_station)
+        self.assertTrue(isinstance(self.turite_station.occupied_by, Landmine))
+        self.assertEqual(self.turite_station.occupied_by.occupied_by, self.avatar)
+
+    def test_placing_multiple_emps(self):
+        self.test_placing_emp()  # call previous test to set up test
+        self.place_controller.handle_actions(ActionType.PLACE_EMP, self.client, self.game_board)
+
+        # needed stack order: Copium -> Lambdium -> Turite -> Landmine -> Avatar
+        self.assertEqual(self.copium_station.occupied_by, self.lambdium_station)
+        self.assertEqual(self.lambdium_station.occupied_by, self.turite_station)
+        self.assertTrue(isinstance(self.turite_station.occupied_by, EMP))
+        self.assertEqual(self.turite_station.occupied_by.occupied_by, self.avatar)

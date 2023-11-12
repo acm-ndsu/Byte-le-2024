@@ -43,7 +43,7 @@ class TestDynamiteController(unittest.TestCase):
     def test_no_explosion(self):
         # make sure the dynamite is placed properly
         self.place_controller.handle_actions(ActionType.PLACE_DYNAMITE, self.player, self.world)
-        self.assertTrue(self.world.game_map[self.avatar.position.y][self.avatar.position.x].is_occupied_by_objcet_type(
+        self.assertTrue(self.world.game_map[self.avatar.position.y][self.avatar.position.x].is_occupied_by_object_type(
             ObjectType.DYNAMITE))
 
         dynamite: Dynamite = self.world.game_map[self.avatar.position.y][self.avatar.position.x].get_occupied_by(
@@ -55,7 +55,7 @@ class TestDynamiteController(unittest.TestCase):
     def test_explosion(self):
         # make sure the dynamite is placed properly
         self.place_controller.handle_actions(ActionType.PLACE_DYNAMITE, self.player, self.world)
-        self.assertTrue(self.world.game_map[self.avatar.position.y][self.avatar.position.x].is_occupied_by_objcet_type(
+        self.assertTrue(self.world.game_map[self.avatar.position.y][self.avatar.position.x].is_occupied_by_object_type(
             ObjectType.DYNAMITE))
 
         dynamite: Dynamite = self.world.game_map[self.avatar.position.y][self.avatar.position.x].get_occupied_by(
@@ -88,10 +88,10 @@ class TestDynamiteController(unittest.TestCase):
         # ensure the tiles still contain the rest of the stations
 
         # the center tile should still have the dynamite object on it; gameboard will remove it
-        self.assertTrue(self.world.game_map[1][1].is_occupied_by_objcet_type(ObjectType.DYNAMITE) and
-                        self.world.game_map[1][1].is_occupied_by_objcet_type(ObjectType.AVATAR))
-        self.assertTrue(self.world.game_map[0][1].is_occupied_by_objcet_type(ObjectType.COPIUM_OCCUPIABLE_STATION))  # up tile
-        self.assertTrue(self.world.game_map[1][2].is_occupied_by_objcet_type(ObjectType.TURITE_OCCUPIABLE_STATION))  # right tile
+        self.assertTrue(self.world.game_map[1][1].is_occupied_by_object_type(ObjectType.DYNAMITE) and
+                        self.world.game_map[1][1].is_occupied_by_object_type(ObjectType.AVATAR))
+        self.assertTrue(self.world.game_map[0][1].is_occupied_by_object_type(ObjectType.COPIUM_OCCUPIABLE_STATION))  # up tile
+        self.assertTrue(self.world.game_map[1][2].is_occupied_by_object_type(ObjectType.TURITE_OCCUPIABLE_STATION))  # right tile
         self.assertTrue(self.world.game_map[2][1].occupied_by is None)  # down tile
-        self.assertTrue(self.world.game_map[1][0].is_occupied_by_objcet_type(ObjectType.COPIUM_OCCUPIABLE_STATION) and  # left tile
-                        self.world.game_map[1][0].is_occupied_by_objcet_type(ObjectType.TURITE_OCCUPIABLE_STATION))
+        self.assertTrue(self.world.game_map[1][0].is_occupied_by_object_type(ObjectType.COPIUM_OCCUPIABLE_STATION) and  # left tile
+                        self.world.game_map[1][0].is_occupied_by_object_type(ObjectType.TURITE_OCCUPIABLE_STATION))

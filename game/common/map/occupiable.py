@@ -57,7 +57,7 @@ class Occupiable(GameObject):
 
         return True
 
-    def is_occupied_by_objcet_type(self, object_type: ObjectType) -> bool:
+    def is_occupied_by_object_type(self, object_type: ObjectType) -> bool:
         """
         This method searches for the given ObjectType in the stack of occupied_by. If found, returns true.
         """
@@ -130,7 +130,7 @@ class Occupiable(GameObject):
         """
 
         # if the object type isn't in the stack, return None
-        if not self.is_occupied_by_objcet_type(object_type):
+        if not self.is_occupied_by_object_type(object_type):
             return None
 
         current_game_object: GameObject = self
@@ -160,7 +160,7 @@ class Occupiable(GameObject):
         """
 
         # if the object type isn't in the stack, return None
-        if not self.is_occupied_by_objcet_type(game_object.object_type):
+        if not self.is_occupied_by_object_type(game_object.object_type):
             return None
 
         current_game_object: GameObject = self

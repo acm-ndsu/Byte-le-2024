@@ -52,19 +52,19 @@ class TestOccupiable(unittest.TestCase):
         copium_station.occupied_by = lambdium_station
 
         # ensure everything is on top of copium, and copium is not on top of itself
-        self.assertTrue(copium_station.is_occupied_by_objcet_type(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-        self.assertTrue(copium_station.is_occupied_by_objcet_type(ObjectType.TURITE_OCCUPIABLE_STATION))
-        self.assertFalse(copium_station.is_occupied_by_objcet_type(ObjectType.COPIUM_OCCUPIABLE_STATION))
+        self.assertTrue(copium_station.is_occupied_by_object_type(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
+        self.assertTrue(copium_station.is_occupied_by_object_type(ObjectType.TURITE_OCCUPIABLE_STATION))
+        self.assertFalse(copium_station.is_occupied_by_object_type(ObjectType.COPIUM_OCCUPIABLE_STATION))
 
         # ensure lambdium is only occupied by turite and nothing else
-        self.assertFalse(lambdium_station.is_occupied_by_objcet_type(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-        self.assertTrue(lambdium_station.is_occupied_by_objcet_type(ObjectType.TURITE_OCCUPIABLE_STATION))
-        self.assertFalse(lambdium_station.is_occupied_by_objcet_type(ObjectType.COPIUM_OCCUPIABLE_STATION))
+        self.assertFalse(lambdium_station.is_occupied_by_object_type(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
+        self.assertTrue(lambdium_station.is_occupied_by_object_type(ObjectType.TURITE_OCCUPIABLE_STATION))
+        self.assertFalse(lambdium_station.is_occupied_by_object_type(ObjectType.COPIUM_OCCUPIABLE_STATION))
 
         # ensure turite is occupied by nothing
-        self.assertFalse(turite_station.is_occupied_by_objcet_type(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-        self.assertFalse(turite_station.is_occupied_by_objcet_type(ObjectType.TURITE_OCCUPIABLE_STATION))
-        self.assertFalse(turite_station.is_occupied_by_objcet_type(ObjectType.COPIUM_OCCUPIABLE_STATION))
+        self.assertFalse(turite_station.is_occupied_by_object_type(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
+        self.assertFalse(turite_station.is_occupied_by_object_type(ObjectType.TURITE_OCCUPIABLE_STATION))
+        self.assertFalse(turite_station.is_occupied_by_object_type(ObjectType.COPIUM_OCCUPIABLE_STATION))
 
     # test removing an object from an occupied_by stack of size 2
     def test_remove_from_occupied_by_2_stack(self):
