@@ -28,27 +28,33 @@ class PlaceController(Controller):
                 return
 
     def __place_dyanmite(self, client: Player, tile: Tile, world: GameBoard) -> None:
-        # calls the place_on_top method to place a dynamite on top of the occupied_by stack but below the Avatar
-        if client.avatar.can_place_dynamite():
+        # places dynamite if the avatar's active ability allows it AND there isn't a dynamite object there already
+        if client.avatar.can_place_dynamite() and not tile.is_occupied_by_object_type(ObjectType.DYNAMITE):
             dynamite: Dynamite = Dynamite(position=client.avatar.position)
+
+            # place dynamite on top of the occupied_by stack but below the Avatar
             tile.place_on_top_of_stack(dynamite)
             world.dynamite_list.add_dynamite(dynamite)
             client.avatar.dynamite_active_ability.reset_fuse()  # reset the ability's cooldown
 
     def __place_landmine(self, client: Player, tile: Tile, world: GameBoard) -> None:
-        # calls the place_on_top method to place a landmine on top of the occupied_by stack but below the Avatar
-        if client.avatar.can_place_trap():
+        # places a landmine if the avatar's active ability allows it AND there isn't a landmine object there already
+        if client.avatar.can_place_trap() and not tile.is_occupied_by_game_object(Trap):
             landmine: Landmine = Landmine(owner_company=client.avatar.company,
                                           target_company=self.__opposing_team(client), position=client.avatar.position)
             self.__add_to_trap_queue(client, world, landmine)
+
+            # place a landmine on top of the occupied_by stack but below the Avatar
             tile.place_on_top_of_stack(Landmine())
 
     def __place_emp(self, client: Player, tile: Tile, world: GameBoard) -> None:
-        # calls the place_on_top method to place a dynamite on top of the occupied_by stack but below the Avatar
-        if client.avatar.can_place_trap():
+        # places an EMP if the avatar's active ability allows it AND there isn't an EMP object there already
+        if client.avatar.can_place_trap() and not tile.is_occupied_by_game_object(Trap):
             emp: EMP = EMP(owner_company=client.avatar.company,
                            target_company=self.__opposing_team(client), position=client.avatar.position)
             self.__add_to_trap_queue(client, world, emp)
+
+            # place an EMP on top of the occupied_by stack but below the Avatar
             tile.place_on_top_of_stack(emp)
 
     def __add_to_trap_queue(self, client: Player, world: GameBoard, placed_object: Trap) -> None:

@@ -1,6 +1,7 @@
 import unittest
 
 from game.common.avatar import Avatar
+from game.common.game_object import GameObject
 from game.common.map.game_board import GameBoard
 from game.common.map.occupiable import Occupiable
 from game.common.stations.occupiable_station import OccupiableStation
@@ -40,8 +41,8 @@ class TestOccupiable(unittest.TestCase):
         self.assertTrue(isinstance(self.game_board.game_map[0][1].get_occupied_by(OccupiableStation()),
                            OccupiableStation))
 
-    # test is_occupied_by_method
-    def test_is_occupied_by_method(self):
+    # test is_occupied_by_object_type
+    def test_is_occupied_by_object_type(self):
         copium_station: CopiumOccupiableStation = CopiumOccupiableStation()
         lambdium_station: LambdiumOccupiableStation = LambdiumOccupiableStation()
         turite_station: TuriteOccupiableStation = TuriteOccupiableStation()
@@ -51,19 +52,19 @@ class TestOccupiable(unittest.TestCase):
         copium_station.occupied_by = lambdium_station
 
         # ensure everything is on top of copium, and copium is not on top of itself
-        self.assertTrue(copium_station.is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-        self.assertTrue(copium_station.is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION))
-        self.assertFalse(copium_station.is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION))
+        self.assertTrue(copium_station.is_occupied_by_object_type(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
+        self.assertTrue(copium_station.is_occupied_by_object_type(ObjectType.TURITE_OCCUPIABLE_STATION))
+        self.assertFalse(copium_station.is_occupied_by_object_type(ObjectType.COPIUM_OCCUPIABLE_STATION))
 
         # ensure lambdium is only occupied by turite and nothing else
-        self.assertFalse(lambdium_station.is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-        self.assertTrue(lambdium_station.is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION))
-        self.assertFalse(lambdium_station.is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION))
+        self.assertFalse(lambdium_station.is_occupied_by_object_type(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
+        self.assertTrue(lambdium_station.is_occupied_by_object_type(ObjectType.TURITE_OCCUPIABLE_STATION))
+        self.assertFalse(lambdium_station.is_occupied_by_object_type(ObjectType.COPIUM_OCCUPIABLE_STATION))
 
         # ensure turite is occupied by nothing
-        self.assertFalse(turite_station.is_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
-        self.assertFalse(turite_station.is_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION))
-        self.assertFalse(turite_station.is_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION))
+        self.assertFalse(turite_station.is_occupied_by_object_type(ObjectType.LAMBDIUM_OCCUPIABLE_STATION))
+        self.assertFalse(turite_station.is_occupied_by_object_type(ObjectType.TURITE_OCCUPIABLE_STATION))
+        self.assertFalse(turite_station.is_occupied_by_object_type(ObjectType.COPIUM_OCCUPIABLE_STATION))
 
     # test removing an object from an occupied_by stack of size 2
     def test_remove_from_occupied_by_2_stack(self):
@@ -128,6 +129,31 @@ class TestOccupiable(unittest.TestCase):
         self.assertEqual(copium_station.remove_from_occupied_by(ObjectType.LAMBDIUM_OCCUPIABLE_STATION),
                          lambdium_station_2)
         self.assertEqual(copium_station.occupied_by, None)
+
+    # test is_occupied_by_game_object
+    def test_is_occupied_by_game_object(self):
+        copium_station: CopiumOccupiableStation = CopiumOccupiableStation()
+        lambdium_station: LambdiumOccupiableStation = LambdiumOccupiableStation()
+        turite_station: TuriteOccupiableStation = TuriteOccupiableStation()
+
+        # set occupied by order: copium -> lambdium -> turite
+        lambdium_station.occupied_by = turite_station
+        copium_station.occupied_by = lambdium_station
+
+        # ensure everything is on top of copium, and copium is not on top of itself
+        self.assertTrue(copium_station.is_occupied_by_game_object(LambdiumOccupiableStation))
+        self.assertTrue(copium_station.is_occupied_by_game_object(TuriteOccupiableStation))
+        self.assertFalse(copium_station.is_occupied_by_game_object(CopiumOccupiableStation))
+
+        # ensure lambdium is only occupied by turite and nothing else
+        self.assertFalse(lambdium_station.is_occupied_by_game_object(LambdiumOccupiableStation))
+        self.assertTrue(lambdium_station.is_occupied_by_game_object(TuriteOccupiableStation))
+        self.assertFalse(lambdium_station.is_occupied_by_game_object(CopiumOccupiableStation))
+
+        # ensure turite is occupied by nothing
+        self.assertFalse(turite_station.is_occupied_by_game_object(LambdiumOccupiableStation))
+        self.assertFalse(turite_station.is_occupied_by_game_object(TuriteOccupiableStation))
+        self.assertFalse(turite_station.is_occupied_by_game_object(CopiumOccupiableStation))
 
     def test_remove_game_object_from_occupied_by(self):
         copium_station: CopiumOccupiableStation = CopiumOccupiableStation()

@@ -46,8 +46,8 @@ class TestMineController(unittest.TestCase):
                                    AncientTech))
 
         # ensure all tiles are the same except the center
-        self.assertTrue(self.world.game_map[1][1].is_occupied_by(ObjectType.AVATAR) and not
-        self.world.game_map[1][1].is_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION))
+        self.assertTrue(self.world.game_map[1][1].is_occupied_by_object_type(ObjectType.AVATAR) and not
+        self.world.game_map[1][1].is_occupied_by_object_type(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION))
 
     def test_mining_fail(self):
         self.mine_controller.handle_actions(ActionType.MINE_ANCIENT_TECH, self.client, self.world)

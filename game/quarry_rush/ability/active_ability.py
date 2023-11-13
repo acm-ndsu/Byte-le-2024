@@ -32,7 +32,7 @@ class ActiveAbility(GameObject):
     def fuse(self) -> int:
         return self.__fuse
 
-# cooldown tick setter
+# fuse setter
     @fuse.setter
     def fuse(self, fuse: int) -> None:
         if fuse is None or not isinstance(fuse, int):
