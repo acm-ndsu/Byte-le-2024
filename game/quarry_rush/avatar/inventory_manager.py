@@ -63,11 +63,15 @@ class InventoryManager(GameObject):
         self.__inventories[company] = self.create_empty_inventory()
         return (points, science)
 
-    def give(self, item: Item, company: Company) -> bool:
+    def give(self, item: Item | None, company: Company) -> bool:
         """
         Give the selected player the given item. If the item was successfully given to the player, return True,
         otherwise False.
         """
+
+        if item is None:
+            return False
+
         inventory = self.__inventories[company]
 
         for i in range(0, len(inventory)):

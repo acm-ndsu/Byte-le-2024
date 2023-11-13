@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import random
 from typing import Self, Callable
 
@@ -57,9 +59,9 @@ class DynamiteList(GameObject):
     def add_dynamite(self, dynamite: Dynamite):
         self.__dynamite_list.append(dynamite)
 
-    def detonate(self, inventory_manager: InventoryManager):
+    def detonate(self):
         for dynamite in self.__dynamite_list:
-            if dynamite.detonate(inventory_manager):
+            if dynamite.is_fuse_at_0():
                 self.__dynamite_list.remove(dynamite)
 
     def size(self) -> int:
@@ -430,4 +432,4 @@ class GameBoard(GameObject):
         self.turing_trap_queue.detonate(self.inventory_manager)
 
     def dynamite_detonation_control(self):
-        self.dynamite_list.detonate(self.inventory_manager)
+        self.dynamite_list.detonate()
