@@ -55,6 +55,15 @@ class TestDynamiteController(unittest.TestCase):
     def test_explosion(self):
         # make sure the dynamite is placed properly
         self.place_controller.handle_actions(ActionType.PLACE_DYNAMITE, self.player, self.world)
+        
+        object = self.world.game_map[self.avatar.position.y][self.avatar.position.x]
+        while object.occupied_by is not None:
+            print(object.object_type)
+            object = object.occupied_by
+            if isinstance(object, Avatar):
+                print(ObjectType.AVATAR)
+                break
+        
         self.assertTrue(self.world.game_map[self.avatar.position.y][self.avatar.position.x].is_occupied_by_object_type(
             ObjectType.DYNAMITE))
 
