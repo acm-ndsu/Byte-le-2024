@@ -13,7 +13,7 @@ class TestTechTree(unittest.TestCase):
         self.mock_unlock_dynamite = Mock()
         self.mock_unlock_landmines = Mock()
         self.mock_unlock_emps = Mock()
-        self.mock_unlock_trap_detection = Mock()
+        self.mock_unlock_trap_defusal = Mock()
         self.avatar_functions = AvatarFunctions(increase_movement=self.mock_increase_movement,
                                                 increase_mining=self.mock_increase_mining,
                                                 unlock_movement_overdrive=self.mock_unlock_movement_overdrive,
@@ -21,13 +21,13 @@ class TestTechTree(unittest.TestCase):
                                                 unlock_dynamite=self.mock_unlock_dynamite,
                                                 unlock_landmines=self.mock_unlock_landmines,
                                                 unlock_emps=self.mock_unlock_emps,
-                                                unlock_trap_detection=self.mock_unlock_trap_detection)
+                                                unlock_trap_defusal=self.mock_unlock_trap_defusal)
         
         self.tech_tree = TechTree(self.avatar_functions)
         
     def test_tech_names(self):
         names = self.tech_tree.tech_names()
-        self.assertEqual(names, ['Mining Robotics', 'Better Drivetrains', 'Unnamed Drivetrain Tech', 'Overdrive Movement', 'High Yield Drilling', 'Unnamed Mining Tech', 'Overdrive Mining', 'Dynamite', 'Landmines', 'EMPs', 'Trap Detection'])
+        self.assertEqual(names, ['Mining Robotics', 'Better Drivetrains', 'Unnamed Drivetrain Tech', 'Overdrive Movement', 'High Yield Drilling', 'Unnamed Mining Tech', 'Overdrive Mining', 'Dynamite', 'Landmines', 'EMPs', 'Trap Defusal'])
         
     def test_researched_techs(self):
         names = self.tech_tree.researched_techs()
@@ -53,12 +53,12 @@ class TestTechTree(unittest.TestCase):
         self.tech_tree.research('High Yield Drilling')
         self.tech_tree.research('Dynamite')
         self.tech_tree.research('Landmines')
-        self.tech_tree.research('Trap Detection')
+        self.tech_tree.research('Trap Defusal')
         result = self.tech_tree.research('EMPs')
         names = self.tech_tree.researched_techs()
         self.assertFalse(result)
-        self.assertEqual(names, ['Mining Robotics', 'High Yield Drilling', 'Dynamite', 'Landmines', 'Trap Detection'])
-        self.mock_unlock_trap_detection.assert_called_once()
+        self.assertEqual(names, ['Mining Robotics', 'High Yield Drilling', 'Dynamite', 'Landmines', 'Trap Defusal'])
+        self.mock_unlock_trap_defusal.assert_called_once()
         self.mock_unlock_emps.assert_not_called()
         
     def test_research_detection_with_emp(self):
@@ -66,12 +66,12 @@ class TestTechTree(unittest.TestCase):
         self.tech_tree.research('Dynamite')
         self.tech_tree.research('Landmines')
         self.tech_tree.research('EMPs')
-        result = self.tech_tree.research('Trap Detection')
+        result = self.tech_tree.research('Trap Defusal')
         names = self.tech_tree.researched_techs()
         self.assertFalse(result)
         self.assertEqual(names, ['Mining Robotics', 'High Yield Drilling', 'Dynamite', 'Landmines', 'EMPs'])
         self.mock_unlock_emps.assert_called_once()
-        self.mock_unlock_trap_detection.assert_not_called()
+        self.mock_unlock_trap_defusal.assert_not_called()
         
     def test_is_researched(self):
         self.tech_tree.research('Better Drivetrains')

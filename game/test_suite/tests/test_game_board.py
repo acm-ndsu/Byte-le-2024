@@ -151,7 +151,7 @@ class TestGameBoard(unittest.TestCase):
 
     def test_dynamite_list_detonate(self):
         self.game_board.dynamite_list.add_dynamite(Dynamite())
-        self.game_board.dynamite_list.detonate(self.game_board.inventory_manager)
+        self.game_board.dynamite_list.detonate(self.game_board.inventory_manager, lambda v : None)
         self.assertEqual(self.game_board.dynamite_list.size(), 0)
 
     def test_dynamite_list_json(self):
