@@ -40,6 +40,17 @@ class TestDynamiteController(unittest.TestCase):
         self.client: Player = Player(avatar=self.avatar)
         self.world.generate_map()
 
+        # Unlock the entire tech tree for testing
+        self.avatar.buy_new_tech('Better Drivetrains')
+        self.avatar.buy_new_tech('Unnamed Drivetrain Tech')
+        self.avatar.buy_new_tech('Overdrive Movement')
+        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('Unnamed Mining Tech')
+        self.avatar.buy_new_tech('Dynamite')
+        self.avatar.buy_new_tech('Landmines')
+        self.avatar.buy_new_tech('EMPs')
+        self.avatar.buy_new_tech('Trap Defusal')
+
     def test_no_explosion(self):
         # make sure the dynamite is placed properly
         self.place_controller.handle_actions(ActionType.PLACE_DYNAMITE, self.player, self.world)
@@ -55,14 +66,6 @@ class TestDynamiteController(unittest.TestCase):
     def test_explosion(self):
         # make sure the dynamite is placed properly
         self.place_controller.handle_actions(ActionType.PLACE_DYNAMITE, self.player, self.world)
-        
-        object = self.world.game_map[self.avatar.position.y][self.avatar.position.x]
-        while object.occupied_by is not None:
-            print(object.object_type)
-            object = object.occupied_by
-            if isinstance(object, Avatar):
-                print(ObjectType.AVATAR)
-                break
         
         self.assertTrue(self.world.game_map[self.avatar.position.y][self.avatar.position.x].is_occupied_by_object_type(
             ObjectType.DYNAMITE))
