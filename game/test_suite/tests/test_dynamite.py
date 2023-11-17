@@ -64,6 +64,16 @@ class TestDynamite(unittest.TestCase):
             self.dynamite.detonate_turn = ""
         self.assertEqual(str(e.exception), 'Dynamite.blast_radius must be an int.')
 
+    # test decrementing the fuse and if it can explode or not
+    def test_dynamite_can_explode(self):
+        self.assertFalse(self.dynamite.can_explode)
+
+        self.dynamite.decrement_fuse()
+        self.assertEqual(self.dynamite.fuse, 0)
+
+        self.assertTrue(self.dynamite.can_explode)
+
+
     # test inventory manager - later
 
     # test: json
@@ -73,3 +83,5 @@ class TestDynamite(unittest.TestCase):
         self.assertEqual(str(self.dynamite.position), str(dynamite.position))
         self.assertEqual(self.dynamite.blast_radius, dynamite.blast_radius)
         self.assertEqual(self.dynamite.object_type, dynamite.object_type)
+        self.assertEqual(self.dynamite.can_explode, dynamite.can_explode)
+        self.assertEqual(self.dynamite.company, dynamite.company)
