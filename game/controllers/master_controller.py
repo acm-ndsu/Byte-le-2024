@@ -95,7 +95,7 @@ class MasterController(Controller):
         client.actions = turn_actions
 
         # Create deep copies of all objects sent to the player
-        current_world = deepcopy(self.current_world_data["game_board"])    # what is current world and copy avatar
+        current_world = deepcopy(self.current_world_data["game_board"])  # what is current world and copy avatar
         copy_avatar = deepcopy(client.avatar)
         # Obfuscate data in objects that that player should not be able to see
         # Currently world data isn't obfuscated at all

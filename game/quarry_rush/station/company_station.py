@@ -54,6 +54,7 @@ class ChurchStation(CompanyStation):
     """
     def __init__(self):
         super().__init__(Company.CHURCH)
+        self.object_type = ObjectType.CHURCH_STATION
 
 
 class TuringStation(CompanyStation):
@@ -62,3 +63,4 @@ class TuringStation(CompanyStation):
     """
     def __init__(self):
         super().__init__(Company.TURING)
+        self.object_type = ObjectType.TURING_STATION

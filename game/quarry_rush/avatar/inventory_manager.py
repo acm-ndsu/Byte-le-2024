@@ -133,8 +133,8 @@ class InventoryManager(GameObject):
             
     def from_inventories_json(self, data: dict) -> dict:
         result: dict = {}
-        for key in data:
-            result[Company(key)] = list(map(self.maybe_item_from_json, data[key]))
+        for key in data.keys():
+            result[Company(int(key))] = list(map(self.maybe_item_from_json, data[key]))
         return result
 
     def to_json(self):

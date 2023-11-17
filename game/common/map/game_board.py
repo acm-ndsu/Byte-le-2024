@@ -428,8 +428,7 @@ class GameBoard(GameObject):
                 return Dynamite().from_json(data)
             # If adding more ObjectTypes that can be placed on the game_board, specify here
             case _:
-                raise ValueError(f'The location (dict) must have a valid key (tuple of vectors) and a valid value ('
-                                 f'list of GameObjects).')
+                raise ValueError(f'ObjectType {temp} does not exist in the from_json() method in GameBoard.')
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)

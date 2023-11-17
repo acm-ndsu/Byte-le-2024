@@ -1,11 +1,12 @@
-from game.common.map.occupiable import Occupiable
-from game.common.enums import ObjectType
-from game.common.game_object import GameObject
-from game.common.avatar import Avatar
-from game.common.stations.occupiable_station import OccupiableStation
-from game.common.stations.station import Station
-from game.common.map.wall import Wall
 from typing import Self
+
+from game.common.game_object import GameObject
+from game.common.map.occupiable import Occupiable
+from game.common.map.wall import Wall
+from game.common.stations.station import Station
+from game.quarry_rush.station.ancient_tech_occupiable_station import AncientTechOccupiableStation
+from game.quarry_rush.station.company_station import ChurchStation, TuringStation
+from game.quarry_rush.station.ore_occupiable_stations import *
 
 
 class Tile(Occupiable):
@@ -41,6 +42,18 @@ class Tile(Occupiable):
                 self.occupied_by: Station = Station().from_json(occupied_by)
             case ObjectType.WALL:
                 self.occupied_by: Wall = Wall().from_json(occupied_by)
+            case ObjectType.COPIUM_OCCUPIABLE_STATION:
+                self.occupied_by: CopiumOccupiableStation = CopiumOccupiableStation().from_json(occupied_by)
+            case ObjectType.TURITE_OCCUPIABLE_STATION:
+                self.occupied_by: TuriteOccupiableStation = TuriteOccupiableStation().from_json(occupied_by)
+            case ObjectType.LAMBDIUM_OCCUPIABLE_STATION:
+                self.occupied_by: LambdiumOccupiableStation = LambdiumOccupiableStation().from_json(occupied_by)
+            case ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION:
+                self.occupied_by: AncientTechOccupiableStation = AncientTechOccupiableStation().from_json(occupied_by)
+            case ObjectType.CHURCH_STATION:
+                self.occupied_by: ChurchStation = ChurchStation().from_json(occupied_by)
+            case ObjectType.TURING_STATION:
+                self.occupied_by: TuringStation = TuringStation().from_json(occupied_by)
             case _:
-                raise Exception(f'Could not parse occupied_by: {occupied_by}')
+                raise ValueError(f'Could not parse occupied_by: {occupied_by}')
         return self
