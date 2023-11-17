@@ -39,12 +39,12 @@ class CompanyStation(OccupiableStation):
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
-        data['company'] = self.company
+        data['company'] = self.company.value
         return data
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.company: Company = data['company']
+        self.company: Company = Company(data['company'])
         return self
 
 
