@@ -1,17 +1,22 @@
 import os
+import random
 
 import pygame as pyg
 
 from visualizer.bytesprites.bytesprite import ByteSprite
 from game.utils.vector import Vector
+from visualizer.bytesprites.bytesprite_factory import ByteSpriteFactory
 
 
-class LambdiumBS(ByteSprite):
-    def __init__(self, screen: pyg.Surface):
-        super().__init__(screen, os.path.join(os.getcwd(), 'visualizer/dummy_sprites/lambdium.png'), 1, None, 10)
+class LambdiumBS(ByteSpriteFactory):
 
-    def update(self, data: dict, layer: int, pos: Vector) -> None:
-        super().update(data, layer, pos)
-        self.active_sheet = self.spritesheets[0]
+    @staticmethod
+    def update(data: dict, layer: int, pos: Vector, spritesheets: list[list[pyg.Surface]]) -> list[pyg.Surface]:
+        if random.randint(1, 6) == 6:
+            return spritesheets[1]
+        return spritesheets[0]
 
-        self.set_image_and_render()
+    @staticmethod
+    def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/dummy_sprites/lambdium.png'), 1, 18,
+                          LambdiumBS.update)

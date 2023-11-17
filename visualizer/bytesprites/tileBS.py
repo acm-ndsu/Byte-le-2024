@@ -8,8 +8,7 @@ from game.utils.vector import Vector
 from visualizer.bytesprites.bytesprite_factory import ByteSpriteFactory
 
 
-class AncientTechBS(ByteSpriteFactory):
-
+class TileBS(ByteSpriteFactory):
     @staticmethod
     def update(data: dict, layer: int, pos: Vector, spritesheets: list[list[pyg.Surface]]) -> list[pyg.Surface]:
         if random.randint(1, 6) == 6:
@@ -19,5 +18,5 @@ class AncientTechBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/dummy_sprites/ancient_tech.png'), 1, 33,
-                          AncientTechBS.update)
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/ExampleTileSS.png'), 2,
+                          7, TileBS.update)
