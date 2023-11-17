@@ -14,5 +14,5 @@ class WallBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/ExampleWallSS.png'), 1,
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/WallSS.png'), 1,
                           8, WallBS.update)

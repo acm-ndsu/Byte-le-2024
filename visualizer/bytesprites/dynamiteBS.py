@@ -15,5 +15,5 @@ class DynamiteBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/dummy_sprites/dynamite.png'), 1, 31,
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/dynamiteSS.png'), 1, 31,
                           DynamiteBS.update)

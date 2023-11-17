@@ -19,5 +19,5 @@ class CopiumBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/dummy_sprites/copium.png'), 1, 20,
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/CopiumSS.png'), 1, 20,
                           CopiumBS.update)

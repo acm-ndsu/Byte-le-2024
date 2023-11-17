@@ -18,5 +18,5 @@ class TileBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/ExampleTileSS.png'), 2,
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/TileSS.png'), 2,
                           7, TileBS.update)

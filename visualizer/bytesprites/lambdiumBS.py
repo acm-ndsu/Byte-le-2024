@@ -18,5 +18,5 @@ class LambdiumBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/dummy_sprites/lambdium.png'), 1, 18,
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/lambdiumSS.png'), 1, 18,
                           LambdiumBS.update)

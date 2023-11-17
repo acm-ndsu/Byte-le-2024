@@ -18,5 +18,5 @@ class TuriteBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/dummy_sprites/turite.png'), 1, 19,
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/turiteSS.png'), 1, 19,
                           TuriteBS.update)
