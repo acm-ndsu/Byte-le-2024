@@ -11,7 +11,7 @@ class DefuseController(Controller):
         
     def handle_actions(self, action: ActionType, client: Player, world: GameBoard):
         result_vector: Vector = client.avatar.position.add_to_vector(self.convert_to_vector(action))
-        world.defust_trap_at(result_vector)
+        world.defuse_trap_at(result_vector)
         
     def convert_to_vector(self, action: ActionType) -> Vector:
         match action:
