@@ -61,6 +61,11 @@ class TestDynamiteController(unittest.TestCase):
         dynamite: Dynamite = self.world.game_map[self.avatar.position.y][self.avatar.position.x].get_occupied_by(
             ObjectType.DYNAMITE)
 
+        # Check the controller doesn't do anything
+        self.dynamite_controller.handle_detonation(dynamite, self.world)
+        self.assertTrue(self.world.game_map[self.avatar.position.y][self.avatar.position.x].is_occupied_by_object_type(
+            ObjectType.DYNAMITE))
+
         # the dynamite cannot explode yet because the tick isn't 0
         self.assertFalse(dynamite.can_explode)
 

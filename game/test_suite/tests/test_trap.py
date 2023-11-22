@@ -147,8 +147,8 @@ class TestTrap(unittest.TestCase):
         with self.assertRaises(KeyError) as e:
             self.assertEqual(data['inventory_manager'], InventoryManager())
         self.assertEqual(str(e.exception), '\'inventory_manager\'')
-        self.assertEqual(data['owner_company'], Company.CHURCH)
-        self.assertEqual(data['target_company'], Company.TURING)
+        self.assertEqual(data['owner_company'], Company.CHURCH.value)
+        self.assertEqual(data['target_company'], Company.TURING.value)
         self.assertEqual(data['opponent_position'](), self.opponent_position)
 
         # To test the object type, need to make a new Trap object
