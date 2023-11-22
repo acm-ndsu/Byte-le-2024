@@ -179,22 +179,22 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
         self.assertTrue(self.avatar.is_researched('EMPs'))
-        self.assertFalse(self.avatar.is_researched('Trap Detection'))
+        self.assertFalse(self.avatar.is_researched('Trap Defusal'))
 
     # Buying Trap Detection will return False if the tree hasn't developed to it yet
-    def test_unlock_trap_detection_fail(self):
-        self.assertFalse(self.avatar.buy_new_tech('Trap Detection'))
+    def test_unlock_trap_defusal_fail(self):
+        self.assertFalse(self.avatar.buy_new_tech('Trap Defusal'))
 
-    # Tests that unlocking Trap Detection works and that unlocking EMPs returns False
-    def test_unlock_trap_detection(self):
+    # Tests that unlocking Trap Defusal works and that unlocking EMPs returns False
+    def test_unlock_trap_defusal(self):
         self.avatar.buy_new_tech('High Yield Drilling')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
-        self.avatar.buy_new_tech('Trap Detection')
+        self.avatar.buy_new_tech('Trap Defusal')
         self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
-        self.assertTrue(self.avatar.is_researched('Trap Detection'))
+        self.assertTrue(self.avatar.is_researched('Trap Defusal'))
         self.assertFalse(self.avatar.is_researched('EMPs'))
 
     # Tests getting the researched techs

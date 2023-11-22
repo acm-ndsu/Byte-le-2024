@@ -19,7 +19,7 @@ class PlaceController(Controller):
         # depending on the action type, the type of placeable entity is placed on the map with the avatar occupying it
         match action:
             case ActionType.PLACE_DYNAMITE:
-                self.__place_dyanmite(client, tile, world)
+                self.__place_dynamite(client, tile, world)
             case ActionType.PLACE_LANDMINE:
                 self.__place_landmine(client, tile, world)
             case ActionType.PLACE_EMP:
@@ -27,7 +27,7 @@ class PlaceController(Controller):
             case _:  # default case
                 return
 
-    def __place_dyanmite(self, client: Player, tile: Tile, world: GameBoard) -> None:
+    def __place_dynamite(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # places dynamite if the avatar's active ability allows it AND there isn't a dynamite object there already
         if client.avatar.can_place_dynamite() and not tile.is_occupied_by_object_type(ObjectType.DYNAMITE):
             dynamite: Dynamite = Dynamite(position=client.avatar.position)

@@ -57,8 +57,8 @@ class TechTree(GameObject):
         """
         Takes the name of the tech to research and returns whether or not it was successfully researched
         """
-        # Don't allow EMPs and Trap Detection to both be researched
-        if tech_name == 'EMPs' and self.is_researched('Trap Detection') or tech_name == 'Trap Detection' and self.is_researched('EMPs'):
+        # Don't allow EMPs and Trap Defusal to both be researched
+        if tech_name == 'EMPs' and self.is_researched('Trap Defusal') or tech_name == 'Trap Defusal' and self.is_researched('EMPs'):
             return False
         
         def research_tree(tree: Tree[tuple[Tech, bool]]) -> bool:
@@ -138,7 +138,7 @@ class TechTree(GameObject):
                                             subs=[]
                                         ),
                                         Tree(
-                                            value=this_techs['Trap Detection'],
+                                            value=this_techs['Trap Defusal'],
                                             subs=[]
                                         )
                                     ]

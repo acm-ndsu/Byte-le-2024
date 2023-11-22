@@ -26,8 +26,7 @@ class AvatarFunctions:
 
     * unlock_emps: A function that unlocks emps for the player
 
-    * unlock_trap_detection: A function that unlocks trap detection
-    for the player
+    * unlock_trap_defusal: A function that unlocks trap defusal for the player
     """
     def __init__(self,
                  increase_movement: Callable[[int], None],
@@ -37,7 +36,7 @@ class AvatarFunctions:
                  unlock_dynamite: Callable[[], None],
                  unlock_landmines: Callable[[], None],
                  unlock_emps: Callable[[], None],
-                 unlock_trap_detection: Callable[[], None]):
+                 unlock_trap_defusal: Callable[[], None]):
         self.increase_movement = increase_movement
         self.increase_mining = increase_mining
         self.unlock_movement_overdrive = unlock_movement_overdrive
@@ -45,4 +44,4 @@ class AvatarFunctions:
         self.unlock_dynamite = unlock_dynamite
         self.unlock_landmines = unlock_landmines
         self.unlock_emps = unlock_emps
-        self.unlock_trap_detection = unlock_trap_detection
+        self.unlock_trap_defusal = unlock_trap_defusal

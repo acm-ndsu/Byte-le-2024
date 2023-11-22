@@ -26,11 +26,19 @@ class TrapQueue(GameObject):
         if len(self.__traps) >= self.__max_traps:
             self.__traps = self.__traps[1:]
         self.__traps += [trap]
-        
-    def detonate(self, inventory_manager: InventoryManager):
+
+    def detonate(self, inventory_manager: InventoryManager, remove_trap_at: Callable[[Vector], None]):
         for i in range(0, len(self.__traps))[::-1]:
             if self.__traps[i].detonate(inventory_manager):
-                self.__traps = self.__traps[:i] + self.__traps[i+1:]
+                # call remove trap from game board method
+                remove_trap_at(self.__traps[i].position)
+                # remove trap from list of traps
+                self.__traps: list[Trap] = self.__traps[:i] + self.__traps[i+1:]
+                
+    def dequeue_trap_at(self, position: Vector):
+        for i in range(0, len(self.__traps))[::-1]:
+            if self.__traps[i].position.x == position.x and self.__traps[i].position.y == position.y:
+                self.__traps: list[Trap] = self.__traps[:1] + self.__traps[i+1:]
 
     def size(self) -> int:
         return len(self.__traps)
@@ -427,9 +435,20 @@ class GameBoard(GameObject):
         self.dynamite_list = DynamiteList().from_json(data['dynamite_list'])
         return self
 
+    # removes trap from game_map based on position, method called in trap queue detonate method
+    def remove_trap_at(self, position: Vector) -> None:
+        tile: Tile = self.game_map[position.y][position.x]
+        tile.remove_from_occupied_by(ObjectType.LANDMINE)
+        tile.remove_from_occupied_by(ObjectType.EMP)
+
     def trap_detonation_control(self):
-        self.church_trap_queue.detonate(self.inventory_manager)
-        self.turing_trap_queue.detonate(self.inventory_manager)
+        self.church_trap_queue.detonate(self.inventory_manager, self.remove_trap_at)
+        self.turing_trap_queue.detonate(self.inventory_manager, self.remove_trap_at)
 
     def dynamite_detonation_control(self):
         self.dynamite_list.detonate()
+        
+    def defuse_trap_at(self, position: Vector) -> None:
+        self.remove_trap_at(position)
+        self.church_trap_queue.dequeue_trap_at(position)
+        self.turing_trap_queue.dequeue_trap_at(position)

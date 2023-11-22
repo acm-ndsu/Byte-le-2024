@@ -97,10 +97,10 @@ def techs(avatar_functions: AvatarFunctions) -> dict[str, Tech]:
             apply=avatar_functions.unlock_emps
         ),
         
-        'Trap Detection': Tech(
-            name='Trap Detection',
+        'Trap Defusal': Tech(
+            name='Trap Defusal',
             cost=0,
             point_value=1,
-            apply=avatar_functions.unlock_trap_detection
+            apply=avatar_functions.unlock_trap_defusal
         )
     }

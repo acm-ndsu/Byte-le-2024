@@ -15,23 +15,8 @@ class TestTrap(unittest.TestCase):
 
     def setUp(self) -> None:
         self.inventory_manager = InventoryManager()
-        self.trap = Trap(0.0, 0.1, Company.CHURCH, Company.TURING,
+        self.trap = Trap(0.1, Company.CHURCH, Company.TURING,
                          lambda: self.opponent_position, Vector(0, 0))
-
-    # test set detection_reduction
-    def test_set_detection_reduction(self):
-        self.trap.detection_reduction = 0.0
-        self.assertEqual(self.trap.detection_reduction, 0.0)
-
-    def test_set_detection_reduction_fail_none(self):
-        with self.assertRaises(ValueError) as e:
-            self.trap.detection_reduction = None
-        self.assertEqual(str(e.exception), 'Trap.detection_reduction must be a float.')
-
-    def test_set_detection_reduction_fail(self):
-        with self.assertRaises(ValueError) as e:
-            self.trap.detection_reduction = 1
-        self.assertEqual(str(e.exception), 'Trap.detection_reduction must be a float.')
 
     # test set steal_rate
     def test_set_steal_rate(self):
@@ -104,10 +89,10 @@ class TestTrap(unittest.TestCase):
         self.assertEqual(self.trap.in_range(), False)
         self.opponent_position = Vector(1, 1)
         self.assertEqual(self.trap.in_range(), False)
+        self.opponent_position = Vector(1, 0)
+        self.assertEqual(self.trap.in_range(), False)
 
     def test_in_range_true(self):
-        self.opponent_position = Vector(1, 0)
-        self.assertEqual(self.trap.in_range(), True)
         self.opponent_position = Vector(0, 0)
         self.assertEqual(self.trap.in_range(), True)
 
@@ -119,29 +104,26 @@ class TestTrap(unittest.TestCase):
         self.assertEqual(self.trap.detonate(self.inventory_manager), False)
         self.opponent_position = Vector(1, 1)
         self.assertEqual(self.trap.detonate(self.inventory_manager), False)
+        self.opponent_position = Vector(1, 0)
+        self.assertEqual(self.trap.detonate(self.inventory_manager), False)
 
     def test_detonate_true(self):
-        self.opponent_position = Vector(1, 0)
-        self.assertEqual(self.trap.detonate(self.inventory_manager), True)
         self.opponent_position = Vector(0, 0)
         self.assertEqual(self.trap.detonate(self.inventory_manager), True)
 
     # test default of Landmine
     def test_landmine(self):
         self.landmine = Landmine(Company.CHURCH, Company.TURING, lambda: self.opponent_position, Vector(1, 1))
-        self.assertEqual(self.landmine.detection_reduction, 0.0)
         self.assertEqual(self.landmine.steal_rate, 0.1)
 
     # test default of EMP
     def test_EMP(self):
         self.EMP = EMP(Company.TURING, Company.CHURCH, lambda: self.opponent_position, Vector(2, 2))
-        self.assertEqual(self.EMP.detection_reduction, 0.1)
         self.assertEqual(self.EMP.steal_rate, 0.2)
 
     # test json
     def test_trap_json(self):
         data: dict = self.trap.to_json()
-        self.assertEqual(data['detection_reduction'], 0.0)
         self.assertEqual(data['steal_rate'], 0.1)
         # inventory_manager not a part of json as there is only one
         with self.assertRaises(KeyError) as e:
