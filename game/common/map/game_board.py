@@ -67,11 +67,10 @@ class DynamiteList(GameObject):
     def add_dynamite(self, dynamite: Dynamite):
         self.__dynamite_list.append(dynamite)
 
-    def detonate(self, remove_dynamite_at: Callable[[Vector], None]):
+    def detonate(self):
         for dynamite in self.__dynamite_list:
             if dynamite.is_fuse_at_0():
                 self.__dynamite_list.remove(dynamite)
-                remove_dynamite_at(dynamite.position)
 
     def size(self) -> int:
         return len(self.__dynamite_list)
@@ -442,17 +441,12 @@ class GameBoard(GameObject):
         tile.remove_from_occupied_by(ObjectType.LANDMINE)
         tile.remove_from_occupied_by(ObjectType.EMP)
 
-    # removes dynamite from game_map based on position, method called in dynamite queue detonate methof
-    def remove_dynamite_at(self, position: Vector) -> None:
-        tile: Tile = self.game_map[position.y][position.x]
-        tile.remove_from_occupied_by(ObjectType.DYNAMITE)
-
     def trap_detonation_control(self):
         self.church_trap_queue.detonate(self.inventory_manager, self.remove_trap_at)
         self.turing_trap_queue.detonate(self.inventory_manager, self.remove_trap_at)
 
     def dynamite_detonation_control(self):
-        self.dynamite_list.detonate(self.remove_dynamite_at)
+        self.dynamite_list.detonate()
         
     def defuse_trap_at(self, position: Vector) -> None:
         self.remove_trap_at(position)
