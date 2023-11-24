@@ -107,16 +107,16 @@ class Trap(OccupiableStation):
     def to_json(self) -> dict:
         data: dict = super().to_json()
         data['steal_rate'] = self.steal_rate
-        data['owner_company'] = self.owner_company
-        data['target_company'] = self.target_company
+        data['owner_company'] = self.owner_company.value
+        data['target_company'] = self.target_company.value
         data['opponent_position'] = self.opponent_position
         return data
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
         self.steal_rate: float = data['steal_rate']
-        self.owner_company: Company = data['owner_company']
-        self.target_company: Company = data['target_company']
+        self.owner_company: Company = Company(data['owner_company'])
+        self.target_company: Company = Company(data['target_company'])
         self.opponent_position: Callable[[], Vector] = data['opponent_position']
         return self
 

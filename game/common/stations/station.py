@@ -1,9 +1,10 @@
+from typing import Self
+
 from game.common.avatar import Avatar
 from game.common.game_object import GameObject
-from game.common.enums import ObjectType
-from game.common.items.item import Item
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
-from typing import Self
+from game.quarry_rush.entity.ancient_tech import AncientTech
+from game.quarry_rush.entity.ores import *
 
 
 # create Station object from GameObject that allows item to be contained in it
@@ -50,7 +51,15 @@ class Station(GameObject):
         # framework match case for from json, can add more object types that can be item
         match ObjectType(held_item['object_type']):
             case ObjectType.ITEM:
-                self.held_item = Item().from_json(held_item)
+                self.held_item: Item = Item().from_json(held_item)
+            case ObjectType.COPIUM:
+                self.held_item: Copium = Copium().from_json(held_item)
+            case ObjectType.TURITE:
+                self.held_item: Turite = Turite().from_json(held_item)
+            case ObjectType.LAMBDIUM:
+                self.held_item: Lambdium = Lambdium().from_json(held_item)
+            case ObjectType.ANCIENT_TECH:
+                self.held_item: AncientTech = AncientTech().from_json(held_item)
             case _:
-                raise Exception(f'Could not parse held_item: {held_item}')
+                raise ValueError(f'Could not parse held_item: {held_item}')
         return self

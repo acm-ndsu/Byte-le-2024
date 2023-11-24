@@ -123,7 +123,7 @@ class InventoryManager(GameObject):
     def inventories_json(self) -> dict:
         result: dict = {}
         for key in self.__inventories:
-            result[key] = list(map(self.maybe_item_json, self.__inventories[key]))
+            result[key.value] = list(map(self.maybe_item_json, self.__inventories[key]))
         return result
             
     def maybe_item_from_json(self, item: dict | None) -> Item | None:
@@ -133,8 +133,8 @@ class InventoryManager(GameObject):
             
     def from_inventories_json(self, data: dict) -> dict:
         result: dict = {}
-        for key in data:
-            result[key] = list(map(self.maybe_item_from_json, data[key]))
+        for key in data.keys():
+            result[Company(int(key))] = list(map(self.maybe_item_from_json, data[key]))
         return result
 
     def to_json(self):

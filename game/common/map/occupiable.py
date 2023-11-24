@@ -39,6 +39,10 @@ class Occupiable(GameObject):
     def place_on_top_of_stack(self, game_object: GameObject) -> bool:
         """
         This method will take in a GameObject and place it on top of the occupied_by stack of the Occupiable object.
+        The placed object will then also be underneath the Avatar object.
+
+        Example before placing: Tile -> Avatar
+                After placing: Tile -> NewObject -> Avatar
         """
         temp_game_object: GameObject = self
 

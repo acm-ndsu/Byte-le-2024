@@ -191,11 +191,11 @@ Changes made in 2023.
 ## How to run
 
 ```bash
-.\build.bat - will build your code (compile, pretty much)
+./build.bat - will build your code (compile, pretty much)
 
-python .\launcher.pyz g - will generate a map 
+python ./launcher.pyz g - will generate a map 
 
-python .\launcher.pyz r - will run the game
+python ./launcher.pyz r - will run the game
 ```
 
 ## Required Python Version

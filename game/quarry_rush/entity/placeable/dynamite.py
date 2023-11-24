@@ -93,7 +93,7 @@ class Dynamite(OccupiableStation):
         data['position'] = self.position.to_json() if self.position is not None else None
         data['blast_radius'] = self.blast_radius
         data['can_explode'] = self.can_explode
-        data['company'] = self.company
+        data['company'] = self.company.value
         return data
 
     # from json
@@ -102,5 +102,5 @@ class Dynamite(OccupiableStation):
         self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
         self.blast_radius: int = data['blast_radius']
         self.can_explode: bool = data['can_explode']
-        self.company: Company = data['company']
+        self.company: Company = Company(data['company'])
         return self

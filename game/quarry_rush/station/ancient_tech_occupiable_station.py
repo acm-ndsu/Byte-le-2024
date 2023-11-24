@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 from game.common.avatar import Avatar
 from game.common.enums import ObjectType
-from game.common.items.item import Item
 from game.common.stations.occupiable_station import OccupiableStation
 from game.quarry_rush.entity.ancient_tech import AncientTech
 from game.quarry_rush.avatar.inventory_manager import InventoryManager

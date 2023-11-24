@@ -1,10 +1,11 @@
-from game.common.avatar import Avatar
-from game.common.map.occupiable import Occupiable
-from game.common.enums import ObjectType
-from game.common.items.item import Item
-from game.common.stations.station import Station
-from game.common.game_object import GameObject
 from typing import Self
+
+from game.common.avatar import Avatar
+from game.common.enums import ObjectType
+from game.common.game_object import GameObject
+from game.common.items.item import Item
+from game.common.map.occupiable import Occupiable
+from game.common.stations.station import Station
 
 
 # create station object that contains occupied_by
@@ -21,6 +22,7 @@ class OccupiableStation(Occupiable, Station):
         Occupiable Station Example is a small file that shows an example of how this class can be
         used. The example class can be deleted or expanded upon if necessary.
     """
+
     def __init__(self, held_item: Item | None = None, occupied_by: GameObject | None = None):
         super().__init__(occupied_by=occupied_by, held_item=held_item)
         self.object_type: ObjectType = ObjectType.OCCUPIABLE_STATION
@@ -28,6 +30,10 @@ class OccupiableStation(Occupiable, Station):
         self.occupied_by = occupied_by
 
     def from_json(self, data: dict) -> Self:
+        from game.quarry_rush.station.ancient_tech_occupiable_station import AncientTechOccupiableStation
+        from game.quarry_rush.station.ore_occupiable_stations import CopiumOccupiableStation, TuriteOccupiableStation, \
+            LambdiumOccupiableStation
+
         super().from_json(data)
         occupied_by = data['occupied_by']
         if occupied_by is None:
@@ -39,6 +45,14 @@ class OccupiableStation(Occupiable, Station):
                 self.occupied_by: Avatar = Avatar().from_json(occupied_by)
             case ObjectType.OCCUPIABLE_STATION:
                 self.occupied_by: OccupiableStation = OccupiableStation().from_json(occupied_by)
+            case ObjectType.COPIUM_OCCUPIABLE_STATION:
+                self.occupied_by: CopiumOccupiableStation = CopiumOccupiableStation().from_json(occupied_by)
+            case ObjectType.TURITE_OCCUPIABLE_STATION:
+                self.occupied_by: TuriteOccupiableStation = TuriteOccupiableStation().from_json(occupied_by)
+            case ObjectType.LAMBDIUM_OCCUPIABLE_STATION:
+                self.occupied_by: LambdiumOccupiableStation = LambdiumOccupiableStation().from_json(occupied_by)
+            case ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION:
+                self.occupied_by: AncientTechOccupiableStation = AncientTechOccupiableStation().from_json(occupied_by)
             case ObjectType.STATION:
                 self.occupied_by: Station = Station().from_json(occupied_by)
             case _:

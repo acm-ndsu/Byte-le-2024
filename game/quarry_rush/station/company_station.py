@@ -39,12 +39,12 @@ class CompanyStation(OccupiableStation):
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
-        data['company'] = self.company
+        data['company'] = self.company.value
         return data
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.company: Company = data['company']
+        self.company: Company = Company(data['company'])
         return self
 
 
@@ -54,6 +54,7 @@ class ChurchStation(CompanyStation):
     """
     def __init__(self):
         super().__init__(Company.CHURCH)
+        self.object_type = ObjectType.CHURCH_STATION
 
 
 class TuringStation(CompanyStation):
@@ -62,3 +63,4 @@ class TuringStation(CompanyStation):
     """
     def __init__(self):
         super().__init__(Company.TURING)
+        self.object_type = ObjectType.TURING_STATION
