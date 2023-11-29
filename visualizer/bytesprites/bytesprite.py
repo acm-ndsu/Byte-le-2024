@@ -134,7 +134,7 @@ class ByteSprite(pyg.sprite.Sprite):
             pos.x * self.__config.TILE_SIZE * self.__config.SCALE + self.__config.GAME_BOARD_MARGIN_LEFT,
             pos.y * self.__config.TILE_SIZE * self.__config.SCALE + self.__config.GAME_BOARD_MARGIN_TOP)
 
-        self.update_function(data, layer, pos, self.spritesheets)
+        self.active_sheet = self.update_function(data, layer, pos, self.spritesheets)
         self.set_image_and_render()
 
     # Call this method at the end of the implemented logic and for each frame

@@ -1,5 +1,6 @@
 import os
 
+import pygame
 import pygame as pyg
 
 from visualizer.bytesprites.bytesprite import ByteSprite
@@ -15,4 +16,5 @@ class EmpsBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/empsSS.png'), 1, 36, EmpsBS.update)
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/empsSS.png'), 1, 36,
+                          EmpsBS.update, colorkey=pygame.Color(255, 0, 255))

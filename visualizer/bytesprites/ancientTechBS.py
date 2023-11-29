@@ -1,6 +1,7 @@
 import os
 import random
 
+import pygame
 import pygame as pyg
 
 from visualizer.bytesprites.bytesprite import ByteSprite
@@ -19,5 +20,5 @@ class AncientTechBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/AncientTechSS.png'), 1, 33,
-                          AncientTechBS.update)
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/AncientTechSS.png'), 2, 33,
+                          AncientTechBS.update, colorkey=pygame.Color(255, 0, 255))

@@ -1,5 +1,6 @@
 import os
 
+import pygame
 import pygame as pyg
 
 from visualizer.bytesprites.bytesprite import ByteSprite
@@ -16,4 +17,4 @@ class DynamiteBS(ByteSpriteFactory):
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
         return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/dynamiteSS.png'), 1, 31,
-                          DynamiteBS.update)
+                          DynamiteBS.update, colorkey=pygame.Color(255, 0, 255))
