@@ -72,6 +72,10 @@ class ActionType(Enum):
     MINE_COPIUM = auto()
     MINE_TURITE = auto()
     MINE_ANCIENT_TECH = auto()
+    DEFUSE_UP = auto()
+    DEFUSE_DOWN = auto()
+    DEFUSE_LEFT = auto()
+    DEFUSE_RIGHT = auto()
 
 
 # Added for Quarry Rush

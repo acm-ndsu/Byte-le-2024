@@ -38,6 +38,17 @@ class TestPlaceController(unittest.TestCase):
         self.client = Player(None, None, [], self.avatar)
         self.game_board.generate_map()
 
+        # Unlock the entire tech tree for testing
+        self.avatar.buy_new_tech('Better Drivetrains')
+        self.avatar.buy_new_tech('Unnamed Drivetrain Tech')
+        self.avatar.buy_new_tech('Overdrive Movement')
+        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('Unnamed Mining Tech')
+        self.avatar.buy_new_tech('Dynamite')
+        self.avatar.buy_new_tech('Landmines')
+        self.avatar.buy_new_tech('EMPs')
+        self.avatar.buy_new_tech('Trap Defusal')
+
     # tests that the avatar is at the top of the stack
     def test_avatar_on_top_of_ores(self) -> None:
         self.movement_controller.handle_actions(ActionType.MOVE_DOWN, self.client, self.game_board)  # move to position

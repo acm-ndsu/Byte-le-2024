@@ -17,12 +17,10 @@ class Trap(OccupiableStation):
                     if so, remove trap from game_board trap queue to remove it from the game.
     """
 
-    def __init__(self, detection_reduction: float = 0.0, steal_rate: float = 0.0,
+    def __init__(self, steal_rate: float = 0.0,
                  owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
                  opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
         super().__init__()
-        # value subtracting from default 5% detection rate
-        self.detection_reduction: float = detection_reduction
         # rate for stealing items from opposing avatar when trap detonates (if none, pass 0.0)
         self.steal_rate: float = steal_rate
         # company of the owner of the trap
@@ -35,11 +33,6 @@ class Trap(OccupiableStation):
         self.position: Vector = position
         # assigning the object type
         self.object_type: ObjectType = ObjectType.TRAP
-
-    # getter methods
-    @property
-    def detection_reduction(self) -> float:
-        return self.__detection_reduction
 
     @property
     def steal_rate(self) -> float:
@@ -56,14 +49,6 @@ class Trap(OccupiableStation):
     @property
     def opponent_position(self) -> Callable[[], Vector]:
         return self.__opponent_position
-
-    # setter methods
-    @detection_reduction.setter
-    def detection_reduction(self, detection_reduction: float) -> None:
-        if detection_reduction is None or not isinstance(detection_reduction, float):
-            raise ValueError(
-                f'{self.__class__.__name__}.detection_reduction must be a float.')
-        self.__detection_reduction = detection_reduction
 
     @steal_rate.setter
     def steal_rate(self, steal_rate: float) -> None:
@@ -103,7 +88,7 @@ class Trap(OccupiableStation):
         # find distance between trap position and opponent_position using method from vector class
         # if distance is less than or equal to maximum distance, then return True, else, False
         opponent_position = self.opponent_position()
-        if self.position.distance(opponent_position) <= 1:
+        if self.position.distance(opponent_position) <= 0:
             return True
         return False
 
@@ -121,7 +106,6 @@ class Trap(OccupiableStation):
     # json methods
     def to_json(self) -> dict:
         data: dict = super().to_json()
-        data['detection_reduction'] = self.detection_reduction
         data['steal_rate'] = self.steal_rate
         data['owner_company'] = self.owner_company.value
         data['target_company'] = self.target_company.value
@@ -130,7 +114,6 @@ class Trap(OccupiableStation):
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.detection_reduction: float = data['detection_reduction']
         self.steal_rate: float = data['steal_rate']
         self.owner_company: Company = Company(data['owner_company'])
         self.target_company: Company = Company(data['target_company'])
@@ -144,7 +127,7 @@ class Landmine(Trap):
 
     def __init__(self, owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
                  opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
-        super().__init__(0.0, 0.1, owner_company, target_company, opponent_position, position)
+        super().__init__(0.1, owner_company, target_company, opponent_position, position)
         self.object_type: ObjectType = ObjectType.LANDMINE
 
 
@@ -152,5 +135,5 @@ class EMP(Trap):
 
     def __init__(self, owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
                  opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
-        super().__init__(0.1, 0.2, owner_company, target_company, opponent_position, position)
+        super().__init__(0.2, owner_company, target_company, opponent_position, position)
         self.object_type: ObjectType = ObjectType.EMP
