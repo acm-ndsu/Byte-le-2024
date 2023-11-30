@@ -7,9 +7,10 @@ class ActiveAbility(GameObject):
 
     def __init__(self, cooldown: int = 1, fuse: int = 0):
         super().__init__()
-        self.object_type = ObjectType.ACTIVE_ABILITY
-        self.cooldown = cooldown
-        self.fuse = fuse
+        self.object_type: ObjectType = ObjectType.ACTIVE_ABILITY
+        self.cooldown: int = cooldown  # variable shouldn't change; used to reset the fuse
+        self.fuse: int = fuse  # variable to keep track of how many turns until the ability can be used again
+        self.is_usable: bool = fuse == 0
 
 # The cooldown represents the amount of turns that the ability is unavailable.
 # cooldown getter
@@ -40,12 +41,19 @@ class ActiveAbility(GameObject):
         if fuse < 0:
             raise ValueError(f'{self.__class__.__name__}.fuse cannot be negative')
         self.__fuse = fuse
+        self.is_usable = fuse == 0  # adjust bool value for if the ability is usable or not
 
-# use will be a boolean checking to see if the object on cooldown is able to be used again
-    def is_useable(self) -> bool:
-        if self.fuse == 0:
-            return True
-        return False
+    # is_usable getter property
+    @property
+    def is_usable(self) -> bool:
+        return self.__is_usable
+
+    # is_usable setter. Property helps with visualization
+    @is_usable.setter
+    def is_usable(self, is_usable: bool) -> None:
+        if is_usable is None or not isinstance(is_usable, bool):
+            raise ValueError(f'{self.__class__.__name__}.is_usable must be a bool')
+        self.__is_usable = is_usable
 
 # decrease cooldown, decrement cooldown: at the end of each turn it will have to be called for each avatar
     def decrease_fuse(self):
@@ -62,6 +70,7 @@ class ActiveAbility(GameObject):
         data: dict = super().to_json()
         data['cooldown'] = self.cooldown
         data['fuse'] = self.fuse
+        data['is_usable'] = self.is_usable
         return data
 
 # from json
@@ -69,4 +78,5 @@ class ActiveAbility(GameObject):
         super().from_json(data)
         self.cooldown = data['cooldown']
         self.fuse = data['fuse']
+        self.is_usable = data['is_usable']
         return self

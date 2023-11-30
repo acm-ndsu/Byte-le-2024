@@ -60,15 +60,15 @@ class TestActiveAbility(unittest.TestCase):
             self.active_ability.fuse = -1
         self.assertEqual(str(e.exception), 'ActiveAbility.fuse cannot be negative')
 
-    # test is_useable: 0 = true
+    # test is_usable: 0 = true
     def test_is_useable_true(self):
         self.active_ability.fuse = 0
-        self.assertEqual(self.active_ability.is_useable(), True)
+        self.assertEqual(self.active_ability.is_usable, True)
 
-    # test is_useable: any other number = false
+    # test is_usable: any other number = false
     def test_is_useable_false(self):
         self.active_ability.fuse = 1
-        self.assertEqual(self.active_ability.is_useable(), False)
+        self.assertEqual(self.active_ability.is_usable, False)
 
     # test decrease_fuse
     def test_decrease_fuse(self):
@@ -94,3 +94,4 @@ class TestActiveAbility(unittest.TestCase):
         self.assertEqual(self.active_ability.cooldown, active_ability.cooldown)
         self.assertEqual(self.active_ability.fuse, active_ability.fuse)
         self.assertEqual(self.active_ability.object_type, active_ability.object_type)
+        self.assertEqual(self.active_ability.is_usable, active_ability.is_usable)
