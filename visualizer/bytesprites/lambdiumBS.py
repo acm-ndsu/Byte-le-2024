@@ -1,6 +1,7 @@
 import os
 import random
 
+import pygame
 import pygame as pyg
 
 from visualizer.bytesprites.bytesprite import ByteSprite
@@ -18,5 +19,5 @@ class LambdiumBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/lambdiumSS.png'), 1, 18,
-                          LambdiumBS.update)
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/lambdiumSS.png'), 2, 18,
+                          LambdiumBS.update, colorkey=pygame.Color(255, 0, 255))

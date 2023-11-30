@@ -1,6 +1,7 @@
 import os
 import random
 
+import pygame
 import pygame as pyg
 
 from visualizer.bytesprites.bytesprite import ByteSprite
@@ -19,5 +20,5 @@ class CopiumBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/CopiumSS.png'), 1, 20,
-                          CopiumBS.update)
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/CopiumSS.png'), 2, 20,
+                          CopiumBS.update, colorkey=pygame.Color(255, 0, 255))
