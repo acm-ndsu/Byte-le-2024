@@ -318,12 +318,12 @@ class Avatar(GameObject):
     # if avatar calls place dynamite, set to true, i.e. they want to place dynamite
     def can_place_dynamite(self) -> bool:
         # This method will be called in the unlock_dynamite method in the else statement for when it's to be used
-        return self.__abilities['Dynamite'] and self.dynamite_active_ability.is_useable()
+        return self.__abilities['Dynamite'] and self.dynamite_active_ability.is_usable
 
     # if avatar calls place trap, set to true, i.e. they want to place trap
     def can_place_trap(self) -> bool:
         # This method will be called in the landmine and EMP methods in the else statement for when it's to be used
-        return (self.__abilities['Landmines'] or self.__abilities['EMPs']) and self.place_trap.is_useable()
+        return (self.__abilities['Landmines'] or self.__abilities['EMPs']) and self.place_trap.is_usable
 
     def can_place_dynamite_or_trap(self) -> bool:
         # This method will return if the avatar can place anything at all
