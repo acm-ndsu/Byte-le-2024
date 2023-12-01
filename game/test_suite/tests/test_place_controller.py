@@ -3,7 +3,7 @@ import unittest
 from game.common.game_object import GameObject
 from game.controllers.movement_controller import *
 from game.controllers.place_controller import *
-from game.quarry_rush.station.ore_occupiable_stations import *
+from game.quarry_rush.station.ore_occupiable_station import *
 from game.quarry_rush.entity.placeable.dynamite import Dynamite
 from game.quarry_rush.entity.placeable.traps import *
 

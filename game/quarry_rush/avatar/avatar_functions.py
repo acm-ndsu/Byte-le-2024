@@ -1,5 +1,6 @@
 from typing import Callable
 
+
 class AvatarFunctions:
     """
     This class is used as an interface for creating a tech tree
@@ -28,6 +29,7 @@ class AvatarFunctions:
 
     * unlock_trap_defusal: A function that unlocks trap defusal for the player
     """
+
     def __init__(self,
                  increase_movement: Callable[[int], None],
                  increase_mining: Callable[[float], None],

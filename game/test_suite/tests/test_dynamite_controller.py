@@ -9,7 +9,7 @@ from game.controllers.dynamite_controller import DynamiteController
 from game.controllers.place_controller import PlaceController
 from game.quarry_rush.entity.placeable.dynamite import Dynamite
 from game.quarry_rush.station.ancient_tech_occupiable_station import AncientTechOccupiableStation
-from game.quarry_rush.station.ore_occupiable_stations import *
+from game.quarry_rush.station.ore_occupiable_station import *
 from game.utils.vector import Vector
 
 

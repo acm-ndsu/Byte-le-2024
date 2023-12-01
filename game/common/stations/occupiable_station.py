@@ -31,7 +31,7 @@ class OccupiableStation(Occupiable, Station):
 
     def from_json(self, data: dict) -> Self:
         from game.quarry_rush.station.ancient_tech_occupiable_station import AncientTechOccupiableStation
-        from game.quarry_rush.station.ore_occupiable_stations import CopiumOccupiableStation, TuriteOccupiableStation, \
+        from game.quarry_rush.station.ore_occupiable_station import CopiumOccupiableStation, TuriteOccupiableStation, \
             LambdiumOccupiableStation
 
         super().from_json(data)

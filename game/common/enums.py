@@ -33,25 +33,22 @@ class ObjectType(Enum):
     ANCIENT_TECH = auto()  # 15
     STATION = auto()  # 16
     OCCUPIABLE_STATION = auto()  # 17
-    LAMBDIUM_OCCUPIABLE_STATION = auto()  # 18
-    TURITE_OCCUPIABLE_STATION = auto()  # 19
-    COPIUM_OCCUPIABLE_STATION = auto()  # 20
-    STATION_EXAMPLE = auto()  # 21
-    STATION_RECEIVER_EXAMPLE = auto()  # 22
-    OCCUPIABLE_STATION_EXAMPLE = auto()  # 23
-    COMPANY_STATION = auto()  # 24
-    CHURCH_STATION = auto()  # 25
-    TURING_STATION = auto()  # 26
-    ACTIVE_ABILITY = auto()  # 27
-    INVENTORY_MANAGER = auto()  # 28
-    PLACE_TRAP = auto()  # 29
-    DYNAMITE_ACTIVE_ABILITY = auto()  # 30
-    DYNAMITE = auto()  # 31
-    ORE_OCCUPIABLE_STATION = auto()  # 32
-    ANCIENT_TECH_OCCUPIABLE_STATION = auto()  # 33
-    TRAP = auto()  # 34
-    LANDMINE = auto()  # 35
-    EMP = auto()  # 36
+    STATION_EXAMPLE = auto()  # 18
+    STATION_RECEIVER_EXAMPLE = auto()  # 19
+    OCCUPIABLE_STATION_EXAMPLE = auto()  # 20
+    COMPANY_STATION = auto()  # 21
+    CHURCH_STATION = auto()  # 22
+    TURING_STATION = auto()  # 23
+    ACTIVE_ABILITY = auto()  # 24
+    INVENTORY_MANAGER = auto()  # 25
+    PLACE_TRAP = auto()  # 26
+    DYNAMITE_ACTIVE_ABILITY = auto()  # 27
+    DYNAMITE = auto()  # 28
+    ORE_OCCUPIABLE_STATION = auto()  # 29
+    ANCIENT_TECH_OCCUPIABLE_STATION = auto()  # 30
+    TRAP = auto()  # 31
+    LANDMINE = auto()  # 32
+    EMP = auto()  # 33
 
 
 class ActionType(Enum):

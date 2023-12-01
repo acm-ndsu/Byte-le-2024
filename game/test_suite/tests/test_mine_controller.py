@@ -5,7 +5,7 @@ from game.common.map.game_board import GameBoard
 from game.controllers.mine_controller import MineController
 from game.controllers.movement_controller import MovementController
 from game.quarry_rush.entity.ancient_tech import AncientTech
-from game.quarry_rush.station.ore_occupiable_stations import *
+from game.quarry_rush.station.ore_occupiable_station import *
 from game.quarry_rush.station.ancient_tech_occupiable_station import AncientTechOccupiableStation
 from game.utils.vector import Vector
 from game.common.player import Player

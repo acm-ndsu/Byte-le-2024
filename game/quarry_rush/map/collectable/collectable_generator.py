@@ -1,14 +1,11 @@
 from json import load
 from game.utils.vector import Vector
-from game.quarry_rush.station.ore_occupiable_stations import OreOccupiableStation, CopiumOccupiableStation, \
-    LambdiumOccupiableStation, TuriteOccupiableStation
-from game.quarry_rush.entity.ores import Ore
-from game.quarry_rush.station.ancient_tech_occupiable_station import AncientTechOccupiableStation
+from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
 import random as rand
 from typing import TypeAlias
 from perlin_noise import PerlinNoise
 
-CollectableStation: TypeAlias = OreOccupiableStation | AncientTechOccupiableStation
+CollectableStation: TypeAlias = OreOccupiableStation
 
 
 class CollectableGenerator:

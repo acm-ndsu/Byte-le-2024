@@ -5,7 +5,7 @@ from game.common.game_object import GameObject
 from game.common.map.game_board import GameBoard
 from game.common.map.occupiable import Occupiable
 from game.common.stations.occupiable_station import OccupiableStation
-from game.quarry_rush.station.ore_occupiable_stations import *
+from game.quarry_rush.station.ore_occupiable_station import *
 from game.quarry_rush.station.ancient_tech_occupiable_station import AncientTechOccupiableStation
 from game.utils.vector import Vector
 

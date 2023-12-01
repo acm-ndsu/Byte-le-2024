@@ -3,7 +3,6 @@ from game.utils.vector import Vector
 from game.common.game_object import GameObject
 from game.common.map.wall import Wall
 from game.quarry_rush.station.company_station import ChurchStation, TuringStation
-from game.common.enums import Company
 
 
 class GameLocation:
