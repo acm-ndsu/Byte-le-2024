@@ -92,17 +92,17 @@ class Adapter:
     def populate_bytesprite_factories(self) -> dict[int: Callable[[pygame.Surface], ByteSprite]]:
         # Instantiate all bytesprites for each object ands add them here
         return {
-            4: AvatarBytespriteFactoryExample().create_bytesprite,
-            7: TileBS().create_bytesprite,
-            8: WallBS().create_bytesprite,
-            33: AncientTechBS().create_bytesprite,
-            20: CopiumBS().create_bytesprite,
-            25: ChurchStationBS().create_bytesprite,
-            31: DynamiteBS().create_bytesprite,
-            36: EmpsBS().create_bytesprite,
-            18: LambdiumBS().create_bytesprite,
-            35: LandmineBS().create_bytesprite,
-            26: TuringStationBS().create_bytesprite,
+            4: AvatarBytespriteFactoryExample.create_bytesprite,
+            7: TileBS.create_bytesprite,
+            8: WallBS.create_bytesprite,
+            33: AncientTechBS.create_bytesprite,
+            20: CopiumBS.create_bytesprite,
+            25: ChurchStationBS.create_bytesprite,
+            31: DynamiteBS.create_bytesprite,
+            36: EmpsBS.create_bytesprite,
+            18: LambdiumBS.create_bytesprite,
+            35: LandmineBS.create_bytesprite,
+            26: TuringStationBS.create_bytesprite,
             19: TuriteBS.create_bytesprite
         }
 
