@@ -10,9 +10,7 @@ from game.utils.vector import Vector
 
 class OreOccupiableStation(OccupiableStation):
     """
-    Station that holds generic ore, inherits from OccupiableStation.
-
-    This station is inherited by other ore occupiable stations.
+    Station that holds the different types of ores; inherits from OccupiableStation.
     """
 
     def __init__(self, position: Vector, seed: float, special_weight: float, ancient_tech_weight: float):
@@ -52,4 +50,3 @@ class OreOccupiableStation(OccupiableStation):
 
         else:
             self.held_item = None
-
