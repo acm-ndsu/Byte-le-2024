@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+from game.common.avatar import Avatar
 from game.common.enums import *
 from game.common.map.game_board import GameBoard
 from game.common.map.tile import Tile
-from game.common.stations.station import Station
 from game.controllers.controller import Controller
 from game.quarry_rush.entity.placeable.dynamite import Dynamite
+from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
 from game.utils.vector import Vector
 
 
@@ -15,8 +16,8 @@ class DynamiteController(Controller):
 
     def handle_detonation(self, dynamite: Dynamite, world: GameBoard) -> None:
         """
-        By taking a dynamite object, its adjacent tiles and the one is on will be collected. Then, the dynamite will
-        explode and collect the first ore or ancient tech it finds.
+        By taking a dynamite object, its adjacent tiles and the one it's on will be collected. Then, the dynamite will
+        explode and add the held items from the stations to the given avatar.
         """
 
         # don't do anything if the dynamite can't explode
@@ -29,30 +30,20 @@ class DynamiteController(Controller):
                                         Vector.add_vectors(dynamite.position, Vector(0, 1)),  # down tile
                                         Vector.add_vectors(dynamite.position, Vector(-1, 0))]  # left tile
 
-        # reference variable for later; will either be None or a Station subclass
-        station: Station | None = None
+        # reference variable for later; will either be None or an OreOccupiableStation subclass
+        station: OreOccupiableStation | None = None
 
         for vector in adjacent_tiles:
             tile: Tile = world.game_map[vector.y][vector.x]
 
-            if tile.is_occupied_by_object_type(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION):
-                station = tile.remove_from_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION)
-            elif tile.is_occupied_by_object_type(self.__wanted_ore(dynamite.company)):
-                station = tile.remove_from_occupied_by(self.__wanted_ore(dynamite.company))
-            elif tile.is_occupied_by_object_type(ObjectType.COPIUM_OCCUPIABLE_STATION):
-                station = tile.remove_from_occupied_by(ObjectType.COPIUM_OCCUPIABLE_STATION)
-            elif tile.is_occupied_by_object_type(self.__not_wanted_ore(dynamite.company)):
-                station = tile.remove_from_occupied_by(ObjectType.TURITE_OCCUPIABLE_STATION)
+            # don't do anything if the occupied_by isn't an OreOccupiableStation
+            if not isinstance(tile.occupied_by, OreOccupiableStation):
+                return
 
-            if station is not None:
-                world.inventory_manager.give(station.held_item, dynamite.company)
+            # call the give_item method to give the station's item to the dynamite's owner
+            station = tile.occupied_by
+            station.give_item(dynamite.company, world.inventory_manager)
 
-    # helper method that returns the object_type of the players preferred ore for their company
-    def __wanted_ore(self, company: Company) -> ObjectType:
-        return ObjectType.LAMBDIUM_OCCUPIABLE_STATION if company is Company.CHURCH \
-            else ObjectType.TURITE_OCCUPIABLE_STATION
-
-    # helper method that returns the object_type of the opposing team's ore
-    def __not_wanted_ore(self, company: Company) -> ObjectType:
-        return ObjectType.LAMBDIUM_OCCUPIABLE_STATION if company is Company.TURING \
-            else ObjectType.TURITE_OCCUPIABLE_STATION
+            # remove the station from the gameboard if it doesn't have a held item
+            if station.held_item is None:
+                tile.remove_from_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION)

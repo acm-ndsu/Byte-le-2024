@@ -68,18 +68,18 @@ class CollectableGenerator:
         ancient_tech_map = self.generate_ancient_tech()
 
         result: dict[tuple[Vector]: list[CollectableStation]] = {}
-        for (y, x) in [(y, x) for y in range(self.__board_size) for x in range(self.__board_size)]:
-            stations: list[CollectableStation] = []
-            if copium_map[y][x]:
-                stations.append(CopiumOccupiableStation())
-            if lambdium_map[y][x]:
-                stations.append(LambdiumOccupiableStation())
-            if turite_map[y][x]:
-                stations.append(TuriteOccupiableStation())
-            if ancient_tech_map[y][x]:
-                stations.append(AncientTechOccupiableStation())
-            if len(stations) > 0:
-                result[(Vector(x=x, y=y),)] = stations
+        # for (y, x) in [(y, x) for y in range(self.__board_size) for x in range(self.__board_size)]:
+        #     stations: list[CollectableStation] = []
+        #     if copium_map[y][x]:
+        #         stations.append(CopiumOccupiableStation())
+        #     if lambdium_map[y][x]:
+        #         stations.append(LambdiumOccupiableStation())
+        #     if turite_map[y][x]:
+        #         stations.append(TuriteOccupiableStation())
+        #     if ancient_tech_map[y][x]:
+        #         stations.append(AncientTechOccupiableStation())
+        #     if len(stations) > 0:
+        #         result[(Vector(x=x, y=y),)] = stations
         return result
 
     def generate_random_noise(self) -> list[list[float]]:

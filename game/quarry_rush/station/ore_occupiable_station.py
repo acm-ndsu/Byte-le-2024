@@ -1,6 +1,6 @@
 import random
 from game.common.avatar import Avatar
-from game.common.enums import ObjectType
+from game.common.enums import ObjectType, Company
 from game.common.stations.occupiable_station import OccupiableStation
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from game.quarry_rush.entity.ancient_tech import AncientTech
@@ -20,11 +20,11 @@ class OreOccupiableStation(OccupiableStation):
         self.special_weight = special_weight
         self.ancient_tech_weight = ancient_tech_weight
 
-    def take_action(self, avatar: Avatar, inventory_manager: InventoryManager = None) -> None:
+    def give_item(self, company: Company, inventory_manager: InventoryManager = None) -> None:
         if InventoryManager is None or not isinstance(inventory_manager, InventoryManager):
             raise ValueError(f'{self.__class__.__name__}.take_action() needs an InventoryManager Object.')
 
-        inventory_manager.give(self.held_item, avatar.company)
+        inventory_manager.give(self.held_item, company)
 
         if isinstance(self.held_item, Copium):
             generated_num: float = self.rand.random()
