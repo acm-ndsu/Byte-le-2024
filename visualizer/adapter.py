@@ -35,8 +35,7 @@ class Adapter:
     def __init__(self, screen):
         self.screen: pygame.Surface = screen
         self.bytesprites: list[ByteSprite] = []
-        self.populate_bytesprite: pygame.sprite.Group = pygame.sprite.Group()
-        self.menu: MenuTemplate = Basic(screen, 'Basic Title')
+        self.menu: MenuTemplate = Basic(screen, 'Quarry Rush')
         self.playback: PlaybackTemplate = PlaybackTemplate(screen)
         self.turn_number: int = 0
         self.turn_max: int = MAX_TICKS
@@ -110,7 +109,8 @@ class Adapter:
     def render(self) -> None:
         # self.button.render()
         # any logic for rendering text, buttons, and other visuals
-        text = Text(self.screen, f'{self.turn_number} / {self.turn_max}', 48)
+        font = os.path.join(os.getcwd(), r'visualizer\templates\zrnic rg.otf')
+        text = Text(self.screen, f'{self.turn_number} / {self.turn_max}', 48, color='#A26D3F', font_name=font)
         text.rect.center = Vector.add_vectors(Vector(*self.screen.get_rect().midtop), Vector(0, 50)).as_tuple()
         text.render()
         self.playback.playback_render()

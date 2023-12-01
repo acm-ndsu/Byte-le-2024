@@ -1,9 +1,10 @@
+import os
 from typing import Any
 
 import pygame
 
 from game.utils.vector import Vector
-from visualizer.utils.button import Button
+from visualizer.utils.button import Button, ButtonColors
 from visualizer.utils.text import Text
 
 """
@@ -27,8 +28,17 @@ class MenuTemplate:
 
     def __init__(self, screen: pygame.Surface):
         self.screen: pygame.Surface = screen
-        self.start_button: Button = Button(screen, 'Start Game', lambda: False, font_size=24, padding=10)
-        self.results_button: Button = Button(screen, 'Exit', lambda: False, font_size=24, padding=10)
+        font = os.path.join(os.getcwd(), r"visualizer\templates\zrnic rg.otf")
+        colors = ButtonColors(bg_color='#A26D3F',
+                              bg_color_hover='#CE9248',
+                              bg_color_clicked='#94493A',
+                              fg_color='#DAB163',
+                              fg_color_hover='#36C5F4',
+                              fg_color_clicked='#FA6E79')
+        self.start_button: Button = Button(screen, 'Start Game', lambda: False, font_size=24, padding=10,
+                                           colors=colors, font_name=font)
+        self.results_button: Button = Button(screen, 'Exit', lambda: False, font_size=24, padding=10,
+                                             colors=colors, font_name=font)
         self.start_button.rect.center = Vector.add_vectors(Vector(*self.screen.get_rect().center),
                                                            Vector(0, 100)).as_tuple()
 
@@ -61,11 +71,13 @@ class Basic(MenuTemplate):
 
     def __init__(self, screen: pygame.Surface, title: str):
         super().__init__(screen)
-        self.title: Text = Text(screen, title, 48)
+        font = os.path.join(os.getcwd(), r"visualizer\templates\zrnic rg.otf")
+        self.title: Text = Text(screen, title, 48, color='#A26D3F', font_name=font)
+        print(font)
         self.title.rect.center = Vector.add_vectors(Vector(*self.screen.get_rect().center),
                                                     Vector(0, -100)).as_tuple()
 
-        self.winning_team_name: Text = Text(screen, '', 0)
+        self.winning_team_name: Text = Text(screen, '', 0, color='#A26D3F')
 
     def start_render(self) -> None:
         super().start_render()
@@ -73,7 +85,7 @@ class Basic(MenuTemplate):
 
     def load_results_screen(self, results: dict) -> None:
         winning_teams = self.__get_winning_teams(results['players'])
-        self.winning_team_name = Text(self.screen, winning_teams, 36)
+        self.winning_team_name = Text(self.screen, winning_teams, 36, color='#A26D3F')
         self.winning_team_name.rect.center = self.screen.get_rect().center
 
     def results_render(self) -> None:

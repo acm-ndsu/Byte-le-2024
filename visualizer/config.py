@@ -7,7 +7,7 @@ class Config:
     __SCALE: int = 1
     __SCREEN_SIZE: Vector = Vector(x=1366, y=768)  # width, height
     __FRAME_RATE: int = 12
-    __BACKGROUND_COLOR: (int, int, int) = 0, 0, 0
+    __BACKGROUND_COLOR: (int, int, int) = 44, 30, 49
     __GAME_BOARD_MARGIN_LEFT: int = 440
     __GAME_BOARD_MARGIN_TOP: int = 100
     __VISUALIZE_HELD_ITEMS: bool = False
