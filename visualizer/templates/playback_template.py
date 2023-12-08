@@ -36,33 +36,28 @@ class PlaybackTemplate:
     Buttons from this template are centered at the bottom of the screen, placed in three rows of three
     """
 
-    def __init__(self, screen: pygame.Surface):
-        font = os.path.join(os.getcwd(), r'visualizer\templates\zrnic rg.otf')
-        colors = ButtonColors(bg_color='#A26D3F',
-                              bg_color_hover='#CE9248',
-                              bg_color_clicked='#94493A',
-                              fg_color='#DAB163',
-                              fg_color_hover='#36C5F4',
-                              fg_color_clicked='#FA6E79')
+    def __init__(self, screen: pygame.Surface, font: str, button_colors: ButtonColors):
+        self.font: str = font
+        self.button_colors: ButtonColors = button_colors
         self.screen: pygame.Surface = screen
         self.pause_button: Button = Button(self.screen, 'Pause', lambda: PlaybackButtons.PAUSE_BUTTON, font_size=18,
-                                           colors=colors, font_name=font)
+                                           colors=self.button_colors, font_name=self.font)
         self.next_button: Button = Button(self.screen, 'Next', lambda: PlaybackButtons.NEXT_BUTTON, font_size=18,
-                                          colors=colors, font_name=font)
+                                          colors=self.button_colors, font_name=self.font)
         self.prev_button: Button = Button(self.screen, 'Prev', lambda: PlaybackButtons.PREV_BUTTON, font_size=18,
-                                          colors=colors, font_name=font)
+                                          colors=self.button_colors, font_name=self.font)
         self.start_button: Button = Button(self.screen, 'Start', lambda: PlaybackButtons.START_BUTTON, font_size=18,
-                                           colors=colors, font_name=font)
+                                           colors=self.button_colors, font_name=self.font)
         self.end_button: Button = Button(self.screen, 'End', lambda: PlaybackButtons.END_BUTTON, font_size=18,
-                                         colors=colors, font_name=font)
+                                         colors=self.button_colors, font_name=self.font)
         self.save_button: Button = Button(self.screen, 'Save', lambda: PlaybackButtons.SAVE_BUTTON, font_size=18,
-                                          colors=colors, font_name=font)
+                                          colors=self.button_colors, font_name=self.font)
         self.normal_speed_button: Button = Button(self.screen, '1x', lambda: PlaybackButtons.NORMAL_SPEED_BUTTON,
-                                                  font_size=18, colors=colors, font_name=font)
+                                                  font_size=18, colors=self.button_colors, font_name=self.font)
         self.fast_speed_button: Button = Button(self.screen, '2x', lambda: PlaybackButtons.FAST_SPEED_BUTTON,
-                                                font_size=18, colors=colors, font_name=font)
+                                                font_size=18, colors=self.button_colors, font_name=self.font)
         self.fastest_speed_button: Button = Button(self.screen, '4x', lambda: PlaybackButtons.FASTEST_SPEED_BUTTON,
-                                                   font_size=18, colors=colors, font_name=font)
+                                                   font_size=18, colors=self.button_colors, font_name=self.font)
 
         self.prev_button.rect.center = Vector.add_vectors(Vector(*self.screen.get_rect().center),
                                                           Vector(-80, 225)).as_tuple()
