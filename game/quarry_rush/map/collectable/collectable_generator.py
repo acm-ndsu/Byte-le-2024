@@ -25,12 +25,12 @@ class CollectableGenerator:
         threshold = sorted([x for row in noise_map for x in row])[-self.__ore_count]
         ore_map = self.map_threshold(threshold, noise_map)
         
-        result: dict[tuple[Vector], OreOccupiableStation]
-        for y in len(ore_map):
-            for x in len(ore_map[y]):
+        result: dict[tuple[Vector], OreOccupiableStation] = {}
+        for y in range(len(ore_map)):
+            for x in range(len(ore_map[y])):
                 if ore_map[y][x]:
                     vec = Vector(x=x, y=y)
-                    result[(vec,)] = OreOccupiableStation(vector=vec,
+                    result[(vec,)] = OreOccupiableStation(position=vec,
                                                           seed=self.__seed,
                                                           special_weight=self.__special_weights[y][x],
                                                           ancient_tech_weight=self.__ancient_tech_weights[y][x])

@@ -1,6 +1,6 @@
 import random
-from game.common.avatar import Avatar
 from game.common.enums import ObjectType, Company
+from game.common.map.tile import Tile
 from game.common.stations.occupiable_station import OccupiableStation
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from game.quarry_rush.entity.ancient_tech import AncientTech
@@ -13,12 +13,14 @@ class OreOccupiableStation(OccupiableStation):
     Station that holds the different types of ores; inherits from OccupiableStation.
     """
 
-    def __init__(self, position: Vector, seed: float, special_weight: float, ancient_tech_weight: float):
+    def __init__(self, position: Vector = Vector(0, 0), seed: float = 0, special_weight: float = .2,
+                 ancient_tech_weight: float = .1):
         super().__init__(held_item=Copium())
         self.object_type = ObjectType.ORE_OCCUPIABLE_STATION
         self.rand = random.Random((19 * position.y + 23 * position.y) * seed)
         self.special_weight = special_weight
         self.ancient_tech_weight = ancient_tech_weight
+        self.held_item = Copium()
 
     def give_item(self, company: Company, inventory_manager: InventoryManager = None) -> None:
         if InventoryManager is None or not isinstance(inventory_manager, InventoryManager):
@@ -50,3 +52,10 @@ class OreOccupiableStation(OccupiableStation):
 
         else:
             self.held_item = None
+
+    def remove_from_game_board(self, tile: Tile):
+        """
+        By giving a tile object, it will remove this OreOccupiableStation object from it.
+        """
+        if self.held_item is None:
+            tile.remove_from_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION)

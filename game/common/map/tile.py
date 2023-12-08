@@ -1,9 +1,11 @@
 from typing import Self
 
+from game.common.avatar import Avatar
 from game.common.game_object import GameObject
 from game.common.map.occupiable import Occupiable
 from game.common.map.wall import Wall
 from game.common.stations.station import Station
+from game.common.stations.occupiable_station import OccupiableStation
 from game.quarry_rush.station.company_station import ChurchStation, TuringStation
 from game.quarry_rush.station.ore_occupiable_station import *
 
@@ -37,12 +39,12 @@ class Tile(Occupiable):
                 self.occupied_by: Avatar = Avatar().from_json(occupied_by)
             case ObjectType.OCCUPIABLE_STATION:
                 self.occupied_by: OccupiableStation = OccupiableStation().from_json(occupied_by)
+            case ObjectType.ORE_OCCUPIABLE_STATION:
+                self.occupied_by: OreOccupiableStation = OreOccupiableStation().from_json(occupied_by)
             case ObjectType.STATION:
                 self.occupied_by: Station = Station().from_json(occupied_by)
             case ObjectType.WALL:
                 self.occupied_by: Wall = Wall().from_json(occupied_by)
-            case ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION:
-                self.occupied_by: AncientTechOccupiableStation = AncientTechOccupiableStation().from_json(occupied_by)
             case ObjectType.CHURCH_STATION:
                 self.occupied_by: ChurchStation = ChurchStation().from_json(occupied_by)
             case ObjectType.TURING_STATION:

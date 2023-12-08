@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from game.common.avatar import Avatar
 from game.common.enums import *
 from game.common.map.game_board import GameBoard
 from game.common.map.tile import Tile
@@ -45,5 +44,4 @@ class DynamiteController(Controller):
             station.give_item(dynamite.company, world.inventory_manager)
 
             # remove the station from the gameboard if it doesn't have a held item
-            if station.held_item is None:
-                tile.remove_from_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION)
+            station.remove_from_game_board(tile)

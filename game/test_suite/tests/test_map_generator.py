@@ -6,6 +6,7 @@ from game.utils.vector import Vector
 from game.common.map.wall import Wall
 from game.common.game_object import GameObject
 from game.quarry_rush.map.map_generator import MapGenerator
+from game.common.avatar import Avatar
 
 
 class TestMapGenerator(unittest.TestCase):
@@ -32,7 +33,9 @@ class TestMapGenerator(unittest.TestCase):
             (Vector(8, 11),): [Wall(), ], (Vector(9, 11),): [Wall(), ],
             (Vector(1, 12),): [Wall(), ], (Vector(7, 12),): [Wall(), ], (Vector(8, 12),): [Wall(), ],
             (Vector(9, 12),): [TuringStation(), ],
-            (Vector(4, 1),): [ChurchStation(), ]
+            (Vector(4, 1),): [ChurchStation(), ],
+            (Vector(9, 12),): [Avatar(), ],
+            (Vector(4, 11),): [Avatar(), ],
         }
 
         # Get the actual result by calling the method
@@ -46,20 +49,9 @@ class TestMapGenerator(unittest.TestCase):
             for av, bv in zip(y, j):
                 self.assertEqual(av.object_type, bv.object_type)
 
-        # check expected values for amount of ores and ancient tech
-        counts: dict[str, int] = {'copium': 0, 'turite': 0, 'lambdium': 0, 'ancient tech': 0}
-
+        count = 0
         for key in actual.keys():
-            if [z.object_type for z in actual[key]].__contains__(ObjectType.COPIUM_OCCUPIABLE_STATION):
-                counts['copium'] += 1
-            if [z.object_type for z in actual[key]].__contains__(ObjectType.LAMBDIUM_OCCUPIABLE_STATION):
-                counts['lambdium'] += 1
-            if [z.object_type for z in actual[key]].__contains__(ObjectType.TURITE_OCCUPIABLE_STATION):
-                counts['turite'] += 1
-            if [z.object_type for z in actual[key]].__contains__(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION):
-                counts['ancient tech'] += 1
+            if [z.object_type for z in actual[key]].__contains__(ObjectType.ORE_OCCUPIABLE_STATION):
+                count += 1
 
-        self.assertEqual(50, counts['copium'])
-        self.assertEqual(25, counts['lambdium'])
-        self.assertEqual(25, counts['turite'])
-        self.assertEqual(50, counts['ancient tech'])
+        self.assertEqual(count, 100)

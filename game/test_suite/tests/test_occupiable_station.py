@@ -1,5 +1,6 @@
 import unittest
 
+from game.common.avatar import Avatar
 from game.common.items.item import Item
 from game.common.map.wall import Wall
 from game.common.stations.station import Station

@@ -32,7 +32,8 @@ class TestGameBoard(unittest.TestCase):
         self.locations: dict[tuple[Vector]:list[GameObject]] = {
             (Vector(1, 1),): [Station(None)],
             (Vector(1, 2), Vector(1, 3)): [OccupiableStation(self.item), Station(None)],
-            (Vector(2, 2), Vector(2, 3)): [OccupiableStation(self.item), OccupiableStation(self.item), OccupiableStation(self.item), OccupiableStation(self.item)],
+            (Vector(2, 2), Vector(2, 3)): [OccupiableStation(self.item), OccupiableStation(self.item),
+                                           OccupiableStation(self.item), OccupiableStation(self.item)],
             (Vector(3, 1), Vector(3, 2), Vector(3, 3)): [OccupiableStation(self.item), Station(None)],
             (Vector(5, 5),): [self.avatar],
             (Vector(5, 6),): [self.wall]
