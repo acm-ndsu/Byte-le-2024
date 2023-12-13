@@ -1,11 +1,12 @@
 import random
 from game.common.enums import ObjectType, Company
-from game.common.map.tile import Tile
+from game.common.game_object import GameObject
 from game.common.stations.occupiable_station import OccupiableStation
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from game.quarry_rush.entity.ancient_tech import AncientTech
 from game.quarry_rush.entity.ores import Lambdium, Turite, Copium
 from game.utils.vector import Vector
+from game.common.map.tile import Tile
 
 
 class OreOccupiableStation(OccupiableStation):

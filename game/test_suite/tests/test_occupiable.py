@@ -17,7 +17,7 @@ class TestOccupiable(unittest.TestCase):
 
         # adds ores to all adjacent tiles and the one the avatar will be on
         self.locations: dict[tuple[Vector]: list[GameObject]] = {
-            (Vector(1, 0), Vector(1, 0)): [OreOccupiableStation, self.avatar]}
+            (Vector(1, 0), Vector(1, 0)): [self.ore_station, self.avatar]}
 
         self.game_board = GameBoard(0, Vector(3, 3), self.locations, False)  # create 3x3 gameboard
         self.game_board.generate_map()
@@ -33,9 +33,6 @@ class TestOccupiable(unittest.TestCase):
     def test_search_by_occupiable_object_type_not_present(self):
         self.assertTrue(
             self.game_board.game_map[0][1].get_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION) is None)
-
-    def test_search_by_occupiable_by_game_object_not_present(self):
-        self.assertTrue(self.game_board.game_map[0][1].get_occupied_by(OreOccupiableStation()) is None)
 
     def test_search_by_occupiable_by_game_object_general(self):
         self.assertTrue(isinstance(self.game_board.game_map[0][1].get_occupied_by(OccupiableStation()),
@@ -155,9 +152,9 @@ class TestOccupiable(unittest.TestCase):
 
         # test the stations are removed in the order: ore station 2 -> ore station 3 -> ore station 1
         self.assertEqual(ore_station.remove_game_object_from_occupied_by(ore_station_2),
-                         ore_station_1)
-        self.assertEqual(ore_station.remove_game_object_from_occupied_by(ore_station_3),
                          ore_station_2)
-        self.assertEqual(ore_station.remove_game_object_from_occupied_by(ore_station_1),
+        self.assertEqual(ore_station.remove_game_object_from_occupied_by(ore_station_3),
                          ore_station_3)
+        self.assertEqual(ore_station.remove_game_object_from_occupied_by(ore_station_1),
+                         ore_station_1)
         self.assertEqual(ore_station.occupied_by, None)

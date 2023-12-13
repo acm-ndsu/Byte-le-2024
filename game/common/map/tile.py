@@ -1,13 +1,13 @@
 from typing import Self
 
 from game.common.avatar import Avatar
+from game.common.enums import ObjectType
 from game.common.game_object import GameObject
 from game.common.map.occupiable import Occupiable
 from game.common.map.wall import Wall
 from game.common.stations.station import Station
 from game.common.stations.occupiable_station import OccupiableStation
 from game.quarry_rush.station.company_station import ChurchStation, TuringStation
-from game.quarry_rush.station.ore_occupiable_station import *
 
 
 class Tile(Occupiable):
@@ -40,6 +40,8 @@ class Tile(Occupiable):
             case ObjectType.OCCUPIABLE_STATION:
                 self.occupied_by: OccupiableStation = OccupiableStation().from_json(occupied_by)
             case ObjectType.ORE_OCCUPIABLE_STATION:
+                # I know it's bad practice, but it's to prevent a circular import
+                from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
                 self.occupied_by: OreOccupiableStation = OreOccupiableStation().from_json(occupied_by)
             case ObjectType.STATION:
                 self.occupied_by: Station = Station().from_json(occupied_by)
