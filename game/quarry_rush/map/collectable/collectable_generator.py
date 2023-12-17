@@ -30,10 +30,10 @@ class CollectableGenerator:
             for x in range(len(ore_map[y])):
                 if ore_map[y][x]:
                     vec = Vector(x=x, y=y)
-                    result[(vec,)] = OreOccupiableStation(position=vec,
+                    result[(vec,)] = [ OreOccupiableStation(position=vec,
                                                           seed=self.__seed,
                                                           special_weight=self.__special_weights[y][x],
-                                                          ancient_tech_weight=self.__ancient_tech_weights[y][x])
+                                                          ancient_tech_weight=self.__ancient_tech_weights[y][x]), ]
         return result
     
 

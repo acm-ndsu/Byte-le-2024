@@ -3,6 +3,8 @@ from game.utils.vector import Vector
 from game.common.game_object import GameObject
 from game.common.map.wall import Wall
 from game.quarry_rush.station.company_station import ChurchStation, TuringStation
+from game.common.enums import Company
+from game.common.avatar import Avatar
 
 
 class GameLocation:
@@ -21,6 +23,7 @@ class GameLocation:
         self.__walls: dict = game_location['walls']
         self.__turing_bases: dict = game_location['turing_bases']
         self.__church_bases: dict = game_location['church_bases']
+        self.__avatars: dict = game_location['avatars']
 
     def generate_location(self) -> dict[tuple[Vector]: list[GameObject]]:
         game_location: dict = {}
@@ -30,5 +33,9 @@ class GameLocation:
             game_location[(Vector(x=pos[0], y=pos[1]),)] = [TuringStation(), ]
         for pos in self.__church_bases:
             game_location[(Vector(x=pos[0], y=pos[1]),)] = [ChurchStation(), ]
+        for avatar_name, pos in self.__avatars.items():
+            game_location[(Vector(x=pos[0], y=pos[1]),)] = [
+                    Avatar(company=Company.TURING if avatar_name == 'turing' else Company.CHURCH,
+                           position=Vector(x=pos[0], y=pos[1])), ]
 
         return game_location

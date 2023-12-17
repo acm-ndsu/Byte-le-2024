@@ -35,7 +35,7 @@ class TestMapGenerator(unittest.TestCase):
             (Vector(9, 12),): [TuringStation(), ],
             (Vector(4, 1),): [ChurchStation(), ],
             (Vector(9, 12),): [Avatar(), ],
-            (Vector(4, 11),): [Avatar(), ],
+            (Vector(4, 1),): [Avatar(), ],
         }
 
         # Get the actual result by calling the method
