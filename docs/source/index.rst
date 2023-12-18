@@ -12,7 +12,7 @@ It's your time to code!
 
 Welcome to your first day at ``<INSERT COMPANY NAME HERE>`` as a robotics specialist!
 If you are reading this specialized User Manual (documentation), it means that you've got the guts and the
-brains to control our state-of-the-art proprietary technology: the MOB-BOT - Mining Operating Buddy Bot!
+brains to control the state-of-the-art proprietary technology: the MOB-BOT - Mining Operating Buddy Bot!
 
 Refer to this manual anytime you have questions about your short time here. If the manual doesn't answer
 your question, ask us in the server or call us over!
@@ -25,6 +25,8 @@ your question, ask us in the server or call us over!
 
    getting_started
    useful_commands
+   game_board
+   ores
 
 
 Indices and tables
