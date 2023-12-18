@@ -25,6 +25,7 @@ your question, ask us in the server or call us over!
 
    getting_started
    useful_commands
+   mobbot
    game_board
    ores
    placeables

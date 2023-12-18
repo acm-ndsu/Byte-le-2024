@@ -7,11 +7,12 @@ different objects that can be placed on the map. These include Dynamite, Landmin
 
 
 
-Dynamite |dynamite|
--------------------
+Dynamite
+--------
 
-.. |dynamite| image:: ./_static/gifs/dynamite.gif
-   :width: 45
+.. image:: ./_static/gifs/dynamite.gif
+   :width: 105
+   :align: center
 
 After unlocking this in your Tech Tree, you will be able to place sticks of dynamite on different tiles. This
 is a very valuable upgrade to have in every MOB-BOT!
@@ -21,19 +22,49 @@ few turns. It will explode the four adjacent Tiles and the Tile it's on top of a
 to your inventory. That's 5 ores you collect in one turn, on top of anything else MOB-BOT mines after placing the
 dynamite (sensational)!
 
-Landmines |landmine|
---------------------
+Let the table below depict a 3x3 game map. 'C' stands for Copium, 'D' for Dynamite, 'L' for Lambium, 'T' for
+Turite, and '.' will be an empty space.
 
-.. |landmine| image:: ./_static/gifs/landmine.gif
-   :width: 65
 
-.. |t_bot_damaged| image:: ./_static/gifs/turing_mobbot_damaged.gif
-   :width: 65
++-------+-------+-------+
+|   Gameboard Before    |
++=======+=======+=======+
+|   .   |   C   |   T   |
++-------+-------+-------+
+|   L   |  D L  |   C   |
++-------+-------+-------+
+|   C   |   T   +   T   |
++-------+-------+-------+
 
-.. |c_bot_damaged| image:: ./_static/gifs/church_mobbot_damaged.gif
-   :width: 65
 
-|t_bot_damaged| **B O O M!** |c_bot_damaged|
++-------+-------+-------+
+|    Gameboard After    |
++=======+=======+=======+
+|   .   |   .   |   T   |
++-------+-------+-------+
+|   .   |   .   |   .   |
++-------+-------+-------+
+|   C   |   .   +   T   |
++-------+-------+-------+
+
+This just shows which Tiles the dynamite object affected when it exploded. All the ores that are gone would now
+be in your inventory. Hope that helps!
+
+
+Landmines
+---------
+
+.. image:: ./_static/gifs/landmine.gif
+   :width: 105
+   :align: center
+
+.. |t_bot| image:: ./_static/gifs/turing_mobbot_damaged.gif
+   :width: 55
+
+.. |c_bot| image:: ./_static/gifs/church_mobbot_damaged.gif
+   :width: 55
+
+|t_bot| **B O O M!** |c_bot|
 
 Landmines are DANGEROUS! If this is unlocked from the Tech Tree, that MOB-BOT becomes a thieving threat
 in The Quarry!
@@ -45,10 +76,10 @@ by the employee(s) responsible, as stated in the Quarry Rush Employee Contract).
 If your MOB-BOT placed a landmine and steps on it, it won't activate, so don't worry. Isn't technology amazing?
 
 
-EMPs |emp|
-----------
+EMPs
+----
 
-.. |emp| image:: ./_static/gifs/emp.gif
+.. image:: ./_static/gifs/emp.gif
    :width: 65
 
 If you thought landmines were bad, EMPs are much worse... by an additional 10% that is.

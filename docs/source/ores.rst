@@ -69,12 +69,4 @@ allow you to upgrade your MOB-BOT. These upgrades include faster movement speed,
 and a few other things. Upgrades are explained more in (avatar).
 
 
-Explain this in avatar and provide a link to it
-
-Teams
------
-
-There are two teams in this game: Church Inc. and Turing Co.
-Church Inc. is the blue team and resides in the bottom left of The Quarry. Turing Co. is the red team and resides
-in the top right.
-Both teams have their respective ores they want to mine, and those will be explained below.
+**(Explain this in avatar and provide a link to it)**

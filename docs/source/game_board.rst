@@ -23,3 +23,17 @@ Tiles
 
 Tile objects can have any other object on top of them. The :doc:`placeables` page will explain everything that
 can be placed on the map by MOB-BOT.
+
+Bases
+-----
+
+Each team will have a base on the map. Their base will match their MOB-BOT and company color
+
+- Turing Co.
+    - Turing Co. will have the red base in the top left corner.
+- Church Inc.
+    - Church Inc. will have the blue base in the bottom left corner.
+
+When you want to cash in ores for points or upgrade your MOB-BOT, you can only do so at your base.
+
+More information on ores is found in :doc:`ores`, and information on MOB-BOT is found in :doc:`mobbot`.
