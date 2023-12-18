@@ -27,6 +27,7 @@ your question, ask us in the server or call us over!
    useful_commands
    game_board
    ores
+   placeables
 
 
 Indices and tables

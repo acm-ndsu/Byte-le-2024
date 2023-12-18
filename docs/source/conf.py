@@ -6,6 +6,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+from sphinx.builders.html import StandaloneHTMLBuilder
+
 project = 'Byte-le Royale 2024'
 copyright = '1974-2023, NDSU ACM'
 author = 'NDSU ACM'
@@ -26,3 +28,13 @@ exclude_patterns = []
 
 html_theme = 'press'
 html_static_path = ['_static']
+
+
+StandaloneHTMLBuilder.name = 'html'
+StandaloneHTMLBuilder.format = 'html'
+StandaloneHTMLBuilder.supported_image_types = [
+    'image/svg+xml',
+    'image/gif',
+    'image/png',
+    'image/jpeg'
+]

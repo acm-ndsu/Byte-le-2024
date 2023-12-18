@@ -21,13 +21,5 @@ The map is made of a 2D array of Tile objects. To access any tiles, you will use
 Tiles
 =====
 
-Tile objects can have any other object on top of them. Here is a list of what can be on a tile and links to their
-pages:
-
-- Ores
-- Dynamite
-- Landmines
-- EMPs
-- Avatar
-
-
+Tile objects can have any other object on top of them. The :doc:`placeables` page will explain everything that
+can be placed on the map by MOB-BOT.
