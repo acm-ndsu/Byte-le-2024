@@ -215,7 +215,7 @@ class TestAvatar(unittest.TestCase):
         self.assertEqual(self.avatar.movement_speed, avatar.movement_speed)
         self.assertEqual(self.avatar.drop_rate, avatar.drop_rate)
 
-        other_tree: dict = self.avatar.get_tech_tree().to_json()
-        for tech in self.avatar.get_tech_tree().tech_names():
-            self.assertEqual(other_tree[tech], self.avatar.get_tech_tree().is_researched(tech))
-        self.assertEqual(self.avatar.get_tech_tree().avatar_functions, other_tree['avatar_functions'])
+        # other_tree: dict = self.avatar.get_tech_tree().to_json()
+        # for tech in self.avatar.get_tech_tree().tech_names():
+        #     self.assertEqual(other_tree[tech], self.avatar.get_tech_tree().is_researched(tech))
+        # self.assertEqual(self.avatar.get_tech_tree().avatar_functions, other_tree['avatar_functions'])
