@@ -1,7 +1,5 @@
 from game.common.map.game_board import GameBoard
 from game.controllers.controller import Controller
-from game.common.avatar import Avatar
-from game.common.enums import ObjectType
 from game.controllers.dynamite_controller import DynamiteController
 
 

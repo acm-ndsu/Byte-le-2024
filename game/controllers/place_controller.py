@@ -30,7 +30,7 @@ class PlaceController(Controller):
     def __place_dynamite(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # places dynamite if the avatar's active ability allows it AND there isn't a dynamite object there already
         if client.avatar.can_place_dynamite() and not tile.is_occupied_by_object_type(ObjectType.DYNAMITE):
-            dynamite: Dynamite = Dynamite(position=client.avatar.position)
+            dynamite: Dynamite = Dynamite(position=client.avatar.position, company=client.avatar.company)
 
             # place dynamite on top of the occupied_by stack but below the Avatar
             tile.place_on_top_of_stack(dynamite)

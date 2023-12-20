@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from game.common.enums import *
 from game.common.map.game_board import GameBoard
+from game.common.map.tile import Tile
 from game.common.player import Player
 from game.controllers.controller import Controller
 from game.controllers.interact_controller import InteractController
+from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
 
 
 class MineController(Controller):
@@ -20,20 +22,16 @@ class MineController(Controller):
         will be taken, and it stops there. If no copium is found, None will be returned.
         """
 
-        ore_object_type: ObjectType
-
         match action:
-            case ActionType.MINE_COPIUM:
-                ore_object_type = ObjectType.COPIUM_OCCUPIABLE_STATION
-            case ActionType.MINE_TURITE:
-                ore_object_type = ObjectType.TURITE_OCCUPIABLE_STATION
-            case ActionType.MINE_LAMBUIM:
-                ore_object_type = ObjectType.LAMBDIUM_OCCUPIABLE_STATION
-            case ActionType.MINE_ANCIENT_TECH:
-                ore_object_type = ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION
+            case ActionType.MINE:
+                InteractController().handle_actions(ActionType.INTERACT_CENTER, client, world)
+                tile: Tile = world.game_map[client.avatar.position.y][client.avatar.position.x]
+                station: OreOccupiableStation = tile.occupied_by  # Will return the OreOccupiableStation if it isn't
+
+                if station is None:
+                    return
+
+                # remove the OreOccupiableStation from the game board
+                station.remove_from_game_board(tile)
             case _:  # default case
                 return
-
-        InteractController().handle_actions(ActionType.INTERACT_CENTER, client, world, ore_object_type)
-
-        world.game_map[client.avatar.position.y][client.avatar.position.x].remove_from_occupied_by(ore_object_type)
