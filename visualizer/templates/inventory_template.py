@@ -34,7 +34,7 @@ class InventoryTemplate(InfoTemplate):
         self.emp_ability = EmpAbility(top_left=Vector.add_vectors(topleft, Vector(y=150, x=225)))
         self.emp_ability.add(self.render_list)
 
-        self.landmine_ability = LandmineAbility(top_left=Vector.add_vectors(topleft, Vector(y=150, x=225)))
+        self.landmine_ability = LandmineAbility(top_left=Vector.add_vectors(topleft, Vector(y=200, x=225)))
         self.landmine_ability.add(self.render_list)
 
     def recalc_animation(self, turn_log: dict) -> None:
