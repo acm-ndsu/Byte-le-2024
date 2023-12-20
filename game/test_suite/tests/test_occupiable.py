@@ -17,7 +17,9 @@ class TestOccupiable(unittest.TestCase):
 
         # adds ores to all adjacent tiles and the one the avatar will be on
         self.locations: dict[tuple[Vector]: list[GameObject]] = {
-            (Vector(1, 0), Vector(1, 0)): [self.ore_station, self.avatar]}
+            (Vector(1, 0), ): [self.ore_station,],
+            (Vector(1, 0), ): [self.avatar, ],
+        }
 
         self.game_board = GameBoard(0, Vector(3, 3), self.locations, False)  # create 3x3 gameboard
         self.game_board.generate_map()
@@ -31,8 +33,7 @@ class TestOccupiable(unittest.TestCase):
                                    OreOccupiableStation))
 
     def test_search_by_occupiable_object_type_not_present(self):
-        self.assertTrue(
-            self.game_board.game_map[0][1].get_occupied_by(ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION) is None)
+        self.assertTrue(self.game_board.game_map[0][1].get_occupied_by(ObjectType.DYNAMITE) is None)
 
     def test_search_by_occupiable_by_game_object_general(self):
         self.assertTrue(isinstance(self.game_board.game_map[0][1].get_occupied_by(OccupiableStation()),

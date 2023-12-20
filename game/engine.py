@@ -309,3 +309,7 @@ class Engine:
             logging.basicConfig(level=logging.DEBUG)
             for arg in args:
                 logging.debug(f'Engine: {arg}')
+
+if __name__ == '__main__':
+    game = Engine()
+    game.loop()
