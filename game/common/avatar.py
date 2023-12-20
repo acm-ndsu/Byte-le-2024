@@ -334,22 +334,24 @@ class Avatar(GameObject):
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
-        data['company'] = self.company
+        data['company'] = self.company.value
         data['score'] = self.score
         data['science_points'] = self.science_points
         data['position'] = self.position.to_json() if self.position is not None else None
         data['movement_speed'] = self.movement_speed
         data['drop_rate'] = self.drop_rate
-        data['tech_tree'] = self.__tech_tree.to_json()
+        data['tech_tree'] = self.__abilities
+        # data['tech_tree'] = self.__tech_tree.to_json()
         return data
 
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
-        self.company: Company = data['company']
+        self.company: Company = Company(data['company'])
         self.score: int = data['score']
         self.science_points: int = data['science_points']
         self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
         self.movement_speed = data['movement_speed']
         self.drop_rate = data['drop_rate']
-        self.__tech_tree = data['tech_tree']
+        self.__abilities = data['tech_tree']
+        # self.__tech_tree = data['tech_tree']
         return self

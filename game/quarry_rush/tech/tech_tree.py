@@ -156,11 +156,9 @@ class TechTree(GameObject):
         result: dict = {}
         for tech in self.tech_names():
             result[tech] = self.is_researched(tech)
-        result['avatar_functions'] = self.avatar_functions
         return result
 
     def from_json(self, data: dict) -> Self:
-        self.avatar_functions = data['avatar_functions']
         self.tree = self.build_tree(self.avatar_functions)
         def set_researched(tree: Tree[tuple[Tech, bool]]) -> None:
             tree.value = (tree.value[0], data[tree.value[0].name])

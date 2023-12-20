@@ -12,6 +12,7 @@ from game.common.stations.occupiable_station import OccupiableStation
 from game.common.stations.station import Station
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from game.quarry_rush.entity.placeable.dynamite import Dynamite
+from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
 from game.utils.vector import Vector
 from game.quarry_rush.entity.placeable.traps import Trap
 from game.quarry_rush.station.company_station import TuringStation, ChurchStation
@@ -412,6 +413,8 @@ class GameBoard(GameObject):
                 return OccupiableStation().from_json(data)
             case ObjectType.STATION:
                 return Station().from_json(data)
+            case ObjectType.ORE_OCCUPIABLE_STATION:
+                return OreOccupiableStation().from_json(data)
             case ObjectType.AVATAR:
                 return Avatar().from_json(data)
             case ObjectType.TURING_STATION:
