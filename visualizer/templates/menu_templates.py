@@ -72,7 +72,7 @@ class Basic(MenuTemplate):
         self.title.rect.center = Vector.add_vectors(Vector(*self.screen.get_rect().center),
                                                     Vector(0, -100)).as_tuple()
 
-        self.winning_team_name: Text = Text(screen, '', 0, color=self.text_color)
+        self.winning_team_name: Text = Text(screen, '', 0, color=self.text_color, font_name=self.font)
 
     def start_render(self) -> None:
         super().start_render()
@@ -80,7 +80,7 @@ class Basic(MenuTemplate):
 
     def load_results_screen(self, results: dict) -> None:
         winning_teams = self.__get_winning_teams(results['players'])
-        self.winning_team_name = Text(self.screen, winning_teams, 36, color=self.text_color)
+        self.winning_team_name = Text(self.screen, winning_teams, 36, color=self.text_color, font_name=self.font)
         self.winning_team_name.rect.center = self.screen.get_rect().center
 
     def results_render(self) -> None:

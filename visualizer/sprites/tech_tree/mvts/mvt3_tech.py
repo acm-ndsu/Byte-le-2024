@@ -8,8 +8,8 @@ class Mvt3Tech(pygame.sprite.Sprite):
     def __init__(self, top_left: Vector):
         super().__init__()
         self.images: list[pygame.Surface] = [
-            pygame.image.load(os.path.join(os.getcwd(), 'visualizer/spritesheets/tech-tree/mvts/mvt3-deactivated.png')),
-            pygame.image.load(os.path.join(os.getcwd(), 'visualizer/spritesheets/tech-tree/mvts/mvt3-activated.png'))
+            pygame.image.load(os.path.join(os.getcwd(), 'visualizer/spritesheets/tech_tree/mvts/mvt3-deactivated-tech-tree.png')),
+            pygame.image.load(os.path.join(os.getcwd(), 'visualizer/spritesheets/tech_tree/mvts/mvt3-activated-tech-tree.png'))
         ]
         self.image: pygame.Surface = self.images[0]
         self.activated: bool = False

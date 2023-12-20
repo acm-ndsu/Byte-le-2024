@@ -4,12 +4,12 @@ import os
 from game.utils.vector import Vector
 
 
-class Mining3Tech(pygame.sprite.Sprite):
+class Mvt2Tech(pygame.sprite.Sprite):
     def __init__(self, top_left: Vector):
         super().__init__()
         self.images: list[pygame.Surface] = [
-            pygame.image.load(os.path.join(os.getcwd(), 'visualizer/spritesheets/tech-tree/mining/mining3-deactivated.png')),
-            pygame.image.load(os.path.join(os.getcwd(), 'visualizer/spritesheets/tech-tree/mining/mining3-activated.png'))
+            pygame.image.load(os.path.join(os.getcwd(), 'visualizer/spritesheets/tech_tree/mvts/mvt2-deactivated-tech-tree.png')),
+            pygame.image.load(os.path.join(os.getcwd(), 'visualizer/spritesheets/tech_tree/mvts/mvt2-activated-tech-tree.png'))
         ]
         self.image: pygame.Surface = self.images[0]
         self.activated: bool = False
