@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to the official Quarry Rush User Manual (documentation)!
-================================================================
+Welcome to the official Quarry Rush User Manual!
+================================================
 
 It's a new day.
 It's your time to shine!
