@@ -1,9 +1,10 @@
 import unittest
 
+from game.common.avatar import Avatar
 from game.common.game_object import GameObject
 from game.controllers.movement_controller import *
 from game.controllers.place_controller import *
-from game.quarry_rush.station.ore_occupiable_stations import *
+from game.quarry_rush.station.ore_occupiable_station import *
 from game.quarry_rush.entity.placeable.dynamite import Dynamite
 from game.quarry_rush.entity.placeable.traps import *
 
@@ -20,16 +21,10 @@ class TestPlaceController(unittest.TestCase):
         self.movement_controller: MovementController = MovementController()
 
         self.avatar = Avatar(position=Vector(1, 0))
-        self.copium_station: CopiumOccupiableStation = CopiumOccupiableStation()
-        self.lambdium_station: LambdiumOccupiableStation = LambdiumOccupiableStation()
-        self.turite_station: TuriteOccupiableStation = TuriteOccupiableStation()
-
-        # stack copium, lambdium, then turite; turite on top (i.e., copium -> lambium -> turite)
-        self.lambdium_station.occupied_by = self.turite_station
-        self.copium_station.occupied_by = self.lambdium_station
+        self.ore_station: OreOccupiableStation = OreOccupiableStation()
 
         self.locations: dict[tuple[Vector]: list[GameObject]] = {
-            (Vector(1, 1),): [self.copium_station],
+            (Vector(1, 1),): [self.ore_station],
             (Vector(1, 0),): [self.avatar]
         }
 
@@ -50,27 +45,21 @@ class TestPlaceController(unittest.TestCase):
         self.avatar.buy_new_tech('Trap Defusal')
 
     # tests that the avatar is at the top of the stack
-    def test_avatar_on_top_of_ores(self) -> None:
+    def test_avatar_on_top_of_ore_station(self) -> None:
         self.movement_controller.handle_actions(ActionType.MOVE_DOWN, self.client, self.game_board)  # move to position
         self.assertEqual((str(self.client.avatar.position)), str(Vector(1, 1)))  # ensure position is fine
-        self.assertEqual(self.turite_station.occupied_by, self.client.avatar)  # ensure avatar is on top
-        self.assertNotEqual(self.lambdium_station.occupied_by, self.client.avatar)  # ensure avatar is not on lambdium
-        self.assertNotEqual(self.copium_station.occupied_by, self.client.avatar)  # ensure avatar is not on copium
+        self.assertEqual(self.ore_station.occupied_by, self.client.avatar)  # ensure avatar is on top
 
     def test_placing_dynamite(self) -> None:
         self.movement_controller.handle_actions(ActionType.MOVE_DOWN, self.client, self.game_board)
         self.place_controller.handle_actions(ActionType.PLACE_DYNAMITE, self.client, self.game_board)
 
-        # ensuring the stack is in the order it should be in
-        self.assertEqual(self.copium_station.occupied_by, self.lambdium_station)
-        self.assertEqual(self.lambdium_station.occupied_by, self.turite_station)
-
-        # test if the turite is occupied by a Dynamite object and not the avatar
-        self.assertTrue(isinstance(self.turite_station.occupied_by, Dynamite))
-        self.assertNotEqual(self.turite_station.occupied_by, self.client.avatar)
+        # test if the ore station is occupied by a Dynamite object and not the avatar
+        self.assertTrue(isinstance(self.ore_station.occupied_by, Dynamite))
+        self.assertNotEqual(self.ore_station.occupied_by, self.client.avatar)
 
         # test if Dynamite is occupied by the Avatar (i.e., Avatar at the top of the stack)
-        placed_dyn: Dynamite = self.turite_station.occupied_by  # returns the correct type; ignore warning
+        placed_dyn: Dynamite = self.ore_station.occupied_by  # returns the correct type; ignore warning
         self.assertEqual(placed_dyn.occupied_by, self.client.avatar)
 
         self.assertEqual(self.avatar.dynamite_active_ability.cooldown, 1)  # double-check the ability cooldown reset
@@ -79,16 +68,12 @@ class TestPlaceController(unittest.TestCase):
         self.movement_controller.handle_actions(ActionType.MOVE_DOWN, self.client, self.game_board)
         self.place_controller.handle_actions(ActionType.PLACE_LANDMINE, self.client, self.game_board)
 
-        # ensuring the stack is in the order it should be in
-        self.assertEqual(self.copium_station.occupied_by, self.lambdium_station)
-        self.assertEqual(self.lambdium_station.occupied_by, self.turite_station)
-
-        # test if the turite is occupied by a Landmine object and not the avatar
-        self.assertTrue(isinstance(self.turite_station.occupied_by, Landmine))
-        self.assertNotEqual(self.turite_station.occupied_by, self.client.avatar)
+        # test if the ore station is occupied by a Landmine object and not the avatar
+        self.assertTrue(isinstance(self.ore_station.occupied_by, Landmine))
+        self.assertNotEqual(self.ore_station.occupied_by, self.client.avatar)
 
         # test if Dynamite is occupied by the Avatar (i.e., Avatar at the top of the stack)
-        placed_landmine: Landmine = self.turite_station.occupied_by  # returns the correct type; ignore warning
+        placed_landmine: Landmine = self.ore_station.occupied_by  # returns the correct type; ignore warning
         self.assertEqual(placed_landmine.occupied_by, self.client.avatar)
 
         self.assertEqual(self.avatar.place_trap.cooldown, 1)  # double-check the ability cooldown reset
@@ -97,16 +82,12 @@ class TestPlaceController(unittest.TestCase):
         self.movement_controller.handle_actions(ActionType.MOVE_DOWN, self.client, self.game_board)
         self.place_controller.handle_actions(ActionType.PLACE_EMP, self.client, self.game_board)
 
-        # ensuring the stack is in the order it should be in
-        self.assertEqual(self.copium_station.occupied_by, self.lambdium_station)
-        self.assertEqual(self.lambdium_station.occupied_by, self.turite_station)
-
         # test if the turite is occupied by an EMP object and not the avatar
-        self.assertTrue(isinstance(self.turite_station.occupied_by, EMP))
-        self.assertNotEqual(self.turite_station.occupied_by, self.client.avatar)
+        self.assertTrue(isinstance(self.ore_station.occupied_by, EMP))
+        self.assertNotEqual(self.ore_station.occupied_by, self.client.avatar)
 
         # test if EMP is occupied by the Avatar (i.e., Avatar at the top of the stack)
-        placed_emp: EMP = self.turite_station.occupied_by  # returns the correct type; ignore warning
+        placed_emp: EMP = self.ore_station.occupied_by  # returns the correct type; ignore warning
         self.assertEqual(placed_emp.occupied_by, self.client.avatar)
 
         self.assertEqual(self.avatar.place_trap.cooldown, 1)  # double-check the ability cooldown reset
@@ -115,31 +96,25 @@ class TestPlaceController(unittest.TestCase):
         self.test_placing_dynamite()  # call previous test to set up test
         self.place_controller.handle_actions(ActionType.PLACE_DYNAMITE, self.client, self.game_board)
 
-        # needed stack order: Copium -> Lambdium -> Turite -> Dynamite -> Avatar
-        self.assertEqual(self.copium_station.occupied_by, self.lambdium_station)
-        self.assertEqual(self.lambdium_station.occupied_by, self.turite_station)
-        self.assertTrue(isinstance(self.turite_station.occupied_by, Dynamite))
-        self.assertEqual(self.turite_station.occupied_by.occupied_by, self.avatar)
+        # needed stack order: OreOccupiableStation -> Dynamite -> Avatar
+        self.assertTrue(isinstance(self.ore_station.occupied_by, Dynamite))
+        self.assertEqual(self.ore_station.occupied_by.occupied_by, self.avatar)
 
     def test_placing_multiple_landmines(self):
         self.test_placing_landmine()  # call previous test to set up test
         self.place_controller.handle_actions(ActionType.PLACE_LANDMINE, self.client, self.game_board)
 
-        # needed stack order: Copium -> Lambdium -> Turite -> Landmine -> Avatar
-        self.assertEqual(self.copium_station.occupied_by, self.lambdium_station)
-        self.assertEqual(self.lambdium_station.occupied_by, self.turite_station)
-        self.assertTrue(isinstance(self.turite_station.occupied_by, Landmine))
-        self.assertEqual(self.turite_station.occupied_by.occupied_by, self.avatar)
+        # needed stack order: OreOccupiableStation -> Landmine -> Avatar
+        self.assertTrue(isinstance(self.ore_station.occupied_by, Landmine))
+        self.assertEqual(self.ore_station.occupied_by.occupied_by, self.avatar)
 
     def test_placing_multiple_emps(self):
         self.test_placing_emp()  # call previous test to set up test
         self.place_controller.handle_actions(ActionType.PLACE_EMP, self.client, self.game_board)
 
-        # needed stack order: Copium -> Lambdium -> Turite -> Landmine -> Avatar
-        self.assertEqual(self.copium_station.occupied_by, self.lambdium_station)
-        self.assertEqual(self.lambdium_station.occupied_by, self.turite_station)
-        self.assertTrue(isinstance(self.turite_station.occupied_by, EMP))
-        self.assertEqual(self.turite_station.occupied_by.occupied_by, self.avatar)
+        # needed stack order: OreOccupiableStation -> EMP -> Avatar
+        self.assertTrue(isinstance(self.ore_station.occupied_by, EMP))
+        self.assertEqual(self.ore_station.occupied_by.occupied_by, self.avatar)
 
     def test_placing_multiple_dynamite_and_traps(self):
         self.test_placing_dynamite()  # call previous test to set up test
@@ -156,9 +131,7 @@ class TestPlaceController(unittest.TestCase):
         # try to place duplicate emp
         self.place_controller.handle_actions(ActionType.PLACE_EMP, self.client, self.game_board)
 
-        # needed stack order: Copium -> Lambdium -> Turite -> Dynamite -> EMP -> Avatar
-        self.assertEqual(self.copium_station.occupied_by, self.lambdium_station)
-        self.assertEqual(self.lambdium_station.occupied_by, self.turite_station)
-        self.assertTrue(isinstance(self.turite_station.occupied_by, Dynamite))
-        self.assertTrue(isinstance(self.turite_station.occupied_by.occupied_by, EMP))
-        self.assertEqual(self.turite_station.occupied_by.occupied_by.occupied_by, self.avatar)
+        # needed stack order: OreOccupiableStation -> Dynamite -> EMP -> Avatar
+        self.assertTrue(isinstance(self.ore_station.occupied_by, Dynamite))
+        self.assertTrue(isinstance(self.ore_station.occupied_by.occupied_by, EMP))
+        self.assertEqual(self.ore_station.occupied_by.occupied_by.occupied_by, self.avatar)

@@ -1,23 +1,16 @@
-import random
-
 import pygame
 from game.config import *
 from typing import Callable, Any
 
-from visualizer.bytesprites.ancientTechBS import AncientTechBS
+from visualizer.bytesprites.avatarBS import AvatarBS
 from visualizer.bytesprites.churchStationBS import ChurchStationBS
-from visualizer.bytesprites.copiumBS import CopiumBS
 from visualizer.bytesprites.dynamiteBS import DynamiteBS
 from visualizer.bytesprites.empsBS import EmpsBS
-from visualizer.bytesprites.exampleTileBS import TileBytespriteFactoryExample
-from visualizer.bytesprites.exampleWallBS import WallBytespriteFactoryExample
-from visualizer.bytesprites.exampleBS import AvatarBytespriteFactoryExample
 from game.utils.vector import Vector
-from visualizer.bytesprites.lambdiumBS import LambdiumBS
 from visualizer.bytesprites.landmineBS import LandmineBS
 from visualizer.bytesprites.tileBS import TileBS
 from visualizer.bytesprites.turingStationBS import TuringStationBS
-from visualizer.bytesprites.turiteBS import TuriteBS
+from visualizer.bytesprites.oreStationBS import OreStationBS
 from visualizer.bytesprites.wallBS import WallBS
 from visualizer.config import Config
 from visualizer.templates.inventory_template import InventoryTemplate
@@ -109,18 +102,15 @@ class Adapter:
     def populate_bytesprite_factories(self) -> dict[int: Callable[[pygame.Surface], ByteSprite]]:
         # Instantiate all bytesprites for each object ands add them here
         return {
-            4: AvatarBytespriteFactoryExample.create_bytesprite,
+            4: AvatarBS.create_bytesprite,
             7: TileBS.create_bytesprite,
             8: WallBS.create_bytesprite,
-            33: AncientTechBS.create_bytesprite,
-            20: CopiumBS.create_bytesprite,
-            25: ChurchStationBS.create_bytesprite,
-            31: DynamiteBS.create_bytesprite,
-            36: EmpsBS.create_bytesprite,
-            18: LambdiumBS.create_bytesprite,
-            35: LandmineBS.create_bytesprite,
-            26: TuringStationBS.create_bytesprite,
-            19: TuriteBS.create_bytesprite
+            22: ChurchStationBS.create_bytesprite,
+            23: TuringStationBS.create_bytesprite,
+            28: DynamiteBS.create_bytesprite,
+            29: OreStationBS.create_bytesprite,
+            31: LandmineBS.create_bytesprite,
+            32: EmpsBS.create_bytesprite,
         }
 
     def render(self) -> None:

@@ -18,7 +18,7 @@ class MapGenerator:
         Calls generate methods and combines them to one dict using the update method. Returns the game map
         """
         game_location: dict[tuple[Vector], list[GameObject]] = self.__game_location.generate_location()
-        collectables: dict[tuple[Vector], list[GameObject]] = self.__collectable_generator.generate_all()
+        collectables: dict[tuple[Vector], list[GameObject]] = self.__collectable_generator.generate()
 
         game_location.update(collectables)
 

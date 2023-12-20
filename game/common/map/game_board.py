@@ -12,10 +12,9 @@ from game.common.stations.occupiable_station import OccupiableStation
 from game.common.stations.station import Station
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from game.quarry_rush.entity.placeable.dynamite import Dynamite
+from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
 from game.utils.vector import Vector
 from game.quarry_rush.entity.placeable.traps import Trap
-from game.quarry_rush.station.ore_occupiable_stations import CopiumOccupiableStation, TuriteOccupiableStation, LambdiumOccupiableStation
-from game.quarry_rush.station.ancient_tech_occupiable_station import AncientTechOccupiableStation
 from game.quarry_rush.station.company_station import TuringStation, ChurchStation
 from game.quarry_rush.entity.placeable.traps import EMP, Landmine
 
@@ -414,16 +413,10 @@ class GameBoard(GameObject):
                 return OccupiableStation().from_json(data)
             case ObjectType.STATION:
                 return Station().from_json(data)
+            case ObjectType.ORE_OCCUPIABLE_STATION:
+                return OreOccupiableStation().from_json(data)
             case ObjectType.AVATAR:
                 return Avatar().from_json(data)
-            case ObjectType.COPIUM_OCCUPIABLE_STATION:
-                return CopiumOccupiableStation().from_json(data)
-            case ObjectType.LAMBDIUM_OCCUPIABLE_STATION:
-                return LambdiumOccupiableStation().from_json(data)
-            case ObjectType.TURITE_OCCUPIABLE_STATION:
-                return TuriteOccupiableStation().from_json(data)
-            case ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION:
-                return AncientTechOccupiableStation().from_json(data)
             case ObjectType.TURING_STATION:
                 return TuringStation().from_json(data)
             case ObjectType.CHURCH_STATION:

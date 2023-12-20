@@ -13,10 +13,9 @@ class AvatarBS(ByteSpriteFactory):
 
     @staticmethod
     def update(data: dict, layer: int, pos: Vector, spritesheets: list[list[pyg.Surface]]) -> list[pyg.Surface]:
-        if data[]:
-            return spritesheets[1]
+        offset: int = 5 if data.get('company', 0) == 2 else 0
 
-        return spritesheets[0]
+        return spritesheets[offset]
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
