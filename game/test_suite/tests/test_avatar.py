@@ -208,6 +208,7 @@ class TestAvatar(unittest.TestCase):
         self.avatar.position = Vector(10, 10)
         data: dict = self.avatar.to_json()
         avatar: Avatar = Avatar().from_json(data)
+        self.assertEqual(self.avatar.abilities, avatar.abilities)
         self.assertEqual(self.avatar.object_type, avatar.object_type)
         self.assertEqual(self.avatar.score, avatar.score)
         self.assertEqual(self.avatar.science_points, avatar.science_points)

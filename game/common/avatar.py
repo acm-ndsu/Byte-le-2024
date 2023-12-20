@@ -147,7 +147,7 @@ class Avatar(GameObject):
         self.position: Vector | None = position
         self.movement_speed: int = 1  # determines how many tiles the player moves
         self.drop_rate: float = 1.0  # determines how many items are dropped after mining
-        self.__abilities: dict = self.__create_abilities_dict()  # used to manage unlocking new abilities
+        self.abilities: dict = self.__create_abilities_dict()  # used to manage unlocking new abilities
         self.__tech_tree: TechTree = self.__create_tech_tree()  # the tech tree cannot be set; made private for security
         self.__company: Company = company
         self.dynamite_active_ability: DynamiteActiveAbility = DynamiteActiveAbility()
@@ -176,6 +176,10 @@ class Avatar(GameObject):
     @property
     def drop_rate(self):
         return self.__drop_rate
+
+    @property
+    def abilities(self):
+        return self.__abilities
 
     @company.setter
     def company(self, company: Company) -> None:
@@ -227,6 +231,17 @@ class Avatar(GameObject):
 
         self.__drop_rate = drop_rate
 
+    @abilities.setter
+    def abilities(self, abilities: dict[bool]) -> None:
+        if abilities is None or not isinstance(abilities, dict):
+            raise ValueError(f'{self.__class__.__name__}.abilities must be a dict.')
+
+        for ability, value in abilities.items():
+            if value is None or not isinstance(value, bool):
+                raise ValueError(f'Every value in the {self.__class__.__name__}.abilities dict must be a bool.')
+
+        self.__abilities = abilities
+
     # Tech Tree methods and implementation------------------------------------------------------------------------------
 
     # Helper method to create the tech tree
@@ -248,23 +263,23 @@ class Avatar(GameObject):
         self.drop_rate += amt
 
     def __unlock_overdrive_movement(self) -> None:
-        self.__abilities['Overdrive Movement'] = True
+        self.abilities['Overdrive Movement'] = True
 
     def __unlock_overdrive_mining(self) -> None:
-        self.__abilities['Overdrive Mining'] = True
+        self.abilities['Overdrive Mining'] = True
 
     def __unlock_dynamite(self) -> None:
-        self.__abilities['Dynamite'] = True
+        self.abilities['Dynamite'] = True
 
     def __unlock_landmines(self) -> None:
-        self.__abilities['Landmines'] = True
+        self.abilities['Landmines'] = True
 
     def __unlock_emps(self) -> None:
-        self.__abilities['EMPs'] = True
-        self.__abilities['Landmines'] = False
+        self.abilities['EMPs'] = True
+        self.abilities['Landmines'] = False
 
     def __unlock_trap_defusal(self) -> None:
-        self.__abilities['Trap Defusal'] = True
+        self.abilities['Trap Defusal'] = True
 
     # Helper method to create a dictionary that stores bool values for which abilities the player unlocked
     def __create_abilities_dict(self) -> dict:
@@ -318,19 +333,19 @@ class Avatar(GameObject):
     # if avatar calls place dynamite, set to true, i.e. they want to place dynamite
     def can_place_dynamite(self) -> bool:
         # This method will be called in the unlock_dynamite method in the else statement for when it's to be used
-        return self.__abilities['Dynamite'] and self.dynamite_active_ability.is_usable
+        return self.abilities['Dynamite'] and self.dynamite_active_ability.is_usable
 
     # if avatar calls place trap, set to true, i.e. they want to place trap
     def can_place_trap(self) -> bool:
         # This method will be called in the landmine and EMP methods in the else statement for when it's to be used
-        return (self.__abilities['Landmines'] or self.__abilities['EMPs']) and self.place_trap.is_usable
+        return (self.abilities['Landmines'] or self.abilities['EMPs']) and self.place_trap.is_usable
 
     def can_place_dynamite_or_trap(self) -> bool:
         # This method will return if the avatar can place anything at all
         return self.can_place_trap() or self.can_place_dynamite()
     
     def can_defuse_trap(self) -> bool:
-        return self.__abilities['Trap Defusal']
+        return self.abilities['Trap Defusal']
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
@@ -340,7 +355,7 @@ class Avatar(GameObject):
         data['position'] = self.position.to_json() if self.position is not None else None
         data['movement_speed'] = self.movement_speed
         data['drop_rate'] = self.drop_rate
-        data['tech_tree'] = self.__abilities
+        data['tech_tree'] = self.abilities
         # data['tech_tree'] = self.__tech_tree.to_json()
         return data
 
@@ -352,6 +367,6 @@ class Avatar(GameObject):
         self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
         self.movement_speed = data['movement_speed']
         self.drop_rate = data['drop_rate']
-        self.__abilities = data['tech_tree']
-        # self.__tech_tree = data['tech_tree']
+        self.abilities = data['tech_tree']
+        self.__tech_tree = data['tech_tree']
         return self

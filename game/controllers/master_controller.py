@@ -45,6 +45,8 @@ class MasterController(Controller):
             This method creates a dictionary that stores a list of the clients' JSON files. This represents the final
             results of the game.
     """
+
+
     def __init__(self):
         super().__init__()
         self.game_over: bool = False
@@ -95,8 +97,8 @@ class MasterController(Controller):
         client.actions = turn_actions
 
         # Create deep copies of all objects sent to the player
-        current_world = deepcopy(self.current_world_data["game_board"])  # what is current world and copy avatar
-        copy_avatar = deepcopy(client.avatar)
+        current_world = GameBoard().from_json(self.current_world_data['game_board'].to_json())  # deepcopy(self.current_world_data['game_board'])  # what is current world and copy avatar
+        copy_avatar = Avatar().from_json(client.avatar.to_json())  # deepcopy(client.avatar)
         # Obfuscate data in objects that that player should not be able to see
         # Currently world data isn't obfuscated at all
         args = (self.turn, turn_actions, current_world, copy_avatar)
@@ -107,8 +109,10 @@ class MasterController(Controller):
         for client in clients:
             for i in range(MAX_NUMBER_OF_ACTIONS_PER_TURN):
                 try:
-                    self.movement_controller.handle_actions(client.actions[i], client, self.current_world_data["game_board"])
-                    self.interact_controller.handle_actions(client.actions[i], client, self.current_world_data["game_board"])
+                    self.movement_controller.handle_actions(client.actions[i], client, self.current_world_data[
+                        'game_board'])
+                    self.interact_controller.handle_actions(client.actions[i], client, self.current_world_data[
+                        'game_board'])
                 except IndexError:
                     pass
 
@@ -120,7 +124,7 @@ class MasterController(Controller):
     # def handle_events(self, clients):
         # If it is time to run an event, master controller picks an event to run
         # if self.turn == self.event_times[0] or self.turn == self.event_times[1]:
-        #    self.current_world_data["game_map"].generate_event(EventType.example, EventType.example)
+        #    self.current_world_data['game_map'].generate_event(EventType.example, EventType.example)
         # event type.example is just a placeholder for now
 
     # Return serialized version of game
@@ -129,7 +133,7 @@ class MasterController(Controller):
         data['tick'] = turn
         data['clients'] = [client.to_json() for client in clients]
         # Add things that should be thrown into the turn logs here
-        data['game_board'] = self.current_world_data["game_board"].to_json()
+        data['game_board'] = self.current_world_data['game_board'].to_json()
 
         return data
 
