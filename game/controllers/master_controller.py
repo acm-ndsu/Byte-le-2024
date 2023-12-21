@@ -109,6 +109,7 @@ class MasterController(Controller):
     # Perform the main logic that happens per turn
     def turn_logic(self, clients: list[Player], turn):
         for client in clients:
+            client.actions.append(ActionType.INTERACT_CENTER)
             for i in range(MAX_NUMBER_OF_ACTIONS_PER_TURN):
                 try:
                     self.movement_controller.handle_actions(client.actions[i], client, self.current_world_data[
