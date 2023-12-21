@@ -27,5 +27,4 @@ class Client(UserClient):
         """
         if turn == 1:
             self.first_turn_init(world, avatar)
-            
-        actions = [ActionType.MOVE_LEFT if self.company == Company.CHURCH else ActionType.MOVE_RIGHT]
+        return [ActionType.MOVE_LEFT if self.company == Company.CHURCH else ActionType.MOVE_RIGHT, ]
