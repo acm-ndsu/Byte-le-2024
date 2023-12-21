@@ -24,11 +24,15 @@ class OreOccupiableStation(OccupiableStation):
         self.ancient_tech_weight = ancient_tech_weight
         self.held_item = Copium()
 
-    def give_item(self, company: Company, inventory_manager: InventoryManager = None) -> None:
+    def give_item(self, company: Company, inventory_manager: InventoryManager = None, drop_rate: int = 1) -> None:
         if InventoryManager is None or not isinstance(inventory_manager, InventoryManager):
             raise ValueError(f'{self.__class__.__name__}.take_action() needs an InventoryManager Object.')
 
-        inventory_manager.give(self.held_item, company)
+        if drop_rate < 1:
+            raise ValueError(f'{self.__class__.__name__}.give_item() needs a drop rate of at least 1')
+
+        # gives the held item for the amount that is specified by the drop rate passed in
+        [inventory_manager.give(self.held_item, company, drop_rate) for i in range(drop_rate)]
 
         if isinstance(self.held_item, Copium):
             generated_num: float = self.rand.random()
@@ -63,5 +67,7 @@ class OreOccupiableStation(OccupiableStation):
             tile.remove_from_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION)
     
     def take_action(self, avatar: Avatar, inventory_manager: InventoryManager):
-        self.give_item(company=avatar.company, inventory_manager=inventory_manager)
+        # The amount of ore received is equal to the avatar's drop rate. Make the change here when mined
+        # Dynamite will not be affected by this, unless necessary for game balancing
+        self.give_item(avatar.company, inventory_manager, avatar.drop_rate)
     

@@ -146,7 +146,7 @@ class Avatar(GameObject):
         self.science_points: int = 0
         self.position: Vector | None = position
         self.movement_speed: int = 1  # determines how many tiles the player moves
-        self.drop_rate: float = 1.0  # determines how many items are dropped after mining
+        self.drop_rate: int = 1  # determines how many items are dropped after mining
         self.abilities: dict = self.__create_abilities_dict()  # used to manage unlocking new abilities
         self.__tech_tree: TechTree = self.__create_tech_tree()  # the tech tree cannot be set; made private for security
         self.__company: Company = company
@@ -170,11 +170,11 @@ class Avatar(GameObject):
         return self.__position
 
     @property
-    def movement_speed(self):
+    def movement_speed(self) -> int:
         return self.__movement_speed
 
     @property
-    def drop_rate(self):
+    def drop_rate(self) -> int:
         return self.__drop_rate
 
     @property
@@ -222,12 +222,12 @@ class Avatar(GameObject):
         self.__movement_speed: int = speed
 
     @drop_rate.setter
-    def drop_rate(self, drop_rate: float) -> None:
-        if drop_rate is None or not isinstance(drop_rate, float):
-            raise ValueError(f'{self.__class__.__name__}.drop_rate must be a float.')
+    def drop_rate(self, drop_rate: int) -> None:
+        if drop_rate is None or not isinstance(drop_rate, int):
+            raise ValueError(f'{self.__class__.__name__}.drop_rate must be an int.')
 
         if drop_rate < 0:
-            raise ValueError(f'{self.__class__.__name__}.drop_rate must be a positive float.')
+            raise ValueError(f'{self.__class__.__name__}.drop_rate must be a positive int.')
 
         self.__drop_rate = drop_rate
 
@@ -259,7 +259,7 @@ class Avatar(GameObject):
     def __increase_movement(self, amt: int) -> None:
         self.movement_speed += amt
 
-    def __increase_drop_rate(self, amt: float) -> None:
+    def __increase_drop_rate(self, amt: int) -> None:
         self.drop_rate += amt
 
     def __unlock_overdrive_movement(self) -> None:

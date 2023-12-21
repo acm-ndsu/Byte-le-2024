@@ -33,12 +33,27 @@ class TestMineController(unittest.TestCase):
 
     # tests getting the material from underneath the avatar
     def test_mining(self):
-        pass
+        self.mine_controller.handle_actions(ActionType.MINE, self.client, self.world)
+        self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[0], Copium))
+
         # remember that the game map is **(y, x)**, not (x, y)
         # self.mine_controller.handle_actions(ActionType.MINE, self.client, self.world)
         # print(f'Inventory: {self.world.inventory_manager.get_inventory(self.avatar.company)[0]}')
         # self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[0],
         #                            Copium))
+
+    # test mining with a drop rate higher than one
+    def test_mining_high_drop_rate(self):
+        self.client.avatar.drop_rate = 3
+        self.mine_controller.handle_actions(ActionType.MINE, self.client, self.world)
+        self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[0], Copium))
+        self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[1], Copium))
+        self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[2], Copium))
+
+    # make sure that after mining with a high drop rate, the points gained are correct
+    def test_points_gained_high_drop_rate(self):
+        self.test_mining_high_drop_rate()
+        self.assertEqual(self.world.inventory_manager.cash_in_points(Company.CHURCH), 30)  # 1 copium = 10 pts
 
     # def test_mining_fail(self):
     #     pass

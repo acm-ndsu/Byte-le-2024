@@ -31,21 +31,21 @@ def techs(avatar_functions: AvatarFunctions) -> dict[str, Tech]:
             name='Mining Robotics',
             cost=0,
             point_value=0,
-            apply=lambda : None
+            apply=lambda: None
         ),
         
         'Better Drivetrains': Tech(
             name='Better Drivetrains',
             cost=0,
             point_value=1,
-            apply=lambda : avatar_functions.increase_movement(1)
+            apply=lambda: avatar_functions.increase_movement(1)
         ),
         
         'High Yield Drilling': Tech(
             name='High Yield Drilling',
             cost=0,
             point_value=1,
-            apply=lambda : avatar_functions.increase_mining(0.2)
+            apply=lambda: avatar_functions.increase_mining(1)
         ),
         
         'Dynamite': Tech(
@@ -59,14 +59,14 @@ def techs(avatar_functions: AvatarFunctions) -> dict[str, Tech]:
             name='Unnamed Drivetrain Tech',
             cost=0,
             point_value=1,
-            apply=lambda : avatar_functions.increase_movement(1)
+            apply=lambda: avatar_functions.increase_movement(1)
         ),
         
         'Unnamed Mining Tech': Tech(
             name='Unnamed Mining Tech',
             cost=0,
             point_value=1,
-            apply=lambda : avatar_functions.increase_mining(-.2)
+            apply=lambda: avatar_functions.increase_mining(1)
         ),
         
         'Landmines': Tech(
