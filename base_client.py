@@ -12,7 +12,10 @@ class Client(UserClient):
         Allows the team to set a team name.
         :return: Your team name
         """
-        return 'Team 1'
+        return 'Paid Intern'
+    
+    def first_turn_init(self, world, avatar):
+        self.company = avatar.company
 
     # This is where your AI will decide what to do
     def take_turn(self, turn, actions, world, avatar):
@@ -22,4 +25,7 @@ class Client(UserClient):
         :param actions:     This is the actions object that you will add effort allocations or decrees to.
         :param world:       Generic world information
         """
-        pass
+        if turn == 1:
+            self.first_turn_init(world, avatar)
+            
+        actions.append(ActionType.MOVE_LEFT if self.company == Company.CHURCH else ActionType.MOVE_RIGHT)
