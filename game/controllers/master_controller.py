@@ -10,6 +10,7 @@ from game.utils.thread import CommunicationThread
 from game.controllers.movement_controller import MovementController
 from game.controllers.controller import Controller
 from game.controllers.interact_controller import InteractController
+from game.controllers.mine_controller import MineController
 from game.common.map.game_board import GameBoard
 from game.config import MAX_NUMBER_OF_ACTIONS_PER_TURN
 from game.utils.vector import Vector 
@@ -56,6 +57,7 @@ class MasterController(Controller):
         self.current_world_data: dict = None
         self.movement_controller: MovementController = MovementController()
         self.interact_controller: InteractController = InteractController()
+        self.mine_controller: MineController = MineController()
 
     # Receives all clients for the purpose of giving them the objects they will control
     def give_clients_objects(self, clients: list[Player], world: dict):
@@ -112,6 +114,8 @@ class MasterController(Controller):
                     self.movement_controller.handle_actions(client.actions[i], client, self.current_world_data[
                         'game_board'])
                     self.interact_controller.handle_actions(client.actions[i], client, self.current_world_data[
+                        'game_board'])
+                    self.mine_controller.handle_actions(client.actions[i], client, self.current_world_data[
                         'game_board'])
                 except IndexError:
                     pass

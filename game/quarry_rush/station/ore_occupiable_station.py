@@ -60,3 +60,4 @@ class OreOccupiableStation(OccupiableStation):
         """
         if self.held_item is None:
             tile.remove_from_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION)
+    
