@@ -30,9 +30,7 @@ class OccupiableStation(Occupiable, Station):
         self.occupied_by = occupied_by
 
     def from_json(self, data: dict) -> Self:
-        from game.quarry_rush.station.ancient_tech_occupiable_station import AncientTechOccupiableStation
-        from game.quarry_rush.station.ore_occupiable_stations import CopiumOccupiableStation, TuriteOccupiableStation, \
-            LambdiumOccupiableStation
+        from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
 
         super().from_json(data)
         occupied_by = data['occupied_by']
@@ -45,14 +43,8 @@ class OccupiableStation(Occupiable, Station):
                 self.occupied_by: Avatar = Avatar().from_json(occupied_by)
             case ObjectType.OCCUPIABLE_STATION:
                 self.occupied_by: OccupiableStation = OccupiableStation().from_json(occupied_by)
-            case ObjectType.COPIUM_OCCUPIABLE_STATION:
-                self.occupied_by: CopiumOccupiableStation = CopiumOccupiableStation().from_json(occupied_by)
-            case ObjectType.TURITE_OCCUPIABLE_STATION:
-                self.occupied_by: TuriteOccupiableStation = TuriteOccupiableStation().from_json(occupied_by)
-            case ObjectType.LAMBDIUM_OCCUPIABLE_STATION:
-                self.occupied_by: LambdiumOccupiableStation = LambdiumOccupiableStation().from_json(occupied_by)
-            case ObjectType.ANCIENT_TECH_OCCUPIABLE_STATION:
-                self.occupied_by: AncientTechOccupiableStation = AncientTechOccupiableStation().from_json(occupied_by)
+            case ObjectType.ORE_OCCUPIABLE_STATION:
+                self.occupied_by: OreOccupiableStation = OreOccupiableStation().from_json(occupied_by)
             case ObjectType.STATION:
                 self.occupied_by: Station = Station().from_json(occupied_by)
             case _:

@@ -15,4 +15,4 @@ class ChurchStationBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/ChurchStationSS.png'), 1, 25, ChurchStationBS.update)
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/ChurchStationSS.png'), 1, 22, ChurchStationBS.update)

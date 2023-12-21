@@ -15,4 +15,4 @@ class TuringStationBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/TuringStationSS.png'), 1, 26, TuringStationBS.update)
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/TuringStationSS.png'), 1, 23, TuringStationBS.update)

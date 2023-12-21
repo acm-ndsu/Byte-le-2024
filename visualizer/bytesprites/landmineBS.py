@@ -16,5 +16,5 @@ class LandmineBS(ByteSpriteFactory):
 
     @staticmethod
     def create_bytesprite(screen: pyg.Surface) -> ByteSprite:
-        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/landmineSS.png'), 1, 35,
+        return ByteSprite(screen, os.path.join(os.getcwd(), 'visualizer/spritesheets/landmineSS.png'), 1, 31,
                           LandmineBS.update, colorkey=pygame.Color(255, 0, 255))
