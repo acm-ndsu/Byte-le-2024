@@ -29,6 +29,7 @@ your question, ask us in the server or call us over!
    game_board
    ores
    placeables
+   scoring
 
 
 Indices and tables

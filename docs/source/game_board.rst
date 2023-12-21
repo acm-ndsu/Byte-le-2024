@@ -40,7 +40,19 @@ When you want to cash in ores for points or upgrade your MOB-BOT, you can only d
 
 More information on ores is found in :doc:`ores`, and information on MOB-BOT is found in :doc:`mobbot`.
 
-Mining
-------
+Mining Interactions
+===================
 
-After mining the ore from a tile,
+After mining ore from a Tile, there is a chance a new piece of ore is discovered underneath! Here's what can appear
+after mining specific ores:
+
+============ ==========================================
+Mined Ore    Next Generated Ore
+============ ==========================================
+Copium       Lambdium | Turite | Ancient Tech | Nothing
+Lambdium     Ancient Tech | Nothing
+Turite       Ancient Tech | Nothing
+Ancient Tech Nothing
+============ ==========================================
+
+Visit :doc:`ores` for more information on ore values.

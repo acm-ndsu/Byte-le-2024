@@ -90,3 +90,6 @@ Defuse |diffuse|                                           Fight back against th
 ========================================================== =============================================================
 
 For more information on Dynamite, Landmines, and EMPs, go to :doc:`placeables`.
+
+Make sure to upgrade the Tech Tree as time goes on. Not only will you gain upgrades, but each unlocked Tech will
+provide extra points. Visit :doc:`scoring` for an overview of how points are accumulated.
