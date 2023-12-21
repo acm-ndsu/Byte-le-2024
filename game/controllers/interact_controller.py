@@ -5,6 +5,7 @@ from game.common.player import Player
 from game.common.stations.station import Station
 from game.common.map.game_board import GameBoard
 from game.utils.vector import Vector
+from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
 
 
 class InteractController(Controller):
@@ -64,5 +65,5 @@ class InteractController(Controller):
 
         stat: Station | None = world.game_map[vector.y][vector.x].get_occupied_by(target)
 
-        if stat is not None and isinstance(stat, Station):
+        if stat is not None and isinstance(stat, Station) and not isinstance(stat, OreOccupiableStation):
             stat.take_action(client.avatar, world.inventory_manager)

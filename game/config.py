@@ -15,7 +15,7 @@ TQDM_UNITS = " turns"                               # units TQDM takes in the ba
 
 MAX_SECONDS_PER_TURN = 0.1                          # max number of basic operations clients have for their turns
 
-MAX_NUMBER_OF_ACTIONS_PER_TURN = 2                  # max number of actions per turn is currently set to 2
+MAX_NUMBER_OF_ACTIONS_PER_TURN = 1000               # master_controller will be handling max actions enforcement for Byte-le 2024 "Quarry Rush"
 
 MIN_CLIENTS_START = None                            # minimum number of clients required to start running the game; should be None when SET_NUMBER_OF_CLIENTS is used
 MAX_CLIENTS_START = None                            # maximum number of clients required to start running the game; should be None when SET_NUMBER_OF_CLIENTS is used

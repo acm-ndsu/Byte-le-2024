@@ -109,6 +109,13 @@ class MasterController(Controller):
     # Perform the main logic that happens per turn
     def turn_logic(self, clients: list[Player], turn):
         for client in clients:
+            if len(client.actions) == 0:
+                continue
+            first = client.actions[0]
+            if first in [ActionType.MOVE_LEFT, ActionType.MOVE_RIGHT, ActionType.MOVE_UP, ActionType.MOVE_DOWN]:
+                client.actions = [action for action in client.actions if action in [ActionType.MOVE_LEFT, ActionType.MOVE_RIGHT, ActionType.MOVE_UP, ActionType.MOVE_DOWN]][:client.avatar.movement_speed]
+            else:
+                client.actions = [client.actions[0]]
             client.actions.append(ActionType.INTERACT_CENTER)
             for i in range(MAX_NUMBER_OF_ACTIONS_PER_TURN):
                 try:

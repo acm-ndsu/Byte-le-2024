@@ -30,7 +30,7 @@ class MineController(Controller):
                 if station is None or station.object_type != ObjectType.ORE_OCCUPIABLE_STATION:
                     return
 
-                station.take_action(client.avatar.company, world.inventory_manager)
+                station.take_action(client.avatar, world.inventory_manager)
 
                 # try to remove the OreOccupiableStation from the game board
                 station.remove_from_game_board(tile)
