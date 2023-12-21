@@ -6,8 +6,12 @@ Layout
 ======
 
 The map is a 14x14 grid, including the outer walls. Both MOB-BOTs for either team will be on the same map.
-The only thing separating them is the walls of The Quarry. However, if the two MOB-BOTs meet in the center
-of the map, anything can happen!
+The only thing separating them is the walls of The Quarry. However, if the two MOB-BOTs meet, it could be an explosive
+battle!
+
+.. image:: ./_static/images/game_map.png
+   :width: 50%
+   :align: center
 
 The map is made of a 2D array of Tile objects. To access any tiles, you will use (y, x) coordinates like so:
 
@@ -15,8 +19,6 @@ The map is made of a 2D array of Tile objects. To access any tiles, you will use
 
    world.game_map[y][x]
 
-
-----
 
 Tiles
 =====
@@ -27,13 +29,18 @@ can be placed on the map by MOB-BOT.
 Bases
 -----
 
-Each team will have a base on the map. Their base will match their MOB-BOT and company color
+Each team will have a base on the map. Their base will match their MOB-BOT and company color.
 
-- Turing Co.
-    - Turing Co. will have the red base in the top left corner.
 - Church Inc.
-    - Church Inc. will have the blue base in the bottom left corner.
+    - Church Inc. will have the blue base in the top left corner.
+- Turing Co.
+    - Turing Co. will have the red base in the bottom left corner.
 
 When you want to cash in ores for points or upgrade your MOB-BOT, you can only do so at your base.
 
 More information on ores is found in :doc:`ores`, and information on MOB-BOT is found in :doc:`mobbot`.
+
+Mining
+------
+
+After mining the ore from a tile,

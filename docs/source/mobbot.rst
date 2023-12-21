@@ -26,29 +26,67 @@ the available upgrade paths and how you can improve.
    :width: 95%
    :align: center
 
+.. |bdt| image:: ./_static/images/better_drivetrains.png
+   :width: 80%
+.. |udt| image:: ./_static/images/unnamed_drivetrain_tech.png
+   :width: 80%
+.. |om| image:: ./_static/images/overdrive_movement.png
+   :width: 80%
+.. |hym| image:: ./_static/images/high_yield_mining.png
+   :width: 80%
+.. |umt| image:: ./_static/images/unnamed_mining_tech.png
+   :width: 80%
+.. |omining| image:: ./_static/images/overdrive_mining.png
+   :width: 80%
+.. |dyn| image:: ./_static/images/dynamite.png
+   :width: 80%
+.. |lm| image:: ./_static/images/landmine.png
+   :width: 80%
+.. |emp| image:: ./_static/images/emp.png
+   :width: 80%
+.. |diffuse| image:: ./_static/images/defuse.png
+   :width: 80%
+
+
+
 Here's a description of all the techs. The order goes by row as depicted above:
 
-====================================== =============================================================
-Tech Name                              Tech Description
-====================================== =============================================================
-Better Drivetrains                     This tech will increase your movement, allowing MOB-BOT to move up to 2 tiles per
-                                       turn!
-Unnamed Drivetrain Tech                Grants an additional movement, allowing MOB-BOT to move up to 3 tiles per turn!
-                                       How wonderful!
-Overdrive Movement                     The ultimate movement upgrade. MOB-BOT can now move up to 4 tiles per turn!
-                                       Burn rubber in that Quarry!
-High Yield Drilling                    A decent upgrade from your basic Mining Robotics. MOB-BOT will now gain 2 pieces
-                                       of ore when you mine!
-Unnamed Mining Tech                    This mysterious new tech brings MOB-BOT's efficiency to a new level. MOB-BOT will
-                                       gain 3 pieces of ore when mining! Sensational!
-Overdrive Mining                       MOB-BOT has become the mining machine it was always meant to be. MOB-BOT will now
-                                       mine 4 ore per turn! Bring in the money!
-Dynamite                               Become more efficient with your mining! Dynamite will explode (x) turns after
-                                       being placed, mining multiple ores at once!
-Landmines                              The other company keeps taking valuable ores, so let's set traps for them...
-                                       `>:D` Landmines will steal ores from the opponent when detonated.
-EMPs                                   EMPs are the rich Bot's landmine! EMPs will steal more from the opponent than a
-                                       normal landmine. Phenomenal!
-====================================== =============================================================
+========================================================== =============================================================
+Tech Name                                                  Tech Description
+========================================================== =============================================================
+Better Drivetrains |bdt|                                   This tech will increase your movement, allowing MOB-BOT to
+                                                           **move up to 2 tiles per turn**!
+
+Unnamed Drivetrain Tech |udt|                              Grants an additional movement, allowing MOB-BOT to **move**
+                                                           **up to 3 tiles per turn**! How wonderful!
+
+Overdrive Movement |om|                                    The ultimate movement upgrade. MOB-BOT can now **move up to**
+                                                           **4 tiles per turn**! Burn rubber!
+
+High Yield Mining |hym|                                    A decent upgrade from your basic Mining Robotics. MOB-BOT
+                                                           will now **gain 2 pieces of ore** when you mine!
+
+Unnamed Mining Tech |umt|                                  This mysterious new tech brings MOB-BOT's efficiency to a new
+                                                           level. MOB-BOT will **gain 3 pieces of ore** when mining!
+                                                           Sensational!
+
+Overdrive Mining |omining|                                 MOB-BOT has become the mining machine it was always meant to
+                                                           be. MOB-BOT will now **gain 4 pieces of ore** per turn!
+                                                           Bring in the money!
+
+Dynamite |dyn|                                             Become more efficient with your mining! Dynamite will explode
+                                                           **3 turns** after being placed, mining multiple ores at once!
+
+Landmines |lm|                                             The other company keeps taking valuable ores, so let's set
+                                                           traps for them... `>:D` Landmines will steal ores from the
+                                                           opponent when detonated.
+
+EMPs |emp|                                                 EMPs are the rich Bot's landmine! EMPs will steal more from
+                                                           the opponent than a normal landmine. Phenomenal!
+
+Defuse |diffuse|                                           Fight back against the traps that are set against you. Trap
+                                                           defusing will deactivate any trap placed by the enemy (as
+                                                           long as you don't step on it)!
+========================================================== =============================================================
 
 For more information on Dynamite, Landmines, and EMPs, go to :doc:`placeables`.
