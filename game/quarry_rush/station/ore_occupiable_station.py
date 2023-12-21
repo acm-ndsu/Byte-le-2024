@@ -7,6 +7,7 @@ from game.quarry_rush.entity.ancient_tech import AncientTech
 from game.quarry_rush.entity.ores import Lambdium, Turite, Copium
 from game.utils.vector import Vector
 from game.common.map.tile import Tile
+from game.common.avatar import Avatar
 
 
 class OreOccupiableStation(OccupiableStation):
@@ -60,4 +61,7 @@ class OreOccupiableStation(OccupiableStation):
         """
         if self.held_item is None:
             tile.remove_from_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION)
+    
+    def take_action(self, avatar: Avatar, inventory_manager: InventoryManager):
+        self.give_item(company=avatar.company, inventory_manager=inventory_manager)
     
