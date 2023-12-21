@@ -28,4 +28,4 @@ class Client(UserClient):
         if turn == 1:
             self.first_turn_init(world, avatar)
             
-        actions.append(ActionType.MOVE_LEFT if self.company == Company.CHURCH else ActionType.MOVE_RIGHT)
+        actions = [ActionType.MOVE_LEFT if self.company == Company.CHURCH else ActionType.MOVE_RIGHT]

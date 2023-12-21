@@ -103,7 +103,7 @@ class MasterController(Controller):
         copy_avatar = Avatar().from_json(client.avatar.to_json())  # deepcopy(client.avatar)
         # Obfuscate data in objects that that player should not be able to see
         # Currently world data isn't obfuscated at all
-        args = (self.turn, turn_actions, current_world, copy_avatar)
+        args = (self.turn, client.actions, current_world, copy_avatar)
         return args
 
     # Perform the main logic that happens per turn
