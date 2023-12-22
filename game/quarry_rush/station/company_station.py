@@ -35,7 +35,9 @@ class CompanyStation(OccupiableStation):
 
     def take_action(self, avatar: Avatar, inventory_manager: InventoryManager) -> None:
         if avatar.company == self.company:
-            inventory_manager.cash_in_all(self.company)
+            points, science = inventory_manager.cash_in_all(self.company)
+            avatar.score += points
+            avatar.science_points += science
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
