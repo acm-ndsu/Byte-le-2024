@@ -79,7 +79,8 @@ class ScoreboardTemplate(InfoTemplate):
 
 
     def recalc_animation(self, turn_log: dict) -> None:
-        scores: list[int] = [client['avatar']['score'] if client['avatar'] else 0 for client in turn_log['clients']]
+        clients = sorted(turn_log['clients'], key=lambda client: client.get('avatar', {'company': 0})['company'])
+        scores: list[int] = [client['avatar']['score'] if client['avatar'] else 0 for client in clients]
         turn = turn_log['tick']
         self.scoreboard_turn_n1.character, turn = divmod(turn, 100)
         self.scoreboard_turn_n2.character, turn = divmod(turn, 10)

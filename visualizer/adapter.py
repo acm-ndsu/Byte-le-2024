@@ -38,10 +38,10 @@ class Adapter:
         self.turn_number: int = 0
         self.turn_max: int = MAX_TICKS
         self.scoreboard = ScoreboardTemplate(screen, Vector(), Vector(y=100, x=1366), self.config.FONT, self.config.TEXT_COLOR)
-        self.p1_tech_tree = TechTreeTemplate(screen, Vector(y=548), Vector(y=220, x=459), self.config.FONT, self.config.TEXT_COLOR, 0)
-        self.p1_inventory = InventoryTemplate(screen, Vector(y=100), Vector(y=448, x=459), self.config.FONT, self.config.TEXT_COLOR, 0)
-        self.p2_tech_tree = TechTreeTemplate(screen, Vector(y=548, x=907), Vector(y=220, x=459), self.config.FONT, self.config.TEXT_COLOR, 1)
-        self.p2_inventory = InventoryTemplate(screen, Vector(y=100, x=907), Vector(y=448, x=459), self.config.FONT, self.config.TEXT_COLOR, 1)
+        self.p1_tech_tree = TechTreeTemplate(screen, Vector(y=548), Vector(y=220, x=459), self.config.FONT, self.config.TEXT_COLOR, 1)
+        self.p1_inventory = InventoryTemplate(screen, Vector(y=100), Vector(y=448, x=459), self.config.FONT, self.config.TEXT_COLOR, 1)
+        self.p2_tech_tree = TechTreeTemplate(screen, Vector(y=548, x=907), Vector(y=220, x=459), self.config.FONT, self.config.TEXT_COLOR, 2)
+        self.p2_inventory = InventoryTemplate(screen, Vector(y=100, x=907), Vector(y=448, x=459), self.config.FONT, self.config.TEXT_COLOR, 2)
 
 
 

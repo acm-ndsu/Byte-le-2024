@@ -16,9 +16,9 @@ from visualizer.sprites.tech_tree.tech_tree_backdrop import TechTreeBackdrop
 
 
 class TechTreeTemplate(InfoTemplate):
-    def __init__(self, screen: pygame.Surface, topleft: Vector, size: Vector, font: str, color: str, player: int) -> None:
+    def __init__(self, screen: pygame.Surface, topleft: Vector, size: Vector, font: str, color: str, company: int) -> None:
         super().__init__(screen, topleft, size, font, color)
-        self.player = player
+        self.company = company
 
         self.tech_tree_backdrop: TechTreeBackdrop = TechTreeBackdrop(top_left=topleft)
         self.tech_tree_backdrop.add(self.render_list)
