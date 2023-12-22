@@ -16,7 +16,11 @@ from visualizer.utils.text import Text
 class InventoryTemplate(InfoTemplate):
     def __init__(self, screen: pygame.Surface, topleft: Vector, size: Vector, font: str, color: str, company: int) -> None:
         super().__init__(screen, topleft, size, font, color)
+
         self.company = company
+        self.company_text = Text(screen, text=f'{"Church" if company == 1 else "Turing"}',
+                                 font_size=48, font_name=self.font, color=self.color,
+                                 position=Vector.add_vectors(topleft, Vector(y=25, x=100)))
 
         self.ancient_tech = AncientTechInventory(top_left=Vector.add_vectors(topleft, Vector(y=100, x=50)))
         self.ancient_tech.add(self.render_list)
@@ -52,6 +56,10 @@ class InventoryTemplate(InfoTemplate):
         self.landmine_ability.add(self.render_list)
 
     def recalc_animation(self, turn_log: dict) -> None:
+        team_name: str = [client['team_name']
+                          for client in turn_log['clients']
+                          if client['avatar']['company'] == self.company][0]
+        self.company_text.text = f'{"Church" if self.company == 1 else "Turing"}: {team_name}'
         inventory: list[dict | None] = [item for item in
                                         turn_log['game_board']
                                         ['inventory_manager']
@@ -65,6 +73,7 @@ class InventoryTemplate(InfoTemplate):
 
     def render(self) -> None:
         super().render()
+        self.company_text.render()
         self.ancient_tech_text.render()
         self.copium_text.render()
         self.lambdium_text.render()
