@@ -5,11 +5,11 @@ from typing import Self
 
 class PlaceTrap(ActiveAbility):
 
-    def __init__(self, cooldown: int = 1, cooldown_tick: int = 0):
+    def __init__(self, cooldown: int = 1, fuse: int = 0):
         super().__init__()
         self.object_type: ObjectType = ObjectType.PLACE_TRAP
         self.cooldown: int = cooldown
-        self.cooldown_tick: int = cooldown_tick
+        self.fuse: int = fuse
         self.placing_trap: bool = False
 
     # getter for cooldown
@@ -26,15 +26,15 @@ class PlaceTrap(ActiveAbility):
 
     # getter for cooldown tick
     @property
-    def cooldown_tick(self) -> int:
-        return self.__cooldown_tick
+    def fuse(self) -> int:
+        return self.__fuse
 
     # setter for cooldown tick
-    @cooldown_tick.setter
-    def cooldown_tick(self, cooldown_tick: int) -> None:
-        if cooldown_tick is None or not isinstance(cooldown_tick, int):
-            raise ValueError(f'{self.__class__.__name__}.cooldown_tick must be an int')
-        self.__cooldown_tick = cooldown_tick
+    @fuse.setter
+    def fuse(self, fuse: int) -> None:
+        if fuse is None or not isinstance(fuse, int):
+            raise ValueError(f'{self.__class__.__name__}.fuse must be an int')
+        self.__fuse = fuse
 
     # placing dynamite getter
     @property
@@ -52,7 +52,7 @@ class PlaceTrap(ActiveAbility):
     def to_json(self) -> dict:
         data: dict = super().to_json()
         data['cooldown'] = self.cooldown
-        data['cooldown_tick'] = self.cooldown_tick
+        data['fuse'] = self.fuse
         data['placing_trap'] = self.placing_trap
         return data
 
@@ -60,6 +60,6 @@ class PlaceTrap(ActiveAbility):
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
         self.cooldown = data['cooldown']
-        self.cooldown_tick = data['cooldown_tick']
+        self.fuse = data['fuse']
         self.placing_trap = data['placing_trap']
         return self
