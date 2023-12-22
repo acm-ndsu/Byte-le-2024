@@ -206,6 +206,7 @@ class TestAvatar(unittest.TestCase):
     # Test the json with the new implementations
     def test_avatar_json(self):
         self.avatar.position = Vector(10, 10)
+        self.avatar.dynamite_active_ability.fuse = 10
         data: dict = self.avatar.to_json()
         avatar: Avatar = Avatar().from_json(data)
         self.assertEqual(self.avatar.abilities, avatar.abilities)
@@ -215,6 +216,12 @@ class TestAvatar(unittest.TestCase):
         self.assertEqual(str(self.avatar.position), str(avatar.position))
         self.assertEqual(self.avatar.movement_speed, avatar.movement_speed)
         self.assertEqual(self.avatar.drop_rate, avatar.drop_rate)
+
+        self.assertEqual(self.avatar.dynamite_active_ability.fuse, avatar.dynamite_active_ability.fuse)
+        self.assertEqual(self.avatar.dynamite_active_ability.cooldown, avatar.dynamite_active_ability.cooldown)
+
+        self.assertEqual(self.avatar.place_trap.fuse, avatar.place_trap.fuse)
+        self.assertEqual(self.avatar.place_trap.cooldown, avatar.place_trap.cooldown)
 
         # other_tree: dict = self.avatar.get_tech_tree().to_json()
         # for tech in self.avatar.get_tech_tree().tech_names():

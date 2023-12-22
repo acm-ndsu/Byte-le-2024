@@ -88,4 +88,4 @@ class TestPlaceTrap(unittest.TestCase):
         self.assertEqual(self.place_trap.object_type, place_trap.object_type)
         self.assertEqual(self.place_trap.placing_trap, place_trap.placing_trap)
         self.assertEqual(self.place_trap.cooldown, place_trap.cooldown)
-        self.assertEqual(self.place_trap.cooldown_tick, place_trap.cooldown_tick)
+        self.assertEqual(self.place_trap.fuse, place_trap.fuse)

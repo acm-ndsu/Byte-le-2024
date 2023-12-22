@@ -356,6 +356,8 @@ class Avatar(GameObject):
         data['movement_speed'] = self.movement_speed
         data['drop_rate'] = self.drop_rate
         data['tech_tree'] = self.abilities
+        data['dynamite_active_ability'] = self.dynamite_active_ability.to_json()
+        data['place_trap'] = self.place_trap.to_json()
         # data['tech_tree'] = self.__tech_tree.to_json()
         return data
 
@@ -369,4 +371,6 @@ class Avatar(GameObject):
         self.drop_rate = data['drop_rate']
         self.abilities = data['tech_tree']
         self.__tech_tree = data['tech_tree']
+        self.dynamite_active_ability = DynamiteActiveAbility().from_json(data['dynamite_active_ability'])
+        self.place_trap = PlaceTrap().from_json(data['place_trap'])
         return self
