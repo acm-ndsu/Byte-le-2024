@@ -14,8 +14,6 @@ There are required packages necessary for running the game. Run the following co
 You can view the list of packages in the requirements.txt file. We have nothing to hide.
 
 
-----
-
 Pygame Installation
 -------------------
 
@@ -25,8 +23,6 @@ If you have problems installing the pygame package, try running the following co
 
     python -m pip install pygame --pre
 
-
-----
 
 Generate, Run, Visualize!
 =========================
@@ -60,7 +56,7 @@ As the game is running, any print statements you have will print to your console
 debugging. There will also be logs generated in the `logs` folder, showing what information was stored turn by
 turn.
 
-Visualize!
+Visualize
 ----------
 
 .. code-block::
@@ -76,6 +72,8 @@ To understand the visualizer more, visit (this page).
 Quality of Life!
 ----------------
 
+Generate, Run, and Visualize at Once!
+=====================================
 It would be annoying if you wanted to generate, run, and visualize using three separate commands, so we condensed
 them for you!
 
@@ -88,9 +86,10 @@ If you type
 in the terminal, it will generate, run, and visualize all at once in one command! How nice.
 
 
-----
+Generate and Run
+================
 
-'But what if I don't want to visualize, but only generate and run?' We've got you covered!
+'What if I don't want to visualize, but only generate and run?' We've got you covered!
 
 .. code-block::
 
@@ -99,7 +98,8 @@ in the terminal, it will generate, run, and visualize all at once in one command
 This command will generate and run your game without using the visualizer. How convenient.
 
 
-----
+Terminal Help
+=============
 
 Lastly, a list of commands will be listed by typing
 

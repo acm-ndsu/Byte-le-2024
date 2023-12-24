@@ -84,7 +84,7 @@ Landmines |lm|                                             The other company kee
 EMPs |emp|                                                 EMPs are the rich Bot's landmine! EMPs will steal more from
                                                            the opponent than a normal landmine. Phenomenal!
 
-Defuse |diffuse|                                           Fight back against the traps that are set against you. Trap
+Trap Defusal |diffuse|                                     Fight back against the traps that are set against you. Trap
                                                            defusing will deactivate any trap placed by the enemy (as
                                                            long as you don't step on it)!
 ========================================================== =============================================================

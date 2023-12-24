@@ -60,8 +60,8 @@ Ancient Tech |ancient tech ore|
 .. |doors logo| image:: ./_static/images/doors_logo.png
    :width: 15
 
-In The Quarry, there is another strange mineral called Ancient Tech. It's shape is oddly reminiscent of something
-from the distant past... |doors logo|
+In The Quarry, there is another strange mineral called Ancient Tech. When refined, its shape is oddly reminiscent of
+something from the distant past... |doors logo|
 
 Regardless, Ancient Tech is unique in that it doesn't yield normal points, but scientific points. These points will
 allow you to upgrade your MOB-BOT. These upgrades include faster movement speed, placing dynamite, placing traps,

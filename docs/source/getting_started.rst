@@ -29,7 +29,8 @@ both bots will swap teams.
 More detail on the MOB-BOT is provided (here).
 
 Remember -- failure to comply with the high standards of the company, along with failure to defeat the rival
-company in the task of mining the most ore, will result in ``immediate termination``. But you'll be okay ``:)``
+company in the task of mining the most ore, will result in ``immediate termination``. But you'll be okay.
+``:)``
 
 
 Running the Game
@@ -40,7 +41,7 @@ Python Version
 Make sure to uninstall the visual studio version of python if you have visual studio installed.
 You can do this by re-running the installer and unselecting the python development kit then clicking update.
 
-We recommend running a Python version between 3.10 and 3.11.
+We require using Python version 3.11.
 
 You can use any text editor or IDE for this competition, but we recommend Visual Studio Code.
 
