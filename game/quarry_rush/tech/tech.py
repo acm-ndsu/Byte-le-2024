@@ -45,7 +45,7 @@ def techs(avatar_functions: AvatarFunctions) -> dict[str, Tech]:
             name='High Yield Mining',
             cost=0,
             point_value=1,
-            apply=lambda : avatar_functions.increase_mining(0.2)
+            apply=lambda : avatar_functions.increase_mining(1)
         ),
         
         'Dynamite': Tech(
@@ -66,7 +66,7 @@ def techs(avatar_functions: AvatarFunctions) -> dict[str, Tech]:
             name='Unnamed Mining Tech',
             cost=0,
             point_value=1,
-            apply=lambda : avatar_functions.increase_mining(-.2)
+            apply=lambda : avatar_functions.increase_mining(1)
         ),
         
         'Landmines': Tech(

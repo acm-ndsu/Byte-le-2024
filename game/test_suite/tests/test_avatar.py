@@ -96,18 +96,18 @@ class TestAvatar(unittest.TestCase):
 
     # Test setting drop rate
     def test_avatar_set_drop_rate(self):
-        self.avatar.drop_rate = 5.3
-        self.assertEqual(self.avatar.drop_rate, 5.3)
+        self.avatar.drop_rate = 5
+        self.assertEqual(self.avatar.drop_rate, 5)
 
     def test_avatar_set_drop_rate_fail(self):
         with self.assertRaises(ValueError) as e:
             self.avatar.drop_rate = 'Fail'
-        self.assertEqual(str(e.exception), 'Avatar.drop_rate must be a float.')
+        self.assertEqual(str(e.exception), 'Avatar.drop_rate must be an int.')
 
     def test_drop_rate_negative(self):
         with self.assertRaises(ValueError) as e:
-            self.avatar.drop_rate = -1.0
-        self.assertEqual(str(e.exception), 'Avatar.drop_rate must be a positive float.')
+            self.avatar.drop_rate = -1
+        self.assertEqual(str(e.exception), 'Avatar.drop_rate must be a positive int.')
 
     # Testing which techs are unlocked
     def test_unlocked_tech(self):
