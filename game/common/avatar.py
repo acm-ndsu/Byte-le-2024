@@ -2,12 +2,13 @@ from typing import Self
 
 from game.common.enums import ObjectType, Company
 from game.common.game_object import GameObject
+from game.quarry_rush.ability.emp_active_ability import EMPActiveAbility
+from game.quarry_rush.ability.landmine_active_ability import LandmineActiveAbility
 from game.quarry_rush.tech.tech import TechInfo
 from game.utils.vector import Vector
 from game.quarry_rush.tech.tech_tree import TechTree
 from game.quarry_rush.avatar.avatar_functions import AvatarFunctions
 from game.quarry_rush.ability.dynamite_active_ability import DynamiteActiveAbility
-from game.quarry_rush.ability.place_trap import PlaceTrap
 
 
 class Avatar(GameObject):
@@ -151,7 +152,8 @@ class Avatar(GameObject):
         self.__tech_tree: TechTree = self.__create_tech_tree()  # the tech tree cannot be set; made private for security
         self.__company: Company = company
         self.dynamite_active_ability: DynamiteActiveAbility = DynamiteActiveAbility()
-        self.place_trap: PlaceTrap = PlaceTrap()
+        self.landmine_active_ability: LandmineActiveAbility = LandmineActiveAbility()
+        self.emp_active_ability: EMPActiveAbility = EMPActiveAbility()
 
     @property
     def company(self) -> Company:
@@ -332,20 +334,20 @@ class Avatar(GameObject):
     # Dynamite placing functionality ----------------------------------------------------------------------------------
     # if avatar calls place dynamite, set to true, i.e. they want to place dynamite
     def can_place_dynamite(self) -> bool:
-        # This method will be called in the unlock_dynamite method in the else statement for when it's to be used
         return self.abilities['Dynamite'] and self.dynamite_active_ability.is_usable
 
-    # if avatar calls place trap, set to true, i.e. they want to place trap
-    def can_place_trap(self) -> bool:
-        # This method will be called in the landmine and EMP methods in the else statement for when it's to be used
-        return (self.abilities['Landmines'] or self.abilities['EMPs']) and self.place_trap.is_usable
+    def can_place_landmine(self) -> bool:
+        return self.abilities['Landmines'] and self.landmine_active_ability.is_usable
 
-    def can_place_dynamite_or_trap(self) -> bool:
-        # This method will return if the avatar can place anything at all
-        return self.can_place_trap() or self.can_place_dynamite()
+    def can_place_emp(self) -> bool:
+        return self.abilities['EMPs'] and self.emp_active_ability.is_usable and not self.abilities['Landmines']
     
     def can_defuse_trap(self) -> bool:
         return self.abilities['Trap Defusal']
+
+    # method to return the opposing team based on the avatar's company
+    def get_opposing_team(self) -> Company:
+        return Company.CHURCH if self.company is Company.TURING else Company.TURING
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
@@ -357,7 +359,8 @@ class Avatar(GameObject):
         data['drop_rate'] = self.drop_rate
         data['tech_tree'] = self.abilities
         data['dynamite_active_ability'] = self.dynamite_active_ability.to_json()
-        data['place_trap'] = self.place_trap.to_json()
+        data['landmine_active_ability'] = self.landmine_active_ability.to_json()
+        data['emp_active_ability'] = self.emp_active_ability.to_json()
         # data['tech_tree'] = self.__tech_tree.to_json()
         return data
 
@@ -372,5 +375,6 @@ class Avatar(GameObject):
         self.abilities = data['tech_tree']
         self.__tech_tree = data['tech_tree']
         self.dynamite_active_ability = DynamiteActiveAbility().from_json(data['dynamite_active_ability'])
-        self.place_trap = PlaceTrap().from_json(data['place_trap'])
+        self.landmine_active_ability = LandmineActiveAbility().from_json(data['landmine_active_ability'])
+        self.emp_active_ability = EMPActiveAbility().from_json(data['emp_active_ability'])
         return self

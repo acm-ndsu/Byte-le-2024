@@ -130,7 +130,7 @@ class TechTree(GameObject):
                     ]
                 ),
                 Tree(
-                    value=this_techs['High Yield Drilling'],
+                    value=this_techs['High Yield Mining'],
                     subs=[
                         Tree(
                             value=this_techs['Unnamed Mining Tech'],
