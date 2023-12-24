@@ -151,8 +151,6 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.abilities['Unnamed Mining Tech'])
         self.assertTrue(self.avatar.abilities['Overdrive Mining'])
 
-
-
     # Buying Dynamite will return False if the tree hasn't developed to it yet
     def test_unlock_dynamite_fail(self):
         self.assertFalse(self.avatar.buy_new_tech('Dynamite'))
