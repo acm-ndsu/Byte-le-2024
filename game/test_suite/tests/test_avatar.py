@@ -134,10 +134,10 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking Overdrive Mining works
     def test_unlock_overdrive_mining(self):
-        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('High Yield Mining')
         self.avatar.buy_new_tech('Unnamed Mining Tech')
         self.avatar.buy_new_tech('Overdrive Mining')
-        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
         self.assertTrue(self.avatar.is_researched('Unnamed Mining Tech'))
         self.assertTrue(self.avatar.is_researched('Overdrive Mining'))
 
@@ -147,9 +147,9 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking Dynamite works
     def test_unlock_dynamite(self):
-        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('High Yield Mining')
         self.avatar.buy_new_tech('Dynamite')
-        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
 
     # Buying Landmines will return False if the tree hasn't developed to it yet
@@ -158,10 +158,10 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking Landmines works
     def test_unlock_landmines(self):
-        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('High Yield Mining')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
-        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
 
@@ -171,11 +171,11 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking EMPs works and that unlocking Trap Detection returns False
     def test_unlock_emps(self):
-        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('High Yield Mining')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
         self.avatar.buy_new_tech('EMPs')
-        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
         self.assertTrue(self.avatar.is_researched('EMPs'))
@@ -187,11 +187,11 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking Trap Defusal works and that unlocking EMPs returns False
     def test_unlock_trap_defusal(self):
-        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('High Yield Mining')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
         self.avatar.buy_new_tech('Trap Defusal')
-        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
         self.assertTrue(self.avatar.is_researched('Trap Defusal'))

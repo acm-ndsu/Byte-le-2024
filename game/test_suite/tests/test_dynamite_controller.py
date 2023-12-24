@@ -41,7 +41,7 @@ class TestDynamiteController(unittest.TestCase):
         self.avatar.buy_new_tech('Better Drivetrains')
         self.avatar.buy_new_tech('Unnamed Drivetrain Tech')
         self.avatar.buy_new_tech('Overdrive Movement')
-        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('High Yield Mining')
         self.avatar.buy_new_tech('Unnamed Mining Tech')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
