@@ -41,13 +41,14 @@ class ObjectType(Enum):
     TURING_STATION = auto()  # 23
     ACTIVE_ABILITY = auto()  # 24
     INVENTORY_MANAGER = auto()  # 25
-    PLACE_TRAP = auto()  # 26
-    DYNAMITE_ACTIVE_ABILITY = auto()  # 27
-    DYNAMITE = auto()  # 28
-    ORE_OCCUPIABLE_STATION = auto()  # 29
-    TRAP = auto()  # 30
-    LANDMINE = auto()  # 31
-    EMP = auto()  # 32
+    LANDMINE_ACTIVE_ABILITY = auto()  # 26
+    EMP_ACTIVE_ABILITY = auto()  # 27
+    DYNAMITE_ACTIVE_ABILITY = auto()  # 28
+    DYNAMITE = auto()  # 29
+    ORE_OCCUPIABLE_STATION = auto()  # 30
+    TRAP = auto()  # 31
+    LANDMINE = auto()  # 32
+    EMP = auto()  # 33
 
 
 class ActionType(Enum):

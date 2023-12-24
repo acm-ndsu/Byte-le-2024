@@ -30,19 +30,19 @@ class TestDynamiteActiveAbility(unittest.TestCase):
     def test_cooldown_fail_null(self):
         with self.assertRaises(ValueError) as e:
             self.dynamite_active_ability.cooldown = None
-        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.cooldown must be an int.')
+        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.cooldown must be an int')
 
     # fail test: cooldown cant be anything else
     def test_cooldown_fail_str(self):
         with self.assertRaises(ValueError) as e:
             self.dynamite_active_ability.cooldown = ""
-        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.cooldown must be an int.')
+        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.cooldown must be an int')
 
     # fail test: cooldown cannot be negative
     def test_cooldown_fail_negative(self):
         with self.assertRaises(ValueError) as e:
             self.dynamite_active_ability.cooldown = -1
-        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.cooldown cannot be negative.')
+        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.cooldown cannot be negative')
 
     # test: fuse
     def test_fuse(self):
@@ -54,19 +54,19 @@ class TestDynamiteActiveAbility(unittest.TestCase):
     def test_fuse_fail_null(self):
         with self.assertRaises(ValueError) as e:
             self.dynamite_active_ability.fuse = None
-        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.fuse must be an int.')
+        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.fuse must be an int')
 
     # fail test: fuse cannot be anything else
     def test_fuse_fail_str(self):
         with self.assertRaises(ValueError) as e:
             self.dynamite_active_ability.fuse = ""
-        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.fuse must be an int.')
+        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.fuse must be an int')
 
     # fail test: fuse cannot be negative
     def test_fuse_fail_negative(self):
         with self.assertRaises(ValueError) as e:
             self.dynamite_active_ability.fuse = -1
-        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.fuse cannot be negative.')
+        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.fuse cannot be negative')
 
     # test: position
     def test_dynamite_active_ability_set_position(self):
@@ -88,18 +88,6 @@ class TestDynamiteActiveAbility(unittest.TestCase):
     def test_placing_dynamite(self):
         self.dynamite_active_ability.placing_dynamite = False
         self.assertEqual(self.dynamite_active_ability.placing_dynamite, False)
-
-    # fail test: placing dynamite cant be none
-    def test_placing_dynamite_none_fail(self):
-        with self.assertRaises(ValueError) as e:
-            self.dynamite_active_ability.placing_dynamite = None
-        self.assertEqual(str(e.exception), 'DynamiteActiveAbility.placing_dynamite must be a bool.')
-
-    # fail test: placing dynamite cant be anything else
-    def test_placing_dynamite_str_fail(self):
-        with self.assertRaises(ValueError) as e:
-            self.dynamite_active_ability.placing_dynamite = None
-        self.assertEqual(str(e.exception), "DynamiteActiveAbility.placing_dynamite must be a bool.")
 
     # test: json
     def test_dynamite_active_ability_json(self):

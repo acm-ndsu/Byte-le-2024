@@ -41,8 +41,8 @@ def techs(avatar_functions: AvatarFunctions) -> dict[str, Tech]:
             apply=lambda : avatar_functions.increase_movement(1)
         ),
         
-        'High Yield Drilling': Tech(
-            name='High Yield Drilling',
+        'High Yield Mining': Tech(
+            name='High Yield Mining',
             cost=0,
             point_value=1,
             apply=lambda : avatar_functions.increase_mining(0.2)

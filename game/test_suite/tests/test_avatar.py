@@ -134,10 +134,10 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking Overdrive Mining works
     def test_unlock_overdrive_mining(self):
-        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('High Yield Mining')
         self.avatar.buy_new_tech('Unnamed Mining Tech')
         self.avatar.buy_new_tech('Overdrive Mining')
-        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
         self.assertTrue(self.avatar.is_researched('Unnamed Mining Tech'))
         self.assertTrue(self.avatar.is_researched('Overdrive Mining'))
 
@@ -147,9 +147,9 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking Dynamite works
     def test_unlock_dynamite(self):
-        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('High Yield Mining')
         self.avatar.buy_new_tech('Dynamite')
-        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
 
     # Buying Landmines will return False if the tree hasn't developed to it yet
@@ -158,10 +158,10 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking Landmines works
     def test_unlock_landmines(self):
-        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('High Yield Mining')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
-        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
 
@@ -171,11 +171,11 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking EMPs works and that unlocking Trap Detection returns False
     def test_unlock_emps(self):
-        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('High Yield Mining')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
         self.avatar.buy_new_tech('EMPs')
-        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
         self.assertTrue(self.avatar.is_researched('EMPs'))
@@ -187,11 +187,11 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking Trap Defusal works and that unlocking EMPs returns False
     def test_unlock_trap_defusal(self):
-        self.avatar.buy_new_tech('High Yield Drilling')
+        self.avatar.buy_new_tech('High Yield Mining')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
         self.avatar.buy_new_tech('Trap Defusal')
-        self.assertTrue(self.avatar.is_researched('High Yield Drilling'))
+        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
         self.assertTrue(self.avatar.is_researched('Trap Defusal'))
@@ -206,6 +206,7 @@ class TestAvatar(unittest.TestCase):
     # Test the json with the new implementations
     def test_avatar_json(self):
         self.avatar.position = Vector(10, 10)
+        self.avatar.dynamite_active_ability.fuse = 10
         data: dict = self.avatar.to_json()
         avatar: Avatar = Avatar().from_json(data)
         self.assertEqual(self.avatar.abilities, avatar.abilities)
@@ -215,6 +216,18 @@ class TestAvatar(unittest.TestCase):
         self.assertEqual(str(self.avatar.position), str(avatar.position))
         self.assertEqual(self.avatar.movement_speed, avatar.movement_speed)
         self.assertEqual(self.avatar.drop_rate, avatar.drop_rate)
+
+        self.assertEqual(self.avatar.dynamite_active_ability.fuse, avatar.dynamite_active_ability.fuse)
+        self.assertEqual(self.avatar.dynamite_active_ability.cooldown, avatar.dynamite_active_ability.cooldown)
+        self.assertEqual(self.avatar.dynamite_active_ability.is_usable, avatar.dynamite_active_ability.is_usable)
+
+        self.assertEqual(self.avatar.landmine_active_ability.fuse, avatar.landmine_active_ability.fuse)
+        self.assertEqual(self.avatar.landmine_active_ability.cooldown, avatar.landmine_active_ability.cooldown)
+        self.assertEqual(self.avatar.landmine_active_ability.is_usable, avatar.landmine_active_ability.is_usable)
+
+        self.assertEqual(self.avatar.emp_active_ability.fuse, avatar.emp_active_ability.fuse)
+        self.assertEqual(self.avatar.emp_active_ability.cooldown, avatar.emp_active_ability.cooldown)
+        self.assertEqual(self.avatar.emp_active_ability.is_usable, avatar.emp_active_ability.is_usable)
 
         # other_tree: dict = self.avatar.get_tech_tree().to_json()
         # for tech in self.avatar.get_tech_tree().tech_names():
