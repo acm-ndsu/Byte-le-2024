@@ -260,9 +260,23 @@ class Avatar(GameObject):
 
     def __increase_movement(self, amt: int) -> None:
         self.movement_speed += amt
+        match self.movement_speed:
+            case 2:
+                self.abilities['Better Drivetrains'] = True
+            case 3:
+                self.abilities['Unnamed Drivetrain Tech'] = True
+            case _:
+                self.abilities['Overdrive Movement'] = True
 
     def __increase_drop_rate(self, amt: int) -> None:
         self.drop_rate += amt
+        match self.drop_rate:
+            case 2:
+                self.abilities['High Yield Mining'] = True
+            case 3:
+                self.abilities['Unnamed Mining Tech'] = True
+            case _:
+                self.abilities['Overdrive Mining'] = True
 
     def __unlock_overdrive_movement(self) -> None:
         self.abilities['Overdrive Movement'] = True
@@ -345,7 +359,7 @@ class Avatar(GameObject):
 
     def can_place_emp(self) -> bool:
         return self.abilities['EMPs'] and self.emp_active_ability.is_usable and not self.abilities['Landmines']
-    
+
     def can_defuse_trap(self) -> bool:
         return self.abilities['Trap Defusal']
 
