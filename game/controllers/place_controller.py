@@ -39,7 +39,7 @@ class PlaceController(Controller):
 
     def __place_landmine(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # places a landmine if the avatar's active ability allows it AND there isn't a landmine object there already
-        if client.avatar.can_place_landmine() and not tile.is_occupied_by_game_object(Landmine):
+        if client.avatar.can_place_landmine() and not tile.is_occupied_by_game_object(Trap):
             landmine: Landmine = Landmine(owner_company=client.avatar.company,
                                           target_company=client.avatar.get_opposing_team(),
                                           position=client.avatar.position)
@@ -50,7 +50,7 @@ class PlaceController(Controller):
 
     def __place_emp(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # places an EMP if the avatar's active ability allows it AND there isn't an EMP object there already
-        if client.avatar.can_place_emp() and not tile.is_occupied_by_game_object(EMP):
+        if client.avatar.can_place_emp() and not tile.is_occupied_by_game_object(Trap):
             emp: EMP = EMP(owner_company=client.avatar.company,
                            target_company=client.avatar.get_opposing_team(), position=client.avatar.position)
             self.__add_to_trap_queue(client, world, emp)

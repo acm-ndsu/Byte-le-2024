@@ -170,3 +170,12 @@ class TestPlaceController(unittest.TestCase):
         self.assertTrue(isinstance(self.ore_station.occupied_by, Dynamite))
         self.assertTrue(isinstance(self.ore_station.occupied_by.occupied_by, EMP))
         self.assertEqual(self.ore_station.occupied_by.occupied_by.occupied_by, self.avatar)
+
+    def test_placing_landmine_then_emp(self):
+        self.test_placing_landmine()  # previous test for setup
+        self.avatar.buy_new_tech('EMPs')  # unlock emps for testing
+
+        # needed stack order: OreOccupiableStation -> Landmine -> Avatar
+        self.assertTrue(isinstance(self.ore_station.occupied_by, Landmine))
+        self.assertTrue(not isinstance(self.ore_station.occupied_by, EMP))
+        self.assertEqual(self.ore_station.occupied_by.occupied_by, self.avatar)
