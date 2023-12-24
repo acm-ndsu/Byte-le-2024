@@ -219,9 +219,15 @@ class TestAvatar(unittest.TestCase):
 
         self.assertEqual(self.avatar.dynamite_active_ability.fuse, avatar.dynamite_active_ability.fuse)
         self.assertEqual(self.avatar.dynamite_active_ability.cooldown, avatar.dynamite_active_ability.cooldown)
+        self.assertEqual(self.avatar.dynamite_active_ability.is_usable, avatar.dynamite_active_ability.is_usable)
 
-        self.assertEqual(self.avatar.place_trap.fuse, avatar.place_trap.fuse)
-        self.assertEqual(self.avatar.place_trap.cooldown, avatar.place_trap.cooldown)
+        self.assertEqual(self.avatar.landmine_active_ability.fuse, avatar.landmine_active_ability.fuse)
+        self.assertEqual(self.avatar.landmine_active_ability.cooldown, avatar.landmine_active_ability.cooldown)
+        self.assertEqual(self.avatar.landmine_active_ability.is_usable, avatar.landmine_active_ability.is_usable)
+
+        self.assertEqual(self.avatar.emp_active_ability.fuse, avatar.emp_active_ability.fuse)
+        self.assertEqual(self.avatar.emp_active_ability.cooldown, avatar.emp_active_ability.cooldown)
+        self.assertEqual(self.avatar.emp_active_ability.is_usable, avatar.emp_active_ability.is_usable)
 
         # other_tree: dict = self.avatar.get_tech_tree().to_json()
         # for tech in self.avatar.get_tech_tree().tech_names():

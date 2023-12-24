@@ -39,19 +39,20 @@ class PlaceController(Controller):
 
     def __place_landmine(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # places a landmine if the avatar's active ability allows it AND there isn't a landmine object there already
-        if client.avatar.can_place_trap() and not tile.is_occupied_by_game_object(Trap):
+        if client.avatar.can_place_landmine() and not tile.is_occupied_by_game_object(Landmine):
             landmine: Landmine = Landmine(owner_company=client.avatar.company,
-                                          target_company=self.__opposing_team(client), position=client.avatar.position)
+                                          target_company=client.avatar.get_opposing_team(),
+                                          position=client.avatar.position)
             self.__add_to_trap_queue(client, world, landmine)
 
             # place a landmine on top of the occupied_by stack but below the Avatar
-            tile.place_on_top_of_stack(Landmine())
+            tile.place_on_top_of_stack(landmine)
 
     def __place_emp(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # places an EMP if the avatar's active ability allows it AND there isn't an EMP object there already
-        if client.avatar.can_place_trap() and not tile.is_occupied_by_game_object(Trap):
+        if client.avatar.can_place_emp() and not tile.is_occupied_by_game_object(EMP):
             emp: EMP = EMP(owner_company=client.avatar.company,
-                           target_company=self.__opposing_team(client), position=client.avatar.position)
+                           target_company=client.avatar.get_opposing_team(), position=client.avatar.position)
             self.__add_to_trap_queue(client, world, emp)
 
             # place an EMP on top of the occupied_by stack but below the Avatar
@@ -60,16 +61,10 @@ class PlaceController(Controller):
     def __add_to_trap_queue(self, client: Player, world: GameBoard, placed_object: Trap) -> None:
         # helper method that adds a trap to the correct trap queue depending on the avatar's company
 
-        client.avatar.place_trap.reset_fuse()  # reset the ability's cooldown
+        # reset the ability's cooldown based on which trap is set
+        client.avatar.landmine_active_ability.reset_fuse() if isinstance(placed_object, Landmine) else \
+            client.avatar.emp_active_ability.reset_fuse()
 
-        match client.avatar.company:
-            case Company.CHURCH:
-                world.church_trap_queue.add_trap(placed_object)
-            case Company.TURING:
-                world.turing_trap_queue.add_trap(placed_object)
-            case _:
-                return
-
-    # Helper method to return the opposing team based on the avatar's company
-    def __opposing_team(self, client: Player) -> Company:
-        return Company.CHURCH if client.avatar.company is Company.TURING else Company.TURING
+        # add the trap to the corresponding trap queue
+        world.church_trap_queue.add_trap(placed_object) if client.avatar.company is Company.CHURCH else \
+            world.turing_trap_queue.add_trap(placed_object)
