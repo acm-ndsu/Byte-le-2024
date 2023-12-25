@@ -44,8 +44,9 @@ class MovementController(Controller):
             temp: Tile = temp.occupied_by
             
         if temp.occupied_by is not None:
-            return 
-        
+            return
+
+        client.avatar.state = 'moving'
         temp.occupied_by = client.avatar
         
         # while the object that occupies tile has the occupied by attribute, escalate check for avatar

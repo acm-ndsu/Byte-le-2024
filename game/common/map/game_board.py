@@ -30,13 +30,14 @@ class TrapQueue(GameObject):
             self.__traps = self.__traps[1:]
         self.__traps += [trap]
 
-    def detonate(self, inventory_manager: InventoryManager, remove_trap_at: Callable[[Vector], None]):
+    def detonate(self, inventory_manager: InventoryManager, remove_trap_at: Callable[[Vector], None], avatar: Avatar) -> None:
         for i in range(0, len(self.__traps))[::-1]:
             if self.__traps[i].detonate(inventory_manager):
                 # call remove trap from game board method
                 remove_trap_at(self.__traps[i].position)
                 # remove trap from list of traps
                 self.__traps: list[Trap] = self.__traps[:i] + self.__traps[i+1:]
+                avatar.state = 'exploding'  # set the state of the avatar for the visualizer
                 
     def dequeue_trap_at(self, position: Vector):
         for i in range(0, len(self.__traps))[::-1]:
@@ -455,9 +456,9 @@ class GameBoard(GameObject):
         tile.remove_from_occupied_by(ObjectType.LANDMINE)
         tile.remove_from_occupied_by(ObjectType.EMP)
 
-    def trap_detonation_control(self):
-        self.church_trap_queue.detonate(self.inventory_manager, self.remove_trap_at)
-        self.turing_trap_queue.detonate(self.inventory_manager, self.remove_trap_at)
+    def trap_detonation_control(self, avatars: dict[Company, Avatar]) -> None:
+        self.church_trap_queue.detonate(self.inventory_manager, self.remove_trap_at, avatars[Company.TURING])
+        self.turing_trap_queue.detonate(self.inventory_manager, self.remove_trap_at, avatars[Company.CHURCH])
 
     def dynamite_detonation_control(self):
         self.dynamite_list.detonate()

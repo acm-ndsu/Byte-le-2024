@@ -6,6 +6,9 @@ from game.common.avatar import Avatar
 from game.common.enums import *
 from game.common.player import Player
 import game.config as config   # this is for turns
+from game.controllers import dynamite_controller
+from game.controllers.defuse_controller import DefuseController
+from game.controllers.dynamite_controller import DynamiteController
 from game.utils.thread import CommunicationThread
 from game.controllers.movement_controller import MovementController
 from game.controllers.controller import Controller
@@ -57,6 +60,8 @@ class MasterController(Controller):
         self.current_world_data: dict = None
         self.movement_controller: MovementController = MovementController()
         self.interact_controller: InteractController = InteractController()
+        self.dynamite_controller: DynamiteController = DynamiteController()
+        self.defuse_controller: DefuseController = DefuseController()
         self.mine_controller: MineController = MineController()
 
     # Receives all clients for the purpose of giving them the objects they will control
@@ -108,7 +113,14 @@ class MasterController(Controller):
 
     # Perform the main logic that happens per turn
     def turn_logic(self, clients: list[Player], turn):
+        # pre turn logic
+        for i in range(self.current_world_data['game_board'].dynamite_list.size()):
+            self.dynamite_controller.handle_detonation(self.current_world_data['game_board'].dynamite_list.get_from_list(i), self.current_world_data['game_board'])
+        self.current_world_data['game_board'].dynamite_detonation_control()
+
+        # during turn logic; handling controller logic
         for client in clients:
+            client.avatar.state = 'idle'  # set the state to idle to aid the visualizer
             if len(client.actions) == 0:
                 continue
             first = client.actions[0]
@@ -125,8 +137,13 @@ class MasterController(Controller):
                         'game_board'])
                     self.mine_controller.handle_actions(client.actions[i], client, self.current_world_data[
                         'game_board'])
+                    self.defuse_controller.handle_actions(client.actions[i], client, self.current_world_data[
+                        'game_board'])
                 except IndexError:
                     pass
+
+            avatars: dict[Company, Avatar] = {client.avatar.company: client.avatar for client in clients}
+            self.current_world_data['game_board'].trap_detonation_control(avatars)
 
         # checks event logic at the end of round
         # self.handle_events(clients)

@@ -32,7 +32,7 @@ class AvatarFunctions:
 
     def __init__(self,
                  increase_movement: Callable[[int], None],
-                 increase_mining: Callable[[float], None],
+                 increase_mining: Callable[[int], None],
                  unlock_movement_overdrive: Callable[[], None],
                  unlock_mining_overdrive: Callable[[], None],
                  unlock_dynamite: Callable[[], None],

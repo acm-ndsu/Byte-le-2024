@@ -24,6 +24,7 @@ class MineController(Controller):
 
         match action:
             case ActionType.MINE:
+                client.avatar.state = 'mining'
                 tile: Tile = world.game_map[client.avatar.position.y][client.avatar.position.x]
                 station: OreOccupiableStation = tile.occupied_by  # Will return the OreOccupiableStation if it isn't
 

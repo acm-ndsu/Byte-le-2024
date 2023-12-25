@@ -12,6 +12,10 @@ from visualizer.bytesprites.tileBS import TileBS
 from visualizer.bytesprites.turingStationBS import TuringStationBS
 from visualizer.bytesprites.oreStationBS import OreStationBS
 from visualizer.bytesprites.wallBS import WallBS
+from visualizer.config import Config
+from visualizer.templates.inventory_template import InventoryTemplate
+from visualizer.templates.scoreboard_template import ScoreboardTemplate
+from visualizer.templates.tech_tree_template import TechTreeTemplate
 from visualizer.utils.text import Text
 from visualizer.utils.button import Button, ButtonColors
 from visualizer.bytesprites.bytesprite import ByteSprite
@@ -27,12 +31,19 @@ class Adapter:
 
     def __init__(self, screen):
         self.screen: pygame.Surface = screen
+        self.config: Config = Config()
         self.bytesprites: list[ByteSprite] = []
-        self.populate_bytesprite: pygame.sprite.Group = pygame.sprite.Group()
-        self.menu: MenuTemplate = Basic(screen, 'Basic Title')
-        self.playback: PlaybackTemplate = PlaybackTemplate(screen)
+        self.menu: MenuTemplate = Basic(screen, self.config.FONT,self.config.TEXT_COLOR, self.config.BUTTON_COLORS, 'Quarry Rush')
+        self.playback: PlaybackTemplate = PlaybackTemplate(screen, self.config.FONT, self.config.BUTTON_COLORS)
         self.turn_number: int = 0
         self.turn_max: int = MAX_TICKS
+        self.scoreboard = ScoreboardTemplate(screen, Vector(), Vector(y=100, x=1366), self.config.FONT, self.config.TEXT_COLOR)
+        self.p1_tech_tree = TechTreeTemplate(screen, Vector(y=548), Vector(y=220, x=459), self.config.FONT, self.config.TEXT_COLOR, 1)
+        self.p1_inventory = InventoryTemplate(screen, Vector(y=100), Vector(y=448, x=459), self.config.FONT, self.config.TEXT_COLOR, 1)
+        self.p2_tech_tree = TechTreeTemplate(screen, Vector(y=548, x=907), Vector(y=220, x=459), self.config.FONT, self.config.TEXT_COLOR, 2)
+        self.p2_inventory = InventoryTemplate(screen, Vector(y=100, x=907), Vector(y=448, x=459), self.config.FONT, self.config.TEXT_COLOR, 2)
+
+
 
     # Define any methods button may run
 
@@ -81,6 +92,11 @@ class Adapter:
         ...
 
     def recalc_animation(self, turn_log: dict) -> None:
+        self.scoreboard.recalc_animation(turn_log)
+        self.p1_inventory.recalc_animation(turn_log)
+        self.p2_inventory.recalc_animation(turn_log)
+        self.p1_tech_tree.recalc_animation(turn_log)
+        self.p2_tech_tree.recalc_animation(turn_log)
         self.turn_number = turn_log['tick']
 
     def populate_bytesprite_factories(self) -> dict[int: Callable[[pygame.Surface], ByteSprite]]:
@@ -91,18 +107,25 @@ class Adapter:
             8: WallBS.create_bytesprite,
             22: ChurchStationBS.create_bytesprite,
             23: TuringStationBS.create_bytesprite,
-            28: DynamiteBS.create_bytesprite,
-            29: OreStationBS.create_bytesprite,
-            31: LandmineBS.create_bytesprite,
-            32: EmpsBS.create_bytesprite,
+            29: DynamiteBS.create_bytesprite,
+            30: OreStationBS.create_bytesprite,
+            32: LandmineBS.create_bytesprite,
+            33: EmpsBS.create_bytesprite,
         }
 
     def render(self) -> None:
         # self.button.render()
         # any logic for rendering text, buttons, and other visuals
-        text = Text(self.screen, f'{self.turn_number} / {self.turn_max}', 48)
+        text = Text(self.screen, f'{self.turn_number:3d} / {self.turn_max:3d}', 48, color=self.config.TEXT_COLOR,
+                    font_name=self.config.FONT)
         text.rect.center = Vector.add_vectors(Vector(*self.screen.get_rect().midtop), Vector(0, 50)).as_tuple()
         text.render()
+
+        self.p1_inventory.render()
+        self.p2_inventory.render()
+        self.p1_tech_tree.render()
+        self.p2_tech_tree.render()
+        self.scoreboard.render()
         self.playback.playback_render()
 
     def clean_up(self) -> None:
