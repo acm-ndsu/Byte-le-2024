@@ -27,8 +27,8 @@ class TestTechTree(unittest.TestCase):
         
     def test_tech_names(self):
         names = self.tech_tree.tech_names()
-        self.assertEqual(names, ['Mining Robotics', 'Improved Drivetrains', 'Superior Drivetrains',
-                                        'Overdrive Drivetrains', 'Improved Mining', 'Superior Mining',
+        self.assertEqual(names, ['Mining Robotics', 'Improved Drivetrain', 'Superior Drivetrain',
+                                        'Overdrive Drivetrain', 'Improved Mining', 'Superior Mining',
                                         'Overdrive Mining', 'Dynamite', 'Landmines', 'EMPs', 'Trap Defusal'])
         
     def test_researched_techs(self):
@@ -36,12 +36,12 @@ class TestTechTree(unittest.TestCase):
         self.assertEqual(names, ['Mining Robotics'])
         
     def test_research(self):
-        result1 = self.tech_tree.research('Improved Drivetrains')
+        result1 = self.tech_tree.research('Improved Drivetrain')
         result2 = self.tech_tree.research('Invalid Tech Name')
         names = self.tech_tree.researched_techs()
         self.assert_(result1)
         self.assertFalse(result2)
-        self.assertEqual(names, ['Mining Robotics', 'Improved Drivetrains'])
+        self.assertEqual(names, ['Mining Robotics', 'Improved Drivetrain'])
         self.mock_increase_movement.assert_called_once_with(1)
         
     def test_illegal_research(self):
@@ -76,8 +76,8 @@ class TestTechTree(unittest.TestCase):
         self.mock_unlock_trap_defusal.assert_not_called()
         
     def test_is_researched(self):
-        self.tech_tree.research('Improved Drivetrains')
-        result1 = self.tech_tree.is_researched('Improved Drivetrains')
+        self.tech_tree.research('Improved Drivetrain')
+        result1 = self.tech_tree.is_researched('Improved Drivetrain')
         result2 = self.tech_tree.is_researched('EMPs')
         result3 = self.tech_tree.is_researched('Invalid Tech Name')
         self.assert_(result1)
@@ -85,8 +85,8 @@ class TestTechTree(unittest.TestCase):
         self.assertFalse(result3)
         
     def test_tech_info(self):
-        better_drivetrain_info = {'name': 'Improved Drivetrains', 'cost': 50, 'point_value': 200}
-        result1 = self.tech_tree.tech_info('Improved Drivetrains')
+        better_drivetrain_info = {'name': 'Improved Drivetrain', 'cost': 50, 'point_value': 200}
+        result1 = self.tech_tree.tech_info('Improved Drivetrain')
         result2 = self.tech_tree.tech_info('Invalid Tech Name')
         self.assertEqual(better_drivetrain_info['name'], result1.name)
         self.assertEqual(better_drivetrain_info['cost'], result1.cost)
@@ -94,7 +94,7 @@ class TestTechTree(unittest.TestCase):
         self.assertIsNone(result2)
         
     def test_score(self):
-        self.tech_tree.research('Improved Drivetrains')
+        self.tech_tree.research('Improved Drivetrain')
         self.tech_tree.research('Improved Mining')
         self.tech_tree.research('Dynamite')
         result = self.tech_tree.score()

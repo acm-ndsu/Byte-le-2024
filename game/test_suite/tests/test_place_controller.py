@@ -35,9 +35,9 @@ class TestPlaceController(unittest.TestCase):
         self.game_board.generate_map()
 
         # Unlock the entire tech tree up to landmines for testing
-        self.avatar.buy_new_tech('Improved Drivetrains')
-        self.avatar.buy_new_tech('Superior Drivetrains')
-        self.avatar.buy_new_tech('Overdrive Drivetrains')
+        self.avatar.buy_new_tech('Improved Drivetrain')
+        self.avatar.buy_new_tech('Superior Drivetrain')
+        self.avatar.buy_new_tech('Overdrive Drivetrain')
         self.avatar.buy_new_tech('Improved Mining')
         self.avatar.buy_new_tech('Superior Mining')
         self.avatar.buy_new_tech('Dynamite')

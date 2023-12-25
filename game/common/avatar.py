@@ -262,11 +262,11 @@ class Avatar(GameObject):
         self.movement_speed += amt
         match self.movement_speed:
             case 2:
-                self.abilities['Improved Drivetrains'] = True
+                self.abilities['Improved Drivetrain'] = True
             case 3:
-                self.abilities['Superior Drivetrains'] = True
+                self.abilities['Superior Drivetrain'] = True
             case _:
-                self.abilities['Overdrive Drivetrains'] = True
+                self.abilities['Overdrive Drivetrain'] = True
 
     def __increase_drop_rate(self, amt: int) -> None:
         self.drop_rate += amt
@@ -279,7 +279,7 @@ class Avatar(GameObject):
                 self.abilities['Overdrive Mining'] = True
 
     def __unlock_overdrive_movement(self) -> None:
-        self.abilities['Overdrive Drivetrains'] = True
+        self.abilities['Overdrive Drivetrain'] = True
 
     def __unlock_overdrive_mining(self) -> None:
         self.abilities['Overdrive Mining'] = True
@@ -299,9 +299,9 @@ class Avatar(GameObject):
 
     # Helper method to create a dictionary that stores bool values for which abilities the player unlocked
     def __create_abilities_dict(self) -> dict:
-        abilities = {'Improved Drivetrains': False,
-                     'Superior Drivetrains': False,
-                     'Overdrive Drivetrains': False,
+        abilities = {'Improved Drivetrain': False,
+                     'Superior Drivetrain': False,
+                     'Overdrive Drivetrain': False,
                      'Improved Mining': False,
                      'Superior Mining': False,
                      'Overdrive Mining': False,

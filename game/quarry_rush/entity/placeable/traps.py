@@ -101,6 +101,7 @@ class Trap(OccupiableStation):
         if self.in_range():
             inventory_manager.steal(self.owner_company, self.target_company, self.steal_rate)
             return True
+
         return False
 
     # json methods

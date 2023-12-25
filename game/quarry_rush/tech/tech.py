@@ -39,8 +39,8 @@ def techs(avatar_functions: AvatarFunctions) -> dict[str, Tech]:
             apply=lambda: None
         ),
 
-        'Improved Drivetrains': Tech(
-            name='Improved Drivetrains',
+        'Improved Drivetrain': Tech(
+            name='Improved Drivetrain',
             cost=50,
             point_value=200,
             apply=lambda: avatar_functions.increase_movement(1)
@@ -60,8 +60,8 @@ def techs(avatar_functions: AvatarFunctions) -> dict[str, Tech]:
             apply=avatar_functions.unlock_dynamite
         ),
 
-        'Superior Drivetrains': Tech(
-            name='Superior Drivetrains',
+        'Superior Drivetrain': Tech(
+            name='Superior Drivetrain',
             cost=100,
             point_value=400,
             apply=lambda: avatar_functions.increase_movement(1)
@@ -81,8 +81,8 @@ def techs(avatar_functions: AvatarFunctions) -> dict[str, Tech]:
             apply=avatar_functions.unlock_landmines
         ),
 
-        'Overdrive Drivetrains': Tech(
-            name='Overdrive Drivetrains',
+        'Overdrive Drivetrain': Tech(
+            name='Overdrive Drivetrain',
             cost=250,
             point_value=1600,
             apply=avatar_functions.unlock_movement_overdrive

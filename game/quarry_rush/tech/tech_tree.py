@@ -116,13 +116,13 @@ class TechTree(GameObject):
             value=this_techs['Mining Robotics'],
             subs=[
                 Tree(
-                    value=this_techs['Improved Drivetrains'],
+                    value=this_techs['Improved Drivetrain'],
                     subs=[
                         Tree(
-                            value=this_techs['Superior Drivetrains'],
+                            value=this_techs['Superior Drivetrain'],
                             subs=[
                                 Tree(
-                                    value=this_techs['Overdrive Drivetrains'],
+                                    value=this_techs['Overdrive Drivetrain'],
                                     subs=[]
                                 )
                             ]

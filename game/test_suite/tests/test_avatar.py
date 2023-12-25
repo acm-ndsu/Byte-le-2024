@@ -113,26 +113,26 @@ class TestAvatar(unittest.TestCase):
     # Testing which techs are unlocked
     def test_unlocked_tech(self):
         self.assertTrue(self.avatar.is_researched('Mining Robotics'))
-        self.assertFalse(self.avatar.is_researched('Improved Drivetrains'))
+        self.assertFalse(self.avatar.is_researched('Improved Drivetrain'))
         self.assertFalse(self.avatar.is_researched('Dynamite'))
 
-    # Buying Overdrive Drivetrains will return False if the tree hasn't developed to it yet
+    # Buying Overdrive Drivetrain will return False if the tree hasn't developed to it yet
     def test_unlock_overdrive_movement_fail(self):
-        self.assertFalse(self.avatar.buy_new_tech('Overdrive Drivetrains'))
+        self.assertFalse(self.avatar.buy_new_tech('Overdrive Drivetrain'))
 
-    # Tests that unlocking Overdrive Drivetrains works
+    # Tests that unlocking Overdrive Drivetrain works
     def test_unlock_overdrive_movement(self):
-        self.avatar.buy_new_tech('Improved Drivetrains')
-        self.avatar.buy_new_tech('Superior Drivetrains')
-        self.avatar.buy_new_tech('Overdrive Drivetrains')
+        self.avatar.buy_new_tech('Improved Drivetrain')
+        self.avatar.buy_new_tech('Superior Drivetrain')
+        self.avatar.buy_new_tech('Overdrive Drivetrain')
 
-        self.assertTrue(self.avatar.is_researched('Improved Drivetrains'))
-        self.assertTrue(self.avatar.is_researched('Superior Drivetrains'))
-        self.assertTrue(self.avatar.is_researched('Overdrive Drivetrains'))
+        self.assertTrue(self.avatar.is_researched('Improved Drivetrain'))
+        self.assertTrue(self.avatar.is_researched('Superior Drivetrain'))
+        self.assertTrue(self.avatar.is_researched('Overdrive Drivetrain'))
 
-        self.assertTrue(self.avatar.abilities['Improved Drivetrains'])
-        self.assertTrue(self.avatar.abilities['Superior Drivetrains'])
-        self.assertTrue(self.avatar.abilities['Overdrive Drivetrains'])
+        self.assertTrue(self.avatar.abilities['Improved Drivetrain'])
+        self.assertTrue(self.avatar.abilities['Superior Drivetrain'])
+        self.assertTrue(self.avatar.abilities['Overdrive Drivetrain'])
 
         self.assertEqual(self.avatar.score, 2200)  # test that the score updates correctly based on tech points
         self.assertEqual(self.avatar.science_points, 4600)  # test science points updates correctly
@@ -217,8 +217,8 @@ class TestAvatar(unittest.TestCase):
     # Tests getting the researched techs
     def test_get_researched_techs(self):
         self.assertEqual(self.avatar.get_researched_techs(), ['Mining Robotics'])
-        self.avatar.buy_new_tech('Improved Drivetrains')
-        self.assertEqual(self.avatar.get_researched_techs(), ['Mining Robotics', 'Improved Drivetrains'])
+        self.avatar.buy_new_tech('Improved Drivetrain')
+        self.assertEqual(self.avatar.get_researched_techs(), ['Mining Robotics', 'Improved Drivetrain'])
 
     # Test the json with the new implementations
     def test_avatar_json(self):
