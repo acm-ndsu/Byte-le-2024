@@ -8,6 +8,7 @@ from game.quarry_rush.entity.ores import Lambdium, Turite, Copium
 from game.utils.vector import Vector
 from game.common.map.tile import Tile
 from game.common.avatar import Avatar
+from typing import Self
 
 
 class OreOccupiableStation(OccupiableStation):
@@ -19,7 +20,9 @@ class OreOccupiableStation(OccupiableStation):
                  ancient_tech_weight: float = .1):
         super().__init__(held_item=Copium())
         self.object_type = ObjectType.ORE_OCCUPIABLE_STATION
-        self.rand = random.Random((19 * position.y + 23 * position.y) * seed)
+        self.seed = seed
+        self.position = position
+        self.rand = random.Random((19 * position.x + 23 * position.y) * seed)
         self.special_weight = special_weight
         self.ancient_tech_weight = ancient_tech_weight
         self.held_item = Copium()
@@ -32,7 +35,7 @@ class OreOccupiableStation(OccupiableStation):
             raise ValueError(f'{self.__class__.__name__}.give_item() needs a drop rate of at least 1')
 
         # gives the held item for the amount that is specified by the drop rate passed in
-        [inventory_manager.give(self.held_item, company, drop_rate) for i in range(drop_rate)]
+        inventory_manager.give(self.held_item, company, drop_rate)
 
         if isinstance(self.held_item, Copium):
             generated_num: float = self.rand.random()
@@ -70,4 +73,23 @@ class OreOccupiableStation(OccupiableStation):
         # The amount of ore received is equal to the avatar's drop rate. Make the change here when mined
         # Dynamite will not be affected by this, unless necessary for game balancing
         self.give_item(avatar.company, inventory_manager, avatar.drop_rate)
+
+    def to_json(self) -> dict:
+        data: dict = super().to_json()
+        data['special_weight'] = self.special_weight
+        data['ancient_tech_weight'] = self.ancient_tech_weight
+        data['seed'] = self.seed
+        data['position'] = self.position.to_json()
+        return data
+
+    def from_json(self, data: dict) -> Self:
+        super().from_json(data)
+        self.special_weight = data['special_weight']
+        self.ancient_tech_weight = data['ancient_tech_weight']
+        self.seed = data['seed']
+        self.position = Vector().from_json(data['position'])
+        self.rand = random.Random((19 * self.position.x + 23 * self.position.y) * self.seed)
+        return self
+
+
     

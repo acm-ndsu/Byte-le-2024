@@ -43,8 +43,7 @@ class ByteVisualiser:
 
         # Scale for video saving (division can be adjusted, higher division = lower quality)
         self.scaled: tuple[int, int] = (self.size.x // 2, self.size.y // 2)
-        self.writer: cv2.VideoWriter = cv2.VideoWriter("out.mp4", cv2.VideoWriter_fourcc(*'mp4v'),
-                                                       self.default_frame_rate, self.scaled)
+        self.writer: cv2.VideoWriter
 
     def load(self) -> None:
         self.turn_logs: dict = logs_to_dict()
@@ -89,6 +88,8 @@ class ByteVisualiser:
             # Save button
             if PlaybackButtons.SAVE_BUTTON in button_pressed:
                 self.recording = True
+                self.writer = cv2.VideoWriter("out.mp4", cv2.VideoWriter_fourcc(*'mp4v'),
+                                              self.default_frame_rate, self.scaled)
                 self.playback_speed = 10
                 self.tick = 0
             if self.tick % self.config.NUMBER_OF_FRAMES_PER_TURN == 0 and self.paused:
@@ -186,7 +187,8 @@ class ByteVisualiser:
             if len(self.bytesprite_factories) == 0:
                 raise ValueError(f'must provide bytesprite factories for visualization!')
             # Check that a bytesprite template exists for current object type
-            factory_function: Callable[[pygame.Surface], ByteSprite] | None = self.bytesprite_factories.get(temp_tile['object_type'])
+            factory_function: Callable[[pygame.Surface], ByteSprite] | None = self.bytesprite_factories.get(
+                temp_tile['object_type'])
             if factory_function is None:
                 raise ValueError(
                     f'Must provide a bytesprite for each object type! Missing object_type: {temp_tile["object_type"]}')
@@ -303,8 +305,12 @@ class ByteVisualiser:
 
             if not in_phase:
                 break
+
             self.clock.tick(math.floor(self.default_frame_rate * self.playback_speed))
-        self.writer.release()
+
+        if self.recording:
+            self.writer.release()
+
 
 if __name__ == '__main__':
     byte_visualiser: ByteVisualiser = ByteVisualiser()

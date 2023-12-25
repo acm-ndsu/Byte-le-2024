@@ -75,8 +75,7 @@ class InventoryManager(GameObject):
             return False
 
         inventory = self.__inventories[company]
-
-        while drop_rate != 0:
+        while drop_rate > 0 and any(map(lambda x: x is None, inventory)):
             for i in range(len(inventory)):
                 if inventory[i] is None:
                     inventory[i] = item
