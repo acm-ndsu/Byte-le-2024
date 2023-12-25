@@ -14,6 +14,7 @@ class TestAvatar(unittest.TestCase):
 
     def setUp(self) -> None:
         self.avatar: Avatar = Avatar()
+        self.avatar.science_points = 5000  # set science points in order to buy techs
         self.item: Item = Item(10, 100, 1, 1)
 
     # test set score
@@ -112,26 +113,26 @@ class TestAvatar(unittest.TestCase):
     # Testing which techs are unlocked
     def test_unlocked_tech(self):
         self.assertTrue(self.avatar.is_researched('Mining Robotics'))
-        self.assertFalse(self.avatar.is_researched('Better Drivetrains'))
+        self.assertFalse(self.avatar.is_researched('Improved Drivetrains'))
         self.assertFalse(self.avatar.is_researched('Dynamite'))
 
-    # Buying Overdrive Movement will return False if the tree hasn't developed to it yet
+    # Buying Overdrive Drivetrains will return False if the tree hasn't developed to it yet
     def test_unlock_overdrive_movement_fail(self):
-        self.assertFalse(self.avatar.buy_new_tech('Overdrive Movement'))
+        self.assertFalse(self.avatar.buy_new_tech('Overdrive Drivetrains'))
 
-    # Tests that unlocking Overdrive Movement works
+    # Tests that unlocking Overdrive Drivetrains works
     def test_unlock_overdrive_movement(self):
-        self.avatar.buy_new_tech('Better Drivetrains')
-        self.avatar.buy_new_tech('Unnamed Drivetrain Tech')
-        self.avatar.buy_new_tech('Overdrive Movement')
+        self.avatar.buy_new_tech('Improved Drivetrains')
+        self.avatar.buy_new_tech('Superior Drivetrains')
+        self.avatar.buy_new_tech('Overdrive Drivetrains')
 
-        self.assertTrue(self.avatar.is_researched('Better Drivetrains'))
-        self.assertTrue(self.avatar.is_researched('Unnamed Drivetrain Tech'))
-        self.assertTrue(self.avatar.is_researched('Overdrive Movement'))
+        self.assertTrue(self.avatar.is_researched('Improved Drivetrains'))
+        self.assertTrue(self.avatar.is_researched('Superior Drivetrains'))
+        self.assertTrue(self.avatar.is_researched('Overdrive Drivetrains'))
 
-        self.assertTrue(self.avatar.abilities['Better Drivetrains'])
-        self.assertTrue(self.avatar.abilities['Unnamed Drivetrain Tech'])
-        self.assertTrue(self.avatar.abilities['Overdrive Movement'])
+        self.assertTrue(self.avatar.abilities['Improved Drivetrains'])
+        self.assertTrue(self.avatar.abilities['Superior Drivetrains'])
+        self.assertTrue(self.avatar.abilities['Overdrive Drivetrains'])
 
     # Buying Overdrive Mining will return False if the tree hasn't developed to it yet
     def test_unlock_overdrive_mining_fail(self):
@@ -139,16 +140,16 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking Overdrive Mining works
     def test_unlock_overdrive_mining(self):
-        self.avatar.buy_new_tech('High Yield Mining')
-        self.avatar.buy_new_tech('Unnamed Mining Tech')
+        self.avatar.buy_new_tech('Improved Mining')
+        self.avatar.buy_new_tech('Superior Mining')
         self.avatar.buy_new_tech('Overdrive Mining')
 
-        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
-        self.assertTrue(self.avatar.is_researched('Unnamed Mining Tech'))
+        self.assertTrue(self.avatar.is_researched('Improved Mining'))
+        self.assertTrue(self.avatar.is_researched('Superior Mining'))
         self.assertTrue(self.avatar.is_researched('Overdrive Mining'))
 
-        self.assertTrue(self.avatar.abilities['High Yield Mining'])
-        self.assertTrue(self.avatar.abilities['Unnamed Mining Tech'])
+        self.assertTrue(self.avatar.abilities['Improved Mining'])
+        self.assertTrue(self.avatar.abilities['Superior Mining'])
         self.assertTrue(self.avatar.abilities['Overdrive Mining'])
 
     # Buying Dynamite will return False if the tree hasn't developed to it yet
@@ -157,9 +158,9 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking Dynamite works
     def test_unlock_dynamite(self):
-        self.avatar.buy_new_tech('High Yield Mining')
+        self.avatar.buy_new_tech('Improved Mining')
         self.avatar.buy_new_tech('Dynamite')
-        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
+        self.assertTrue(self.avatar.is_researched('Improved Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
 
     # Buying Landmines will return False if the tree hasn't developed to it yet
@@ -168,10 +169,10 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking Landmines works
     def test_unlock_landmines(self):
-        self.avatar.buy_new_tech('High Yield Mining')
+        self.avatar.buy_new_tech('Improved Mining')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
-        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
+        self.assertTrue(self.avatar.is_researched('Improved Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
 
@@ -181,11 +182,11 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking EMPs works and that unlocking Trap Detection returns False
     def test_unlock_emps(self):
-        self.avatar.buy_new_tech('High Yield Mining')
+        self.avatar.buy_new_tech('Improved Mining')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
         self.avatar.buy_new_tech('EMPs')
-        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
+        self.assertTrue(self.avatar.is_researched('Improved Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
         self.assertTrue(self.avatar.is_researched('EMPs'))
@@ -197,11 +198,11 @@ class TestAvatar(unittest.TestCase):
 
     # Tests that unlocking Trap Defusal works and that unlocking EMPs returns False
     def test_unlock_trap_defusal(self):
-        self.avatar.buy_new_tech('High Yield Mining')
+        self.avatar.buy_new_tech('Improved Mining')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
         self.avatar.buy_new_tech('Trap Defusal')
-        self.assertTrue(self.avatar.is_researched('High Yield Mining'))
+        self.assertTrue(self.avatar.is_researched('Improved Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
         self.assertTrue(self.avatar.is_researched('Trap Defusal'))
@@ -210,8 +211,8 @@ class TestAvatar(unittest.TestCase):
     # Tests getting the researched techs
     def test_get_researched_techs(self):
         self.assertEqual(self.avatar.get_researched_techs(), ['Mining Robotics'])
-        self.avatar.buy_new_tech('Better Drivetrains')
-        self.assertEqual(self.avatar.get_researched_techs(), ['Mining Robotics', 'Better Drivetrains'])
+        self.avatar.buy_new_tech('Improved Drivetrains')
+        self.assertEqual(self.avatar.get_researched_techs(), ['Mining Robotics', 'Improved Drivetrains'])
 
     # Test the json with the new implementations
     def test_avatar_json(self):

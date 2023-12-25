@@ -21,6 +21,7 @@ class TestPlaceController(unittest.TestCase):
         self.movement_controller: MovementController = MovementController()
 
         self.avatar = Avatar(position=Vector(1, 0))
+        self.avatar.science_points = 5000  # set science points in order to buy techs
         self.ore_station: OreOccupiableStation = OreOccupiableStation()
 
         self.locations: dict[tuple[Vector]: list[GameObject]] = {
@@ -34,11 +35,11 @@ class TestPlaceController(unittest.TestCase):
         self.game_board.generate_map()
 
         # Unlock the entire tech tree up to landmines for testing
-        self.avatar.buy_new_tech('Better Drivetrains')
-        self.avatar.buy_new_tech('Unnamed Drivetrain Tech')
-        self.avatar.buy_new_tech('Overdrive Movement')
-        self.avatar.buy_new_tech('High Yield Mining')
-        self.avatar.buy_new_tech('Unnamed Mining Tech')
+        self.avatar.buy_new_tech('Improved Drivetrains')
+        self.avatar.buy_new_tech('Superior Drivetrains')
+        self.avatar.buy_new_tech('Overdrive Drivetrains')
+        self.avatar.buy_new_tech('Improved Mining')
+        self.avatar.buy_new_tech('Superior Mining')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
 

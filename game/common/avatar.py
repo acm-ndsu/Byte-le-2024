@@ -262,24 +262,24 @@ class Avatar(GameObject):
         self.movement_speed += amt
         match self.movement_speed:
             case 2:
-                self.abilities['Better Drivetrains'] = True
+                self.abilities['Improved Drivetrains'] = True
             case 3:
-                self.abilities['Unnamed Drivetrain Tech'] = True
+                self.abilities['Superior Drivetrains'] = True
             case _:
-                self.abilities['Overdrive Movement'] = True
+                self.abilities['Overdrive Drivetrains'] = True
 
     def __increase_drop_rate(self, amt: int) -> None:
         self.drop_rate += amt
         match self.drop_rate:
             case 2:
-                self.abilities['High Yield Mining'] = True
+                self.abilities['Improved Mining'] = True
             case 3:
-                self.abilities['Unnamed Mining Tech'] = True
+                self.abilities['Superior Mining'] = True
             case _:
                 self.abilities['Overdrive Mining'] = True
 
     def __unlock_overdrive_movement(self) -> None:
-        self.abilities['Overdrive Movement'] = True
+        self.abilities['Overdrive Drivetrains'] = True
 
     def __unlock_overdrive_mining(self) -> None:
         self.abilities['Overdrive Mining'] = True
@@ -299,11 +299,11 @@ class Avatar(GameObject):
 
     # Helper method to create a dictionary that stores bool values for which abilities the player unlocked
     def __create_abilities_dict(self) -> dict:
-        abilities = {'Better Drivetrains': False,
-                     'Unnamed Drivetrain Tech': False,
-                     'Overdrive Movement': False,
-                     'High Yield Mining': False,
-                     'Unnamed Mining Tech': False,
+        abilities = {'Improved Drivetrains': False,
+                     'Superior Drivetrains': False,
+                     'Overdrive Drivetrains': False,
+                     'Improved Mining': False,
+                     'Superior Mining': False,
                      'Overdrive Mining': False,
                      'Dynamite': False,
                      'Landmines': False,
