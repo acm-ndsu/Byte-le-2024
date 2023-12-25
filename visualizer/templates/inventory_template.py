@@ -24,8 +24,8 @@ class InventoryTemplate(InfoTemplate):
 
         self.company = company
         self.company_text: Text = Text(screen, text=f'{"Church" if company == 1 else "Turing"}',
-                                       font_size=48, font_name=self.font, color=self.color,
-                                       position=Vector.add_vectors(topleft, Vector(y=25, x=100)))
+                                       font_size=32, font_name=self.font, color=self.color,
+                                       position=Vector.add_vectors(topleft, Vector(y=25, x=25)))
 
         self.ancient_tech = AncientTechInventory(top_left=Vector.add_vectors(topleft, Vector(y=100, x=50)))
         self.ancient_tech.add(self.render_list)
@@ -71,7 +71,7 @@ class InventoryTemplate(InfoTemplate):
         team_name: str = [client['team_name']
                           for client in turn_log['clients']
                           if client['avatar']['company'] == self.company][0]
-        self.company_text.text = f'{"Church" if self.company == 1 else "Turing"}: {team_name}'
+        self.company_text.text = f'{"Church" if self.company == 1 else "Turing"}: {team_name}'[:30]
 
         avatar: dict = [client['avatar']
                         for client in turn_log['clients']

@@ -17,7 +17,7 @@ class Client(UserClient):
         Allows the team to set a team name.
         :return: Your team name
         """
-        return 'Paid Intern'
+        return 'The King\'s Lambdas 2'
     
     def first_turn_init(self, world, avatar):
         """
