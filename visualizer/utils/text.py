@@ -34,7 +34,10 @@ class Text:
         self.font_size: int = font_size
         self.font_name: str = font_name
         # Get selected font from list of fonts
-        self.__font: pygame.font.Font = pygame.font.SysFont(self.font_name, self.font_size)
+        try:
+            self.__font: pygame.font.Font = pygame.font.Font(self.font_name, self.font_size)
+        except FileNotFoundError:
+            self.__font: pygame.font.Font = pygame.font.SysFont(self.font_name, self.font_size)
         self.color: Color = color
         self.position: Vector = position
         self.text: str = text
