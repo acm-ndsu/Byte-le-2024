@@ -331,6 +331,7 @@ class Avatar(GameObject):
         # Subtract the cost from the player's science_points if successfully researched
         if successful:
             self.science_points -= tech_info.cost
+            self.score += tech_info.point_value
 
         return successful
 

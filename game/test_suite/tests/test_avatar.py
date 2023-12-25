@@ -134,6 +134,9 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.abilities['Superior Drivetrains'])
         self.assertTrue(self.avatar.abilities['Overdrive Drivetrains'])
 
+        self.assertEqual(self.avatar.score, 2200)  # test that the score updates correctly based on tech points
+        self.assertEqual(self.avatar.science_points, 4600)  # test science points updates correctly
+
     # Buying Overdrive Mining will return False if the tree hasn't developed to it yet
     def test_unlock_overdrive_mining_fail(self):
         self.assertFalse(self.avatar.buy_new_tech('Overdrive Mining'))
@@ -151,6 +154,9 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.abilities['Improved Mining'])
         self.assertTrue(self.avatar.abilities['Superior Mining'])
         self.assertTrue(self.avatar.abilities['Overdrive Mining'])
+
+        self.assertEqual(self.avatar.score, 1100)  # test that the score updates correctly based on tech points
+        self.assertEqual(self.avatar.science_points, 4600)  # test science points updates correctly
 
     # Buying Dynamite will return False if the tree hasn't developed to it yet
     def test_unlock_dynamite_fail(self):
