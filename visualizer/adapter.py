@@ -107,10 +107,10 @@ class Adapter:
             8: WallBS.create_bytesprite,
             22: ChurchStationBS.create_bytesprite,
             23: TuringStationBS.create_bytesprite,
-            28: DynamiteBS.create_bytesprite,
-            29: OreStationBS.create_bytesprite,
-            31: LandmineBS.create_bytesprite,
-            32: EmpsBS.create_bytesprite,
+            29: DynamiteBS.create_bytesprite,
+            30: OreStationBS.create_bytesprite,
+            32: LandmineBS.create_bytesprite,
+            33: EmpsBS.create_bytesprite,
         }
 
     def render(self) -> None:

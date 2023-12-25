@@ -16,7 +16,8 @@ from visualizer.sprites.tech_tree.tech_tree_backdrop import TechTreeBackdrop
 
 
 class TechTreeTemplate(InfoTemplate):
-    def __init__(self, screen: pygame.Surface, topleft: Vector, size: Vector, font: str, color: str, company: int) -> None:
+    def __init__(self, screen: pygame.Surface, topleft: Vector, size: Vector, font: str, color: str,
+                 company: int) -> None:
         super().__init__(screen, topleft, size, font, color)
         self.company = company
 
@@ -54,4 +55,19 @@ class TechTreeTemplate(InfoTemplate):
         self.defuse_tech.add(self.render_list)
 
     def recalc_animation(self, turn_log: dict) -> None:
-        ...
+        tech_tree: dict = [client['avatar']['tech_tree']
+                           for client in turn_log['clients']
+                           if client['avatar']['company'] == self.company][0]
+
+        self.mvt1_tech.activated = tech_tree['Better Drivetrains']
+        self.mvt2_tech.activated = tech_tree['Unnamed Drivetrain Tech']
+        self.mvt3_tech.activated = tech_tree['Overdrive Movement']
+
+        self.mining1_tech.activated = tech_tree['High Yield Mining']
+        self.mining2_tech.activated = tech_tree['Unnamed Mining Tech']
+        self.mining3_tech.activated = tech_tree['Overdrive Mining']
+
+        self.dynamite_tech.activated = tech_tree['Dynamite']
+        self.landmine_tech.activated = tech_tree['Landmines']
+        self.emp_tech.activated = tech_tree['EMPs']
+        self.defuse_tech.activated = tech_tree['Trap Defusal']

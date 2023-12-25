@@ -6,6 +6,7 @@ from enum import Flag, auto
 import pygame
 
 from game.utils.vector import Vector
+from visualizer.sprites.playback_backdrop import PlaybackBackdrop
 from visualizer.utils.button import Button, ButtonColors
 from visualizer.utils.text import Text
 
@@ -40,23 +41,24 @@ class PlaybackTemplate:
         self.font: str = font
         self.button_colors: ButtonColors = button_colors
         self.screen: pygame.Surface = screen
+        self.backdrop: PlaybackBackdrop = PlaybackBackdrop(Vector(x=459, y=548))
         self.pause_button: Button = Button(self.screen, 'Pause', lambda: PlaybackButtons.PAUSE_BUTTON, font_size=18,
                                            colors=self.button_colors, font_name=self.font)
-        self.next_button: Button = Button(self.screen, 'Next', lambda: PlaybackButtons.NEXT_BUTTON, font_size=18,
+        self.next_button: Button = Button(self.screen, 'Next ', lambda: PlaybackButtons.NEXT_BUTTON, font_size=18,
                                           colors=self.button_colors, font_name=self.font)
-        self.prev_button: Button = Button(self.screen, 'Prev', lambda: PlaybackButtons.PREV_BUTTON, font_size=18,
+        self.prev_button: Button = Button(self.screen, 'Prev ', lambda: PlaybackButtons.PREV_BUTTON, font_size=18,
                                           colors=self.button_colors, font_name=self.font)
         self.start_button: Button = Button(self.screen, 'Start', lambda: PlaybackButtons.START_BUTTON, font_size=18,
                                            colors=self.button_colors, font_name=self.font)
-        self.end_button: Button = Button(self.screen, 'End', lambda: PlaybackButtons.END_BUTTON, font_size=18,
+        self.end_button: Button = Button(self.screen, ' End ', lambda: PlaybackButtons.END_BUTTON, font_size=18,
                                          colors=self.button_colors, font_name=self.font)
-        self.save_button: Button = Button(self.screen, 'Save', lambda: PlaybackButtons.SAVE_BUTTON, font_size=18,
+        self.save_button: Button = Button(self.screen, 'Save ', lambda: PlaybackButtons.SAVE_BUTTON, font_size=18,
                                           colors=self.button_colors, font_name=self.font)
-        self.normal_speed_button: Button = Button(self.screen, '1x', lambda: PlaybackButtons.NORMAL_SPEED_BUTTON,
+        self.normal_speed_button: Button = Button(self.screen, '  1x  ', lambda: PlaybackButtons.NORMAL_SPEED_BUTTON,
                                                   font_size=18, colors=self.button_colors, font_name=self.font)
-        self.fast_speed_button: Button = Button(self.screen, '2x', lambda: PlaybackButtons.FAST_SPEED_BUTTON,
+        self.fast_speed_button: Button = Button(self.screen, '  2x  ', lambda: PlaybackButtons.FAST_SPEED_BUTTON,
                                                 font_size=18, colors=self.button_colors, font_name=self.font)
-        self.fastest_speed_button: Button = Button(self.screen, '4x', lambda: PlaybackButtons.FASTEST_SPEED_BUTTON,
+        self.fastest_speed_button: Button = Button(self.screen, '  4x  ', lambda: PlaybackButtons.FASTEST_SPEED_BUTTON,
                                                    font_size=18, colors=self.button_colors, font_name=self.font)
 
         self.prev_button.rect.center = Vector.add_vectors(Vector(*self.screen.get_rect().center),
@@ -79,6 +81,7 @@ class PlaybackTemplate:
                                                                    Vector(80, 325)).as_tuple()
 
     def playback_render(self) -> None:
+        self.screen.blit(self.backdrop.image, self.backdrop.rect)
         self.prev_button.render()
         self.pause_button.render()
         self.next_button.render()
