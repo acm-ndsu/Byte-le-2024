@@ -1,3 +1,5 @@
+import random
+
 from game.client.user_client import UserClient
 from game.common.enums import *
 
@@ -45,15 +47,19 @@ class Client(UserClient):
             self.current_state = State.MINING
             
         # Make action decision for this turn
-        if self.current_state == State.SELLING:
-            actions = [ActionType.MOVE_LEFT if self.company == Company.TURING else ActionType.MOVE_RIGHT] # If I'm selling, move towards my base
+        # if self.current_state == State.SELLING:
+        #     actions = [ActionType.MOVE_LEFT if self.company == Company.TURING else ActionType.MOVE_RIGHT] # If I'm selling, move towards my base
+        # else:
+        if current_tile.occupied_by.object_type == ObjectType.ORE_OCCUPIABLE_STATION:
+            # If I'm mining and I'm standing on an ore, mine it and set my state to selling
+            actions = [ActionType.MINE]
+            self.current_state = State.SELLING
         else:
-            if current_tile.occupied_by.object_type == ObjectType.ORE_OCCUPIABLE_STATION:
-                # If I'm mining and I'm standing on an ore, mine it and set my state to selling
-                actions = [ActionType.MINE]
-                self.current_state = State.SELLING
-            else:
-                # If I'm mining and I'm not standing on an ore, move away from my station to try to find an ore
-                actions = [ActionType.MOVE_RIGHT if self.company == Company.TURING else ActionType.MOVE_LEFT]
+            # If I'm mining and I'm not standing on an ore, move away from my station to try to find an ore
+            actions = [self.move_logic()]
+            # actions = [ActionType.MOVE_RIGHT if self.company == Company.TURING else ActionType.MOVE_LEFT]
         
         return actions
+
+    def move_logic(self):
+        return random.choice([ActionType.MOVE_LEFT, ActionType.MOVE_RIGHT, ActionType.MOVE_UP, ActionType.MOVE_DOWN])

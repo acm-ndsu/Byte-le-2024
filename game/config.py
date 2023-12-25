@@ -34,6 +34,7 @@ ALLOWED_MODULES = ["game.client.user_client",       # modules that clients are s
                    "pandas",
                    "itertools",
                    "functools",
+                   "random",
                    ]
 
 RESULTS_FILE_NAME = "results.json"                                  # Name and extension of results file

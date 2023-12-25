@@ -77,7 +77,7 @@ class InventoryManager(GameObject):
         inventory = self.__inventories[company]
 
         while drop_rate != 0:
-            for i in range(0, len(inventory)):
+            for i in range(len(inventory)):
                 if inventory[i] is None:
                     inventory[i] = item
                     drop_rate -= 1
