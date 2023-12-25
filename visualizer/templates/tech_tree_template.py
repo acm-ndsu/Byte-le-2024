@@ -59,12 +59,12 @@ class TechTreeTemplate(InfoTemplate):
                            for client in turn_log['clients']
                            if client['avatar']['company'] == self.company][0]
 
-        self.mvt1_tech.activated = tech_tree['Better Drivetrains']
-        self.mvt2_tech.activated = tech_tree['Unnamed Drivetrain Tech']
-        self.mvt3_tech.activated = tech_tree['Overdrive Movement']
+        self.mvt1_tech.activated = tech_tree['Improved Drivetrain']
+        self.mvt2_tech.activated = tech_tree['Superior Drivetrain']
+        self.mvt3_tech.activated = tech_tree['Overdrive Drivetrain']
 
-        self.mining1_tech.activated = tech_tree['High Yield Mining']
-        self.mining2_tech.activated = tech_tree['Unnamed Mining Tech']
+        self.mining1_tech.activated = tech_tree['Improved Mining']
+        self.mining2_tech.activated = tech_tree['Superior Mining']
         self.mining3_tech.activated = tech_tree['Overdrive Mining']
 
         self.dynamite_tech.activated = tech_tree['Dynamite']

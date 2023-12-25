@@ -22,6 +22,7 @@ class TestDynamiteController(unittest.TestCase):
         self.place_controller: PlaceController = PlaceController()
 
         self.avatar = Avatar(position=Vector(1, 1), company=Company.CHURCH)
+        self.avatar.science_points = 5000  # set science points in order to buy techs
         self.player: Player = Player(avatar=self.avatar)
 
         # adds ore stations to all adjacent tiles and the one the avatar will be on
@@ -37,16 +38,13 @@ class TestDynamiteController(unittest.TestCase):
         self.client: Player = Player(avatar=self.avatar)
         self.world.generate_map()
 
-        # Unlock the entire tech tree for testing
-        self.avatar.buy_new_tech('Better Drivetrains')
-        self.avatar.buy_new_tech('Unnamed Drivetrain Tech')
-        self.avatar.buy_new_tech('Overdrive Movement')
-        self.avatar.buy_new_tech('High Yield Mining')
-        self.avatar.buy_new_tech('Unnamed Mining Tech')
+        # Unlock the techs for testing
+        self.avatar.buy_new_tech('Improved Drivetrain')
+        self.avatar.buy_new_tech('Superior Drivetrain')
+        self.avatar.buy_new_tech('Overdrive Drivetrain')
+        self.avatar.buy_new_tech('Improved Mining')
+        self.avatar.buy_new_tech('Superior Mining')
         self.avatar.buy_new_tech('Dynamite')
-        self.avatar.buy_new_tech('Landmines')
-        self.avatar.buy_new_tech('EMPs')
-        self.avatar.buy_new_tech('Trap Defusal')
 
     def test_no_explosion(self):
         # make sure the dynamite is placed properly

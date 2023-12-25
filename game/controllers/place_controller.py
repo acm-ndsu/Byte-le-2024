@@ -31,6 +31,7 @@ class PlaceController(Controller):
         # places dynamite if the avatar's active ability allows it AND there isn't a dynamite object there already
         if client.avatar.can_place_dynamite() and not tile.is_occupied_by_object_type(ObjectType.DYNAMITE):
             dynamite: Dynamite = Dynamite(position=client.avatar.position, company=client.avatar.company)
+            client.avatar.state = 'placing'
 
             # place dynamite on top of the occupied_by stack but below the Avatar
             tile.place_on_top_of_stack(dynamite)
@@ -40,6 +41,7 @@ class PlaceController(Controller):
     def __place_landmine(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # places a landmine if the avatar's active ability allows it AND there isn't a landmine object there already
         if client.avatar.can_place_landmine() and not tile.is_occupied_by_game_object(Trap):
+            client.avatar.state = 'placing'
             landmine: Landmine = Landmine(owner_company=client.avatar.company,
                                           target_company=client.avatar.get_opposing_team(),
                                           position=client.avatar.position)
@@ -51,6 +53,7 @@ class PlaceController(Controller):
     def __place_emp(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # places an EMP if the avatar's active ability allows it AND there isn't an EMP object there already
         if client.avatar.can_place_emp() and not tile.is_occupied_by_game_object(Trap):
+            client.avatar.state = 'placing'
             emp: EMP = EMP(owner_company=client.avatar.company,
                            target_company=client.avatar.get_opposing_team(), position=client.avatar.position)
             self.__add_to_trap_queue(client, world, emp)

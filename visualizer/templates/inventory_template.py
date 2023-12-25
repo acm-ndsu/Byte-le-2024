@@ -1,5 +1,4 @@
 import pygame
-from matplotlib.animation import Animation
 
 from game.utils.vector import Vector
 from visualizer.sprites.inventory.ancient_tech_inventory import AncientTechInventory
