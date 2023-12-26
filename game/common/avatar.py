@@ -314,7 +314,6 @@ class Avatar(GameObject):
     def buy_new_tech(self, tech_name: str) -> bool:
         """By giving the name of a tech, this method attempts to buy the tech. It returns a boolean representing if
         the purchase was successful or not."""
-        # to prevent players from using this whenever, there can be another check here to see if they are at their base
 
         tech_info: TechInfo = self.__tech_tree.tech_info(tech_name)
 

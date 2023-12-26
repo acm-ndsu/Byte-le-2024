@@ -70,6 +70,16 @@ class ActionType(Enum):
     DEFUSE_DOWN = auto()
     DEFUSE_LEFT = auto()
     DEFUSE_RIGHT = auto()
+    BUY_IMPROVED_DRIVETRAIN = auto()
+    BUY_SUPERIOR_DRIVETRAIN = auto()
+    BUY_OVERDRIVE_DRIVETRAIN = auto()
+    BUY_IMPROVED_MINING = auto()
+    BUY_SUPERIOR_MINING = auto()
+    BUY_OVERDRIVE_MINING = auto()
+    BUY_DYNAMITE = auto()
+    BUY_LANDMINES = auto()
+    BUY_EMPS = auto()
+    BUY_TRAP_DEFUSAL = auto()
 
 
 # Added for Quarry Rush
