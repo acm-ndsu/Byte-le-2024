@@ -1,9 +1,10 @@
+import os
 from typing import Any
 
 import pygame
 
 from game.utils.vector import Vector
-from visualizer.utils.button import Button
+from visualizer.utils.button import Button, ButtonColors
 from visualizer.utils.text import Text
 
 """
@@ -25,10 +26,15 @@ class MenuTemplate:
     Note: The provided buttons are already centered to be in the center of the screen.
     """
 
-    def __init__(self, screen: pygame.Surface):
+    def __init__(self, screen: pygame.Surface, font: str, text_color: str, button_colors: ButtonColors):
         self.screen: pygame.Surface = screen
-        self.start_button: Button = Button(screen, 'Start Game', lambda: False, font_size=24, padding=10)
-        self.results_button: Button = Button(screen, 'Exit', lambda: False, font_size=24, padding=10)
+        self.font = font
+        self.text_color = text_color
+        self.button_colors = button_colors
+        self.start_button: Button = Button(screen, 'Start Game', lambda: False, font_size=24, padding=10,
+                                           colors=self.button_colors, font_name=self.font)
+        self.results_button: Button = Button(screen, 'Exit', lambda: False, font_size=24, padding=10,
+                                             colors=self.button_colors, font_name=self.font)
         self.start_button.rect.center = Vector.add_vectors(Vector(*self.screen.get_rect().center),
                                                            Vector(0, 100)).as_tuple()
 
@@ -59,13 +65,14 @@ class Basic(MenuTemplate):
     Basic class can be used as a template for any future classes.
     """
 
-    def __init__(self, screen: pygame.Surface, title: str):
-        super().__init__(screen)
-        self.title: Text = Text(screen, title, 48)
+    def __init__(self, screen: pygame.Surface, font: str, text_color: str, button_colors: ButtonColors, title: str):
+        super().__init__(screen, font, text_color, button_colors)
+        self.title: Text = Text(screen, title, 48, color=self.text_color, font_name=self.font)
+        print(self.font)
         self.title.rect.center = Vector.add_vectors(Vector(*self.screen.get_rect().center),
                                                     Vector(0, -100)).as_tuple()
 
-        self.winning_team_name: Text = Text(screen, '', 0)
+        self.winning_team_name: Text = Text(screen, '', 0, color=self.text_color, font_name=self.font)
 
     def start_render(self) -> None:
         super().start_render()
@@ -73,7 +80,7 @@ class Basic(MenuTemplate):
 
     def load_results_screen(self, results: dict) -> None:
         winning_teams = self.__get_winning_teams(results['players'])
-        self.winning_team_name = Text(self.screen, winning_teams, 36)
+        self.winning_team_name = Text(self.screen, winning_teams, 36, color=self.text_color, font_name=self.font)
         self.winning_team_name.rect.center = self.screen.get_rect().center
 
     def results_render(self) -> None:

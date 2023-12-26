@@ -14,6 +14,14 @@ class AvatarBS(ByteSpriteFactory):
     @staticmethod
     def update(data: dict, layer: int, pos: Vector, spritesheets: list[list[pyg.Surface]]) -> list[pyg.Surface]:
         offset: int = 5 if data.get('company', 0) == 2 else 0
+        if data['state'] == 'mining':
+            return spritesheets[offset+1]
+        if data['state'] == 'exploding':
+            return spritesheets[offset+2]
+        if data['state'] == 'moving':
+            return spritesheets[offset+3]
+        if data['state'] == 'placing':
+            return spritesheets[offset+4]
 
         return spritesheets[offset]
 

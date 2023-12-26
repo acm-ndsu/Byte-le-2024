@@ -116,13 +116,13 @@ class TechTree(GameObject):
             value=this_techs['Mining Robotics'],
             subs=[
                 Tree(
-                    value=this_techs['Better Drivetrains'],
+                    value=this_techs['Improved Drivetrain'],
                     subs=[
                         Tree(
-                            value=this_techs['Unnamed Drivetrain Tech'],
+                            value=this_techs['Superior Drivetrain'],
                             subs=[
                                 Tree(
-                                    value=this_techs['Overdrive Movement'],
+                                    value=this_techs['Overdrive Drivetrain'],
                                     subs=[]
                                 )
                             ]
@@ -130,10 +130,10 @@ class TechTree(GameObject):
                     ]
                 ),
                 Tree(
-                    value=this_techs['High Yield Mining'],
+                    value=this_techs['Improved Mining'],
                     subs=[
                         Tree(
-                            value=this_techs['Unnamed Mining Tech'],
+                            value=this_techs['Superior Mining'],
                             subs=[
                                 Tree(
                                     value=this_techs['Overdrive Mining'],

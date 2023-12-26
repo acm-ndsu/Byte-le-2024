@@ -245,6 +245,8 @@ class ByteVisualiser:
                 if in_phase:
                     in_phase = self.adapter.start_menu_event(event)
 
+            self.screen.fill(self.config.BACKGROUND_COLOR)
+
             self.adapter.start_menu_render()
 
             pygame.display.flip()
@@ -289,6 +291,8 @@ class ByteVisualiser:
 
                 if in_phase:
                     in_phase = self.adapter.results_event(event)
+
+            self.screen.fill(self.config.BACKGROUND_COLOR)
 
             self.adapter.results_render()
 

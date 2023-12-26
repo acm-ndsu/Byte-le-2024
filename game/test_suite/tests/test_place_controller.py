@@ -21,6 +21,7 @@ class TestPlaceController(unittest.TestCase):
         self.movement_controller: MovementController = MovementController()
 
         self.avatar = Avatar(position=Vector(1, 0))
+        self.avatar.science_points = 5000  # set science points in order to buy techs
         self.ore_station: OreOccupiableStation = OreOccupiableStation()
 
         self.locations: dict[tuple[Vector]: list[GameObject]] = {
@@ -33,16 +34,14 @@ class TestPlaceController(unittest.TestCase):
         self.client = Player(None, None, [], self.avatar)
         self.game_board.generate_map()
 
-        # Unlock the entire tech tree for testing
-        self.avatar.buy_new_tech('Better Drivetrains')
-        self.avatar.buy_new_tech('Unnamed Drivetrain Tech')
-        self.avatar.buy_new_tech('Overdrive Movement')
-        self.avatar.buy_new_tech('High Yield Drilling')
-        self.avatar.buy_new_tech('Unnamed Mining Tech')
+        # Unlock the entire tech tree up to landmines for testing
+        self.avatar.buy_new_tech('Improved Drivetrain')
+        self.avatar.buy_new_tech('Superior Drivetrain')
+        self.avatar.buy_new_tech('Overdrive Drivetrain')
+        self.avatar.buy_new_tech('Improved Mining')
+        self.avatar.buy_new_tech('Superior Mining')
         self.avatar.buy_new_tech('Dynamite')
         self.avatar.buy_new_tech('Landmines')
-        self.avatar.buy_new_tech('EMPs')
-        self.avatar.buy_new_tech('Trap Defusal')
 
     # tests that the avatar is at the top of the stack
     def test_avatar_on_top_of_ore_station(self) -> None:
@@ -54,7 +53,7 @@ class TestPlaceController(unittest.TestCase):
         self.movement_controller.handle_actions(ActionType.MOVE_DOWN, self.client, self.game_board)
         self.place_controller.handle_actions(ActionType.PLACE_DYNAMITE, self.client, self.game_board)
 
-        # test if the ore station is occupied by a Dynamite object and not the avatar
+        # show the ore station's first occupied_by is a Dynamite object and not the avatar
         self.assertTrue(isinstance(self.ore_station.occupied_by, Dynamite))
         self.assertNotEqual(self.ore_station.occupied_by, self.client.avatar)
 
@@ -62,27 +61,31 @@ class TestPlaceController(unittest.TestCase):
         placed_dyn: Dynamite = self.ore_station.occupied_by  # returns the correct type; ignore warning
         self.assertEqual(placed_dyn.occupied_by, self.client.avatar)
 
-        self.assertEqual(self.avatar.dynamite_active_ability.cooldown, 1)  # double-check the ability cooldown reset
+        # double-check the ability cooldown reset
+        self.assertEqual(self.avatar.dynamite_active_ability.cooldown, 1)
 
     def test_placing_landmine(self) -> None:
         self.movement_controller.handle_actions(ActionType.MOVE_DOWN, self.client, self.game_board)
         self.place_controller.handle_actions(ActionType.PLACE_LANDMINE, self.client, self.game_board)
 
-        # test if the ore station is occupied by a Landmine object and not the avatar
+        # show the ore station's first occupied_by is a Landmine object and not the avatar
         self.assertTrue(isinstance(self.ore_station.occupied_by, Landmine))
         self.assertNotEqual(self.ore_station.occupied_by, self.client.avatar)
 
-        # test if Dynamite is occupied by the Avatar (i.e., Avatar at the top of the stack)
+        # test if Landmine is occupied by the Avatar (i.e., Avatar at the top of the stack)
         placed_landmine: Landmine = self.ore_station.occupied_by  # returns the correct type; ignore warning
         self.assertEqual(placed_landmine.occupied_by, self.client.avatar)
 
-        self.assertEqual(self.avatar.place_trap.cooldown, 1)  # double-check the ability cooldown reset
+        # double-check the ability cooldown reset
+        self.assertEqual(self.avatar.landmine_active_ability.cooldown, 1)
 
     def test_placing_emp(self) -> None:
+        self.avatar.buy_new_tech('EMPs')  # unlock emps for testing
+
         self.movement_controller.handle_actions(ActionType.MOVE_DOWN, self.client, self.game_board)
         self.place_controller.handle_actions(ActionType.PLACE_EMP, self.client, self.game_board)
 
-        # test if the turite is occupied by an EMP object and not the avatar
+        # show the ore station's first occupied_by is an EMP object and not the avatar
         self.assertTrue(isinstance(self.ore_station.occupied_by, EMP))
         self.assertNotEqual(self.ore_station.occupied_by, self.client.avatar)
 
@@ -90,10 +93,21 @@ class TestPlaceController(unittest.TestCase):
         placed_emp: EMP = self.ore_station.occupied_by  # returns the correct type; ignore warning
         self.assertEqual(placed_emp.occupied_by, self.client.avatar)
 
-        self.assertEqual(self.avatar.place_trap.cooldown, 1)  # double-check the ability cooldown reset
+        self.assertEqual(self.avatar.emp_active_ability.cooldown, 1)  # double-check the ability cooldown reset
 
+    # test that 2 dynamite aren't on the same tile
     def test_placing_multiple_dynamite(self):
         self.test_placing_dynamite()  # call previous test to set up test
+        self.place_controller.handle_actions(ActionType.PLACE_DYNAMITE, self.client, self.game_board)
+
+        # show that the avatar can't place dynamite due to cooldown
+        self.assertFalse(self.avatar.dynamite_active_ability.is_usable)
+
+        # set fuse to 0 so that active ability is usable
+        self.avatar.dynamite_active_ability.fuse = 0
+        self.assertTrue(self.avatar.can_place_dynamite())
+
+        # attempt to place dynamite down
         self.place_controller.handle_actions(ActionType.PLACE_DYNAMITE, self.client, self.game_board)
 
         # needed stack order: OreOccupiableStation -> Dynamite -> Avatar
@@ -104,6 +118,16 @@ class TestPlaceController(unittest.TestCase):
         self.test_placing_landmine()  # call previous test to set up test
         self.place_controller.handle_actions(ActionType.PLACE_LANDMINE, self.client, self.game_board)
 
+        # show that the avatar can't place a landmine due to cooldown
+        self.assertFalse(self.avatar.landmine_active_ability.is_usable)
+
+        # set fuse to 0 so that active ability is usable
+        self.avatar.landmine_active_ability.fuse = 0
+        self.assertTrue(self.avatar.can_place_landmine())
+
+        # attempt to place landmine down
+        self.place_controller.handle_actions(ActionType.PLACE_LANDMINE, self.client, self.game_board)
+
         # needed stack order: OreOccupiableStation -> Landmine -> Avatar
         self.assertTrue(isinstance(self.ore_station.occupied_by, Landmine))
         self.assertEqual(self.ore_station.occupied_by.occupied_by, self.avatar)
@@ -112,11 +136,22 @@ class TestPlaceController(unittest.TestCase):
         self.test_placing_emp()  # call previous test to set up test
         self.place_controller.handle_actions(ActionType.PLACE_EMP, self.client, self.game_board)
 
+        # show that the avatar can't place EMP due to cooldown
+        self.assertFalse(self.avatar.emp_active_ability.is_usable)
+
+        # set fuse to 0 so that active ability is usable
+        self.avatar.emp_active_ability.fuse = 0
+        self.assertTrue(self.avatar.can_place_emp())
+
+        # attempt to place an EMP down
+        self.place_controller.handle_actions(ActionType.PLACE_EMP, self.client, self.game_board)
+
         # needed stack order: OreOccupiableStation -> EMP -> Avatar
         self.assertTrue(isinstance(self.ore_station.occupied_by, EMP))
         self.assertEqual(self.ore_station.occupied_by.occupied_by, self.avatar)
 
     def test_placing_multiple_dynamite_and_traps(self):
+        self.avatar.buy_new_tech('EMPs')  # unlock emps for testing
         self.test_placing_dynamite()  # call previous test to set up test
 
         # try to place duplicate dynamite
@@ -126,7 +161,8 @@ class TestPlaceController(unittest.TestCase):
         self.place_controller.handle_actions(ActionType.PLACE_EMP, self.client, self.game_board)
 
         # allow the avatar to place next EMP by making the fuse 0
-        self.avatar.place_trap.fuse = 0
+        self.avatar.emp_active_ability.fuse = 0
+        self.assertTrue(self.avatar.can_place_emp())
 
         # try to place duplicate emp
         self.place_controller.handle_actions(ActionType.PLACE_EMP, self.client, self.game_board)
@@ -135,3 +171,12 @@ class TestPlaceController(unittest.TestCase):
         self.assertTrue(isinstance(self.ore_station.occupied_by, Dynamite))
         self.assertTrue(isinstance(self.ore_station.occupied_by.occupied_by, EMP))
         self.assertEqual(self.ore_station.occupied_by.occupied_by.occupied_by, self.avatar)
+
+    def test_placing_landmine_then_emp(self):
+        self.test_placing_landmine()  # previous test for setup
+        self.avatar.buy_new_tech('EMPs')  # unlock emps for testing
+
+        # needed stack order: OreOccupiableStation -> Landmine -> Avatar
+        self.assertTrue(isinstance(self.ore_station.occupied_by, Landmine))
+        self.assertTrue(not isinstance(self.ore_station.occupied_by, EMP))
+        self.assertEqual(self.ore_station.occupied_by.occupied_by, self.avatar)
