@@ -26,17 +26,17 @@ the available upgrade paths and how you can improve.
    :width: 95%
    :align: center
 
-.. |bdt| image:: ./_static/images/better_drivetrains.png
+.. |id| image:: ./_static/images/improved_drivetrain.png
    :width: 80%
-.. |udt| image:: ./_static/images/unnamed_drivetrain_tech.png
+.. |sd| image:: ./_static/images/superior_drivetrain.png
    :width: 80%
-.. |om| image:: ./_static/images/overdrive_movement.png
+.. |od| image:: ./_static/images/overdrive_drivetrain.png
    :width: 80%
-.. |hym| image:: ./_static/images/high_yield_mining.png
+.. |im| image:: ./_static/images/improved_mining.png
    :width: 80%
-.. |umt| image:: ./_static/images/unnamed_mining_tech.png
+.. |sm| image:: ./_static/images/superior_mining.png
    :width: 80%
-.. |omining| image:: ./_static/images/overdrive_mining.png
+.. |om| image:: ./_static/images/overdrive_mining.png
    :width: 80%
 .. |dyn| image:: ./_static/images/dynamite.png
    :width: 80%
@@ -54,23 +54,23 @@ Here's a description of all the techs. The order goes by row as depicted above:
 ========================================================== =============================================================
 Tech Name                                                  Tech Description
 ========================================================== =============================================================
-Better Drivetrains |bdt|                                   This tech will increase your movement, allowing MOB-BOT to
+Improved Drivetrain |id|                                   This tech will increase your movement, allowing MOB-BOT to
                                                            **move up to 2 tiles per turn**!
 
-Unnamed Drivetrain Tech |udt|                              Grants an additional movement, allowing MOB-BOT to **move**
+Superior Drivetrain |sd|                                   Grants an additional movement, allowing MOB-BOT to **move**
                                                            **up to 3 tiles per turn**! How wonderful!
 
-Overdrive Movement |om|                                    The ultimate movement upgrade. MOB-BOT can now **move up to**
+Overdrive Drivetrain |od|                                  The ultimate movement upgrade. MOB-BOT can now **move up to**
                                                            **4 tiles per turn**! Burn rubber!
 
-High Yield Mining |hym|                                    A decent upgrade from your basic Mining Robotics. MOB-BOT
+Improved Mining |im|                                       A decent upgrade from your basic Mining Robotics. MOB-BOT
                                                            will now **gain 2 pieces of ore** when you mine!
 
-Unnamed Mining Tech |umt|                                  This mysterious new tech brings MOB-BOT's efficiency to a new
+Superior Mining |sm|                                       This mysterious new tech brings MOB-BOT's efficiency to a new
                                                            level. MOB-BOT will **gain 3 pieces of ore** when mining!
                                                            Sensational!
 
-Overdrive Mining |omining|                                 MOB-BOT has become the mining machine it was always meant to
+Overdrive Mining |om|                                      MOB-BOT has become the mining machine it was always meant to
                                                            be. MOB-BOT will now **gain 4 pieces of ore** per turn!
                                                            Bring in the money!
 
