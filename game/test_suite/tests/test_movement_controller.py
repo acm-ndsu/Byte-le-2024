@@ -1,15 +1,12 @@
 import unittest
 
-from game.common.map.game_board import GameBoard
-from game.controllers.movement_controller import MovementController
-from game.common.stations.station import Station
-from game.common.stations.occupiable_station import OccupiableStation
-from game.common.map.wall import Wall
-from game.utils.vector import Vector
-from game.common.player import Player
 from game.common.action import ActionType
 from game.common.avatar import Avatar
 from game.common.game_object import GameObject
+from game.common.map.game_board import GameBoard
+from game.common.player import Player
+from game.controllers.movement_controller import MovementController
+from game.utils.vector import Vector
 
 
 class TestMovementControllerIfWall(unittest.TestCase):
