@@ -168,6 +168,7 @@ class TestAvatar(unittest.TestCase):
         self.avatar.buy_new_tech('Dynamite')
         self.assertTrue(self.avatar.is_researched('Improved Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
+        self.assertTrue(self.avatar.can_place_dynamite())
 
     # Buying Landmines will return False if the tree hasn't developed to it yet
     def test_unlock_landmines_fail(self):
@@ -181,6 +182,7 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.is_researched('Improved Mining'))
         self.assertTrue(self.avatar.is_researched('Dynamite'))
         self.assertTrue(self.avatar.is_researched('Landmines'))
+        self.assertTrue(self.avatar.can_place_landmine())
 
     # Buying EMPs will return False if the tree hasn't developed to it yet
     def test_unlock_emps_fail(self):
@@ -197,6 +199,7 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.is_researched('Landmines'))
         self.assertTrue(self.avatar.is_researched('EMPs'))
         self.assertFalse(self.avatar.is_researched('Trap Defusal'))
+        self.assertTrue(self.avatar.can_place_emp())
 
     # Buying Trap Detection will return False if the tree hasn't developed to it yet
     def test_unlock_trap_defusal_fail(self):
@@ -213,6 +216,7 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.is_researched('Landmines'))
         self.assertTrue(self.avatar.is_researched('Trap Defusal'))
         self.assertFalse(self.avatar.is_researched('EMPs'))
+        self.assertTrue(self.avatar.can_defuse_trap())
 
     # Tests getting the researched techs
     def test_get_researched_techs(self):
@@ -245,6 +249,11 @@ class TestAvatar(unittest.TestCase):
         self.assertEqual(self.avatar.emp_active_ability.fuse, avatar.emp_active_ability.fuse)
         self.assertEqual(self.avatar.emp_active_ability.cooldown, avatar.emp_active_ability.cooldown)
         self.assertEqual(self.avatar.emp_active_ability.is_usable, avatar.emp_active_ability.is_usable)
+
+        self.assertEqual(self.avatar.trap_defusal_active_ability.fuse, avatar.trap_defusal_active_ability.fuse)
+        self.assertEqual(self.avatar.trap_defusal_active_ability.cooldown, avatar.trap_defusal_active_ability.cooldown)
+        self.assertEqual(self.avatar.trap_defusal_active_ability.is_usable,
+                         avatar.trap_defusal_active_ability.is_usable)
 
         # other_tree: dict = self.avatar.get_tech_tree().to_json()
         # for tech in self.avatar.get_tech_tree().tech_names():
