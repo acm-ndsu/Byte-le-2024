@@ -23,7 +23,7 @@ MOB-BOT can undergo a myriad of upgrades that will make it an amazing, mining ma
 the available upgrade paths and how you can improve.
 
 .. image:: ./_static/images/tech-tree-backdrop.png
-   :width: 95%
+   :width: 100%
    :align: center
 
 .. |id| image:: ./_static/images/improved_drivetrain.png
@@ -78,7 +78,7 @@ Dynamite |dyn|                                             Become more efficient
                                                            **3 turns** after being placed, mining multiple ores at once!
 
 Landmines |lm|                                             The other company keeps taking valuable ores, so let's set
-                                                           traps for them... `>:D` Landmines will steal ores from the
+                                                           traps for them... ``>:D`` Landmines will steal ores from the
                                                            opponent when detonated.
 
 EMPs |emp|                                                 EMPs are the rich Bot's landmine! EMPs will steal more from

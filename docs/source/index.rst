@@ -30,6 +30,7 @@ your question, ask us in the server or call us over!
    ores
    placeables
    scoring
+   enums
 
 
 Indices and tables
