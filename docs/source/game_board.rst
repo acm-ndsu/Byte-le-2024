@@ -13,15 +13,15 @@ battle!
    :width: 50%
    :align: center
 
-The map is made of a 2D array of Tile objects. To access any tiles, you will use (y, x) coordinates like so:
+
+Tiles
+=====
+
+The map is made of a 2D array of Tile objects. To access any tiles, use (y, x) coordinates like so:
 
 .. code-block:: python
 
    world.game_map[y][x]
-
-
-Tiles
-=====
 
 Tile objects can have any other object on top of them. The :doc:`placeables` page will explain everything that
 can be placed on the map by MOB-BOT.
@@ -36,7 +36,8 @@ Each team will have a base on the map. Their base will match their MOB-BOT and c
 - Turing Co.
     - Turing Co. will have the red base in the bottom left corner.
 
-When you want to cash in ores for points or upgrade your MOB-BOT, you can only do so at your base.
+When you want to cash in ores for points or upgrade your MOB-BOT, you can only do so at your base. Once MOB-BOT is
+standing on their base at the end of the turn, it will automatically deposit all the ores in its inventory.
 
 More information on ores is found in :doc:`ores`, and information on MOB-BOT is found in :doc:`mobbot`.
 

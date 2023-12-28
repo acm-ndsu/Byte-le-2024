@@ -8,51 +8,22 @@ different objects that can be placed on the map. These include Dynamite, Landmin
 
 
 Dynamite
---------
+========
 
 .. image:: ./_static/gifs/dynamite.gif
    :width: 105
    :align: center
 
-After unlocking this in your Tech Tree, you will be able to place sticks of dynamite on different tiles. This
+After unlocking this in your Tech Tree, you will be able to place sticks of dynamite on different Tiles. This
 is a very valuable upgrade to have in every MOB-BOT!
 
-Mining one ore at a time is cumbersome, so dynamite solves this issue. Place dynamite on a tile and wait a
-**3** turns. It will explode the four adjacent Tiles and the Tile it's on top of. Any ores on those tiles will be added
-to your inventory. That's 5 ores you collect in one turn, on top of anything else, MOB-BOT can still mine after
-placing the dynamite!
-
-Let the table below depict a 3x3 game map. 'C' stands for Copium, 'D' for Dynamite, 'L' for Lambium, 'T' for
-Turite, and '.' will be an empty space.
-
-
-+-------+-------+-------+
-|   Gameboard Before    |
-+=======+=======+=======+
-|   .   |   C   |   T   |
-+-------+-------+-------+
-|   L   |  D L  |   C   |
-+-------+-------+-------+
-|   C   |   T   +   T   |
-+-------+-------+-------+
-
-
-+-------+-------+-------+
-|    Gameboard After    |
-+=======+=======+=======+
-|   .   |   .   |   T   |
-+-------+-------+-------+
-|   .   |   .   |   .   |
-+-------+-------+-------+
-|   C   |   .   +   T   |
-+-------+-------+-------+
-
-This just shows which Tiles the dynamite object affected when it exploded. All the ores that are gone would now
-be in your inventory. Hope that helps!
+Mining one ore at a time is cumbersome, so dynamite solves this issue. Place dynamite on a Tile and wait a
+**3** turns. It will explode the four adjacent Tiles and the Tile it's on top of. Any ores on those Tiles will be added
+to your inventory. That's 5 ores you collect in one turn on top of the ores MOB-BOT mines after placing the dynamite!
 
 
 Landmines
----------
+=========
 
 .. image:: ./_static/gifs/landmine.gif
    :width: 105
@@ -73,11 +44,11 @@ Whenever a landmine is placed by the opposing team, if your MOB-BOT steps on it,
 **10%** chance of being stolen! Be mindful, and watch your step! (Any damage done to MOB-BOT will be paid for in full
 by the employee(s) responsible, as stated in the Quarry Rush Employee Contract).
 
-If your MOB-BOT placed a landmine and steps on it, it won't activate, so don't worry. Isn't technology amazing?
+If your own MOB-BOT placed a landmine and steps on it, it won't activate, so don't worry. Isn't technology amazing?
 
 
 EMPs
-----
+====
 
 .. image:: ./_static/gifs/emp.gif
    :width: 105

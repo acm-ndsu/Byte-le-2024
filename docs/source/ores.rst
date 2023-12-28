@@ -8,7 +8,7 @@ the different ores you can mine.
 
 
 Copium
-------
+======
 
 .. |pepe copium| image:: ./_static/images/pepe_copium.png
    :width: 35
@@ -18,29 +18,29 @@ Copium
    :width: 90
    :align: center
 
-A very basic ore that's a commodity in every MOB-BOT. Everyone wants Copium. Who doesn't want Copium? |pepe copium|
+A very basic ore that's a commodity for every MOB-BOT. Everyone wants Copium. Who doesn't want Copium? |pepe copium|
 
-Mining this ore will yield **20** points, regardless of team.
+Mining this ore will yield **20** points, regardless of company affiliation.
 
 
 Lambdium
---------
+========
 
 .. image:: ./_static/images/lambdium.png
    :width: 90
    :align: center
 
 Lambium is the favored ore by Church Inc. Lambium is what powers their MOB-BOTs and allows them
-to continue research for investing something called 'anonymous functions,' whatever those are.
+to continue research for investigating something called 'anonymous functions,' whatever those are.
 
-If you are associated with **Church Inc.**, any Lambdium you mine will yield **80 points**! That's a steal!
+If you are affiliated with **Church Inc.**, any Lambdium you mine will yield **80 points**! That's a steal!
 
-If you are associated with **Turing Co.**, the Lambdium you mine will be worth **24 points**. It's still
+If you are affiliated with **Turing Co.**, the Lambdium you mine will be worth **24 points**. It's still
 valuable, but it's not what you want. It's (barely) better than Copium, though!
 
 
 Turite
-------
+======
 
 .. image:: ./_static/images/turite.png
    :width: 90
@@ -51,12 +51,12 @@ systems! Fascinating.
 
 **Turing Co.** will yield **80 points** for every Turite they cash in.
 
-If you are associated with **Church Inc.**, Turite will yield **24 points** for you. That's still worthwhile, but again,
+If you are affiliated with **Church Inc.**, Turite will yield **24 points** for you. That's still worthwhile, but again,
 it's (barely) better than Copium.
 
 
 Ancient Tech
-------------
+============
 
 .. |doors logo| image:: ./_static/images/doors_logo.png
    :width: 35
@@ -68,6 +68,6 @@ Ancient Tech
 In The Quarry, there is another strange mineral called Ancient Tech. When refined, its shape is oddly reminiscent of
 something from the distant past... |doors logo|
 
-Regardless, Ancient Tech is unique in that it doesn't yield normal points, but scientific points. These points will
+Regardless, Ancient Tech is unique in that it doesn't yield normal points, but science points. These points will
 allow you to upgrade your MOB-BOT. These upgrades include faster movement speed, placing dynamite, placing traps,
 and a few other things. Upgrades are explained more in :doc:`mobbot`.

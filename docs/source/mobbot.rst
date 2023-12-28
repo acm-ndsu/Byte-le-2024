@@ -49,7 +49,7 @@ the available upgrade paths and how you can improve.
 
 
 
-Here's a description of all the techs. The order goes by row as depicted above:
+Here's a description of each Tech:
 
 ========================================================== =============================================================
 Tech Name                                                  Tech Description
@@ -57,36 +57,38 @@ Tech Name                                                  Tech Description
 Improved Drivetrain |id|                                   This tech will increase your movement, allowing MOB-BOT to
                                                            **move up to 2 tiles per turn**!
 
-Superior Drivetrain |sd|                                   Grants an additional movement, allowing MOB-BOT to **move**
-                                                           **up to 3 tiles per turn**! How wonderful!
+Superior Drivetrain |sd|                                   Grants an additional increase in movement, allowing MOB-BOT
+                                                           to **move up to 3 tiles per turn**! How wonderful!
 
 Overdrive Drivetrain |od|                                  The ultimate movement upgrade. MOB-BOT can now **move up to**
                                                            **4 tiles per turn**! Burn rubber!
 
-Improved Mining |im|                                       A decent upgrade from your basic Mining Robotics. MOB-BOT
+Improved Mining |im|                                       A decent upgrade from basic Mining Robotics. MOB-BOT
                                                            will now **gain 2 pieces of ore** when you mine!
 
-Superior Mining |sm|                                       This mysterious new tech brings MOB-BOT's efficiency to a new
-                                                           level. MOB-BOT will **gain 3 pieces of ore** when mining!
-                                                           Sensational!
+Superior Mining |sm|                                       This upgraded mining technology brings MOB-BOT's efficiency
+                                                           to a new level. MOB-BOT will **gain 3 pieces of ore** when
+                                                           mining! Sensational!
 
 Overdrive Mining |om|                                      MOB-BOT has become the mining machine it was always meant to
-                                                           be. MOB-BOT will now **gain 4 pieces of ore** per turn!
+                                                           be. MOB-BOT will now **gain 4 pieces of ore** when mining!
                                                            Bring in the money!
 
 Dynamite |dyn|                                             Become more efficient with your mining! Dynamite will explode
                                                            **3 turns** after being placed, mining multiple ores at once!
 
 Landmines |lm|                                             The other company keeps taking valuable ores, so let's set
-                                                           traps for them... ``>:D`` Landmines will steal ores from the
-                                                           opponent when detonated.
+                                                           traps for them... ``>:D`` Landmines **steal ores** from the
+                                                           opponent when activated.
 
-EMPs |emp|                                                 EMPs are the rich Bot's landmine! EMPs will steal more from
-                                                           the opponent than a normal landmine. Phenomenal!
+EMPs |emp|                                                 EMPs are the rich Bot's landmine! EMPs **steal more ores**
+                                                           from the opponent than a normal landmine. Phenomenal!
+                                                           NOTE: once purchased, Trap Defusal cannot be purchased.
 
 Trap Defusal |diffuse|                                     Fight back against the traps that are set against you. Trap
                                                            defusing will deactivate any trap placed by the enemy (as
                                                            long as you don't step on it)!
+                                                           NOTE: once purchased, EMPs cannot be purchased.
 ========================================================== =============================================================
 
 For more information on Dynamite, Landmines, and EMPs, go to :doc:`placeables`.

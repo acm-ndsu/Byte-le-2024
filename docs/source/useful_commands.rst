@@ -3,7 +3,7 @@ Useful Commands
 ===============
 
 Running the launcher
---------------------
+====================
 
 There are required packages necessary for running the game. Run the following command to install them all:
 
@@ -15,7 +15,7 @@ You can view the list of packages in the requirements.txt file. We have nothing 
 
 
 Pygame Installation
--------------------
+===================
 
 If you have problems installing the pygame package, try running the following command:
 
@@ -27,7 +27,7 @@ If you have problems installing the pygame package, try running the following co
 Generate, Run, Visualize!
 =========================
 
-As your testing, it's important to do these three actions. 'Generate' will... well, generate a new game and map.
+As you're testing, it's important to do these three actions. 'Generate' will generate a new game and map.
 'Run' will execute the most recently generated game. 'Visualize' will visualize what happened in the last ran game.
 
 Here are the commands:
@@ -53,8 +53,8 @@ Run
     python launcher.pyz r
 
 As the game is running, any print statements you have will print to your console, which can be useful for
-debugging. There will also be logs generated in the `logs` folder, showing what information was stored turn by
-turn.
+debugging. There will also be logs generated in the ``logs`` folder, showing what information was stored each turn in
+the JSON format.
 
 Visualize
 ----------
@@ -66,14 +66,14 @@ Visualize
 This will visualize the game you ran, allowing you to debug in a more user-friendly way! Thank
 ``<INSERT COMPANY NAME HERE>`` for that.
 
-To understand the visualizer more, visit (this page).
+Visit :doc:`visualizer` to get a better understanding of how it works.
 
 
 Quality of Life!
-----------------
+================
 
 Generate, Run, and Visualize at Once!
-=====================================
+-------------------------------------
 It would be annoying if you wanted to generate, run, and visualize using three separate commands, so we condensed
 them for you!
 
@@ -87,7 +87,7 @@ in the terminal, it will generate, run, and visualize all at once in one command
 
 
 Generate and Run
-================
+----------------
 
 'What if I don't want to visualize, but only generate and run?' We've got you covered!
 
@@ -99,7 +99,7 @@ This command will generate and run your game without using the visualizer. How c
 
 
 Terminal Help
-=============
+-------------
 
 Lastly, a list of commands will be listed by typing
 
@@ -107,4 +107,4 @@ Lastly, a list of commands will be listed by typing
 
     python launcher.pyz -h
 
-in the terminal. Each of the sub-commands will have their own help messages too, of course.
+in the terminal. Each of the sub-commands will have their own help messages too.

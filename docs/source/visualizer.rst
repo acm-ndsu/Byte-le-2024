@@ -16,8 +16,8 @@ The scores are in the top left and top right sections of the screen, showing the
 Turing Co. respectively. The turn counter is in the top center section.
 
 All information for Church Inc. will be on the left and Turing Co. on the right. This includes how much of each ore
-each team has, their total science points, their Tech Tree and which Techs have been unlocked, and which active
-abilities are available to use (they will be colored when available).
+each team has, their total science points, which Active Abilities are available to use (they will be colored when
+available), their Tech Tree, and which Techs have been unlocked.
 
 
 Controls
@@ -30,8 +30,8 @@ Button Function
 ====== ==============================================================================================================
 Prev   Reverts to the previous turn each time it's clicked. Puts the visualizer in a paused state to allow for
        manual navigation.
-Pause  Click once to pause the turn progression and put the visualizer in a paused state. If in a paused state,
-       click to resume game progression from current turn (current turn is affected by Prev and Next).
+Pause  Click once to pause the turn progression and put the visualizer in a paused state. If already in a paused state,
+       click to resume playing the game progression from current turn (current turn is affected by Prev and Next).
 Next   Progresses to the next turn each time it's clicked. Puts the visualizer in a paused state to allow for manual
        navigation.
 Start  Starts the visualizer from the first turn. Puts the visualizer in a paused state, so press Pause to play as

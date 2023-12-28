@@ -6,6 +6,17 @@ The use of enums will manage which actions you'd like to do. Pass these in to co
 ``from game.common.enums import *`` to have access to all the enums you'll need.
 
 
+Company Enums
+=============
+
+============== =========
+Enum Name      Int Value
+============== =========
+Company.CHURCH 1
+Company.TURING 2
+============== =========
+
+
 ObjectType Enums
 ================
 

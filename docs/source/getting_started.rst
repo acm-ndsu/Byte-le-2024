@@ -15,22 +15,26 @@ More commands are listed in :doc:`useful_commands`. Thank you!
 
 
 Objective
----------
-Your objective for this year is to mine more ores than the opposing team.
+=========
+Your objective for this year is to mine more ores than the opposing team in The Quarry.
 
-As you collect ores, make your way back to your base to cash them in for total points and upgrade points!
-Upgrading your MOB-BOT will increase how much you can mine, thus improving corporate revenue (fantastic)!
-You can even disrupt the opposing team with traps, giving you the advantage and removing the competition
+As you collect ores, make your way back to your base to cash them in for game points and science points!
+Upgrading your MOB-BOT with science points will increase its mining capabilities, thus improving corporate revenue
+(fantastic)! You can even disrupt the opposing team with traps, giving you the advantage and removing the competition
 from the market (astounding)!
 
-At the end of every round game, the bot with the most points will win. **(UPDATE THIS >>>)** After one game,
-both bots will swap teams.
-
-More detail on the MOB-BOT is provided (here).
+Visit :doc:`mobbot` for more information on how it all works.
 
 Remember -- failure to comply with the high standards of the company, along with failure to defeat the rival
 company in the task of mining the most ore, will result in ``immediate termination``. But you'll be okay.
 ``:)``
+
+
+Tournament Structure
+====================
+Each pairing of teams will have two games against each other. After one game, both teams will switch company
+affiliations (i.e., if first with Church Inc., will next be Turing Co.). The points gained from both games will be added
+to those teams' total points in the tournament.
 
 
 Running the Game
@@ -55,4 +59,5 @@ Need to discuss how we will distribute the code to contestants.
 Submitting Issues
 -----------------
 
-If you run into issues with the game, please submit an issue to the discord in the bugs channel!
+If you run into issues with the game, please submit an issue to the discord in the bugs channel or call an developer
+over!
