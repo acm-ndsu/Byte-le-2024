@@ -10,6 +10,9 @@ class DefuseController(Controller):
         super().__init__()
         
     def handle_actions(self, action: ActionType, client: Player, world: GameBoard):
+        if not client.avatar.can_defuse_trap():  # return if not usable
+            return
+
         temp_vector: Vector
         match action:
             case ActionType.DEFUSE_UP:

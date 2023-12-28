@@ -22,6 +22,10 @@ class MineController(Controller):
         will be taken, and it stops there. If no copium is found, None will be returned.
         """
 
+        # don't mine anything if the inventory is full
+        if len(world.inventory_manager.get_inventory(client.avatar.company)) == 50:
+            return
+
         match action:
             case ActionType.MINE:
                 client.avatar.state = 'mining'

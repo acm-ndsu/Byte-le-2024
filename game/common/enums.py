@@ -49,6 +49,7 @@ class ObjectType(Enum):
     TRAP = auto()  # 31
     LANDMINE = auto()  # 32
     EMP = auto()  # 33
+    TRAP_DEFUSAL_ACTIVE_ABILITY = auto()  # 34
 
 
 class ActionType(Enum):
