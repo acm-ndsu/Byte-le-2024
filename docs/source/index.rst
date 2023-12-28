@@ -31,6 +31,7 @@ your question, ask us in the server or call us over!
    placeables
    scoring
    enums
+   visualizer
 
 
 Indices and tables

@@ -95,6 +95,11 @@ Make sure to upgrade the Tech Tree as time goes on. Not only will you gain upgra
 provide extra points. Visit :doc:`scoring` for an overview of how points are accumulated.
 
 
+Inventory
+=========
+
+Each MOB-BOT comes with its own, standardized inventory system. The inventory has a max capacity of 50 ores. Once
+
 Abilities
 =========
 
