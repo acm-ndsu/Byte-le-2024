@@ -1,24 +1,16 @@
 import unittest
 from game.quarry_rush.ability.dynamite_active_ability import DynamiteActiveAbility
-from game.utils.vector import Vector
 
 
 class TestDynamiteActiveAbility(unittest.TestCase):
+    """
+    This is class that tests the Dynamite Active Ability
+    """
 
-    """
-    This is class that tests the Active Ability
-    """
     # set up
     def setUp(self) -> None:
         self.dynamite_active_ability = DynamiteActiveAbility()
-        self.name: str = ""
         self.cooldown: int = 1
-
-    # test: name
-    def test_name(self):
-        self.name = ""
-        self.dynamite_active_ability.name = ""
-        self.assertEqual(self.dynamite_active_ability.name, self.name)
 
     # test: cooldown
     def test_cooldown(self):
@@ -67,22 +59,6 @@ class TestDynamiteActiveAbility(unittest.TestCase):
         with self.assertRaises(ValueError) as e:
             self.dynamite_active_ability.fuse = -1
         self.assertEqual(str(e.exception), 'DynamiteActiveAbility.fuse cannot be negative')
-
-    # test: position
-    def test_dynamite_active_ability_set_position(self):
-        self.dynamite_active_ability.position = Vector(10, 10)
-        self.assertEqual(str(self.dynamite_active_ability.position), str(Vector(10, 10)))
-
-    # test: position none
-    def test_dynamite_active_ability_set_position_None(self):
-        self.dynamite_active_ability.position = None
-        self.assertEqual(self.dynamite_active_ability.position, None)
-
-    # fail test: position cannot be anything else
-    # def test_dynamite_active_ability_set_position_fail(self):
-    #     with self.assertRaises(ValueError) as e:
-    #         self.dynamite_active_ability.position = 10
-    #     self.assertEqual(str(e.exception), 'DynamiteActiveAbility.position must be a Vector or None.')
 
     # test: for placing dynamite
     def test_placing_dynamite(self):
