@@ -17,7 +17,7 @@ Here are some important notes about MOB-BOT that will help you to improve its fu
 
 
 Tech Tree
----------
+=========
 
 MOB-BOT can undergo a myriad of upgrades that will make it an amazing, mining machine. This tree structure shows
 the available upgrade paths and how you can improve.
@@ -93,3 +93,34 @@ For more information on Dynamite, Landmines, and EMPs, go to :doc:`placeables`.
 
 Make sure to upgrade the Tech Tree as time goes on. Not only will you gain upgrades, but each unlocked Tech will
 provide extra points. Visit :doc:`scoring` for an overview of how points are accumulated.
+
+
+Abilities
+=========
+
+As more Techs are unlocked, they will either be considered a Passive or Active Ability and behave differently.
+
+
+Passive Abilities
+-----------------
+
+All Drivetrain and Mining Techs will be passive. Once you unlock them, they will apply to MOB-BOT. When a Drivetrain
+Tech is unlocked, it simply allows for more movement actions to take place in one turn. This will be explained more in
+**(EXPLAIN ME MORE)**
+
+
+Active Abilities
+----------------
+
+There are 4 active abilities: Dynamite Active Ability, Landmine Active Ability, EMP Active Ability, and Trap Defusal
+Active Ability. These all have cooldown effects, preventing them from being used all the time. Manage your resources
+properly, and you can get the upper hand!
+
+======================= ========
+Ability                 Cooldown
+======================= ========
+Dynamite Active Ability 4
+Landmine Active Ability 6
+EMP Active Ability      4
+Trap Defusal            0
+======================= ========
