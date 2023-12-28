@@ -40,6 +40,17 @@ class TestMineController(unittest.TestCase):
         # self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.avatar.company)[0],
         #                            Copium))
 
+    def test_mining_full_inventory(self):
+        # fill inventory
+        [self.world.inventory_manager.give(Turite(), self.client.avatar.company) for x in range(50)]
+
+        # attempt to mine
+        self.mine_controller.handle_actions(ActionType.MINE, self.client, self.world)
+
+        # ensure the last slot is still Turite and not Copium
+        self.assertTrue(isinstance(self.world.inventory_manager.get_inventory(self.client.avatar.company)[49],
+                                   Turite))
+
     # def test_mining_fail(self):
     #     pass
         # self.mine_controller.handle_actions(ActionType.MINE_ANCIENT_TECH, self.client, self.world)
