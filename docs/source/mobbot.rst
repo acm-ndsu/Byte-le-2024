@@ -98,7 +98,12 @@ provide extra points. Visit :doc:`scoring` for an overview of how points are acc
 Inventory
 =========
 
-Each MOB-BOT comes with its own, standardized inventory system. The inventory has a max capacity of 50 ores. Once
+Each MOB-BOT comes with its own, standardized inventory system. The inventory has a max capacity of **50 ores**. Once
+capacity has been reached, MOB-BOT will no longer be able to mine. Make sure to go back to base and make a deposit!
+
+Each time you mine, your drop rate will determine how many ores are added to your inventory. For example, if Overdrive
+Mining (drop rate = 4) was unlocked and there is an empty inventory, the inventory will have 4/50 slots filled.
+
 
 Abilities
 =========
@@ -118,8 +123,8 @@ Active Abilities
 ----------------
 
 There are 4 active abilities: Dynamite Active Ability, Landmine Active Ability, EMP Active Ability, and Trap Defusal
-Active Ability. These all have cooldown effects, preventing them from being used all the time. Manage your resources
-properly, and you can get the upper hand!
+Active Ability. These all have cooldown effects and must be called using :doc:`enums`, preventing them from being used
+all the time. Manage your resources properly, and you can get the upper hand!
 
 ======================= ========
 Ability                 Cooldown
