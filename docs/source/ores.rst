@@ -7,58 +7,63 @@ the technological world, but they also increase your points and allow for you to
 the different ores you can mine.
 
 
-Copium |copium ore|
--------------------
-
-.. |copium ore| image:: ./_static/images/copium.png
-   :width: 35
+Copium
+------
 
 .. |pepe copium| image:: ./_static/images/pepe_copium.png
    :width: 35
 
-A very basic ore that's a commodity. Everyone wants Copium. Who doesn't want Copium? |pepe copium|
 
-Mining this ore will yield **1** point.
+.. image:: ./_static/images/copium.png
+   :width: 90
+   :align: center
+
+A very basic ore that's a commodity in every MOB-BOT. Everyone wants Copium. Who doesn't want Copium? |pepe copium|
+
+Mining this ore will yield **20** points, regardless of team.
 
 
-Lambdium |lambdium|
--------------------
+Lambdium
+--------
 
-.. |lambdium| image:: ./_static/images/lambdium.png
-   :width: 35
+.. image:: ./_static/images/lambdium.png
+   :width: 90
+   :align: center
 
 Lambium is the favored ore by Church Inc. Lambium is what powers their MOB-BOTs and allows them
 to continue research for investing something called 'anonymous functions,' whatever those are.
 
-If you are associated with **Church Inc.**, any Lambdium you mine will yield **10 points**! That's a steal!
+If you are associated with **Church Inc.**, any Lambdium you mine will yield **80 points**! That's a steal!
 
-If you are associated with **Turing Co.**, the Lambdium you mine will be worth **7 points**. It's still
-valuable, but it's not what you want. It's better than Copium, though!
+If you are associated with **Turing Co.**, the Lambdium you mine will be worth **24 points**. It's still
+valuable, but it's not what you want. It's (barely) better than Copium, though!
 
 
-Turite |turite|
----------------
+Turite
+------
 
-.. |turite| image:: ./_static/images/turite.png
-   :width: 35
+.. image:: ./_static/images/turite.png
+   :width: 90
+   :align: center
 
 Turite is the favored ore by Turing Inc. Turite will power Turing Machine-based MOB-BOTs and improve their
 systems! Fascinating.
 
-**Turing Co.** will yield **10 points** for every Turite they cash in.
+**Turing Co.** will yield **80 points** for every Turite they cash in.
 
-If you are associated with **Church Inc.**, Turite will yield **7 points** for you. That's still worthwhile, but again,
-it's better than Copium.
+If you are associated with **Church Inc.**, Turite will yield **24 points** for you. That's still worthwhile, but again,
+it's (barely) better than Copium.
 
 
-Ancient Tech |ancient tech ore|
--------------------------------
-
-.. |ancient tech ore| image:: ./_static/images/ancient_tech.png
-   :width: 35
+Ancient Tech
+------------
 
 .. |doors logo| image:: ./_static/images/doors_logo.png
-   :width: 15
+   :width: 35
+
+.. image:: ./_static/images/ancient_tech.png
+   :width: 90
+   :align: center
 
 In The Quarry, there is another strange mineral called Ancient Tech. When refined, its shape is oddly reminiscent of
 something from the distant past... |doors logo|
