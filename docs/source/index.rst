@@ -26,6 +26,7 @@ your question, call a developer over and they'll answer your question!
    getting_started
    useful_commands
    mobbot
+   taking_action
    game_board
    ores
    placeables
