@@ -292,7 +292,7 @@ class Engine:
         if source:
             output = "\n"
             for client in self.clients:
-                if client.error != None:
+                if client.error is not None:
                     output += client.error + "\n"
             print(f'\nGame has ended due to {source}: [{output}].')
 

@@ -29,6 +29,7 @@ SET_NUMBER_OF_CLIENTS_CONTINUE = 2                  # required number of clients
 
 ALLOWED_MODULES = ["game.client.user_client",       # modules that clients are specifically allowed to access
                    "game.common.enums",
+                   "game.utils.vector",
                    "numpy",
                    "scipy",
                    "pandas",
