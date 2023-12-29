@@ -23,7 +23,7 @@ class MineController(Controller):
         """
 
         # don't mine anything if the inventory is full
-        if len(world.inventory_manager.get_inventory(client.avatar.company)) == 50:
+        if len(list(filter(lambda item: item is not None, world.inventory_manager.get_inventory(client.avatar.company)))) == 50:
             return
 
         match action:

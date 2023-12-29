@@ -35,7 +35,8 @@ class OreOccupiableStation(OccupiableStation):
             raise ValueError(f'{self.__class__.__name__}.give_item() needs a drop rate of at least 1')
 
         # gives the held item for the amount that is specified by the drop rate passed in
-        inventory_manager.give(self.held_item, company, drop_rate)
+        for i in range(drop_rate):
+            inventory_manager.give(self.held_item, company, drop_rate)
 
         if isinstance(self.held_item, Copium):
             generated_num: float = self.rand.random()

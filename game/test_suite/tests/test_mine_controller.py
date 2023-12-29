@@ -54,6 +54,7 @@ class TestMineController(unittest.TestCase):
     def test_points_gained_high_drop_rate(self):
         self.test_mining_high_drop_rate()
         self.assertEqual(self.world.inventory_manager.cash_in_points(Company.CHURCH), 30)  # 1 copium = 10 pts
+        
     def test_mining_full_inventory(self):
         # fill inventory
         [self.world.inventory_manager.give(Turite(), self.client.avatar.company) for x in range(50)]
