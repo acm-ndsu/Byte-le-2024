@@ -4,6 +4,7 @@ from game.common.enums import ObjectType, Company
 from game.common.game_object import GameObject
 from game.quarry_rush.ability.emp_active_ability import EMPActiveAbility
 from game.quarry_rush.ability.landmine_active_ability import LandmineActiveAbility
+from game.quarry_rush.ability.trap_defusal_active_ability import TrapDefusalActiveAbility
 from game.quarry_rush.tech.tech import TechInfo
 from game.utils.vector import Vector
 from game.quarry_rush.tech.tech_tree import TechTree
@@ -154,6 +155,7 @@ class Avatar(GameObject):
         self.dynamite_active_ability: DynamiteActiveAbility = DynamiteActiveAbility()
         self.landmine_active_ability: LandmineActiveAbility = LandmineActiveAbility()
         self.emp_active_ability: EMPActiveAbility = EMPActiveAbility()
+        self.trap_defusal_active_ability: TrapDefusalActiveAbility = TrapDefusalActiveAbility()
 
     @property
     def company(self) -> Company:
@@ -361,7 +363,7 @@ class Avatar(GameObject):
         return self.abilities['EMPs'] and self.emp_active_ability.is_usable and not self.abilities['Landmines']
 
     def can_defuse_trap(self) -> bool:
-        return self.abilities['Trap Defusal']
+        return self.abilities['Trap Defusal'] and self.trap_defusal_active_ability.is_usable
 
     # method to return the opposing team based on the avatar's company
     def get_opposing_team(self) -> Company:

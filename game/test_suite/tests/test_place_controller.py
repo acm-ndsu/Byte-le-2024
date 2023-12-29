@@ -62,7 +62,7 @@ class TestPlaceController(unittest.TestCase):
         self.assertEqual(placed_dyn.occupied_by, self.client.avatar)
 
         # double-check the ability cooldown reset
-        self.assertEqual(self.avatar.dynamite_active_ability.cooldown, 1)
+        self.assertEqual(self.avatar.dynamite_active_ability.cooldown, 4)
 
     def test_placing_landmine(self) -> None:
         self.movement_controller.handle_actions(ActionType.MOVE_DOWN, self.client, self.game_board)
@@ -77,7 +77,7 @@ class TestPlaceController(unittest.TestCase):
         self.assertEqual(placed_landmine.occupied_by, self.client.avatar)
 
         # double-check the ability cooldown reset
-        self.assertEqual(self.avatar.landmine_active_ability.cooldown, 1)
+        self.assertEqual(self.avatar.landmine_active_ability.cooldown, 6)
 
     def test_placing_emp(self) -> None:
         self.avatar.buy_new_tech('EMPs')  # unlock emps for testing
@@ -93,7 +93,7 @@ class TestPlaceController(unittest.TestCase):
         placed_emp: EMP = self.ore_station.occupied_by  # returns the correct type; ignore warning
         self.assertEqual(placed_emp.occupied_by, self.client.avatar)
 
-        self.assertEqual(self.avatar.emp_active_ability.cooldown, 1)  # double-check the ability cooldown reset
+        self.assertEqual(self.avatar.emp_active_ability.cooldown, 4)  # double-check the ability cooldown reset
 
     # test that 2 dynamite aren't on the same tile
     def test_placing_multiple_dynamite(self):
