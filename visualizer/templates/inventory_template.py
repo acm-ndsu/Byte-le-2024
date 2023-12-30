@@ -3,6 +3,7 @@ import pygame
 from game.utils.vector import Vector
 from visualizer.sprites.inventory.ancient_tech_inventory import AncientTechInventory
 from visualizer.sprites.inventory.copium_inventory import CopiumInventory
+from visualizer.sprites.inventory.defusal_ability import DefusalAbility
 from visualizer.sprites.inventory.dynamite_ability import DynamiteAbility
 from visualizer.sprites.inventory.emp_ability import EmpAbility
 from visualizer.sprites.inventory.inventory_backdrop import InventoryBackdrop
@@ -60,6 +61,9 @@ class InventoryTemplate(InfoTemplate):
         self.landmine_ability = LandmineAbility(top_left=Vector.add_vectors(topleft, Vector(y=200, x=225)))
         self.landmine_ability.add(self.render_list)
 
+        self.defusal_ability = DefusalAbility(top_left=Vector.add_vectors(topleft, Vector(y=250, x=225)))
+        self.defusal_ability.add(self.render_list)
+
         self.science: Science = Science(top_left=Vector.add_vectors(topleft, Vector(y=400, x=50)))
 
         self.science.add(self.render_list)
@@ -99,6 +103,9 @@ class InventoryTemplate(InfoTemplate):
 
         self.emp_ability.activated = (avatar['emp_active_ability']['is_usable']
                                       and avatar['tech_tree']['EMPs'])
+
+        self.defusal_ability.activated = (avatar['defusal_active_ability']['is_usable']
+                                          and avatar['tech_tree']['Trap Defusal'])
 
     def render(self) -> None:
         super().render()
