@@ -381,6 +381,7 @@ class Avatar(GameObject):
         data['dynamite_active_ability'] = self.dynamite_active_ability.to_json()
         data['landmine_active_ability'] = self.landmine_active_ability.to_json()
         data['emp_active_ability'] = self.emp_active_ability.to_json()
+        data['defusal_active_ability'] = self.trap_defusal_active_ability.to_json()
         # data['tech_tree'] = self.__tech_tree.to_json()
         return data
 
@@ -397,4 +398,5 @@ class Avatar(GameObject):
         self.dynamite_active_ability = DynamiteActiveAbility().from_json(data['dynamite_active_ability'])
         self.landmine_active_ability = LandmineActiveAbility().from_json(data['landmine_active_ability'])
         self.emp_active_ability = EMPActiveAbility().from_json(data['emp_active_ability'])
+        self.trap_defusal_active_ability = TrapDefusalActiveAbility().from_json(data['defusal_active_ability'])
         return self
