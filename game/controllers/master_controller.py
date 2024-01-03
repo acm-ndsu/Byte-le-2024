@@ -14,6 +14,8 @@ from game.controllers.movement_controller import MovementController
 from game.controllers.controller import Controller
 from game.controllers.interact_controller import InteractController
 from game.controllers.mine_controller import MineController
+from game.controllers.buy_tech_controller import BuyTechController
+from game.controllers.place_controller import PlaceController
 from game.common.map.game_board import GameBoard
 from game.config import MAX_NUMBER_OF_ACTIONS_PER_TURN
 from game.utils.vector import Vector 
@@ -63,6 +65,8 @@ class MasterController(Controller):
         self.dynamite_controller: DynamiteController = DynamiteController()
         self.defuse_controller: DefuseController = DefuseController()
         self.mine_controller: MineController = MineController()
+        self.buy_tech_controller: BuyTechController = BuyTechController()
+        self.place_controller: PlaceController = PlaceController()
 
     # Receives all clients for the purpose of giving them the objects they will control
     def give_clients_objects(self, clients: list[Player], world: dict):
@@ -138,6 +142,10 @@ class MasterController(Controller):
                     self.mine_controller.handle_actions(client.actions[i], client, self.current_world_data[
                         'game_board'])
                     self.defuse_controller.handle_actions(client.actions[i], client, self.current_world_data[
+                        'game_board'])
+                    self.buy_tech_controller.handle_actions(client.actions[i], client, self.current_world_data[
+                        'game_board'])
+                    self.place_controller.handle_actions(client.actions[i], client, self.current_world_data[
                         'game_board'])
                 except IndexError:
                     pass

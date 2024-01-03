@@ -29,10 +29,10 @@ class Client(UserClient):
         self.company = avatar.company
         self.my_station_type = ObjectType.TURING_STATION if self.company == Company.TURING else ObjectType.CHURCH_STATION
         self.current_state = State.MINING
-        self.base_position = self.find_all_by_type(world, self.my_station_type)[0]
+        self.base_position = world.get_objects(self.my_station_type)[0][0]
 
     # This is where your AI will decide what to do
-    def take_turn(self, turn: int, actions: ActionType, world, avatar):
+    def take_turn(self, turn, actions, world, avatar):
         """
         This is where your AI will decide what to do.
         :param turn:        The current turn of the game.
@@ -44,9 +44,17 @@ class Client(UserClient):
             
         current_tile = world.game_map[avatar.position.y][avatar.position.x] # set current tile to the tile that I'm standing on
         
-        # If I start the turn on my station, I should start mining
+        # If I start the turn on my station, I should...
         if current_tile.occupied_by.object_type == self.my_station_type:
+            # buy Improved Mining tech if I can...
+            if avatar.science_points >= avatar.get_tech_info('Improved Drivetrain').cost and not avatar.is_researched('Improved Drivetrain'):
+                return [ActionType.BUY_IMPROVED_DRIVETRAIN]
+            # otherwise set my state to mining
             self.current_state = State.MINING
+            
+        # If I have at least 5 items in my inventory, set my state to selling
+        if len([item for item in world.inventory_manager.get_inventory(self.company) if item is not None]) >= 5:
+            self.current_state = State.SELLING
             
         # Make action decision for this turn
         if self.current_state == State.SELLING:
@@ -54,13 +62,12 @@ class Client(UserClient):
             actions = self.generate_moves(avatar.position, self.base_position, turn % 2 == 0)
         else:
             if current_tile.occupied_by.object_type == ObjectType.ORE_OCCUPIABLE_STATION:
-                # If I'm mining and I'm standing on an ore, mine it and set my state to selling
+                # If I'm mining and I'm standing on an ore, mine it
                 actions = [ActionType.MINE]
-                self.current_state = State.SELLING
             else:
                 # If I'm mining and I'm not standing on an ore, move randomly
                 actions = [random.choice([ActionType.MOVE_LEFT, ActionType.MOVE_RIGHT, ActionType.MOVE_UP, ActionType.MOVE_DOWN])]
-
+                
         return actions
 
     def generate_moves(self, start_position, end_position, vertical_first):
@@ -79,26 +86,3 @@ class Client(UserClient):
         vertical = [ActionType.MOVE_UP] * -dy if dy < 0 else [ActionType.MOVE_DOWN] * dy
         
         return vertical + horizontal if vertical_first else horizontal + vertical
-    
-    def find_all_by_type(self, world, object_type):
-        """
-        Finds all tiles on the board with the given object_type
-        :param world:           Generic world information
-        :param object_type:     The desired object type
-        :return:                List of all Vectors for positions with Tiles with the object type
-        """
-        return self.find_all(world, lambda tile: tile.occupied_by is not None and tile.occupied_by.object_type == object_type)
-    
-    def find_all(self, world, criteria):
-        """
-        Finds all tiles on the board that match the given criteria
-        :param world:           Generic world information
-        :param criteria:        The required criteria as a function that takes a Tile and returns a bool
-        :return:                List of all Vectors for positions with Tiles that meet the criteria
-        """
-        result = []
-        for y in range(len(world.game_map)):
-            for x in range(len(world.game_map[y])):
-                if criteria(world.game_map[y][x]):
-                    result.append(Vector(x=x, y=y))
-        return result
