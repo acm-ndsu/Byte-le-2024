@@ -13,6 +13,9 @@ from game.utils.thread import CommunicationThread
 from game.controllers.movement_controller import MovementController
 from game.controllers.controller import Controller
 from game.controllers.interact_controller import InteractController
+from game.controllers.mine_controller import MineController
+from game.controllers.buy_tech_controller import BuyTechController
+from game.controllers.place_controller import PlaceController
 from game.common.map.game_board import GameBoard
 from game.config import MAX_NUMBER_OF_ACTIONS_PER_TURN
 from game.utils.vector import Vector 
@@ -61,6 +64,9 @@ class MasterController(Controller):
         self.interact_controller: InteractController = InteractController()
         self.dynamite_controller: DynamiteController = DynamiteController()
         self.defuse_controller: DefuseController = DefuseController()
+        self.mine_controller: MineController = MineController()
+        self.buy_tech_controller: BuyTechController = BuyTechController()
+        self.place_controller: PlaceController = PlaceController()
 
     # Receives all clients for the purpose of giving them the objects they will control
     def give_clients_objects(self, clients: list[Player], world: dict):
@@ -119,17 +125,31 @@ class MasterController(Controller):
         # during turn logic; handling controller logic
         for client in clients:
             client.avatar.state = 'idle'  # set the state to idle to aid the visualizer
+            if len(client.actions) == 0:
+                continue
+            first = client.actions[0]
+            if first in [ActionType.MOVE_LEFT, ActionType.MOVE_RIGHT, ActionType.MOVE_UP, ActionType.MOVE_DOWN]:
+                client.actions = [action for action in client.actions if action in [ActionType.MOVE_LEFT, ActionType.MOVE_RIGHT, ActionType.MOVE_UP, ActionType.MOVE_DOWN]][:client.avatar.movement_speed]
+            else:
+                client.actions = [client.actions[0]]
+            client.actions.append(ActionType.INTERACT_CENTER)
             for i in range(MAX_NUMBER_OF_ACTIONS_PER_TURN):
                 try:
                     self.movement_controller.handle_actions(client.actions[i], client, self.current_world_data[
                         'game_board'])
                     self.interact_controller.handle_actions(client.actions[i], client, self.current_world_data[
                         'game_board'])
+                    self.mine_controller.handle_actions(client.actions[i], client, self.current_world_data[
+                        'game_board'])
                     self.defuse_controller.handle_actions(client.actions[i], client, self.current_world_data[
+                        'game_board'])
+                    self.buy_tech_controller.handle_actions(client.actions[i], client, self.current_world_data[
+                        'game_board'])
+                    self.place_controller.handle_actions(client.actions[i], client, self.current_world_data[
                         'game_board'])
                 except IndexError:
                     pass
-                
+
             avatars: dict[Company, Avatar] = {client.avatar.company: client.avatar for client in clients}
             self.current_world_data['game_board'].trap_detonation_control(avatars)
 

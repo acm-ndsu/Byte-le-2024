@@ -63,21 +63,24 @@ class InventoryManager(GameObject):
         self.__inventories[company] = self.create_empty_inventory()
         return (points, science)
 
-    def give(self, item: Item | None, company: Company) -> bool:
+    def give(self, item: Item | None, company: Company, drop_rate: int = 1) -> bool:
         """
         Give the selected player the given item. If the item was successfully given to the player, return True,
         otherwise False.
         """
+        if drop_rate < 1:
+            raise ValueError(f'{self.__class__.__name__}.give() needs a drop rate of at least 1')
 
         if item is None:
             return False
 
         inventory = self.__inventories[company]
-
-        for i in range(0, len(inventory)):
-            if inventory[i] is None:
-                inventory[i] = item
-                return True
+        while drop_rate > 0 and any(map(lambda x: x is None, inventory)):
+            for i in range(len(inventory)):
+                if inventory[i] is None:
+                    inventory[i] = item
+                    drop_rate -= 1
+                    return True
         return False
 
     def take(self, item: Item, company: Company) -> bool:
