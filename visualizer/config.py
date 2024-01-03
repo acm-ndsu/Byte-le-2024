@@ -1,4 +1,7 @@
 from game.utils.vector import Vector
+import os
+
+from visualizer.utils.button import ButtonColors
 
 
 class Config:
@@ -7,10 +10,20 @@ class Config:
     __SCALE: int = 1
     __SCREEN_SIZE: Vector = Vector(x=1366, y=768)  # width, height
     __FRAME_RATE: int = 12
-    __BACKGROUND_COLOR: (int, int, int) = 0, 0, 0
-    __GAME_BOARD_MARGIN_LEFT: int = 440
+    __BACKGROUND_COLOR: (int, int, int) = 44, 30, 49
+    __GAME_BOARD_MARGIN_LEFT: int = 459
     __GAME_BOARD_MARGIN_TOP: int = 100
     __VISUALIZE_HELD_ITEMS: bool = False
+    __FONT: str = os.path.join(os.getcwd(), r'visualizer\templates\zrnic rg.otf')
+    __TEXT_COLOR: str = '#A26D3F'
+    __BUTTON_COLORS: ButtonColors = ButtonColors(
+        bg_color='#A26D3F',
+        bg_color_hover='#CE9248',
+        bg_color_clicked='#94493A',
+        fg_color='#DAB163',
+        fg_color_hover='#36C5F4',
+        fg_color_clicked='#FA6E79'
+    )
 
     # if you have an animation, this will be the number of frames the animation goes through for each turn
     @property
@@ -55,5 +68,14 @@ class Config:
     def VISUALIZE_HELD_ITEMS(self) -> bool:
         return self.__VISUALIZE_HELD_ITEMS
 
+    @property
+    def FONT(self) -> str:
+        return self.__FONT
 
+    @property
+    def TEXT_COLOR(self) -> str:
+        return self.__TEXT_COLOR
 
+    @property
+    def BUTTON_COLORS(self) -> ButtonColors:
+        return self.__BUTTON_COLORS

@@ -28,7 +28,8 @@ class TestGameBoard(unittest.TestCase):
     def setUp(self) -> None:
         self.item: Item = Item(10)
         self.wall: Wall = Wall()
-        self.avatar: Avatar = Avatar(position=Vector(5, 5))
+        self.avatar: Avatar = Avatar(position=Vector(5, 5), company=Company.CHURCH)
+        self.avatar2: Avatar = Avatar(position=Vector(5, 5), company=Company.TURING)
         self.locations: dict[tuple[Vector]:list[GameObject]] = {
             (Vector(1, 1),): [Station(None)],
             (Vector(1, 2), Vector(1, 3)): [OccupiableStation(self.item), Station(None)],
@@ -138,7 +139,7 @@ class TestGameBoard(unittest.TestCase):
                                                             opponent_position=lambda: Vector(5, 5), position=Vector()))
         self.assertEqual(self.game_board.turing_trap_queue.size(), 2)
         self.assertEqual(self.game_board.church_trap_queue.size(), 1)
-        self.game_board.trap_detonation_control()
+        self.game_board.trap_detonation_control(avatars={Company.CHURCH: self.avatar, Company.TURING: self.avatar2})
         self.assertEqual(self.game_board.turing_trap_queue.size(), 1)
         self.assertEqual(self.game_board.church_trap_queue.size(), 1)
 

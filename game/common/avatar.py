@@ -2,12 +2,14 @@ from typing import Self
 
 from game.common.enums import ObjectType, Company
 from game.common.game_object import GameObject
+from game.quarry_rush.ability.emp_active_ability import EMPActiveAbility
+from game.quarry_rush.ability.landmine_active_ability import LandmineActiveAbility
+from game.quarry_rush.ability.trap_defusal_active_ability import TrapDefusalActiveAbility
 from game.quarry_rush.tech.tech import TechInfo
 from game.utils.vector import Vector
 from game.quarry_rush.tech.tech_tree import TechTree
 from game.quarry_rush.avatar.avatar_functions import AvatarFunctions
 from game.quarry_rush.ability.dynamite_active_ability import DynamiteActiveAbility
-from game.quarry_rush.ability.place_trap import PlaceTrap
 
 
 class Avatar(GameObject):
@@ -146,12 +148,14 @@ class Avatar(GameObject):
         self.science_points: int = 0
         self.position: Vector | None = position
         self.movement_speed: int = 1  # determines how many tiles the player moves
-        self.drop_rate: float = 1.0  # determines how many items are dropped after mining
+        self.drop_rate: int = 1  # determines how many items are dropped after mining
         self.abilities: dict = self.__create_abilities_dict()  # used to manage unlocking new abilities
         self.__tech_tree: TechTree = self.__create_tech_tree()  # the tech tree cannot be set; made private for security
         self.__company: Company = company
         self.dynamite_active_ability: DynamiteActiveAbility = DynamiteActiveAbility()
-        self.place_trap: PlaceTrap = PlaceTrap()
+        self.landmine_active_ability: LandmineActiveAbility = LandmineActiveAbility()
+        self.emp_active_ability: EMPActiveAbility = EMPActiveAbility()
+        self.trap_defusal_active_ability: TrapDefusalActiveAbility = TrapDefusalActiveAbility()
 
     @property
     def company(self) -> Company:
@@ -170,11 +174,11 @@ class Avatar(GameObject):
         return self.__position
 
     @property
-    def movement_speed(self):
+    def movement_speed(self) -> int:
         return self.__movement_speed
 
     @property
-    def drop_rate(self):
+    def drop_rate(self) -> int:
         return self.__drop_rate
 
     @property
@@ -222,12 +226,12 @@ class Avatar(GameObject):
         self.__movement_speed: int = speed
 
     @drop_rate.setter
-    def drop_rate(self, drop_rate: float) -> None:
-        if drop_rate is None or not isinstance(drop_rate, float):
-            raise ValueError(f'{self.__class__.__name__}.drop_rate must be a float.')
+    def drop_rate(self, drop_rate: int) -> None:
+        if drop_rate is None or not isinstance(drop_rate, int):
+            raise ValueError(f'{self.__class__.__name__}.drop_rate must be an int.')
 
         if drop_rate < 0:
-            raise ValueError(f'{self.__class__.__name__}.drop_rate must be a positive float.')
+            raise ValueError(f'{self.__class__.__name__}.drop_rate must be a positive int.')
 
         self.__drop_rate = drop_rate
 
@@ -258,12 +262,26 @@ class Avatar(GameObject):
 
     def __increase_movement(self, amt: int) -> None:
         self.movement_speed += amt
+        match self.movement_speed:
+            case 2:
+                self.abilities['Improved Drivetrain'] = True
+            case 3:
+                self.abilities['Superior Drivetrain'] = True
+            case _:
+                self.abilities['Overdrive Drivetrain'] = True
 
-    def __increase_drop_rate(self, amt: float) -> None:
+    def __increase_drop_rate(self, amt: int) -> None:
         self.drop_rate += amt
+        match self.drop_rate:
+            case 2:
+                self.abilities['Improved Mining'] = True
+            case 3:
+                self.abilities['Superior Mining'] = True
+            case _:
+                self.abilities['Overdrive Mining'] = True
 
     def __unlock_overdrive_movement(self) -> None:
-        self.abilities['Overdrive Movement'] = True
+        self.abilities['Overdrive Drivetrain'] = True
 
     def __unlock_overdrive_mining(self) -> None:
         self.abilities['Overdrive Mining'] = True
@@ -283,7 +301,12 @@ class Avatar(GameObject):
 
     # Helper method to create a dictionary that stores bool values for which abilities the player unlocked
     def __create_abilities_dict(self) -> dict:
-        abilities = {'Overdrive Movement': False,
+        abilities = {'Mining Robotics': True,
+                     'Improved Drivetrain': False,
+                     'Superior Drivetrain': False,
+                     'Overdrive Drivetrain': False,
+                     'Improved Mining': False,
+                     'Superior Mining': False,
                      'Overdrive Mining': False,
                      'Dynamite': False,
                      'Landmines': False,
@@ -294,7 +317,6 @@ class Avatar(GameObject):
     def buy_new_tech(self, tech_name: str) -> bool:
         """By giving the name of a tech, this method attempts to buy the tech. It returns a boolean representing if
         the purchase was successful or not."""
-        # to prevent players from using this whenever, there can be another check here to see if they are at their base
 
         tech_info: TechInfo = self.__tech_tree.tech_info(tech_name)
 
@@ -311,11 +333,9 @@ class Avatar(GameObject):
         # Subtract the cost from the player's science_points if successfully researched
         if successful:
             self.science_points -= tech_info.cost
+            self.score += tech_info.point_value
 
         return successful
-
-    def get_tech_tree(self) -> TechTree:
-        return self.__tech_tree
 
     def is_researched(self, tech_name: str) -> bool:
         """Returns if the given tech was researched."""
@@ -328,24 +348,31 @@ class Avatar(GameObject):
     def get_all_tech_names(self) -> list[str]:
         """Returns a list of all possible tech names in a Tech Tree."""
         return self.__tech_tree.tech_names()
+    
+    def get_tech_info(self, tech_name: str) -> TechInfo | None:
+        """
+        Returns a TechInfo object about the tech with the given name if the tech is found in the tree.
+        Returns None if the tech isn't found
+        """
+        return self.__tech_tree.tech_info(tech_name)
 
     # Dynamite placing functionality ----------------------------------------------------------------------------------
     # if avatar calls place dynamite, set to true, i.e. they want to place dynamite
     def can_place_dynamite(self) -> bool:
-        # This method will be called in the unlock_dynamite method in the else statement for when it's to be used
         return self.abilities['Dynamite'] and self.dynamite_active_ability.is_usable
 
-    # if avatar calls place trap, set to true, i.e. they want to place trap
-    def can_place_trap(self) -> bool:
-        # This method will be called in the landmine and EMP methods in the else statement for when it's to be used
-        return (self.abilities['Landmines'] or self.abilities['EMPs']) and self.place_trap.is_usable
+    def can_place_landmine(self) -> bool:
+        return self.abilities['Landmines'] and self.landmine_active_ability.is_usable
 
-    def can_place_dynamite_or_trap(self) -> bool:
-        # This method will return if the avatar can place anything at all
-        return self.can_place_trap() or self.can_place_dynamite()
-    
+    def can_place_emp(self) -> bool:
+        return self.abilities['EMPs'] and self.emp_active_ability.is_usable and not self.abilities['Landmines']
+
     def can_defuse_trap(self) -> bool:
-        return self.abilities['Trap Defusal']
+        return self.abilities['Trap Defusal'] and self.trap_defusal_active_ability.is_usable
+
+    # method to return the opposing team based on the avatar's company
+    def get_opposing_team(self) -> Company:
+        return Company.CHURCH if self.company is Company.TURING else Company.TURING
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
@@ -356,6 +383,10 @@ class Avatar(GameObject):
         data['movement_speed'] = self.movement_speed
         data['drop_rate'] = self.drop_rate
         data['tech_tree'] = self.abilities
+        data['dynamite_active_ability'] = self.dynamite_active_ability.to_json()
+        data['landmine_active_ability'] = self.landmine_active_ability.to_json()
+        data['emp_active_ability'] = self.emp_active_ability.to_json()
+        data['defusal_active_ability'] = self.trap_defusal_active_ability.to_json()
         # data['tech_tree'] = self.__tech_tree.to_json()
         return data
 
@@ -368,5 +399,10 @@ class Avatar(GameObject):
         self.movement_speed = data['movement_speed']
         self.drop_rate = data['drop_rate']
         self.abilities = data['tech_tree']
-        self.__tech_tree = data['tech_tree']
+        self.__tech_tree = self.__create_tech_tree()
+        self.__tech_tree.from_json(data['tech_tree'])
+        self.dynamite_active_ability = DynamiteActiveAbility().from_json(data['dynamite_active_ability'])
+        self.landmine_active_ability = LandmineActiveAbility().from_json(data['landmine_active_ability'])
+        self.emp_active_ability = EMPActiveAbility().from_json(data['emp_active_ability'])
+        self.trap_defusal_active_ability = TrapDefusalActiveAbility().from_json(data['defusal_active_ability'])
         return self
