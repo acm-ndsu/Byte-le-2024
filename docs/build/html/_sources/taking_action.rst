@@ -47,9 +47,16 @@ will be filtered to:
 Now MOB-BOT can only move the first 3 movement enums specified.
 
 
+Buying Techs
+------------
+
+Buying Techs is done by using the specific :doc:`enums` while MOB-BOT is on its base. Attempting to buy a Tech otherwise
+won't work.
+
+
 Any Other Action
 ----------------
 
 In your ``actions`` list, if the first ActionType enum is *not* a movement option, that will be the only action taken
-for that turn. This includes placing dynamite or traps, mining, defusing traps, and buying new tech. Recall that selling
-ores is done automatically as long as MOB-BOT ends the turn on its company base.
+for that turn. This includes placing dynamite or traps, mining, defusing traps, and buying new Techs. Recall that
+selling ores is done automatically as long as MOB-BOT ends the turn on its company base.

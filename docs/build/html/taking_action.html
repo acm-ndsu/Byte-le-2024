@@ -307,6 +307,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-turn-method">Take Turn Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-management">Action Management</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#movement">Movement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buying-techs">Buying Techs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#any-other-action">Any Other Action</a></li>
 </ul>
 </li>
@@ -352,11 +353,16 @@ of:</p>
 </div>
 <p>Now MOB-BOT can only move the first 3 movement enums specified.</p>
 </section>
+<section id="buying-techs">
+<h3>Buying Techs<a class="headerlink" href="#buying-techs" title="Permalink to this heading">#</a></h3>
+<p>Buying Techs is done by using the specific <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> while MOB-BOT is on its base. Attempting to buy a Tech otherwise
+won’t work.</p>
+</section>
 <section id="any-other-action">
 <h3>Any Other Action<a class="headerlink" href="#any-other-action" title="Permalink to this heading">#</a></h3>
 <p>In your <code class="docutils literal notranslate"><span class="pre">actions</span></code> list, if the first ActionType enum is <em>not</em> a movement option, that will be the only action taken
-for that turn. This includes placing dynamite or traps, mining, defusing traps, and buying new tech. Recall that selling
-ores is done automatically as long as MOB-BOT ends the turn on its company base.</p>
+for that turn. This includes placing dynamite or traps, mining, defusing traps, and buying new Techs. Recall that
+selling ores is done automatically as long as MOB-BOT ends the turn on its company base.</p>
 </section>
 </section>
 </section>
@@ -408,6 +414,7 @@ ores is done automatically as long as MOB-BOT ends the turn on its company base.
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-turn-method">Take Turn Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-management">Action Management</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#movement">Movement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buying-techs">Buying Techs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#any-other-action">Any Other Action</a></li>
 </ul>
 </li>
