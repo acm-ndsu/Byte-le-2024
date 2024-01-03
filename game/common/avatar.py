@@ -174,11 +174,11 @@ class Avatar(GameObject):
         return self.__position
 
     @property
-    def movement_speed(self):
+    def movement_speed(self) -> int:
         return self.__movement_speed
 
     @property
-    def drop_rate(self):
+    def drop_rate(self) -> int:
         return self.__drop_rate
 
     @property
@@ -301,7 +301,8 @@ class Avatar(GameObject):
 
     # Helper method to create a dictionary that stores bool values for which abilities the player unlocked
     def __create_abilities_dict(self) -> dict:
-        abilities = {'Improved Drivetrain': False,
+        abilities = {'Mining Robotics': True,
+                     'Improved Drivetrain': False,
                      'Superior Drivetrain': False,
                      'Overdrive Drivetrain': False,
                      'Improved Mining': False,
@@ -336,9 +337,6 @@ class Avatar(GameObject):
 
         return successful
 
-    def get_tech_tree(self) -> TechTree:
-        return self.__tech_tree
-
     def is_researched(self, tech_name: str) -> bool:
         """Returns if the given tech was researched."""
         return self.__tech_tree.is_researched(tech_name)
@@ -350,6 +348,13 @@ class Avatar(GameObject):
     def get_all_tech_names(self) -> list[str]:
         """Returns a list of all possible tech names in a Tech Tree."""
         return self.__tech_tree.tech_names()
+    
+    def get_tech_info(self, tech_name: str) -> TechInfo | None:
+        """
+        Returns a TechInfo object about the tech with the given name if the tech is found in the tree.
+        Returns None if the tech isn't found
+        """
+        return self.__tech_tree.tech_info(tech_name)
 
     # Dynamite placing functionality ----------------------------------------------------------------------------------
     # if avatar calls place dynamite, set to true, i.e. they want to place dynamite
@@ -394,7 +399,8 @@ class Avatar(GameObject):
         self.movement_speed = data['movement_speed']
         self.drop_rate = data['drop_rate']
         self.abilities = data['tech_tree']
-        self.__tech_tree = data['tech_tree']
+        self.__tech_tree = self.__create_tech_tree()
+        self.__tech_tree.from_json(data['tech_tree'])
         self.dynamite_active_ability = DynamiteActiveAbility().from_json(data['dynamite_active_ability'])
         self.landmine_active_ability = LandmineActiveAbility().from_json(data['landmine_active_ability'])
         self.emp_active_ability = EMPActiveAbility().from_json(data['emp_active_ability'])

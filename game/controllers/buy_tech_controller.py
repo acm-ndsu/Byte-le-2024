@@ -45,7 +45,8 @@ class BuyTechController(Controller):
             case ActionType.BUY_TRAP_DEFUSAL:
                 tech_name = 'Trap Defusal'
 
-        client.avatar.buy_new_tech(tech_name)  # buy the tech specified
+        if tech_name != '':
+            client.avatar.buy_new_tech(tech_name)  # buy the tech specified
 
     def __is_on_home_base(self, client: Player, world: GameBoard):
         avatar_pos: Vector = client.avatar.position  # get the position of the avatar

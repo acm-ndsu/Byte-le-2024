@@ -16,11 +16,11 @@ class DefuseTech(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = top_left.as_tuple()
 
-        @property
-        def activated(self) -> bool:
-            return self.__activated
+    @property
+    def activated(self) -> bool:
+        return self.__activated
 
-        @activated.setter
-        def activated(self, activated) -> None:
-            self.__activated = activated
-            self.image = self.images[1 if self.__activated else 0]
+    @activated.setter
+    def activated(self, activated) -> None:
+        self.__activated = activated
+        self.image = self.images[1 if self.__activated else 0]

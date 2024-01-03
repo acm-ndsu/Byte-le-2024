@@ -17,7 +17,7 @@ def generate(seed: int = random.randint(0, 1000000000)):
     """
 
     print('Generating game map...')
-    
+    print('Seed:', seed)
     map_generator = MapGenerator(seed=seed)
 
     temp: GameBoard = GameBoard(seed, map_size=Vector(14, 14), locations=map_generator.generate(), walled=True)

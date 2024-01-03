@@ -86,18 +86,16 @@ class ScoreboardTemplate(InfoTemplate):
         self.scoreboard_turn_n2.character, turn = divmod(turn, 10)
         self.scoreboard_turn_n3.character = turn
 
+        self.scoreboard_t1_n1.character, scores[0] = divmod(scores[0], 100000)
+        self.scoreboard_t1_n2.character, scores[0] = divmod(scores[0], 10000)
+        self.scoreboard_t1_n3.character, scores[0] = divmod(scores[0], 1000)
+        self.scoreboard_t1_n4.character, scores[0] = divmod(scores[0], 100)
+        self.scoreboard_t1_n5.character, scores[0] = divmod(scores[0], 10)
+        self.scoreboard_t1_n6.character = scores[0]
 
-
-        self.scoreboard_t1_n1, scores[0] = divmod(scores[0], 100000)
-        self.scoreboard_t1_n2, scores[0] = divmod(scores[0], 10000)
-        self.scoreboard_t1_n3, scores[0] = divmod(scores[0], 1000)
-        self.scoreboard_t1_n4, scores[0] = divmod(scores[0], 100)
-        self.scoreboard_t1_n5, scores[0] = divmod(scores[0], 10)
-        self.scoreboard_t1_n6 = scores[0]
-
-        self.scoreboard_t2_n1, scores[1] = divmod(scores[1], 100000)
-        self.scoreboard_t2_n2, scores[1] = divmod(scores[1], 10000)
-        self.scoreboard_t2_n3, scores[1] = divmod(scores[1], 1000)
-        self.scoreboard_t2_n4, scores[1] = divmod(scores[1], 100)
-        self.scoreboard_t2_n5, scores[1] = divmod(scores[1], 10)
-        self.scoreboard_t2_n6 = scores[1]
+        self.scoreboard_t2_n1.character, scores[1] = divmod(scores[1], 100000)
+        self.scoreboard_t2_n2.character, scores[1] = divmod(scores[1], 10000)
+        self.scoreboard_t2_n3.character, scores[1] = divmod(scores[1], 1000)
+        self.scoreboard_t2_n4.character, scores[1] = divmod(scores[1], 100)
+        self.scoreboard_t2_n5.character, scores[1] = divmod(scores[1], 10)
+        self.scoreboard_t2_n6.character = scores[1]

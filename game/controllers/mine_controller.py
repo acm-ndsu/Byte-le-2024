@@ -23,20 +23,21 @@ class MineController(Controller):
         """
 
         # don't mine anything if the inventory is full
-        if len(world.inventory_manager.get_inventory(client.avatar.company)) == 50:
+        if len(list(filter(lambda item: item is not None, world.inventory_manager.get_inventory(client.avatar.company)))) == 50:
             return
 
         match action:
             case ActionType.MINE:
                 client.avatar.state = 'mining'
-                InteractController().handle_actions(ActionType.INTERACT_CENTER, client, world)
                 tile: Tile = world.game_map[client.avatar.position.y][client.avatar.position.x]
                 station: OreOccupiableStation = tile.occupied_by  # Will return the OreOccupiableStation if it isn't
 
-                if station is None:
+                if station is None or station.object_type != ObjectType.ORE_OCCUPIABLE_STATION:
                     return
 
-                # remove the OreOccupiableStation from the game board
+                station.take_action(client.avatar, world.inventory_manager)
+
+                # try to remove the OreOccupiableStation from the game board
                 station.remove_from_game_board(tile)
             case _:  # default case
                 return
