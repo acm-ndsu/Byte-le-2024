@@ -27,7 +27,7 @@ class TestInventoryManager(unittest.TestCase):
     def test_cash_points(self):
         self.manager.give(self.item_1, Company.CHURCH)
         self.manager.give(self.item_2, Company.CHURCH)
-        self.assertEqual(self.manager.cash_in_points(Company.CHURCH), 13)
+        self.assertEqual(self.manager.cash_in_points(Company.CHURCH), 104)  # 80 +24
 
     def test_inventory_manager_json(self):
         data: dict = self.manager.to_json()

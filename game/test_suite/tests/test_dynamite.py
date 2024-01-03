@@ -68,7 +68,6 @@ class TestDynamite(unittest.TestCase):
     def test_dynamite_can_explode(self):
         self.assertFalse(self.dynamite.can_explode)
 
-        print(f'dynamite fuse: {self.dynamite.fuse}')
         [self.dynamite.decrement_fuse() for x in range(3)]  # decrement the fuse to be 0
         self.assertEqual(self.dynamite.fuse, 0)
 

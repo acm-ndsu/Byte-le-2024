@@ -76,8 +76,8 @@ def techs(avatar_functions: AvatarFunctions) -> dict[str, Tech]:
 
         'Landmines': Tech(
             name='Landmines',
-            cost=0,
-            point_value=1,
+            cost=300,
+            point_value=1000,
             apply=avatar_functions.unlock_landmines
         ),
 
