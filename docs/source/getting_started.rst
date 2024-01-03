@@ -16,7 +16,8 @@ More commands are listed in :doc:`useful_commands`. Thank you!
 
 Objective
 =========
-Your objective for this year is to mine more ores than the opposing team in The Quarry.
+Your objective for this year is to gain more points than your opponents. This is done by more mining ores than the
+opposing team in The Quarry, and by unlocking upgrades. :doc:`scoring` will explain the point totals of everything.
 
 As you collect ores, make your way back to your base to cash them in for game points and science points!
 Upgrading your MOB-BOT with science points will increase its mining capabilities, thus improving corporate revenue

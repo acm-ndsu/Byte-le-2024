@@ -22,6 +22,10 @@ Tech Tree
 MOB-BOT can undergo a myriad of upgrades that will make it an amazing, mining machine. This tree structure shows
 the available upgrade paths and how you can improve.
 
+
+Structure
+---------
+
 .. image:: ./_static/images/tech-tree-backdrop.png
    :width: 100%
    :align: center
@@ -46,7 +50,6 @@ the available upgrade paths and how you can improve.
    :width: 80%
 .. |diffuse| image:: ./_static/images/defuse.png
    :width: 80%
-
 
 
 Here's a description of each Tech:
@@ -95,6 +98,23 @@ For more information on Dynamite, Landmines, and EMPs, go to :doc:`placeables`.
 
 Make sure to upgrade the Tech Tree as time goes on. Not only will you gain upgrades, but each unlocked Tech will
 provide extra points. Visit :doc:`scoring` for an overview of how points are accumulated.
+
+
+Unlocking Techs
+---------------
+
+To unlock these Techs, you must mine Ancient Tech, which will yield science points. These do not count toward your total
+points.
+
+To unlock these Techs, MOB-BOT *must be on top of its company's base*. When there, it can purchase a new Tech
+(assuming it has enough science points). To do so, use the enums that are provided. Refer to :doc:`enums` for which
+enums must be called, and :doc:`taking_action` will explain how to implement it in more detail.
+
+Remember - the Tech Tree is... a tree. You must unlock techs in order based on their branches. That means you cannot buy
+Dynamite without first buying Improved Mining. You can, however, buy Improved Mining and then Improved Drivetrain, and
+vice versa.
+
+To view the cost of all Techs, please visit :doc:`scoring` for more information.
 
 
 Inventory
