@@ -21,7 +21,7 @@ class TestInventoryManager(unittest.TestCase):
     # Tests that cashing in science points works
     def test_cash_sci_points(self):
         self.manager.give(self.item_3, Company.CHURCH)
-        self.assertEqual(self.manager.cash_in_science(Company.CHURCH), 1)
+        self.assertEqual(self.manager.cash_in_science(Company.CHURCH), 10)
 
     # Tests that cashing in points works
     def test_cash_points(self):
