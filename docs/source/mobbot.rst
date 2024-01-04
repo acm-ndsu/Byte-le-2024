@@ -26,7 +26,7 @@ the available upgrade paths and how you can improve.
 Structure
 ---------
 
-.. image:: ./_static/images/tech-tree-backdrop.png
+.. image:: ./_static/images/tech_tree_backdrop.png
    :width: 100%
    :align: center
 
@@ -80,18 +80,18 @@ Overdrive Mining |om|                                      MOB-BOT has become th
 Dynamite |dyn|                                             Become more efficient with your mining! Dynamite will explode
                                                            **3 turns** after being placed, mining multiple ores at once!
 
-Landmines |lm|                                             The other company keeps taking valuable ores, so let's set
-                                                           traps for them... ``>:D`` Landmines **steal ores** from the
-                                                           opponent when activated.
+Landmines |lm|                                             The other company keeps taking valuable ores, so start
+                                                           setting traps for them... ``>:D`` Landmines **steal ores**
+                                                           from the opponent when activated.
 
 EMPs |emp|                                                 EMPs are the rich Bot's landmine! EMPs **steal more ores**
                                                            from the opponent than a normal landmine. Phenomenal!
-                                                           NOTE: once purchased, Trap Defusal cannot be purchased.
+                                                           NOTE: once purchased, Trap Defusal **CANNOT** be purchased.
 
 Trap Defusal |diffuse|                                     Fight back against the traps that are set against you. Trap
                                                            defusing will deactivate any trap placed by the enemy (as
                                                            long as you don't step on it)!
-                                                           NOTE: once purchased, EMPs cannot be purchased.
+                                                           NOTE: once purchased, EMPs **CANNOT** be purchased.
 ========================================================== =============================================================
 
 For more information on Dynamite, Landmines, and EMPs, go to :doc:`placeables`.
@@ -114,6 +114,10 @@ Remember - the Tech Tree is... a tree. You must unlock techs in order based on t
 Dynamite without first buying Improved Mining. You can, however, buy Improved Mining and then Improved Drivetrain, and
 vice versa.
 
+This also means that any branching paths can only access one Tech. More specifically, After purchasing landmines,
+there is the choice to purchase either EMPs or Trap Defusal. **Only one can be purchased.** After it is purchased, the
+other cannot be purchased.
+
 To view the cost of all Techs, please visit :doc:`scoring` for more information.
 
 
@@ -127,22 +131,22 @@ Each time you mine, your drop rate will determine how many ores are added to you
 Mining (drop rate = 4) was unlocked and there is an empty inventory, the inventory will have 4/50 slots filled.
 
 
-Abilities
-=========
-
 As more Techs are unlocked, they will either be considered a Passive or Active Ability and behave differently.
 
 
 Passive Abilities
------------------
+=================
 
 All Drivetrain and Mining Techs will be passive. Once you unlock them, they will apply to MOB-BOT. When a Drivetrain
-Tech is unlocked, it simply allows for more movement actions to take place in one turn. This will be explained more in
-**(EXPLAIN ME MORE)**
+Tech is unlocked, it simply allows for more movement actions to take place in one turn. Movement and other
+implementations to note while coding are explained in :doc:`taking_action`.
 
 
 Active Abilities
-----------------
+================
+
+What Are They?
+--------------
 
 There are 4 active abilities: Dynamite Active Ability, Landmine Active Ability, EMP Active Ability, and Trap Defusal
 Active Ability. These all have cooldown effects and must be called using :doc:`enums`, preventing them from being used
@@ -156,3 +160,32 @@ Landmine Active Ability 6
 EMP Active Ability      4
 Trap Defusal            0
 ======================= ========
+
+
+Dynamite, Landmine, and EMP Active Abilities
+--------------------------------------------
+
+As listed in the Tech Tree Structure, these abilities allows MOB-BOT to place dynamite, landmines, and EMPs on the
+ground respectfully. Each of these are explained more in depth in :doc:`placeables`
+
+
+Trap Defusal Active Ability
+---------------------------
+
+This ability is the most unique one that MOB-BOT can acquire. Instead of placing a Landmine or EMP on the ground,
+MOB-BOT can instead *remove* Landmines and EMPs. This allows for it to fight back against any selfish, stealing
+MOB-BOTs. The audacity of them.
+
+This is briefly explained more in :doc:`taking_action`, and the enums are provided in :doc:`enums`.
+
+
+When Using Active Abilities
+---------------------------
+
+When using active abilities, as long as they are available to use, they can be called whenever.
+
+For example, say MOB-BOT has the Dynamite and EMP Active Abilities, and they can both be used. MOB-BOT could place
+dynamite one turn, and then place an EMP the next turn. The same applies in the other order. As long as the cooldown
+is no longer active, an ability can be used.
+
+When an ability is usable, it is shown on the :doc:`visualizer` by showing the ability's icon colored in.

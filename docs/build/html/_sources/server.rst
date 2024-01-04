@@ -22,11 +22,16 @@ is unique to your team and allows you to submit your clients and view specific t
 Client Commands
 ===============
 
+**NOTE**: As commands are listed, some will have two versions to perform the same task. The first command will be typed
+in its entirety, and the second command will be a shortened version for ease of use.
+
+**Only ONE line needs to be typed into the terminal, NOT both.**
+
 
 Submitting Code
 ---------------
 
-To submit your client code, type either of the following into the terminal:
+To submit your client code, type the following into the terminal:
 
 .. code-block::
 
@@ -45,7 +50,7 @@ many times as you'd like during the duration of the competition, but do not exce
 Leaderboard
 -----------
 
-To view the leaderboard, type either of the following:
+To view the leaderboard, type one of the following in the terminal:
 
 .. code-block::
 
@@ -60,7 +65,7 @@ alumni, type one of the following:
     python launcher.pyz client leaderboard -include_alumni
     python launcher.pyz c l -include_alumni
 
-If you want to see previous leaderboards from the competition, you may type either of the following by providing a
+If you want to see previous leaderboards from the competition, you may type one of the following by providing a
 leaderboard's id:
 
 .. code-block::

@@ -47,6 +47,14 @@ will be filtered to:
 Now MOB-BOT can only move the first 3 movement enums specified.
 
 
+Non-movement Actions
+--------------------
+
+In your ``actions`` list, if the first ActionType enum is *not* a movement option, that will be the only action taken
+for that turn. This includes placing dynamite or traps, mining, defusing traps, and buying new Techs. Recall that
+selling ores is done automatically as long as MOB-BOT ends the turn on its company base.
+
+
 Buying Techs
 ------------
 
@@ -54,9 +62,9 @@ Buying Techs is done by using the specific :doc:`enums` while MOB-BOT is on its 
 won't work.
 
 
-Any Other Action
-----------------
+Defusing Traps
+--------------
 
-In your ``actions`` list, if the first ActionType enum is *not* a movement option, that will be the only action taken
-for that turn. This includes placing dynamite or traps, mining, defusing traps, and buying new Techs. Recall that
-selling ores is done automatically as long as MOB-BOT ends the turn on its company base.
+Defusing traps is done by using :doc:`enums` to defuse in any adjacent space to MOB-BOT. This includes Up, Down, Left,
+and Right. If a trap is not in the specified direction when nothing is called, nothing will happen.
+

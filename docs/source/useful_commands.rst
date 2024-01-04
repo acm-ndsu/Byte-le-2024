@@ -11,7 +11,7 @@ There are required packages necessary for running the game. Run the following co
 
     python -m pip install -r requirements.txt
 
-You can view the list of packages in the requirements.txt file. We have nothing to hide.
+You can view the list of packages in the requirements.txt file.
 
 
 Pygame Installation
@@ -63,8 +63,7 @@ Visualize
 
     python launcher.pyz v
 
-This will visualize the game you ran, allowing you to debug in a more user-friendly way! Thank
-``<INSERT COMPANY NAME HERE>`` for that.
+This will visualize the game you ran, allowing you to debug in a more user-friendly way! How wonderful.
 
 Visit :doc:`visualizer` to get a better understanding of how it works.
 
@@ -72,8 +71,8 @@ Visit :doc:`visualizer` to get a better understanding of how it works.
 Quality of Life!
 ================
 
-Generate, Run, and Visualize at Once!
--------------------------------------
+Generate, Run, and Visualize all at Once!
+-----------------------------------------
 It would be annoying if you wanted to generate, run, and visualize using three separate commands, so we condensed
 them for you!
 

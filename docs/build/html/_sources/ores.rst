@@ -30,7 +30,7 @@ Lambdium
    :width: 90
    :align: center
 
-Lambium is the favored ore by Church Inc. Lambium is what powers their MOB-BOTs and allows them
+Lambdium is the favored ore by Church Inc. Lambdium is what powers their MOB-BOTs and allows them
 to continue research for investigating something called 'anonymous functions,' whatever those are.
 
 If you are affiliated with **Church Inc.**, any Lambdium you mine will yield **80 points**! That's a steal!
@@ -46,8 +46,8 @@ Turite
    :width: 90
    :align: center
 
-Turite is the favored ore by Turing Inc. Turite will power Turing Machine-based MOB-BOTs and improve their
-systems! Fascinating.
+Turite is the favored ore by Turing Inc. Turite will power Turing Machine-based MOB-BOTs and improve their systems to
+become more turing complete! Fascinating.
 
 **Turing Co.** will yield **80 points** for every Turite they cash in.
 
@@ -68,6 +68,7 @@ Ancient Tech
 In The Quarry, there is another strange mineral called Ancient Tech. When refined, its shape is oddly reminiscent of
 something from the distant past... |doors logo|
 
-Regardless, Ancient Tech is unique in that it doesn't yield normal points, but science points. These points will
-allow you to upgrade your MOB-BOT. These upgrades include faster movement speed, placing dynamite, placing traps,
-and a few other things. Upgrades are explained more in :doc:`mobbot`.
+Regardless, Ancient Tech is unique in that it doesn't yield normal points, but science points. The amount of science
+points earned is listed in :doc:`scoring`. These points will allow you to upgrade your MOB-BOT. These upgrades include
+faster movement speed, placing dynamite, placing traps, and a few other things. Upgrades are explained more in
+:doc:`mobbot`.

@@ -17,7 +17,7 @@ Dynamite
 After unlocking this in your Tech Tree, you will be able to place sticks of dynamite on different Tiles. This
 is a very valuable upgrade to have in every MOB-BOT!
 
-Mining one ore at a time is cumbersome, so dynamite solves this issue. Place dynamite on a Tile and wait a
+Mining one ore at a time is cumbersome, so dynamite solves this issue. Place dynamite on a Tile and wait
 **3** turns. It will explode the four adjacent Tiles and the Tile it's on top of. Any ores on those Tiles will be added
 to your inventory. That's 5 ores you collect in one turn on top of the ores MOB-BOT mines after placing the dynamite!
 

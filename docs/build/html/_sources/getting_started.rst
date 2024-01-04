@@ -54,11 +54,32 @@ You can use any text editor or IDE for this competition, but we recommend Visual
 Getting the Code and MOB-BOT
 ----------------------------
 
-Need to discuss how we will distribute the code to contestants.
+To receive the code and your own MOB-BOT, please clone the repository found
+`here <https://github.com/acm-ndsu/Byte-le-2024>`_.
+
+When on GitHub, press the green ``<> Code`` button to drop down the following menu:
+
+.. image:: ./_static/images/clone_repo_options.png
+
+We highly recommend cloning with GitHub Desktop or downloading the ZIP folder.
+
+#. Open with GitHub Desktop
+    * Allow the website to open GitHub Desktop if you have it downloaded already
+    * Once in GitHub Desktop, the URL to the repository will be provided
+    * Choose where you'd like it saved on your device
+    * Click ``Clone`` and you're good to go!
+
+    .. image:: ./_static/images/github_desktop_cloning.png
+
+#. Download ZIP
+    * Click ``Download ZIP`` and find it in your Downloads.
+    * Extract the files and save it some where on your device.
+    * Use your IDE/text editor (Visual Studio Code is recommended) of choice and open the extracted folder downloaded.
+    * You're ready to code!
 
 
 Submitting Issues
 -----------------
 
-If you run into issues with the game, please submit an issue to the discord in the bugs channel or call an developer
+If you run into issues with the game, please submit an issue to the discord in the bugs channel or call a developer
 over!

@@ -34,7 +34,7 @@ Each team will have a base on the map. Their base will match their MOB-BOT and c
 - Church Inc.
     - Church Inc. will have the blue base in the top left corner.
 - Turing Co.
-    - Turing Co. will have the red base in the bottom left corner.
+    - Turing Co. will have the red base in the bottom right corner.
 
 When you want to cash in ores for points or upgrade your MOB-BOT, you can only do so at your base. Once MOB-BOT is
 standing on their base at the end of the turn, it will automatically deposit all the ores in its inventory.

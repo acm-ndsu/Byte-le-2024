@@ -38,6 +38,6 @@ Start  Starts the visualizer from the first turn. Puts the visualizer in a pause
        normal.
 Save   Saves a .mp4 video file of the game in your Byte-le 2024 folder. 
 End    Jumps to the end of the game to instantly reveal the winner of the game.
-Speed  The speed controls are the last three buttons: 1x, 2x, and 4x. Adjust how fast you want to game to go by
-       clicking these once.
+Speed  The speed controls are the last three buttons: 1x, 2x, and 4x. The will adjust the speed of the visualizer. The
+       default speed is 1x.
 ====== ==============================================================================================================

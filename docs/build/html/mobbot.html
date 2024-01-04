@@ -310,9 +310,12 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inventory">Inventory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abilities">Abilities</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-abilities">Passive Abilities</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#active-abilities">Active Abilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-abilities">Passive Abilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#active-abilities">Active Abilities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-they">What Are They?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamite-landmine-and-emp-active-abilities">Dynamite, Landmine, and EMP Active Abilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trap-defusal-active-ability">Trap Defusal Active Ability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-using-active-abilities">When Using Active Abilities</a></li>
 </ul>
 </li>
 </ul>
@@ -339,7 +342,7 @@ own MOB-BOT. MOB-BOT is a friendly, cute, and efficient robot designed to mine i
 the available upgrade paths and how you can improve.</p>
 <section id="structure">
 <h3>Structure<a class="headerlink" href="#structure" title="Permalink to this heading">#</a></h3>
-<a class="reference internal image-reference" href="_images/tech-tree-backdrop.png"><img alt="_images/tech-tree-backdrop.png" class="align-center" src="_images/tech-tree-backdrop.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/tech_tree_backdrop.png"><img alt="_images/tech_tree_backdrop.png" class="align-center" src="_images/tech_tree_backdrop.png" style="width: 100%;" /></a>
 <p>Here’s a description of each Tech:</p>
 <table class="table">
 <thead>
@@ -379,20 +382,20 @@ Bring in the money!</p></td>
 <strong>3 turns</strong> after being placed, mining multiple ores at once!</p></td>
 </tr>
 <tr class="row-odd"><td><p>Landmines <a class="reference internal" href="_images/landmine.png"><img alt="lm" src="_images/landmine.png" style="width: 80%;" /></a></p></td>
-<td><p>The other company keeps taking valuable ores, so let’s set
-traps for them… <code class="docutils literal notranslate"><span class="pre">&gt;:D</span></code> Landmines <strong>steal ores</strong> from the
-opponent when activated.</p></td>
+<td><p>The other company keeps taking valuable ores, so start
+setting traps for them… <code class="docutils literal notranslate"><span class="pre">&gt;:D</span></code> Landmines <strong>steal ores</strong>
+from the opponent when activated.</p></td>
 </tr>
 <tr class="row-even"><td><p>EMPs <a class="reference internal" href="_images/emp.png"><img alt="emp" src="_images/emp.png" style="width: 80%;" /></a></p></td>
 <td><p>EMPs are the rich Bot’s landmine! EMPs <strong>steal more ores</strong>
 from the opponent than a normal landmine. Phenomenal!
-NOTE: once purchased, Trap Defusal cannot be purchased.</p></td>
+NOTE: once purchased, Trap Defusal <strong>CANNOT</strong> be purchased.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Trap Defusal <a class="reference internal" href="_images/defuse.png"><img alt="diffuse" src="_images/defuse.png" style="width: 80%;" /></a></p></td>
 <td><p>Fight back against the traps that are set against you. Trap
 defusing will deactivate any trap placed by the enemy (as
 long as you don’t step on it)!
-NOTE: once purchased, EMPs cannot be purchased.</p></td>
+NOTE: once purchased, EMPs <strong>CANNOT</strong> be purchased.</p></td>
 </tr>
 </tbody>
 </table>
@@ -410,6 +413,9 @@ enums must be called, and <a class="reference internal" href="taking_action.html
 <p>Remember - the Tech Tree is… a tree. You must unlock techs in order based on their branches. That means you cannot buy
 Dynamite without first buying Improved Mining. You can, however, buy Improved Mining and then Improved Drivetrain, and
 vice versa.</p>
+<p>This also means that any branching paths can only access one Tech. More specifically, After purchasing landmines,
+there is the choice to purchase either EMPs or Trap Defusal. <strong>Only one can be purchased.</strong> After it is purchased, the
+other cannot be purchased.</p>
 <p>To view the cost of all Techs, please visit <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> for more information.</p>
 </section>
 </section>
@@ -419,18 +425,18 @@ vice versa.</p>
 capacity has been reached, MOB-BOT will no longer be able to mine. Make sure to go back to base and make a deposit!</p>
 <p>Each time you mine, your drop rate will determine how many ores are added to your inventory. For example, if Overdrive
 Mining (drop rate = 4) was unlocked and there is an empty inventory, the inventory will have 4/50 slots filled.</p>
-</section>
-<section id="abilities">
-<h2>Abilities<a class="headerlink" href="#abilities" title="Permalink to this heading">#</a></h2>
 <p>As more Techs are unlocked, they will either be considered a Passive or Active Ability and behave differently.</p>
+</section>
 <section id="passive-abilities">
-<h3>Passive Abilities<a class="headerlink" href="#passive-abilities" title="Permalink to this heading">#</a></h3>
+<h2>Passive Abilities<a class="headerlink" href="#passive-abilities" title="Permalink to this heading">#</a></h2>
 <p>All Drivetrain and Mining Techs will be passive. Once you unlock them, they will apply to MOB-BOT. When a Drivetrain
-Tech is unlocked, it simply allows for more movement actions to take place in one turn. This will be explained more in
-<strong>(EXPLAIN ME MORE)</strong></p>
+Tech is unlocked, it simply allows for more movement actions to take place in one turn. Movement and other
+implementations to note while coding are explained in <a class="reference internal" href="taking_action.html"><span class="doc">Taking Action</span></a>.</p>
 </section>
 <section id="active-abilities">
-<h3>Active Abilities<a class="headerlink" href="#active-abilities" title="Permalink to this heading">#</a></h3>
+<h2>Active Abilities<a class="headerlink" href="#active-abilities" title="Permalink to this heading">#</a></h2>
+<section id="what-are-they">
+<h3>What Are They?<a class="headerlink" href="#what-are-they" title="Permalink to this heading">#</a></h3>
 <p>There are 4 active abilities: Dynamite Active Ability, Landmine Active Ability, EMP Active Ability, and Trap Defusal
 Active Ability. These all have cooldown effects and must be called using <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a>, preventing them from being used
 all the time. Manage your resources properly, and you can get the upper hand!</p>
@@ -455,6 +461,26 @@ all the time. Manage your resources properly, and you can get the upper hand!</p
 </tr>
 </tbody>
 </table>
+</section>
+<section id="dynamite-landmine-and-emp-active-abilities">
+<h3>Dynamite, Landmine, and EMP Active Abilities<a class="headerlink" href="#dynamite-landmine-and-emp-active-abilities" title="Permalink to this heading">#</a></h3>
+<p>As listed in the Tech Tree Structure, these abilities allows MOB-BOT to place dynamite, landmines, and EMPs on the
+ground respectfully. Each of these are explained more in depth in <a class="reference internal" href="placeables.html"><span class="doc">Placeables</span></a></p>
+</section>
+<section id="trap-defusal-active-ability">
+<h3>Trap Defusal Active Ability<a class="headerlink" href="#trap-defusal-active-ability" title="Permalink to this heading">#</a></h3>
+<p>This ability is the most unique one that MOB-BOT can acquire. Instead of placing a Landmine or EMP on the ground,
+MOB-BOT can instead <em>remove</em> Landmines and EMPs. This allows for it to fight back against any selfish, stealing
+MOB-BOTs. The audacity of them.</p>
+<p>This is briefly explained more in <a class="reference internal" href="taking_action.html"><span class="doc">Taking Action</span></a>, and the enums are provided in <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a>.</p>
+</section>
+<section id="when-using-active-abilities">
+<h3>When Using Active Abilities<a class="headerlink" href="#when-using-active-abilities" title="Permalink to this heading">#</a></h3>
+<p>When using active abilities, as long as they are available to use, they can be called whenever.</p>
+<p>For example, say MOB-BOT has the Dynamite and EMP Active Abilities, and they can both be used. MOB-BOT could place
+dynamite one turn, and then place an EMP the next turn. The same applies in the other order. As long as the cooldown
+is no longer active, an ability can be used.</p>
+<p>When an ability is usable, it is shown on the <a class="reference internal" href="visualizer.html"><span class="doc">Visualizer</span></a> by showing the ability’s icon colored in.</p>
 </section>
 </section>
 </section>
@@ -509,9 +535,12 @@ all the time. Manage your resources properly, and you can get the upper hand!</p
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inventory">Inventory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abilities">Abilities</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-abilities">Passive Abilities</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#active-abilities">Active Abilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-abilities">Passive Abilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#active-abilities">Active Abilities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-they">What Are They?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamite-landmine-and-emp-active-abilities">Dynamite, Landmine, and EMP Active Abilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trap-defusal-active-ability">Trap Defusal Active Ability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-using-active-abilities">When Using Active Abilities</a></li>
 </ul>
 </li>
 </ul>

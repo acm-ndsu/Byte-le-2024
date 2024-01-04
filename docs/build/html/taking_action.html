@@ -307,8 +307,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-turn-method">Take Turn Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-management">Action Management</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#movement">Movement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-movement-actions">Non-movement Actions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buying-techs">Buying Techs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#any-other-action">Any Other Action</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defusing-traps">Defusing Traps</a></li>
 </ul>
 </li>
 </ul>
@@ -353,16 +354,21 @@ of:</p>
 </div>
 <p>Now MOB-BOT can only move the first 3 movement enums specified.</p>
 </section>
+<section id="non-movement-actions">
+<h3>Non-movement Actions<a class="headerlink" href="#non-movement-actions" title="Permalink to this heading">#</a></h3>
+<p>In your <code class="docutils literal notranslate"><span class="pre">actions</span></code> list, if the first ActionType enum is <em>not</em> a movement option, that will be the only action taken
+for that turn. This includes placing dynamite or traps, mining, defusing traps, and buying new Techs. Recall that
+selling ores is done automatically as long as MOB-BOT ends the turn on its company base.</p>
+</section>
 <section id="buying-techs">
 <h3>Buying Techs<a class="headerlink" href="#buying-techs" title="Permalink to this heading">#</a></h3>
 <p>Buying Techs is done by using the specific <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> while MOB-BOT is on its base. Attempting to buy a Tech otherwise
 won’t work.</p>
 </section>
-<section id="any-other-action">
-<h3>Any Other Action<a class="headerlink" href="#any-other-action" title="Permalink to this heading">#</a></h3>
-<p>In your <code class="docutils literal notranslate"><span class="pre">actions</span></code> list, if the first ActionType enum is <em>not</em> a movement option, that will be the only action taken
-for that turn. This includes placing dynamite or traps, mining, defusing traps, and buying new Techs. Recall that
-selling ores is done automatically as long as MOB-BOT ends the turn on its company base.</p>
+<section id="defusing-traps">
+<h3>Defusing Traps<a class="headerlink" href="#defusing-traps" title="Permalink to this heading">#</a></h3>
+<p>Defusing traps is done by using <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> to defuse in any adjacent space to MOB-BOT. This includes Up, Down, Left,
+and Right. If a trap is not in the specified direction when nothing is called, nothing will happen.</p>
 </section>
 </section>
 </section>
@@ -414,8 +420,9 @@ selling ores is done automatically as long as MOB-BOT ends the turn on its compa
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-turn-method">Take Turn Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-management">Action Management</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#movement">Movement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-movement-actions">Non-movement Actions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buying-techs">Buying Techs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#any-other-action">Any Other Action</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defusing-traps">Defusing Traps</a></li>
 </ul>
 </li>
 </ul>
