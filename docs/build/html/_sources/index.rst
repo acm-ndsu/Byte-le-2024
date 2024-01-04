@@ -34,6 +34,7 @@ your question, call a developer over and they'll answer your question!
    scoring
    enums
    visualizer
+   credits
 
 
 Indices and tables
