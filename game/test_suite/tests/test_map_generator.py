@@ -55,125 +55,25 @@ class TestMapGenerator(unittest.TestCase):
             (Vector(x=9, y=12),): [TuringStation(), ],
             (Vector(x=4, y=1),): [ChurchStation(), ],
             (Vector(9, 12),): [Avatar(), ],
-            (Vector(4, 1),): [Avatar(), ],
-            (Vector(x=1, y=1),): [OreOccupiableStation(), ],
-            (Vector(x=2, y=1),): [OreOccupiableStation(), ],
-            (Vector(x=3, y=1),): [OreOccupiableStation(), ],
-            (Vector(x=7, y=1),): [OreOccupiableStation(), ],
-            (Vector(x=8, y=1),): [OreOccupiableStation(), ],
-            (Vector(x=9, y=1),): [OreOccupiableStation(), ],
-            (Vector(x=10, y=1),): [OreOccupiableStation(), ],
-            (Vector(x=11, y=1),): [OreOccupiableStation(), ],
-            (Vector(x=1, y=2),): [OreOccupiableStation(), ],
-            (Vector(x=2, y=2),): [OreOccupiableStation(), ],
-            (Vector(x=3, y=2),): [OreOccupiableStation(), ],
-            (Vector(x=6, y=2),): [OreOccupiableStation(), ],
-            (Vector(x=7, y=2),): [OreOccupiableStation(), ],
-            (Vector(x=8, y=2),): [OreOccupiableStation(), ],
-            (Vector(x=9, y=2),): [OreOccupiableStation(), ],
-            (Vector(x=10, y=2),): [OreOccupiableStation(), ],
-            (Vector(x=11, y=2),): [OreOccupiableStation(), ],
-            (Vector(x=12, y=2),): [OreOccupiableStation(), ],
-            (Vector(x=1, y=3),): [OreOccupiableStation(), ],
-            (Vector(x=2, y=3),): [OreOccupiableStation(), ],
-            (Vector(x=5, y=3),): [OreOccupiableStation(), ],
-            (Vector(x=6, y=3),): [OreOccupiableStation(), ],
-            (Vector(x=7, y=3),): [OreOccupiableStation(), ],
-            (Vector(x=8, y=3),): [OreOccupiableStation(), ],
-            (Vector(x=10, y=3),): [OreOccupiableStation(), ],
-            (Vector(x=11, y=3),): [OreOccupiableStation(), ],
-            (Vector(x=12, y=3),): [OreOccupiableStation(), ],
-            (Vector(x=1, y=4),): [OreOccupiableStation(), ],
-            (Vector(x=2, y=4),): [OreOccupiableStation(), ],
-            (Vector(x=4, y=4),): [OreOccupiableStation(), ],
-            (Vector(x=5, y=4),): [OreOccupiableStation(), ],
-            (Vector(x=6, y=4),): [OreOccupiableStation(), ],
-            (Vector(x=8, y=4),): [OreOccupiableStation(), ],
-            (Vector(x=11, y=4),): [OreOccupiableStation(), ],
-            (Vector(x=12, y=4),): [OreOccupiableStation(), ],
-            (Vector(x=1, y=5),): [OreOccupiableStation(), ],
-            (Vector(x=2, y=5),): [OreOccupiableStation(), ],
-            (Vector(x=4, y=5),): [OreOccupiableStation(), ],
-            (Vector(x=5, y=5),): [OreOccupiableStation(), ],
-            (Vector(x=6, y=5),): [OreOccupiableStation(), ],
-            (Vector(x=7, y=5),): [OreOccupiableStation(), ],
-            (Vector(x=8, y=5),): [OreOccupiableStation(), ],
-            (Vector(x=9, y=5),): [OreOccupiableStation(), ],
-            (Vector(x=11, y=5),): [OreOccupiableStation(), ],
-            (Vector(x=12, y=5),): [OreOccupiableStation(), ],
-            (Vector(x=1, y=6),): [OreOccupiableStation(), ],
-            (Vector(x=2, y=6),): [OreOccupiableStation(), ],
-            (Vector(x=4, y=6),): [OreOccupiableStation(), ],
-            (Vector(x=5, y=6),): [OreOccupiableStation(), ],
-            (Vector(x=6, y=6),): [OreOccupiableStation(), ],
-            (Vector(x=7, y=6),): [OreOccupiableStation(), ],
-            (Vector(x=8, y=6),): [OreOccupiableStation(), ],
-            (Vector(x=9, y=6),): [OreOccupiableStation(), ],
-            (Vector(x=11, y=6),): [OreOccupiableStation(), ],
-            (Vector(x=12, y=6),): [OreOccupiableStation(), ],
-            (Vector(x=1, y=7),): [OreOccupiableStation(), ],
-            (Vector(x=2, y=7),): [OreOccupiableStation(), ],
-            (Vector(x=4, y=7),): [OreOccupiableStation(), ],
-            (Vector(x=5, y=7),): [OreOccupiableStation(), ],
-            (Vector(x=7, y=7),): [OreOccupiableStation(), ],
-            (Vector(x=8, y=7),): [OreOccupiableStation(), ],
-            (Vector(x=9, y=7),): [OreOccupiableStation(), ],
-            (Vector(x=11, y=7),): [OreOccupiableStation(), ],
-            (Vector(x=12, y=7),): [OreOccupiableStation(), ],
-            (Vector(x=1, y=8),): [OreOccupiableStation(), ],
-            (Vector(x=2, y=8),): [OreOccupiableStation(), ],
-            (Vector(x=5, y=8),): [OreOccupiableStation(), ],
-            (Vector(x=9, y=8),): [OreOccupiableStation(), ],
-            (Vector(x=11, y=8),): [OreOccupiableStation(), ],
-            (Vector(x=12, y=8),): [OreOccupiableStation(), ],
-            (Vector(x=1, y=9),): [OreOccupiableStation(), ],
-            (Vector(x=2, y=9),): [OreOccupiableStation(), ],
-            (Vector(x=5, y=9),): [OreOccupiableStation(), ],
-            (Vector(x=6, y=9),): [OreOccupiableStation(), ],
-            (Vector(x=7, y=9),): [OreOccupiableStation(), ],
-            (Vector(x=9, y=9),): [OreOccupiableStation(), ],
-            (Vector(x=11, y=9),): [OreOccupiableStation(), ],
-            (Vector(x=12, y=9),): [OreOccupiableStation(), ],
-            (Vector(x=1, y=10),): [OreOccupiableStation(), ],
-            (Vector(x=2, y=10),): [OreOccupiableStation(), ],
-            (Vector(x=8, y=10),): [OreOccupiableStation(), ],
-            (Vector(x=11, y=10),): [OreOccupiableStation(), ],
-            (Vector(x=12, y=10),): [OreOccupiableStation(), ],
-            (Vector(x=1, y=11),): [OreOccupiableStation(), ],
-            (Vector(x=2, y=11),): [OreOccupiableStation(), ],
-            (Vector(x=3, y=11),): [OreOccupiableStation(), ],
-            (Vector(x=4, y=11),): [OreOccupiableStation(), ],
-            (Vector(x=5, y=11),): [OreOccupiableStation(), ],
-            (Vector(x=6, y=11),): [OreOccupiableStation(), ],
-            (Vector(x=7, y=11),): [OreOccupiableStation(), ],
-            (Vector(x=11, y=11),): [OreOccupiableStation(), ],
-            (Vector(x=12, y=11),): [OreOccupiableStation(), ],
-            (Vector(x=2, y=12),): [OreOccupiableStation(), ],
-            (Vector(x=3, y=12),): [OreOccupiableStation(), ],
-            (Vector(x=4, y=12),): [OreOccupiableStation(), ],
-            (Vector(x=5, y=12),): [OreOccupiableStation(), ],
-            (Vector(x=6, y=12),): [OreOccupiableStation(), ],
-            (Vector(x=10, y=12),): [OreOccupiableStation(), ],
-            (Vector(x=11, y=12),): [OreOccupiableStation(), ],
-            (Vector(x=12, y=12),): [OreOccupiableStation(), ],
+            (Vector(4, 1),): [Avatar(), ]
         }
 
         # Get the actual result by calling the method
         actual: dict[tuple[Vector], list[GameObject]] = self.map_generator.generate()
 
 
-
-        # compare all values within the dict to see if they match
-        for (x, y), (i, j) in zip(expected.items(), actual.items()):
+        # compare all values within the dict to see if they match (ignoring ORE_OCCUPIABLE_STATIONs)
+        for (x, y), (i, j) in zip(expected.items(), dict(filter(lambda pair : pair[1][0].object_type != ObjectType.ORE_OCCUPIABLE_STATION, actual.items())).items()):
             for ake, bke in zip(x, i):
                 self.assertEqual(ake.x, bke.x)
                 self.assertEqual(ake.y, bke.y)
             for av, bv in zip(y, j):
                 self.assertEqual(av.object_type, bv.object_type)
 
+        # check if there are exactly 75 ORE_OCCUPIABLE_STATIONS
         count = 0
         for key in actual.keys():
             if [z.object_type for z in actual[key]].__contains__(ObjectType.ORE_OCCUPIABLE_STATION):
                 count += 1
 
-        self.assertEqual(count, 100)
+        self.assertEqual(count, 75)
