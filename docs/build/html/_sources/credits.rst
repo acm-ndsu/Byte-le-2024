@@ -22,9 +22,35 @@ Ian King
 ----
 
 
+Brandon Gasser
+
+
+----
+
+
 Jean Eckelberg
 
 .. image:: ./_static/contributors/jean.png
+
+
+----
+
+
+Gunnar Moody
+
+
+----
+
+
+Julia Motzko
+
+.. image:: ./_static/contributors/julia.png
+
+
+----
+
+
+Carson Bring
 
 
 ----
@@ -38,6 +64,11 @@ Carson Keeper
 ----
 
 
-Julia Motzko
+Josiah Ernst
 
-.. image:: ./_static/contributors/julia.png
+
+----
+
+
+Caitlin Frank
+
