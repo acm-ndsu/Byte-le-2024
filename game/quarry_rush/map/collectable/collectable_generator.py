@@ -8,7 +8,7 @@ from perlin_noise import PerlinNoise
 
 class CollectableGenerator:
     __board_size = 14  # This includes the borders. Field is 12x12
-    __ore_count = 50
+    __ore_count = 75
 
     def __init__(self, seed: int = rand.randint(0, 8675309)):
         with open('game/quarry_rush/map/collectable/collectable_weights.json') as f:
