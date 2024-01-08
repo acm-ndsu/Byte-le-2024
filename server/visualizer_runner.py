@@ -53,7 +53,9 @@ class visualizer_runner:
             while 1:
                 schedule.run_pending()
                 time.sleep(1)
-        except (KeyboardInterrupt, Exception) as e:
+        except KeyboardInterrupt:
+            print(f'Ending visualizer due to KeyboardInterrupt')
+        except Exception as e:
             print(f'Ending visualizer due to {e}')
 
     # Get new logs from the latest tournament
@@ -103,6 +105,8 @@ class visualizer_runner:
             shutil.copy(os.path.join(os.getcwd(), 'server', 'runners', 'vis_runner.sh'), id_dir)
             shutil.copy(os.path.join(os.getcwd(), 'server', 'runners', 'vis_runner.bat'), id_dir)
             shutil.copytree(os.path.join(os.getcwd(), 'visualizer'), os.path.join(id_dir, 'visualizer'))
+        else:
+            print('No logs for tournament\n')
 
     def get_latest_tournament(self) -> Tournament | None:
         print("Getting Latest Tournament")
@@ -132,10 +136,14 @@ class visualizer_runner:
                 print('made it past creating stdout and stderr')
 
                 print(f'stdout: {stdout}\nstderr: {stderr}')
+            else:
+                print('No ids in log path')
 
         except PermissionError:
             print("Whoops")
 
+        finally:
+            print('Job done\n')
 
 if __name__ == "__main__":
     visualizer_runner()
