@@ -1,4 +1,6 @@
 from json import load
+
+from game.quarry_rush.map.collectable.collectable_weights_dict import COLLECTABLE_WEIGHTS
 from game.utils.vector import Vector
 from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
 import random as rand
@@ -11,9 +13,7 @@ class CollectableGenerator:
     __ore_count = 75
 
     def __init__(self, seed: int = rand.randint(0, 8675309)):
-        with open('game/quarry_rush/map/collectable/collectable_weights.json') as f:
-            collectable_weights = load(f)
-
+        collectable_weights = COLLECTABLE_WEIGHTS
         self.__ore_weights = collectable_weights['ore']
         self.__special_weights = collectable_weights['special']
         self.__ancient_tech_weights = collectable_weights['ancient_tech']

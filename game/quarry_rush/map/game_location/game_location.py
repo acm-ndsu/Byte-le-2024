@@ -1,4 +1,6 @@
 from json import load
+
+from game.quarry_rush.map.game_location.game_location_dict import GAME_LOCATION
 from game.utils.vector import Vector
 from game.common.game_object import GameObject
 from game.common.map.wall import Wall
@@ -16,9 +18,7 @@ class GameLocation:
         - church_bases
     """
     def __init__(self):
-        f = open('game/quarry_rush/map/game_location/game_location.json')
-        game_location: dict = load(f)
-        f.close()
+        game_location: dict = GAME_LOCATION
 
         self.__walls: dict = game_location['walls']
         self.__turing_bases: dict = game_location['turing_bases']

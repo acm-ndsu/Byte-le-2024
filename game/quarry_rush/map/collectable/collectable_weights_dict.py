@@ -1,4 +1,4 @@
-{
+COLLECTABLE_WEIGHTS: dict = {
     "ore": [
         [
             0.0,
