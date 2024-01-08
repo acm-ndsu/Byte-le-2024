@@ -21,12 +21,23 @@ class Player(GameObject):
         super().__init__()
         self.object_type: ObjectType = ObjectType.PLAYER
         self.functional: bool = True
-        # self.error: object | None = None  # error is not used
+        self.error: str | None = None
+        self.file_name: str | None = None
         self.team_name: str | None = team_name
         self.code: UserClient | None = code
         # self.action: Action = action
         self.actions: list[ActionType] = actions
         self.avatar: Avatar | None = avatar
+
+    @property
+    def error(self) -> str | None:
+        return self.__error
+
+    @error.setter
+    def error(self, error: str | None) -> None:
+        if error is not None and not isinstance(error, str):
+            raise ValueError(f'{self.__class__.__name__}.error must be either a string or None.')
+        self.__error = error
 
     @property
     def actions(self) -> list[ActionType] | list:  # change to Action if you want to use the action object
@@ -54,14 +65,24 @@ class Player(GameObject):
         self.__functional = functional
 
     @property
-    def team_name(self) -> str:
+    def team_name(self) -> str | None:
         return self.__team_name
 
     @team_name.setter
-    def team_name(self, team_name: str) -> None:
+    def team_name(self, team_name: str | None) -> None:
         if team_name is not None and not isinstance(team_name, str):
             raise ValueError(f'{self.__class__.__name__}.team_name must be a String or None')
         self.__team_name = team_name
+
+    @property
+    def file_name(self) -> str | None:
+        return self.__file_name
+
+    @file_name.setter
+    def file_name(self, file_name: str | None) -> None:
+        if file_name is not None and not isinstance(file_name, str):
+            raise ValueError(f'{self.__class__.__name__}.file_name must be a String or None')
+        self.__file_name = file_name
 
     @property
     def avatar(self) -> Avatar:
@@ -87,8 +108,9 @@ class Player(GameObject):
         data = super().to_json()
 
         data['functional'] = self.functional
-        # data['error'] = self.error  # .to_json() if self.error is not None else None
+        data['error'] = self.error
         data['team_name'] = self.team_name
+        data['file_name'] = self.file_name
         data['actions'] = [act.value for act in self.actions]
         data['avatar'] = self.avatar.to_json() if self.avatar is not None else None
 
@@ -98,8 +120,9 @@ class Player(GameObject):
         super().from_json(data)
 
         self.functional = data['functional']
-        # self.error = data['error']  # .from_json(data['action']) if data['action'] is not None else None
+        self.error = data['error']
         self.team_name = data['team_name']
+        self.file_name = data['file_name']
 
         self.actions: list[ActionType] = [ObjectType(action) for action in data['actions']]
         avatar: Avatar | None = data['avatar']

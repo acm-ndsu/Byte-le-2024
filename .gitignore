@@ -2,6 +2,7 @@
 *.idea
 *.json
 *.pyz
+*.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -132,3 +133,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# server temp folders
+runner_temp/
+vis_temp/
+
+# database related files
+byte_server.db-shm
+byte_server.db-wal
+vID
+
+# visualizer output video
+out.mp4

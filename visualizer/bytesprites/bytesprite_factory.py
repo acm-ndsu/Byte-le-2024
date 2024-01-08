@@ -1,3 +1,5 @@
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame as pyg
 
 from game.utils.vector import Vector
@@ -5,6 +7,13 @@ from visualizer.bytesprites.bytesprite import ByteSprite
 
 
 class ByteSpriteFactory:
+    """
+    This is a class that every ByteSpriteFactory subclass must inherit. The factory structure allows for these classes
+    to create the ByteSprite objects that will be used for visualization. With the given structure, it forces those
+    classes to have the following methods: update() and create_bytesprite(). These methods can be implemented in many
+    different ways depending on how the sprites should behave during the game. Examples are provided in the example
+    files.
+    """
     @staticmethod
     def update(data: dict, layer: int, pos: Vector, spritesheets: list[list[pyg.Surface]]) -> list[pyg.Surface]:
         """

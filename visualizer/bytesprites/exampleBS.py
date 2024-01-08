@@ -1,6 +1,8 @@
 import os
 import random
 
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame as pyg
 
 from visualizer.bytesprites.bytesprite import ByteSprite

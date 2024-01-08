@@ -1,5 +1,7 @@
 import random
 
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 from game.config import *
 from typing import Callable, Any
@@ -75,11 +77,12 @@ class Adapter:
         """
         ...
 
+    # re-renders the animation
     def recalc_animation(self, turn_log: dict) -> None:
         self.turn_number = turn_log['tick']
 
     def populate_bytesprite_factories(self) -> dict[int: Callable[[pygame.Surface], ByteSprite]]:
-        # Instantiate all bytesprites for each object ands add them here
+        # Instantiate all bytesprites for each object and add them here
         return {
             4: AvatarBytespriteFactoryExample().create_bytesprite,
             7: TileBytespriteFactoryExample().create_bytesprite,
@@ -94,6 +97,7 @@ class Adapter:
         text.render()
         self.playback.playback_render()
 
+    # is used in post render - post render is used to clear the playback buttons
     def clean_up(self) -> None:
         ...
 

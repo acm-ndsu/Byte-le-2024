@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from functools import reduce
 from enum import Flag, auto
 
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 
 from game.utils.vector import Vector
@@ -15,6 +17,12 @@ while the game is running, with buttons including pause, speed up, slow down, re
 
 
 class PlaybackButtons(Flag):
+    """
+    These are enums that are used to represent the playback buttons on the visualizer. They inherit from `Flag` and not
+    `Enum` because Flag enums can use bitwise operators (& AND, | OR, ^ XOR, ~ INVERT). This allows for multiple values
+    to be returned at the same time. Refer to https://docs.python.org/3.11/library/enum.html#enum.Flag to read more on
+    it.
+    """
     PAUSE_BUTTON = auto()
     SAVE_BUTTON = auto()
     NEXT_BUTTON = auto()
@@ -28,11 +36,11 @@ class PlaybackButtons(Flag):
 
 class PlaybackTemplate:
     """
-    Playback Template provides a menu of buttons during runtime of the visualizer to control the playback
+    This class provides a menu of buttons during runtime of the visualizer to control the playback
     of the visualizer, including pausing, start, end, frame scrubbing, speeding up, and slowing down, as well as
-    saving it to .mp4
+    saving it to a .mp4 file.
 
-    Buttons from this template are centered at the bottom of the screen, placed in three rows of three
+    Buttons from this template are centered at the bottom of the screen, placed in three rows of three.
     """
 
     def __init__(self, screen: pygame.Surface):
@@ -70,6 +78,10 @@ class PlaybackTemplate:
                                                                    Vector(80, 325)).as_tuple()
 
     def playback_render(self) -> None:
+        """
+        This renders all the playback buttons.
+        :return: None
+        """
         self.prev_button.render()
         self.pause_button.render()
         self.next_button.render()
@@ -81,6 +93,14 @@ class PlaybackTemplate:
         self.fastest_speed_button.render()
 
     def playback_events(self, event: pygame.event) -> PlaybackButtons:
+        """
+        This handles all the playback events. By using the given event, this will return the playback buttons and
+        execute each one's function. This is done by using the `reduce()` method. Read the documentation on the
+        `reduce()` method for more information. Refer to the Button class for more information on how the
+        mouse.clicked() method works.
+        :param event:
+        :return: PlaybackButtons
+        """
         return reduce(lambda a, b: a | b,
                       (self.pause_button.mouse_clicked(event, default=PlaybackButtons(0)),
                        self.save_button.mouse_clicked(event, default=PlaybackButtons(0)),

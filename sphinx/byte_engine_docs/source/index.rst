@@ -11,6 +11,9 @@ NDSU's ACM chapter hosts an annual competition called "Byte-le Royale." This com
 Jordan Goetze, Jacob Baumann, Ajay Brown, and Nick Hilger. It promotes working with others and developing critical
 thinking skills, while challenging competitors under a time limit.
 
+This revamped version of the engine was started by Jean Eckelberg, Ian King, Julia Motzko, and Gunnar Moody, with extra
+contributions as well. Thank you to everyone who took the time to work on this!
+
 This project provides the framework for developing games for Byte-le. The README document is attached to this page.
 Refer to that for additional info to what's here!
 

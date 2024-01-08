@@ -1,6 +1,8 @@
 from __future__ import annotations
 from typing import Callable
 
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame as pyg
 
 from visualizer.config import Config
@@ -203,7 +205,7 @@ class ByteSprite(pyg.sprite.Sprite):
         """
         This method will start an animation based on the currently set active_sheet. Then, it will reassign the
         active_sheet based on what the BytespriteFactory's update method will return. Lastly, the
-        ``set_image_and_render`` method is then called to then display the new sprites in the active_sheet.
+        ``set_image_and_render`` method is then called to display the new sprites in the active_sheet.
         :param data:
         :param layer:
         :param pos:

@@ -1,3 +1,5 @@
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 import math
 from visualizer.utils.text import Text
@@ -235,6 +237,10 @@ class Button(Text):
 
     # Method to get the bg rect for the button
     def get_bg_rect(self) -> pygame.Rect:
+        """
+        This method gets the background Rect of the button.
+        :return: pygame.Rect
+        """
         self.position = Vector(*self.rect.topleft)
         return pygame.Rect(
             [self.rect.x - self.padding, self.rect.y - self.padding, self.rect.width + (self.padding * 2),
@@ -242,6 +248,12 @@ class Button(Text):
 
     # Method that executes action parameter
     def execute(self, *args, **kwargs) -> Any:
+        """
+        This will execute whatever is passed in. 
+        :param args:
+        :param kwargs:
+        :return:
+        """
         return self.action(*args, **kwargs)
 
     # Method for rendering button, called by render method in adapter class

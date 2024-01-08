@@ -54,6 +54,3 @@ class Config:
     @property
     def VISUALIZE_HELD_ITEMS(self) -> bool:
         return self.__VISUALIZE_HELD_ITEMS
-
-
-

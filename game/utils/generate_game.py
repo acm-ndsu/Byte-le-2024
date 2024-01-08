@@ -15,7 +15,7 @@ def generate(seed: int = random.randint(0, 1000000000)):
     :return: None
     """
 
-    print('Generating game map...')
+    print(f'Generating game map... seed: {seed}')
 
     temp: GameBoard = GameBoard(seed, map_size=Vector(6, 6), locations={(Vector(1, 1),): [Avatar()],
                                                                         (Vector(4, 4),): [Avatar()]}, walled=True)

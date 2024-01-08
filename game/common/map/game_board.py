@@ -272,6 +272,7 @@ class GameBoard(GameObject):
             temp_tile.occupied_by = game_object
             temp_tile = temp_tile.occupied_by
 
+# Returns the Vector and a list of GameObject for whatever objects you are trying to get
     def get_objects(self, look_for: ObjectType) -> list[tuple[Vector, list[GameObject]]]:
         to_return: list[tuple[Vector, list[GameObject]]] = list()
 
@@ -285,6 +286,7 @@ class GameBoard(GameObject):
 
         return to_return
 
+# Add the objects to the end of to_return (a list of GameObject)
     def __get_objects_help(self, look_for: ObjectType, temp: GameObject | Tile, to_return: list[GameObject]):
         while hasattr(temp, 'occupied_by'):
             if temp.object_type is look_for:

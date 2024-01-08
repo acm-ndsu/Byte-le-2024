@@ -11,6 +11,7 @@ from game.utils.vector import Vector
 from game.common.enums import ActionType
 from game.common.enums import ObjectType
 
+
 # class that tests stations and its methods
 class TestStation(unittest.TestCase):
     """

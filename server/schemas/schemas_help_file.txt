@@ -1,0 +1,40 @@
+Models and Schemas are different!
+
+Models are classes that represent the *tables* in the database. Schemas are classes that represent *objects* that can
+be serialized for the endpoints in the URL (handled by FastAPI; the unit tests show how these work).
+
+Each schema class will be an object that stores the values of what each table could return.
+
+For example:
+    The run table (look at run.py in /models) has variable unique to its table:
+        * run_id
+        * tournament_id
+        * run_time
+        * seed
+        * results
+    The run table also has variables that reference other tables:
+        * submission_run_infos
+        * tournament
+        * turns
+
+    In the RunBase class in /schemas, it has the following variables:
+        * run_id
+        * tournament_id
+        * run_time
+        * seed
+        * results
+
+    See the pattern? These are the basic things a `run` object will need when serialized for the API.
+    Now look at the RunSchema class as well. It has the following variables:
+        * tournament
+        * submission_run_infos
+        * turns
+
+    This class inherits from RunBase, giving it the basic variables a Run object needs, and it has its own
+    variables that show the objects related to other tables. The same applies to the RunsSchemaWithoutTournament
+    class.
+
+    Make sure that all schemas keep the `model_config: dict = {'from_attributes': True}` in their base classes.
+
+    NOTE: when working with the models and schemas, keep the same naming convention to prevent confusion. If something
+    is a list of objects, keep it plural (e.g., turn*s* or submission_run_info*s*).
