@@ -184,7 +184,7 @@ class ClientRunner:
                     results: dict = json.load(f)
 
         finally:
-            player_sub_ids = [x["team_name"].split("_")[-1] for x in results['players']]
+            player_sub_ids = [x["file_name"].split("_")[-1] for x in results['players']]
             run_id: int = self.insert_run(
                 self.tournament.tournament_id,
                 self.index_to_seed_id[seed_index],
