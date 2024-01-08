@@ -66,11 +66,13 @@ class visualizer_runner:
             print('No tournament is in the database.')
             return
 
-        if self.tournament_id != tournament.tournament_id:
+        if self.tournament_id != tournament.tournament_id and tournament.is_finished:
             print("Getting new logs")
             self.get_latest_log_files(tournament)
             self.tournament_id = tournament.tournament_id
             print(f'Tournament id: {self.tournament_id}')
+        else:
+            print('Same Tournament')
         self.visualizer_loop()
 
     # Delete visual logs path at end of competition
@@ -98,6 +100,9 @@ class visualizer_runner:
             for turn in log:
                 with open(os.path.join(logs_dir, f'turn_{turn.turn_number:04d}.json'), "w") as fl:
                     fl.write(str(turn.turn_data, 'utf-8'))
+            else:
+                print("No turns")
+
             with open(os.path.join(logs_dir, 'results.json'), 'x') as fl:
                 json.dump(json.loads(run.results.decode('utf-8')), fl)
 
@@ -106,7 +111,7 @@ class visualizer_runner:
             shutil.copy(os.path.join(os.getcwd(), 'server', 'runners', 'vis_runner.bat'), id_dir)
             shutil.copytree(os.path.join(os.getcwd(), 'visualizer'), os.path.join(id_dir, 'visualizer'))
         else:
-            print('No logs for tournament\n')
+            print('No logs for tournament')
 
     def get_latest_tournament(self) -> Tournament | None:
         print("Getting Latest Tournament")
@@ -141,7 +146,6 @@ class visualizer_runner:
 
         except PermissionError:
             print("Whoops")
-
         finally:
             print('Job done\n')
 
