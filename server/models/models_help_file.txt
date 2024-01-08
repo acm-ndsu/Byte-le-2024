@@ -1,0 +1,21 @@
+Each class in this module will represent a table in the database.
+
+Make sure each class has the following to declare the table's name: __tablename__: str = 'Example Name'
+
+These classes will have type hinted variables that represent a column in each table and what their value is (int, str,
+etc.). Each variable explicitly states any foreign key relationship it may have with another class, and any unique
+constraints that may be necessary. Primary keys are also explicitly declared.
+
+When there are foreign key relationships, at the bottom of each file, there is code that uses a 'relationship()' method.
+This method **MUST** be used to help declare the relationships between tables. Furthermore, the name of the variable in
+the quotation marks must match *exactly* what the variable name will be in the other module class.
+
+Example:
+    In team_type.py, there is a line of code, reading:
+    `teams: Mapped[list['Team']] = relationship(back_populates='team_type')`.
+
+    The `Mapped[list['Team']]` type hinting shows that this relates to team.py, and that this will be a list of Team
+    entities in the datatable for this class.
+
+    The `relationship(back_populates='team_type')` shows that this relates to the table via the 'team_type' variable in
+    the Team class. Go to team.py to see that it has a variable named 'team_type'.

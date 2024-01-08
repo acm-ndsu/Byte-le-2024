@@ -9,6 +9,7 @@ from game.common.map.game_board import GameBoard
 from game.utils.vector import Vector
 from game.common.enums import ObjectType
 
+
 # class that tests stations and its methods
 class TestStation(unittest.TestCase):
     """

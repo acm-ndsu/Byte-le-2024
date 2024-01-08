@@ -36,7 +36,7 @@ class TestTile(unittest.TestCase):
         self.tile.occupied_by = self.occupiable_station
         self.assertEqual(self.tile.occupied_by.object_type, ObjectType.OCCUPIABLE_STATION)
 
-    # test aadding wall to tile
+    # test adding wall to tile
     def test_wall_tile(self):
         self.tile.occupied_by = self.wall
         self.assertEqual(self.tile.occupied_by.object_type, ObjectType.WALL)
