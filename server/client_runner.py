@@ -133,10 +133,12 @@ class ClientRunner:
             self.index_to_seed_id[index] = gameboard['game_board']['seed']
 
         # then run them in parallel using their index as a unique identifier
-        [self.jobqueues[i % 6].put(self.internal_runner(games[i], i)) for i in range(self.total_number_of_games)]
+        [self.jobqueues[i % 6].put((self.internal_runner, games[i], i)) for i in range(self.total_number_of_games)]
         threads: list[threading.Thread] = [
             threading.Thread(target=runner_utils.worker_main, args=(self.jobqueues[i],)) for i in range(6)]
+        [t.start() for t in threads]
         [t.join() for t in threads if t.is_alive()]
+        print('Inserting logs')
         self.read_best_logs_and_insert()
         self.delete_runner_temp()
         self.update_tournament_finished()
@@ -182,7 +184,7 @@ class ClientRunner:
                     results: dict = json.load(f)
 
         finally:
-            player_sub_ids = [x["file_name"].split("_")[-1] for x in results['players']]
+            player_sub_ids = [x["team_name"].split("_")[-1] for x in results['players']]
             run_id: int = self.insert_run(
                 self.tournament.tournament_id,
                 self.index_to_seed_id[seed_index],

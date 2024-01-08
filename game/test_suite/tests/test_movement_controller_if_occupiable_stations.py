@@ -22,7 +22,7 @@ class TestMovementControllerIfOccupiableStations(unittest.TestCase):
     def setUp(self) -> None:
         self.movement_controller = MovementController()
 
-        self.avatar = Avatar(None, 10)
+        self.avatar = Avatar()
 
         # (1, 0), (2, 0), (0, 1), (0, 2), (1, 3), (2, 3), (3, 1), (3, 2)
         self.locations: dict = {(Vector(1, 0), Vector(2, 0), Vector(0, 1), Vector(0, 2), Vector(1, 3), Vector(2, 3),

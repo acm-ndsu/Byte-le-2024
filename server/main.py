@@ -1,7 +1,6 @@
 from typing import Callable
 from functools import wraps
 
-import psycopg2
 from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
