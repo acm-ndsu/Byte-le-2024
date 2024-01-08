@@ -132,11 +132,20 @@ def delete(db: Session, id: int) -> None:
     db.commit()
 
 
-def get_latest_tournament(db: Session) -> Tournament | None:
+def get_latest_tournament(db: Session, with_turns: bool = False) -> Tournament | None:
     return (db.query(Tournament)
             .options(joinedload(Tournament.runs)
                      .joinedload(Run.submission_run_infos)
                      .joinedload(SubmissionRunInfo.submission)
                      .joinedload(Submission.team))
             .order_by(Tournament.tournament_id.desc())
-            .first())
+            .first()) if not with_turns else \
+        (db.query(Tournament)
+         .options(joinedload(Tournament.runs)
+                  .joinedload(Run.submission_run_infos)
+                  .joinedload(SubmissionRunInfo.submission)
+                  .joinedload(Submission.team),
+                  joinedload(Tournament.runs)
+                  .joinedload(Run.turns))
+         .order_by(Tournament.tournament_id.desc())
+         .first())
