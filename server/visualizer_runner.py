@@ -107,7 +107,7 @@ class visualizer_runner:
     def get_latest_tournament(self) -> Tournament | None:
         print("Getting Latest Tournament")
         with DB() as db:
-            return crud_tournament.get_latest_tournament(db) if not None else None
+            return crud_tournament.get_latest_tournament(db, with_turns=True) if not None else None
 
     def visualizer_loop(self) -> None:
         print('in visualizer_loop()')
