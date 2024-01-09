@@ -1,3 +1,5 @@
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 from game.config import *
 from typing import Callable, Any
@@ -91,6 +93,7 @@ class Adapter:
         """
         ...
 
+    # re-renders the animation
     def recalc_animation(self, turn_log: dict) -> None:
         self.scoreboard.recalc_animation(turn_log)
         self.p1_inventory.recalc_animation(turn_log)
@@ -128,6 +131,7 @@ class Adapter:
         self.scoreboard.render()
         self.playback.playback_render()
 
+    # is used in post render - post render is used to clear the playback buttons
     def clean_up(self) -> None:
         ...
 

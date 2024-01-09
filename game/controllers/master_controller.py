@@ -73,10 +73,9 @@ class MasterController(Controller):
         # starting_positions = [[3, 3], [3, 9]]   # would be done in generate game
         gb: GameBoard = world['game_board']
         avatars: list[tuple[Vector, list[Avatar]]] = gb.get_objects(ObjectType.AVATAR)
-        for avatar, client in zip(avatars,clients):
+        for avatar, client in zip(avatars, clients):
             avatar[1][0].position = avatar[0]
             client.avatar = avatar[1][0]
-            
 
     # Generator function. Given a key:value pair where the key is the identifier for the current world and the value is
     # the state of the world, returns the key that will give the appropriate world information

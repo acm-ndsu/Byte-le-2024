@@ -53,7 +53,7 @@ class Client(UserClient):
             self.current_state = State.MINING
             
         # If I have at least 5 items in my inventory, set my state to selling
-        if len([item for item in world.inventory_manager.get_inventory(self.company) if item is not None]) >= 5:
+        if len([item for item in self.get_my_inventory(world) if item is not None]) >= 5:
             self.current_state = State.SELLING
             
         # Make action decision for this turn
@@ -86,3 +86,6 @@ class Client(UserClient):
         vertical = [ActionType.MOVE_UP] * -dy if dy < 0 else [ActionType.MOVE_DOWN] * dy
         
         return vertical + horizontal if vertical_first else horizontal + vertical
+    
+    def get_my_inventory(self, world):
+        return world.inventory_manager.get_inventory(self.company)

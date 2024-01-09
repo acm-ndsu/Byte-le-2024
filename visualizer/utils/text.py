@@ -1,3 +1,5 @@
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 from game.utils.vector import Vector
 from typing import Optional, TypeAlias
@@ -37,6 +39,7 @@ class Text:
         try:
             self.__font: pygame.font.Font = pygame.font.Font(self.font_name, self.font_size)
         except FileNotFoundError:
+            print("Font not found")
             self.__font: pygame.font.Font = pygame.font.SysFont(self.font_name, self.font_size)
         self.color: Color = color
         self.position: Vector = position

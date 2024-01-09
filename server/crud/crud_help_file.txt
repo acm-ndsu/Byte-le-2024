@@ -1,0 +1,22 @@
+Overview
+--------
+
+The CRUD module is used to store methods that will be used to Create, Read, Update, and Delete tables in the database.
+Each CRUD file is related to its respective table.
+
+Eager Loading
+-------------
+
+In a few methods, there is a variable called `eager`. This bool will determine whether the database should return all
+information within a table or only the specified information.
+
+For example, in crud_run.py, all 3 'read' methods use eager loading. In the `read()` method, if eager loading is false,
+only the most recent run from the table is returned. If eager loading is true, the most recent run is returned, but it
+comes with information from the other tables it's also related to: Turns, Tournament, and SubmissionRunInfo.
+
+Commit Method
+-------------
+
+In the Create, Update, and Delete methods, they all commonly use `db.commit()`. This method is necessary to save any
+changes in the database. Without this, changes will not be reflected, so make sure that it is used in each of these
+methods.

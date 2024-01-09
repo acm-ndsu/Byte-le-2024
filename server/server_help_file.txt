@@ -1,0 +1,19 @@
+database.py
+-----------
+
+The database file is what's used to create the actual database in the project. The file listed here creates it with
+SQLite.
+
+
+main.py
+-------
+
+The main file is what uses FastAPI to create the URLs that utilize the schemas. It also calls methods that create the
+database if it hasn't been created yet.
+
+To check if the serve is running, go to the root page. If it says 'Hello World,' congrats! Your server is up and
+running. To check this, type the root directory specified by `self.IP` in client_utils.py in your browser. 'Hello World'
+should be the only thing printed there.
+
+Typing in the other URLs listed in each method should return the data needed, assuming it's in the database. HTTP errors
+are raised if something goes wrong, and these are caught and handled in the client_utils.py file.

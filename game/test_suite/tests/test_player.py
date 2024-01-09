@@ -49,7 +49,6 @@ class TestPlayer(unittest.TestCase):
         self.functional = True
         self.assertEqual(self.player.functional, self.functional)
 
-    #
     def test_functional_false(self):
         self.player.functional = False
         self.functional = False
