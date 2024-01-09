@@ -14,7 +14,7 @@ class Config:
     __GAME_BOARD_MARGIN_LEFT: int = 459
     __GAME_BOARD_MARGIN_TOP: int = 100
     __VISUALIZE_HELD_ITEMS: bool = False
-    __FONT: str = os.path.join(os.getcwd(), r'visualizer\templates\zrnic rg.otf')
+    __FONT: str = os.path.join(os.getcwd(), 'visualizer', 'templates', 'zrnic rg.otf')
     __TEXT_COLOR: str = '#A26D3F'
     __BUTTON_COLORS: ButtonColors = ButtonColors(
         bg_color='#A26D3F',
