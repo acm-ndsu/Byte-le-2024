@@ -8,6 +8,9 @@ import subprocess
 import sys
 import threading
 import time
+
+from sqlalchemy.exc import IntegrityError
+
 from server.models.run import Run
 from server.models.submission_run_info import SubmissionRunInfo
 from server.models.team import Team
@@ -22,7 +25,8 @@ from queue import Queue
 import schedule
 
 from server import runner_utils
-from server.crud import crud_tournament, crud_submission, crud_run, crud_submission_run_info, crud_turn, crud_university, crud_team_type
+from server.crud import crud_tournament, crud_submission, crud_run, crud_submission_run_info, crud_turn, \
+    crud_university, crud_team_type
 from server.database import SessionLocal
 from server.models.submission import Submission
 from server.models.tournament import Tournament
@@ -49,6 +53,7 @@ class DB:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.db.close()
 
+
 class ClientRunner:
     def __init__(self):
         self.config: Config = Config()
@@ -68,7 +73,7 @@ class ClientRunner:
 
         self.version: str = self.get_version_number()
 
-        self.best_run_for_client = {}
+        self.best_run_for_client: dict = {}
         self.runner_temp_dir: str = os.path.join(os.getcwd(), 'server', 'runner_temp')
         self.seed_path: str = os.path.join(self.runner_temp_dir, 'seeds')
 
@@ -117,6 +122,9 @@ class ClientRunner:
         self.total_number_of_games_for_one_client = self.count_number_of_game_appearances(games)
         self.tournament = self.insert_new_tournament()
 
+        # delete the turns of the last tournament
+        self.delete_turns()
+
         if not os.path.exists(self.runner_temp_dir):
             os.mkdir(self.runner_temp_dir)
 
@@ -148,34 +156,35 @@ class ClientRunner:
         print('Job completed\n')
 
     def internal_runner(self, submission_tuple, index) -> None:
-        max_score: int = -1
+        score_for_each_submission: dict[int, int] = {}
         results = dict()
+
+        # Run game
+        # Create a folder for this client and seed
+        end_path = os.path.join(self.runner_temp_dir, str(index))
+        if not os.path.exists(end_path):
+            os.mkdir(end_path)
+
+        shutil.copy('launcher.pyz', end_path)
+
+        # Write the clients into the folder
+        for index_2, submission in enumerate(submission_tuple):
+            # runner will run -fn argument, which makes the file name the file name
+            # So we can grab the submission_id out of the results later
+            with open(os.path.join(end_path, f'client_{index_2}_{submission.submission_id}.py'), 'x') as f:
+                f.write(str(submission.file_txt, 'utf-8'))
+
+        # Determine what seed this run needs based on it's serial index
+        seed_index = index // self.number_of_unique_games
+        logging.info(f'running run {index} for game ({submission_tuple[0].submission_id}, '
+                     f'{submission_tuple[1].submission_id}) using seed index {seed_index}')
+
+        # Copy the seed into the run folder
+        if os.path.exists(os.path.join(self.seed_path, str(seed_index), 'logs', 'game_map.json')):
+            os.mkdir(os.path.join(end_path, 'logs'))
+            shutil.copyfile(os.path.join(self.seed_path, str(seed_index), 'logs', 'game_map.json'),
+                            os.path.join(end_path, 'logs', 'game_map.json'))
         try:
-            # Run game
-            # Create a folder for this client and seed
-            end_path = os.path.join(self.runner_temp_dir, str(index))
-            if not os.path.exists(end_path):
-                os.mkdir(end_path)
-
-            shutil.copy('launcher.pyz', end_path)
-
-            # Write the clients into the folder
-            for index_2, submission in enumerate(submission_tuple):
-                # runner will run -fn argument, which makes the file name the file name
-                # So we can grab the submission_id out of the results later
-                with open(os.path.join(end_path, f'client_{index_2}_{submission.submission_id}.py'), 'x') as f:
-                    f.write(str(submission.file_txt, 'utf-8'))
-
-            # Determine what seed this run needs based on it's serial index
-            seed_index = index // self.number_of_unique_games
-            logging.info(f'running run {index} for game ({submission_tuple[0].submission_id}, '
-                            f'{submission_tuple[1].submission_id}) using seed index {seed_index}')
-
-            # Copy the seed into the run folder
-            if os.path.exists(os.path.join(self.seed_path, str(seed_index), 'logs', 'game_map.json')):
-                os.mkdir(os.path.join(end_path, 'logs'))
-                shutil.copyfile(os.path.join(self.seed_path, str(seed_index), 'logs', 'game_map.json'),
-                                os.path.join(end_path, 'logs', 'game_map.json'))
 
             res = self.run_runner(end_path, os.path.join(os.getcwd(), 'server', 'runners', 'runner'))
 
@@ -184,7 +193,7 @@ class ClientRunner:
                     results: dict = json.load(f)
 
         finally:
-            player_sub_ids = [x["team_name"].split("_")[-1] for x in results['players']]
+            player_sub_ids: list[int] = [int(x["file_name"].split("_")[-1]) for x in results['players']]
             run_id: int = self.insert_run(
                 self.tournament.tournament_id,
                 self.index_to_seed_id[seed_index],
@@ -192,14 +201,20 @@ class ClientRunner:
             for i, result in enumerate(results["players"]):
                 self.insert_submission_run_info(player_sub_ids[i], run_id, result["error"], i,
                                                 result["avatar"]["score"])
+                score_for_each_submission[player_sub_ids[i]] = result["avatar"]["score"]
+
+            # don't store logs with non-eligible teams
+            if any([not submission.team.team_type.eligible for submission in submission_tuple]):
+                return
 
             # Update information in best run dict
             for submission in submission_tuple:
-                if max_score > self.best_run_for_client.get(submission.submission_id, {'score': -2})["score"]:
+                if (score_for_each_submission[submission.submission_id]
+                        > self.best_run_for_client.get(submission.submission_id, {'score': -2})['score']):
                     self.best_run_for_client[submission.submission_id] = {}
                     self.best_run_for_client[submission.submission_id]["log_path"] = os.path.join(end_path, 'logs')
                     self.best_run_for_client[submission.submission_id]["run_id"] = run_id
-                    self.best_run_for_client[submission.submission_id]["score"] = max_score
+                    self.best_run_for_client[submission.submission_id]["score"] = score_for_each_submission[submission.submission_id]
 
     def run_runner(self, end_path, runner) -> bytes:
         """
@@ -297,7 +312,7 @@ class ClientRunner:
                 if file in ['game_map.json', 'results.json', 'turn_logs.json']:
                     continue
                 with open(os.path.join(path, file)) as fl:
-                    turn_logs.append(TurnBase(turn_id=0, turn_number=int(file[-9:-5]), run_id=self.best_run_for_client[
+                    turn_logs.append(TurnBase(turn_number=int(file[-9:-5]), run_id=self.best_run_for_client[
                         submission_id]["run_id"], turn_data=bytes(fl.read(), 'utf-8')))
 
             self.insert_logs(turn_logs)
@@ -306,8 +321,11 @@ class ClientRunner:
         """
         Inserts logs
         """
-        with DB() as db:
-            crud_turn.create_all(db, logs)
+        try:
+            with DB() as db:
+                crud_turn.create_all(db, logs)
+        except IntegrityError:
+            ...
 
     def close_server(self) -> None:
         if self.tournament != -1 and not self.tournament.is_finished:
@@ -317,6 +335,10 @@ class ClientRunner:
         self.delete_runner_temp()
         schedule.clear()
         sys.exit(0)
+
+    def delete_turns(self) -> None:
+        with DB() as db:
+            crud_turn.delete_all(db)
 
     def delete_runner_temp(self) -> None:
         while True:
