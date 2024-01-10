@@ -1,4 +1,5 @@
-from sqlalchemy.orm import Session, joinedload
+from sqlalchemy import and_
+from sqlalchemy.orm import Session, joinedload, Query
 
 from server.models.turn import Turn
 from server.schemas.turn.turn_schema import TurnBase
@@ -13,7 +14,7 @@ def create(db: Session, turn: TurnBase) -> Turn:
     :param turn:
     :return:
     """
-    db_turn: Turn = Turn(**turn.model_dump(exclude={'turn_id'}))
+    db_turn: Turn = Turn(**turn.model_dump())
     db.add(db_turn)
     db.commit()
     db.refresh(db_turn)
@@ -22,27 +23,30 @@ def create(db: Session, turn: TurnBase) -> Turn:
 
 # create method that adds the entire list of Turn
 def create_all(db: Session, turns: [TurnBase]) -> None:
-    inserts: list[Turn] = [Turn(**turn.model_dump(exclude={'turn_id'})) for turn in turns]
+    inserts: list[Turn] = [Turn(**turn.model_dump()) for turn in turns]
     db.add_all(inserts)
     db.commit()
 
 
 # read the most recent turn
-def read(db: Session, id: int, eager: bool = False) -> Turn | None:
+def read(db: Session, turn_number: int, run_id: int, eager: bool = False) -> Turn | None:
     """
     This gets information from the Turn table and returns it. Eager loading will determine whether to only return the
     entry in the Turn table or to return it with more information from the tables that it's related to.
     :param db:
-    :param id:
+    :param turn_number:
+    :param run_id:
     :param eager:
     :return:
     """
     return (db.query(Turn)
-            .filter(Turn.turn_id == id)
+            .filter(and_(Turn.turn_number == turn_number,
+                         Turn.run_id == run_id))
             .first() if not eager
             else db.query(Turn)
             .options(joinedload(Turn.run))
-            .filter(Turn.turn_id == id)
+            .filter(and_(Turn.turn_number == turn_number,
+                         Turn.run_id == run_id))
             .first())
 
 
@@ -82,17 +86,19 @@ def read_all_W_filter(db: Session, eager: bool = False, **kwargs) -> [Turn]:
 
 
 # update a turn
-def update(db: Session, id: int, turn: TurnBase) -> Turn | None:
+def update(db: Session, turn_number: int, run_id: int, turn: TurnBase) -> Turn | None:
     """
     This method takes a Turn object and updates the specified Turn in the database with it. If there is nothing to
     update, returns None.
     :param db:
-    :param id:
+    :param turn_number:
+    :param run_id:
     :param turn:
     :return:
     """
     db_turn: Turn | None = (db.query(Turn)
-                            .filter(Turn.turn_id == id)
+                            .filter(and_(Turn.turn_number == turn_number,
+                                         Turn.run_id == run_id))
                             .one_or_none())
     if db_turn is None:
         return
@@ -106,19 +112,32 @@ def update(db: Session, id: int, turn: TurnBase) -> Turn | None:
 
 
 # delete a turn
-def delete(db: Session, id: int, turn_table: TurnBase) -> None:
+def delete(db: Session, turn_number: int, run_id: int) -> None:
     """
     Deletes the specified Turn entity from the database.
     :param db:
-    :param id:
-    :param turn_table:
+    :param turn_number:
+    :param run_id:
     :return: None
     """
     db_turn: Turn | None = (db.query(Turn)
-                            .filter(Turn.turn_id == id)
+                            .filter(and_(Turn.turn_number == turn_number,
+                                         Turn.run_id == run_id))
                             .one_or_none())
     if db_turn is None:
         return
 
     db.delete(db_turn)
+    db.commit()
+
+
+def delete_all(db: Session) -> None:
+    """
+    Deletes all turn records from the database
+    :param db:
+    :return: None
+    """
+    db_turns: Query = db.query(Turn)
+
+    db_turns.delete()
     db.commit()
