@@ -16,8 +16,8 @@ More commands are listed in :doc:`useful_commands`. Thank you!
 
 Objective
 =========
-Your objective for this year is to gain more points than your opponents. This is done by more mining ores than the
-opposing team in The Quarry, and by unlocking upgrades. :doc:`scoring` will explain the point totals of everything.
+Your objective for this year is to gain more points than your opponents. This is done by mining more ores than the
+opposing team in The Quarry, and by unlocking upgrades. :doc:`scoring` will explain how the points are totaled.
 
 As you collect ores, make your way back to your base to cash them in for game points and science points!
 Upgrading your MOB-BOT with science points will increase its mining capabilities, thus improving corporate revenue
@@ -46,7 +46,8 @@ Python Version
 Make sure to uninstall the visual studio version of python if you have visual studio installed.
 You can do this by re-running the installer and unselecting the python development kit then clicking update.
 
-We require using Python version 3.11.
+**We require using Python version 3.11.** You can go to the
+`official Python website <https://www.python.org/downloads/release/python-3117/>`_ to download it.
 
 You can use any text editor or IDE for this competition, but we recommend Visual Studio Code.
 
@@ -54,7 +55,7 @@ You can use any text editor or IDE for this competition, but we recommend Visual
 Getting the Code and MOB-BOT
 ----------------------------
 
-To receive the code and your own MOB-BOT, please clone the repository found
+To receive the code and your own MOB-BOT, please clone the repository here
 `here <https://github.com/acm-ndsu/Byte-le-2024>`_.
 
 When on GitHub, press the green ``<> Code`` button to drop down the following menu:

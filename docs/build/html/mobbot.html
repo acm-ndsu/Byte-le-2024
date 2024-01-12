@@ -156,6 +156,7 @@
 <li class="toctree-l1"><a class="reference internal" href="scoring.html">Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualizer.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
 </ul>
 
     </div>
@@ -331,10 +332,23 @@ document.write(`
                   
   <section id="mob-bot">
 <h1>MOB-BOT<a class="headerlink" href="#mob-bot" title="Permalink to this heading">#</a></h1>
-<a class="reference internal image-reference" href="_images/church_bot.gif"><img alt="_images/church_bot.gif" src="_images/church_bot.gif" style="width: 200px;" /></a>
-<a class="reference internal image-reference" href="_images/turing_bot.gif"><img alt="_images/turing_bot.gif" class="align-right" src="_images/turing_bot.gif" style="width: 200px;" /></a>
+<figure class="align-left" id="id1">
+<a class="reference internal image-reference" href="_images/church_bot.gif"><img alt="_images/church_bot.gif" src="_images/church_bot.gif" style="width: 130px;" /></a>
+<figcaption>
+<p><span class="caption-text">Church Co. MOB-BOT</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-right" id="id2">
+<a class="reference internal image-reference" href="_images/turing_bot.gif"><img alt="_images/turing_bot.gif" src="_images/turing_bot.gif" style="width: 130px;" /></a>
+<figcaption>
+<p><span class="caption-text">Turing Inc. MOB-BOT</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>As you work for your assigned company (Church Inc. or Turing Co.), you will be coding and upgrading your very
 own MOB-BOT. MOB-BOT is a friendly, cute, and efficient robot designed to mine in The Quarry forever! How lovely.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>Here are some important notes about MOB-BOT that will help you to improve its functionalities.</p>
 <section id="tech-tree">
 <h2>Tech Tree<a class="headerlink" href="#tech-tree" title="Permalink to this heading">#</a></h2>
@@ -407,9 +421,9 @@ provide extra points. Visit <a class="reference internal" href="scoring.html"><s
 <h3>Unlocking Techs<a class="headerlink" href="#unlocking-techs" title="Permalink to this heading">#</a></h3>
 <p>To unlock these Techs, you must mine Ancient Tech, which will yield science points. These do not count toward your total
 points.</p>
-<p>To unlock these Techs, MOB-BOT <em>must be on top of its company’s base</em>. When there, it can purchase a new Tech
-(assuming it has enough science points). To do so, use the enums that are provided. Refer to <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> for which
-enums must be called, and <a class="reference internal" href="taking_action.html"><span class="doc">Taking Action</span></a> will explain how to implement it in more detail.</p>
+<p>To unlock these Techs, MOB-BOT <em>must end the turn on top of its company’s base</em>. When there, it can also purchase a new
+Tech on the following turn (assuming it has enough science points). To do so, use the <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> that are provided,
+and <a class="reference internal" href="taking_action.html"><span class="doc">Taking Action</span></a> will explain how to implement it in more detail.</p>
 <p>Remember - the Tech Tree is… a tree. You must unlock techs in order based on their branches. That means you cannot buy
 Dynamite without first buying Improved Mining. You can, however, buy Improved Mining and then Improved Drivetrain, and
 vice versa.</p>
@@ -439,7 +453,8 @@ implementations to note while coding are explained in <a class="reference intern
 <h3>What Are They?<a class="headerlink" href="#what-are-they" title="Permalink to this heading">#</a></h3>
 <p>There are 4 active abilities: Dynamite Active Ability, Landmine Active Ability, EMP Active Ability, and Trap Defusal
 Active Ability. These all have cooldown effects and must be called using <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a>, preventing them from being used
-all the time. Manage your resources properly, and you can get the upper hand!</p>
+all the time. The cooldown will represent how many turns it takes until the ability can be used again.
+Manage your resources properly, and you can get the upper hand!</p>
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Ability</p></th>
@@ -465,7 +480,7 @@ all the time. Manage your resources properly, and you can get the upper hand!</p
 <section id="dynamite-landmine-and-emp-active-abilities">
 <h3>Dynamite, Landmine, and EMP Active Abilities<a class="headerlink" href="#dynamite-landmine-and-emp-active-abilities" title="Permalink to this heading">#</a></h3>
 <p>As listed in the Tech Tree Structure, these abilities allows MOB-BOT to place dynamite, landmines, and EMPs on the
-ground respectfully. Each of these are explained more in depth in <a class="reference internal" href="placeables.html"><span class="doc">Placeables</span></a></p>
+ground respectfully. Each of these are explained more in depth in <a class="reference internal" href="placeables.html"><span class="doc">Placeables</span></a>.</p>
 </section>
 <section id="trap-defusal-active-ability">
 <h3>Trap Defusal Active Ability<a class="headerlink" href="#trap-defusal-active-ability" title="Permalink to this heading">#</a></h3>

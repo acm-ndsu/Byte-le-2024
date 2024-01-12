@@ -156,6 +156,7 @@
 <li class="toctree-l1"><a class="reference internal" href="scoring.html">Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualizer.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
 </ul>
 
     </div>
@@ -306,6 +307,9 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#layout">Layout</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tiles">Tiles</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates">Coordinates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#occupied-by">Occupied_by</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-occupied-by-and-get-occupied-by">Is_occupied_by and get_occupied_by</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bases">Bases</a></li>
 </ul>
 </li>
@@ -328,16 +332,67 @@ document.write(`
 <p>The map is a 14x14 grid, including the outer walls. Both MOB-BOTs for either team will be on the same map.
 The only thing separating them is the walls of The Quarry. However, if the two MOB-BOTs meet, it could be an explosive
 battle!</p>
+<p><strong>NOTE: Two MOB-BOTs cannot stand on the same tile.</strong> However, MOB-BOT can stand on Traps, Dynamite, and Ores.</p>
 <a class="reference internal image-reference" href="_images/game_map.png"><img alt="_images/game_map.png" class="align-center" src="_images/game_map.png" style="width: 50%;" /></a>
 </section>
 <section id="tiles">
 <h2>Tiles<a class="headerlink" href="#tiles" title="Permalink to this heading">#</a></h2>
+<section id="coordinates">
+<h3>Coordinates<a class="headerlink" href="#coordinates" title="Permalink to this heading">#</a></h3>
 <p>The map is made of a 2D array of Tile objects. To access any tiles, use (y, x) coordinates like so:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="o">.</span><span class="n">game_map</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Tile objects can have any other object on top of them. The <a class="reference internal" href="placeables.html"><span class="doc">Placeables</span></a> page will explain everything that
-can be placed on the map by MOB-BOT.</p>
+<p>For example, looking at the game map, there is Copium ore close to the Church base at coordinate (2, 1) (remember that
+the top left is (0, 0)). To access that tile, type the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="o">.</span><span class="n">game_map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Typing this will return the Tile object that has the ore at the specified coordinate.</p>
+</section>
+<section id="occupied-by">
+<h3>Occupied_by<a class="headerlink" href="#occupied-by" title="Permalink to this heading">#</a></h3>
+<p>Each Tile object – along with some others – has an attribute called <code class="docutils literal notranslate"><span class="pre">occupied_by</span></code>. This attribute allows for each Tile
+to act like a stack to see everything that is on top of it.</p>
+<p>For example, assume a Tile object has an OreOccupiableStation (an object that gives you ores when you mine), Dynamite,
+and a MOB-BOT on it in that order. To see the first object the Tile is occupied by, type the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ore_occupiable_station</span> <span class="o">=</span> <span class="n">tile</span><span class="o">.</span><span class="n">occupied_by</span>
+</pre></div>
+</div>
+<p>Since the OreOccupiableStation is the first object in the stack, it will be the returned.</p>
+<p>To check if the returned OreOccupiableStation is occupied by something, there are two ways to check this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dynamite</span> <span class="o">=</span> <span class="n">ore_occupiable_station</span><span class="o">.</span><span class="n">occupied_by</span>
+<span class="n">dynamite</span> <span class="o">=</span> <span class="n">tile</span><span class="o">.</span><span class="n">occupied_by</span><span class="o">.</span><span class="n">occupied_by</span>
+</pre></div>
+</div>
+<p>Both of these would return a Dynamite object in this example. For every object that is on a Tile, you can either use
+an object reference and call <code class="docutils literal notranslate"><span class="pre">occupied_by</span></code> if it has it, or you can chain call <code class="docutils literal notranslate"><span class="pre">occupied_by</span></code> on the initial Tile
+object.</p>
+<p>To access the MOB-BOT from the tile, you can do the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">avatar</span> <span class="o">=</span> <span class="n">dynamite</span><span class="o">.</span><span class="n">occupied_by</span>
+<span class="n">dynamite</span> <span class="o">=</span> <span class="n">tile</span><span class="o">.</span><span class="n">occupied_by</span><span class="o">.</span><span class="n">occupied_by</span><span class="o">.</span><span class="n">occupied_by</span>
+</pre></div>
+</div>
+</section>
+<section id="is-occupied-by-and-get-occupied-by">
+<h3>Is_occupied_by and get_occupied_by<a class="headerlink" href="#is-occupied-by-and-get-occupied-by" title="Permalink to this heading">#</a></h3>
+<p>If you simply want to check if a Tile is occupied by a certain object, you can type either of the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tile</span><span class="o">.</span><span class="n">is_occupied_by_object_type</span><span class="p">(</span><span class="n">ObjectType</span><span class="o">.</span><span class="n">EXAMPLE_OBJECT_TYPE</span><span class="p">)</span>
+<span class="n">tile</span><span class="o">.</span><span class="n">is_occupied_by_game_object</span><span class="p">(</span><span class="n">ExampleClassName</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Both methods will return a boolean representing if the Tile is occupied by the given parameter. The methods take an
+ObjectType and class name respectively.</p>
+<p>Lastly, to receive an object that is on a Tile, type:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tile</span><span class="o">.</span><span class="n">get_occupied_by</span><span class="p">(</span><span class="n">ObjectType</span><span class="o">.</span><span class="n">EXAMPLE_OBJECT_TYPE</span> <span class="o">|</span> <span class="n">ExampleClassName</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This method will take either an ObjectType enum or a class name – <strong>not both</strong> and search for it. If found, it will
+return the object. Otherwise, the <code class="docutils literal notranslate"><span class="pre">None</span></code> value will be returned.</p>
+<p>The <a class="reference internal" href="placeables.html"><span class="doc">Placeables</span></a> page will explain everything that can be placed on the map by MOB-BOT, and <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> will have
+the enums needed for every object that can be on the game map.</p>
+<p>If you would like to see</p>
+</section>
 <section id="bases">
 <h3>Bases<a class="headerlink" href="#bases" title="Permalink to this heading">#</a></h3>
 <p>Each team will have a base on the map. Their base will match their MOB-BOT and company color.</p>
@@ -437,6 +492,9 @@ after mining specific ores:</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#layout">Layout</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tiles">Tiles</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates">Coordinates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#occupied-by">Occupied_by</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-occupied-by-and-get-occupied-by">Is_occupied_by and get_occupied_by</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bases">Bases</a></li>
 </ul>
 </li>

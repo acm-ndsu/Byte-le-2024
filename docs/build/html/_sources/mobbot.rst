@@ -2,16 +2,22 @@
 MOB-BOT
 =======
 
-.. image:: ./_static/gifs/church_bot.gif
-   :width: 200
+.. figure:: ./_static/gifs/church_bot.gif
+   :width: 130
+   :align: left
 
-.. image:: ./_static/gifs/turing_bot.gif
-   :width: 200
+   Church Co. MOB-BOT
+
+.. figure:: ./_static/gifs/turing_bot.gif
+   :width: 130
    :align: right
 
+   Turing Inc. MOB-BOT
 
 As you work for your assigned company (Church Inc. or Turing Co.), you will be coding and upgrading your very
 own MOB-BOT. MOB-BOT is a friendly, cute, and efficient robot designed to mine in The Quarry forever! How lovely.
+
+|
 
 Here are some important notes about MOB-BOT that will help you to improve its functionalities.
 
@@ -106,9 +112,9 @@ Unlocking Techs
 To unlock these Techs, you must mine Ancient Tech, which will yield science points. These do not count toward your total
 points.
 
-To unlock these Techs, MOB-BOT *must be on top of its company's base*. When there, it can purchase a new Tech
-(assuming it has enough science points). To do so, use the enums that are provided. Refer to :doc:`enums` for which
-enums must be called, and :doc:`taking_action` will explain how to implement it in more detail.
+To unlock these Techs, MOB-BOT *must end the turn on top of its company's base*. When there, it can also purchase a new
+Tech on the following turn (assuming it has enough science points). To do so, use the :doc:`enums` that are provided,
+and :doc:`taking_action` will explain how to implement it in more detail.
 
 Remember - the Tech Tree is... a tree. You must unlock techs in order based on their branches. That means you cannot buy
 Dynamite without first buying Improved Mining. You can, however, buy Improved Mining and then Improved Drivetrain, and
@@ -150,7 +156,8 @@ What Are They?
 
 There are 4 active abilities: Dynamite Active Ability, Landmine Active Ability, EMP Active Ability, and Trap Defusal
 Active Ability. These all have cooldown effects and must be called using :doc:`enums`, preventing them from being used
-all the time. Manage your resources properly, and you can get the upper hand!
+all the time. The cooldown will represent how many turns it takes until the ability can be used again.
+Manage your resources properly, and you can get the upper hand!
 
 ======================= ========
 Ability                 Cooldown
@@ -166,7 +173,7 @@ Dynamite, Landmine, and EMP Active Abilities
 --------------------------------------------
 
 As listed in the Tech Tree Structure, these abilities allows MOB-BOT to place dynamite, landmines, and EMPs on the
-ground respectfully. Each of these are explained more in depth in :doc:`placeables`
+ground respectfully. Each of these are explained more in depth in :doc:`placeables`.
 
 
 Trap Defusal Active Ability
