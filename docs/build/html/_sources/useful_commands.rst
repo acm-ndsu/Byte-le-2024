@@ -2,6 +2,12 @@
 Useful Commands
 ===============
 
+.. raw:: html
+
+    <style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
+
+.. role:: red
+
 Running the launcher
 ====================
 
@@ -107,3 +113,11 @@ Lastly, a list of commands will be listed by typing
     python launcher.pyz -h
 
 in the terminal. Each of the sub-commands will have their own help messages too.
+
+|
+|
+
+.. figure:: ./_static/images/turing_comp.png
+
+(:red:`Turing Inc. MOB-BOT` using terminal commands to visualize The Quarry)
+

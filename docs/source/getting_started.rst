@@ -27,6 +27,10 @@ More commands are listed in :doc:`useful_commands`. Thank you!
 
 Objective
 =========
+
+.. image:: ./_static/images/wcyotc.png
+
+
 Your objective for this year is to gain more points than your opponents. This is done by mining more ores than the
 opposing team in The Quarry, and by unlocking upgrades. :doc:`scoring` will explain how the points are totaled. Each
 game will have 500 turns before ending. Manage your time wisely!
@@ -45,6 +49,9 @@ company in the task of mining the most ore, will result in ``immediate terminati
 
 Tournament Structure
 ====================
+
+.. image:: ./_static/images/vs.png
+
 Each pairing of teams will have two games against each other. After one game, both teams will switch company
 affiliations (i.e., if first with :blue:`Church Inc.`, will next be :red:`Turing Co.`). The points gained from both
 games will be added to those teams' total points in the tournament.
@@ -52,6 +59,8 @@ games will be added to those teams' total points in the tournament.
 
 Running the Game
 ================
+
+
 Python Version
 --------------
 

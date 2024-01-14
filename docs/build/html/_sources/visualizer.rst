@@ -2,6 +2,12 @@
 Visualizer
 ==========
 
+.. raw:: html
+
+   <style> .blue {color:#1769BC; font-weight:bold; font-size:16px} </style>
+
+.. role:: blue
+
 The visualizer is a useful tool that will help visually test your MOB-BOT and what happens in a game. Some
 built-in functionalities should help make the coding experience easier too.
 
@@ -18,6 +24,11 @@ Turing Co. respectively. The turn counter is in the top center section.
 All information for Church Inc. will be on the left and Turing Co. on the right. This includes how much of each ore
 each team has, their total science points, which Active Abilities are available to use (they will be colored when
 available), their Tech Tree, and which Techs have been unlocked.
+
+.. figure:: ./_static/images/church_anc_tch.png
+
+(:blue:`Church Inc. MOB-BOT` admiring refined Ancient Tech)
+
 
 
 Controls
