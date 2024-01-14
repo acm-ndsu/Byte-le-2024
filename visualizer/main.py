@@ -49,8 +49,7 @@ class ByteVisualiser:
 
         # Scale for video saving (division can be adjusted, higher division = lower quality)
         self.scaled: tuple[int, int] = (self.size.x // 2, self.size.y // 2)
-        self.writer: cv2.VideoWriter = cv2.VideoWriter("out.mp4", cv2.VideoWriter_fourcc(*'mp4v'),
-                                                       self.default_frame_rate, self.scaled)
+
         self.end_time: int = end_time
         self.skip_start: bool = skip_start
         self.loop_count: int = loop_count
@@ -559,10 +558,6 @@ class ByteVisualiser:
 
             self.clock.tick(math.floor(self.default_frame_rate * self.playback_speed))
             ticks += 1
-        self.writer.release()
-
-        if self.recording:
-            self.writer.release()
 
 
 if __name__ == '__main__':
