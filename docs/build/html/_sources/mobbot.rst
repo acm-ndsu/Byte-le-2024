@@ -142,6 +142,25 @@ other cannot be purchased.
 To view the cost of all Techs, please visit :doc:`scoring` for more information.
 
 
+Score & Science Points
+======================
+
+To know your total score at any given turn, type
+
+.. code-block::
+
+    score = avatar.score
+
+to access it.
+
+To know how many science points you have, type
+
+.. code-block::
+
+    science_points = avatar.science_points
+
+to access it.
+
 Inventory
 =========
 
@@ -151,6 +170,10 @@ Once capacity has been reached, MOB-BOT will no longer be able to mine. Make sur
 Each time you mine, your drop rate will determine how many ores are added to your inventory. For example, if Overdrive
 Mining (drop rate = 4) was unlocked and there is an empty inventory, the inventory will have 4/50 slots filled after
 mining.
+
+:gold:`To view your inventory`, a method called get_my_inventory() is provided in either ``base_client`` file. It
+requires the ``world`` object to be passed in, and you will receive the inventory for your company's MOB-BOT. Remember
+that it is a list of the different :doc:`ores` you can mine.
 
 |
 

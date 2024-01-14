@@ -91,6 +91,13 @@ We highly recommend cloning with GitHub Desktop or downloading the ZIP folder.
     * You're ready to code!
 
 
+Submitting Code
+---------------
+
+To submit your code, program MOB-BOT in either your ``base_client.py`` or ``base_client_2.py`` files. When you submit
+your code via the command specified in :doc:`server`, you can submit either of these files if you choose to.
+
+
 Submitting Issues
 -----------------
 

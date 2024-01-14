@@ -8,7 +8,7 @@ The Server
 
 .. role:: gold
 
-Here are some notes to consider about the server to aid you in the competiton.
+Here are some notes to consider about the server to aid you in the competition.
 
 
 Registering
@@ -46,8 +46,9 @@ To submit your client code, type one of the following into the terminal:
 
 
 After successfully registering your team, you are able to submit your client code. At least one client must be
-submitted by 10 PM to be eligible to win. The server automatically looks for files in the root directory that contain
-the word 'client,' so you don't need to stress about submitting the correct file.
+submitted by 10 PM to be eligible to win. You can either submit ``base_client.py`` or ``base_client_2.py``. The command
+will prompt you to submit ``base_client.py`` first. If you say 'no,' it will then prompt you to submit
+``base_client_2.py``.
 
 Once uploaded to the server, your code will run against other submitted code to determine placing. You can submit as
 many times as you'd like during the duration of the competition, but do not excessively upload, please.

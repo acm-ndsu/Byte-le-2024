@@ -310,6 +310,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unlocking-techs">Unlocking Techs</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score-science-points">Score &amp; Science Points</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inventory">Inventory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-abilities">Passive Abilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#active-abilities">Active Abilities</a><ul class="nav section-nav flex-column">
@@ -440,6 +441,19 @@ other cannot be purchased.</p>
 <p>To view the cost of all Techs, please visit <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> for more information.</p>
 </section>
 </section>
+<section id="score-science-points">
+<h2>Score &amp; Science Points<a class="headerlink" href="#score-science-points" title="Permalink to this heading">#</a></h2>
+<p>To know your total score at any given turn, type</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">avatar</span><span class="o">.</span><span class="n">score</span>
+</pre></div>
+</div>
+<p>to access it.</p>
+<p>To know how many science points you have, type</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">science_points</span> <span class="o">=</span> <span class="n">avatar</span><span class="o">.</span><span class="n">science_points</span>
+</pre></div>
+</div>
+<p>to access it.</p>
+</section>
 <section id="inventory">
 <h2>Inventory<a class="headerlink" href="#inventory" title="Permalink to this heading">#</a></h2>
 <p>Each MOB-BOT comes with its own, standardized inventory system. The inventory has a <span class="gold">max capacity of 50 ores</span>.
@@ -447,6 +461,9 @@ Once capacity has been reached, MOB-BOT will no longer be able to mine. Make sur
 <p>Each time you mine, your drop rate will determine how many ores are added to your inventory. For example, if Overdrive
 Mining (drop rate = 4) was unlocked and there is an empty inventory, the inventory will have 4/50 slots filled after
 mining.</p>
+<p><span class="gold">To view your inventory</span>, a method called get_my_inventory() is provided in either <code class="docutils literal notranslate"><span class="pre">base_client</span></code> file. It
+requires the <code class="docutils literal notranslate"><span class="pre">world</span></code> object to be passed in, and you will receive the inventory for your company’s MOB-BOT. Remember
+that it is a list of the different <a class="reference internal" href="ores.html"><span class="doc">Ores</span></a> you can mine.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -560,6 +577,7 @@ is no longer active, an ability can be used.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unlocking-techs">Unlocking Techs</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score-science-points">Score &amp; Science Points</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inventory">Inventory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-abilities">Passive Abilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#active-abilities">Active Abilities</a><ul class="nav section-nav flex-column">
