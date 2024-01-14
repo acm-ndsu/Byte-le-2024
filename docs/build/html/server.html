@@ -326,7 +326,7 @@ document.write(`
                   
   <section id="the-server">
 <h1>The Server<a class="headerlink" href="#the-server" title="Permalink to this heading">#</a></h1>
-<p>Here are some notes to consider about the server to aid you in the competiton.</p>
+<style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style><p>Here are some notes to consider about the server to aid you in the competiton.</p>
 <section id="registering">
 <h2>Registering<a class="headerlink" href="#registering" title="Permalink to this heading">#</a></h2>
 <p>To register your team, type</p>
@@ -334,17 +334,17 @@ document.write(`
 </pre></div>
 </div>
 <p>into the terminal. Follow the prompts to enter your team name, select your university, and select if you are an alumni.</p>
-<p>After registering, you will receive a new file called <code class="docutils literal notranslate"><span class="pre">vID</span></code> in your Byte-le 2024 folder. <strong>DO NOT SHARE THIS.</strong> This
-is unique to your team and allows you to submit your clients and view specific team information.</p>
+<p>After registering, you will receive a new file called <code class="docutils literal notranslate"><span class="pre">vID</span></code> in your Byte-le 2024 folder. <span class="gold">DO NOT SHARE THIS.</span>
+This is unique to your team and allows you to submit your clients and view specific team information.</p>
 </section>
 <section id="client-commands">
 <h2>Client Commands<a class="headerlink" href="#client-commands" title="Permalink to this heading">#</a></h2>
-<p><strong>NOTE</strong>: As commands are listed, some will have two versions to perform the same task. The first command will be typed
-in its entirety, and the second command will be a shortened version for ease of use.</p>
-<p><strong>Only ONE line needs to be typed into the terminal, NOT both.</strong></p>
+<p><span class="gold">NOTE</span>: As commands are listed, some will have two versions to perform the same task. The first command will be
+typed in its entirety, and the second command will be a shortened version for ease of use.</p>
+<p><span class="gold">Only ONE line needs to be typed into the terminal, NOT both.</span></p>
 <section id="submitting-code">
 <h3>Submitting Code<a class="headerlink" href="#submitting-code" title="Permalink to this heading">#</a></h3>
-<p>To submit your client code, type the following into the terminal:</p>
+<p>To submit your client code, type one of the following into the terminal:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">client</span> <span class="o">-</span><span class="n">submit</span>
 <span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">c</span> <span class="o">-</span><span class="n">submit</span>
 </pre></div>
@@ -377,19 +377,19 @@ leaderboard’s id:</p>
 </section>
 <section id="stats">
 <h3>Stats<a class="headerlink" href="#stats" title="Permalink to this heading">#</a></h3>
-<p>To view your stats for the latest submission, type</p>
+<p>To view your stats for the latest submission, type one of the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">client</span> <span class="n">stats</span>
 <span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">c</span> <span class="n">s</span>
 </pre></div>
 </div>
-<p>to view them. Your stats will continue to change until all games are completed.</p>
+<p>Your stats will continue to change until all games are completed.</p>
 <p>If you desire to see all of your submissions, type</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">client</span> <span class="o">-</span><span class="n">get_submissions</span>
 <span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">c</span> <span class="o">-</span><span class="n">get_submissions</span>
 </pre></div>
 </div>
 <p>to receive all your submission ids. These ids can be used in some of the commands listed below.</p>
-<p>To view code from a previous submission, have a submission id ready and type</p>
+<p>To receive code from a previous submission, have a submission id ready and type</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">client</span> <span class="o">-</span><span class="n">get_code_for_submission</span> <span class="o">&lt;</span><span class="n">submission_id</span><span class="o">&gt;</span>
 <span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">c</span> <span class="o">-</span><span class="n">get_code_for_submission</span> <span class="o">&lt;</span><span class="n">submission_id</span><span class="o">&gt;</span>
 </pre></div>

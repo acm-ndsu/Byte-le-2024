@@ -2,21 +2,32 @@
 MOB-BOT
 =======
 
+.. raw:: html
+
+    <style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
+    <style> .blue {color:#1769BC; font-weight:bold; font-size:16px} </style>
+    <style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style>
+
+.. role:: red
+.. role:: blue
+.. role:: gold
+
 .. figure:: ./_static/gifs/church_bot.gif
-   :width: 130
+   :width: 170
    :align: left
 
-   Church Co. MOB-BOT
+   :blue:`Church Co. MOB-BOT`
 
 .. figure:: ./_static/gifs/turing_bot.gif
-   :width: 130
+   :width: 170
    :align: right
 
-   Turing Inc. MOB-BOT
+   :red:`Turing Inc. MOB-BOT`
 
-As you work for your assigned company (Church Inc. or Turing Co.), you will be coding and upgrading your very
-own MOB-BOT. MOB-BOT is a friendly, cute, and efficient robot designed to mine in The Quarry forever! How lovely.
+As you work for your assigned company (:blue:`Church Inc.` or :red:`Turing Co.`), you will be coding and upgrading your
+very own MOB-BOT. MOB-BOT is a friendly, cute, and efficient robot designed to mine in The Quarry forever! How lovely.
 
+|
 |
 
 Here are some important notes about MOB-BOT that will help you to improve its functionalities.
@@ -64,40 +75,44 @@ Here's a description of each Tech:
 Tech Name                                                  Tech Description
 ========================================================== =============================================================
 Improved Drivetrain |id|                                   This tech will increase your movement, allowing MOB-BOT to
-                                                           **move up to 2 tiles per turn**!
+                                                           :gold:`move up to 2 tiles per turn`!
 
 Superior Drivetrain |sd|                                   Grants an additional increase in movement, allowing MOB-BOT
-                                                           to **move up to 3 tiles per turn**! How wonderful!
+                                                           to :gold:`move up to 3 tiles per turn`! How wonderful!
 
-Overdrive Drivetrain |od|                                  The ultimate movement upgrade. MOB-BOT can now **move up to**
-                                                           **4 tiles per turn**! Burn rubber!
+Overdrive Drivetrain |od|                                  The ultimate movement upgrade. MOB-BOT can now
+                                                           :gold:`move up to 4 tiles per turn`! Burn rubber!
 
 Improved Mining |im|                                       A decent upgrade from basic Mining Robotics. MOB-BOT
-                                                           will now **gain 2 pieces of ore** when you mine!
+                                                           will now :gold:`gain 2 pieces of ore` when you mine!
 
 Superior Mining |sm|                                       This upgraded mining technology brings MOB-BOT's efficiency
-                                                           to a new level. MOB-BOT will **gain 3 pieces of ore** when
-                                                           mining! Sensational!
+                                                           to a new level. MOB-BOT will :gold:`gain 3 pieces of ore`
+                                                           when mining! Sensational!
 
 Overdrive Mining |om|                                      MOB-BOT has become the mining machine it was always meant to
-                                                           be. MOB-BOT will now **gain 4 pieces of ore** when mining!
-                                                           Bring in the money!
+                                                           be. MOB-BOT will now :gold:`gain 4 pieces of ore` when
+                                                           mining! Bring in the money!
 
-Dynamite |dyn|                                             Become more efficient with your mining! Dynamite will explode
-                                                           **3 turns** after being placed, mining multiple ores at once!
+Dynamite |dyn|                                             Become more efficient with your mining! Dynamite
+                                                           :gold:`explodes 3 turns after being placed`, mining multiple
+                                                           ores at once!
 
 Landmines |lm|                                             The other company keeps taking valuable ores, so start
-                                                           setting traps for them... ``>:D`` Landmines **steal ores**
-                                                           from the opponent when activated.
+                                                           setting traps for them... ``>:D`` Landmines
+                                                           :gold:`steal ores from the opponent when activated`.
 
-EMPs |emp|                                                 EMPs are the rich Bot's landmine! EMPs **steal more ores**
-                                                           from the opponent than a normal landmine. Phenomenal!
-                                                           NOTE: once purchased, Trap Defusal **CANNOT** be purchased.
+EMPs |emp|                                                 EMPs are the rich Bot's landmine! EMPs
+                                                           :gold:`steal more ores from the opponent` than a normal
+                                                           landmine. Phenomenal!
+                                                           :gold:`NOTE: once purchased, Trap Defusal CANNOT be`
+                                                           :gold:`purchased.`
 
 Trap Defusal |diffuse|                                     Fight back against the traps that are set against you. Trap
-                                                           defusing will deactivate any trap placed by the enemy (as
-                                                           long as you don't step on it)!
-                                                           NOTE: once purchased, EMPs **CANNOT** be purchased.
+                                                           defusing will
+                                                           :gold:`deactivate any trap placed by the enemy` (as long as
+                                                           you don't step on it)!
+                                                           :gold:`NOTE: once purchased, EMPs CANNOT be purchased.`
 ========================================================== =============================================================
 
 For more information on Dynamite, Landmines, and EMPs, go to :doc:`placeables`.
@@ -113,15 +128,15 @@ To unlock these Techs, you must mine Ancient Tech, which will yield science poin
 points.
 
 To unlock these Techs, MOB-BOT *must end the turn on top of its company's base*. When there, it can also purchase a new
-Tech on the following turn (assuming it has enough science points). To do so, use the :doc:`enums` that are provided,
-and :doc:`taking_action` will explain how to implement it in more detail.
+Tech (assuming it has enough science points). To do so, use the :doc:`enums` that are provided, and :doc:`taking_action`
+will explain how to implement it in more detail.
 
 Remember - the Tech Tree is... a tree. You must unlock techs in order based on their branches. That means you cannot buy
 Dynamite without first buying Improved Mining. You can, however, buy Improved Mining and then Improved Drivetrain, and
 vice versa.
 
 This also means that any branching paths can only access one Tech. More specifically, After purchasing landmines,
-there is the choice to purchase either EMPs or Trap Defusal. **Only one can be purchased.** After it is purchased, the
+there is the choice to purchase either EMPs or Trap Defusal. :gold:`Only one can be purchased.` After it is purchased, the
 other cannot be purchased.
 
 To view the cost of all Techs, please visit :doc:`scoring` for more information.
@@ -130,12 +145,14 @@ To view the cost of all Techs, please visit :doc:`scoring` for more information.
 Inventory
 =========
 
-Each MOB-BOT comes with its own, standardized inventory system. The inventory has a max capacity of **50 ores**. Once
-capacity has been reached, MOB-BOT will no longer be able to mine. Make sure to go back to base and make a deposit!
+Each MOB-BOT comes with its own, standardized inventory system. The inventory has a :gold:`max capacity of 50 ores`.
+Once capacity has been reached, MOB-BOT will no longer be able to mine. Make sure to go back to base and make a deposit!
 
 Each time you mine, your drop rate will determine how many ores are added to your inventory. For example, if Overdrive
-Mining (drop rate = 4) was unlocked and there is an empty inventory, the inventory will have 4/50 slots filled.
+Mining (drop rate = 4) was unlocked and there is an empty inventory, the inventory will have 4/50 slots filled after
+mining.
 
+|
 
 As more Techs are unlocked, they will either be considered a Passive or Active Ability and behave differently.
 

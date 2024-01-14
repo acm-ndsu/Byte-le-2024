@@ -2,17 +2,32 @@
 Scoring
 =======
 
-In case you missed how all the points will be added, they will all be listed here. Remember: points and science points
-are different; science points are *only* used for buying Techs.
+.. raw:: html
 
-=============== ==================  =================  ======================
-Ore             Church Inc. Points  Turing Co. Points  Science Points
-=============== ==================  =================  ======================
-Copium          20                  20                 0
-Lambium         80                  24                 0
-Turite          24                  80                 0
-Ancient Tech    0                   0                  10
-=============== ==================  =================  ======================
+    <style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
+    <style> .blue {color:#1769BC; font-weight:bold; font-size:16px} </style>
+    <style> .green {color:#469B34; font-weight:bold; font-size:16px} </style>
+    <style> .brown {color:#623514; font-weight:bold; font-size:16px} </style>
+    <style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style>
+
+.. role:: red
+.. role:: blue
+.. role:: green
+.. role:: brown
+.. role:: gold
+
+
+In case you missed how all the points will be added, they will all be listed here. Remember: points and science points
+are different; science points are :gold:`only` used for buying Techs.
+
+====================== ==========================  ========================  =======================
+Ore                    :blue:`Church Inc. Points`  :red:`Turing Co. Points`  :brown:`Science Points`
+====================== ==========================  ========================  =======================
+:green:`Copium`        20                          20                        0
+:blue:`Lambium`        80                          24                        0
+:red:`Turite`          24                          80                        0
+:brown:`Ancient Tech`  0                           0                         10
+====================== ==========================  ========================  =======================
 
 
 ============================ ===================== ==============

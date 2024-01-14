@@ -2,6 +2,17 @@
 Getting Started
 ===============
 
+.. raw:: html
+
+    <style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
+    <style> .blue {color:#1769BC; font-weight:bold; font-size:16px} </style>
+    <style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style>
+
+.. role:: red
+.. role:: blue
+.. role:: gold
+
+
 NOTICE
 ======
 
@@ -17,7 +28,8 @@ More commands are listed in :doc:`useful_commands`. Thank you!
 Objective
 =========
 Your objective for this year is to gain more points than your opponents. This is done by mining more ores than the
-opposing team in The Quarry, and by unlocking upgrades. :doc:`scoring` will explain how the points are totaled.
+opposing team in The Quarry, and by unlocking upgrades. :doc:`scoring` will explain how the points are totaled. Each
+game will have 500 turns before ending. Manage your time wisely!
 
 As you collect ores, make your way back to your base to cash them in for game points and science points!
 Upgrading your MOB-BOT with science points will increase its mining capabilities, thus improving corporate revenue
@@ -34,8 +46,8 @@ company in the task of mining the most ore, will result in ``immediate terminati
 Tournament Structure
 ====================
 Each pairing of teams will have two games against each other. After one game, both teams will switch company
-affiliations (i.e., if first with Church Inc., will next be Turing Co.). The points gained from both games will be added
-to those teams' total points in the tournament.
+affiliations (i.e., if first with :blue:`Church Inc.`, will next be :red:`Turing Co.`). The points gained from both
+games will be added to those teams' total points in the tournament.
 
 
 Running the Game
@@ -46,7 +58,7 @@ Python Version
 Make sure to uninstall the visual studio version of python if you have visual studio installed.
 You can do this by re-running the installer and unselecting the python development kit then clicking update.
 
-**We require using Python version 3.11.** You can go to the
+:gold:`We require using Python version 3.11.` You can go to the
 `official Python website <https://www.python.org/downloads/release/python-3117/>`_ to download it.
 
 You can use any text editor or IDE for this competition, but we recommend Visual Studio Code.

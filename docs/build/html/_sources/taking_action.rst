@@ -2,6 +2,12 @@
 Taking Action
 =============
 
+.. raw:: html
+
+        <style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style>
+
+.. role:: gold
+
 To control your MOB-BOT, you will be using :doc:`enums` to determine which action(s) take place each turn.
 
 
@@ -13,10 +19,11 @@ The take turn method will be where you program your MOB-BOT. The ``actions`` var
 
 .. code-block::
 
-    actions = [ActionType.EXAMPLE_ENUM]
+    actions = [ActionType.EXAMPLE_ENUM,]
 
 Make sure to keep the ``return actions`` at the end of the method or your actions won't be received!
 
+NOTE: If you will only provide a single enum to the list, add the comma at the end.
 
 Action Management
 =================
@@ -28,7 +35,7 @@ Movement
 
 If you desire for MOB-BOT to move, make sure that the first action in your ``actions`` list is an ActionType enum for
 movement. Since it is possible to move multiple Tiles in one turn, if the first enum is for movement, the rest of the
-list will be filtered to *only* movement enums. The list size will then be based on MOB-BOT's movement speed.
+list will be filtered to :gold:`only` movement enums. The list size will then be based on MOB-BOT's movement speed.
 
 For example, if MOB-BOT unlocked the Superior Drivetrain Tech to increase its movement speed to 3, an ``actions`` list
 of:
@@ -50,8 +57,8 @@ Now MOB-BOT can only move the first 3 movement enums specified.
 Non-movement Actions
 --------------------
 
-In your ``actions`` list, if the first ActionType enum is *not* a movement option, that will be the only action taken
-for that turn. This includes placing dynamite or traps, mining, defusing traps, and buying new Techs. Recall that
+In your ``actions`` list, if the first ActionType enum is :gold:`not` a movement option, that will be the only action
+taken for that turn. This includes placing dynamite or traps, mining, defusing traps, and buying new Techs. Recall that
 selling ores is done automatically as long as MOB-BOT ends the turn on its company base.
 
 
@@ -66,5 +73,5 @@ Defusing Traps
 --------------
 
 Defusing traps is done by using :doc:`enums` to defuse in any adjacent space to MOB-BOT. This includes Up, Down, Left,
-and Right. If a trap is not in the specified direction when nothing is called, nothing will happen.
+and Right. If a trap is not in the specified direction when called, nothing will happen.
 

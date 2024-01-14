@@ -327,12 +327,16 @@ document.write(`
                   
   <section id="the-game-board">
 <h1>The Game Board<a class="headerlink" href="#the-game-board" title="Permalink to this heading">#</a></h1>
-<section id="layout">
+<style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
+<style> .blue {color:#1769BC; font-weight:bold; font-size:16px} </style>
+<style> .green {color:#469B34; font-weight:bold; font-size:16px} </style>
+<style> .brown {color:#623514; font-weight:bold; font-size:16px} </style>
+<style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style><section id="layout">
 <h2>Layout<a class="headerlink" href="#layout" title="Permalink to this heading">#</a></h2>
 <p>The map is a 14x14 grid, including the outer walls. Both MOB-BOTs for either team will be on the same map.
 The only thing separating them is the walls of The Quarry. However, if the two MOB-BOTs meet, it could be an explosive
 battle!</p>
-<p><strong>NOTE: Two MOB-BOTs cannot stand on the same tile.</strong> However, MOB-BOT can stand on Traps, Dynamite, and Ores.</p>
+<p><span class="gold">NOTE: Two MOB-BOTs cannot stand on the same tile. However, MOB-BOT can stand on Traps, Dynamite, and Ores.</span></p>
 <a class="reference internal image-reference" href="_images/game_map.png"><img alt="_images/game_map.png" class="align-center" src="_images/game_map.png" style="width: 50%;" /></a>
 </section>
 <section id="tiles">
@@ -343,8 +347,8 @@ battle!</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="o">.</span><span class="n">game_map</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>For example, looking at the game map, there is Copium ore close to the Church base at coordinate (2, 1) (remember that
-the top left is (0, 0)). To access that tile, type the following:</p>
+<p>For example, looking at the game map, there is Copium ore close to the <span class="blue">Church base</span> at coordinate (2, 1)
+(remember that the top left is (0, 0)). To access that tile, type the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">world</span><span class="o">.</span><span class="n">game_map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -387,8 +391,8 @@ ObjectType and class name respectively.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tile</span><span class="o">.</span><span class="n">get_occupied_by</span><span class="p">(</span><span class="n">ObjectType</span><span class="o">.</span><span class="n">EXAMPLE_OBJECT_TYPE</span> <span class="o">|</span> <span class="n">ExampleClassName</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This method will take either an ObjectType enum or a class name – <strong>not both</strong> and search for it. If found, it will
-return the object. Otherwise, the <code class="docutils literal notranslate"><span class="pre">None</span></code> value will be returned.</p>
+<p>This method will take either an ObjectType enum or a class name – <span class="gold">not both</span> – and search for it. If found, it
+will return the object. Otherwise, the <code class="docutils literal notranslate"><span class="pre">None</span></code> value will be returned.</p>
 <p>The <a class="reference internal" href="placeables.html"><span class="doc">Placeables</span></a> page will explain everything that can be placed on the map by MOB-BOT, and <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> will have
 the enums needed for every object that can be on the game map.</p>
 <p>If you would like to see</p>
@@ -398,15 +402,15 @@ the enums needed for every object that can be on the game map.</p>
 <p>Each team will have a base on the map. Their base will match their MOB-BOT and company color.</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt>Church Inc.</dt><dd><ul>
-<li><p>Church Inc. will have the blue base in the top left corner.</p></li>
+<dt><span class="blue">Church Inc</span>.</dt><dd><ul>
+<li><p><span class="blue">Church Inc.</span> will have the blue base in the top left corner.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Turing Co.</dt><dd><ul>
-<li><p>Turing Co. will have the red base in the bottom right corner.</p></li>
+<dt><span class="red">Turing Co.</span></dt><dd><ul>
+<li><p><span class="red">Turing Co.</span> will have the red base in the bottom right corner.</p></li>
 </ul>
 </dd>
 </dl>
@@ -428,16 +432,16 @@ after mining specific ores:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Copium</p></td>
-<td><p>Lambdium | Turite | Ancient Tech | Nothing</p></td>
+<tr class="row-even"><td><p><span class="green">Copium</span></p></td>
+<td><p><span class="blue">Lambdium</span> | <span class="red">Turite</span> | <span class="brown">Ancient Tech</span> | Nothing</p></td>
 </tr>
-<tr class="row-odd"><td><p>Lambdium</p></td>
-<td><p>Ancient Tech | Nothing</p></td>
+<tr class="row-odd"><td><p><span class="blue">Lambdium</span></p></td>
+<td><p><span class="brown">Ancient Tech</span> | Nothing</p></td>
 </tr>
-<tr class="row-even"><td><p>Turite</p></td>
-<td><p>Ancient Tech | Nothing</p></td>
+<tr class="row-even"><td><p><span class="red">Turite</span></p></td>
+<td><p><span class="brown">Ancient Tech</span> | Nothing</p></td>
 </tr>
-<tr class="row-odd"><td><p>Ancient Tech</p></td>
+<tr class="row-odd"><td><p><span class="brown">Ancient Tech</span></p></td>
 <td><p>Nothing</p></td>
 </tr>
 </tbody>

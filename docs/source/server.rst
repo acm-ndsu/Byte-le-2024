@@ -2,6 +2,12 @@
 The Server
 ==========
 
+.. raw:: html
+
+    <style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style>
+
+.. role:: gold
+
 Here are some notes to consider about the server to aid you in the competiton.
 
 
@@ -16,22 +22,22 @@ To register your team, type
 
 into the terminal. Follow the prompts to enter your team name, select your university, and select if you are an alumni.
 
-After registering, you will receive a new file called ``vID`` in your Byte-le 2024 folder. **DO NOT SHARE THIS.** This
-is unique to your team and allows you to submit your clients and view specific team information.
+After registering, you will receive a new file called ``vID`` in your Byte-le 2024 folder. :gold:`DO NOT SHARE THIS.`
+This is unique to your team and allows you to submit your clients and view specific team information.
 
 Client Commands
 ===============
 
-**NOTE**: As commands are listed, some will have two versions to perform the same task. The first command will be typed
-in its entirety, and the second command will be a shortened version for ease of use.
+:gold:`NOTE`: As commands are listed, some will have two versions to perform the same task. The first command will be
+typed in its entirety, and the second command will be a shortened version for ease of use.
 
-**Only ONE line needs to be typed into the terminal, NOT both.**
+:gold:`Only ONE line needs to be typed into the terminal, NOT both.`
 
 
 Submitting Code
 ---------------
 
-To submit your client code, type the following into the terminal:
+To submit your client code, type one of the following into the terminal:
 
 .. code-block::
 
@@ -77,14 +83,14 @@ leaderboard's id:
 Stats
 -----
 
-To view your stats for the latest submission, type
+To view your stats for the latest submission, type one of the following:
 
 .. code-block::
 
     python launcher.pyz client stats
     python launcher.pyz c s
 
-to view them. Your stats will continue to change until all games are completed.
+Your stats will continue to change until all games are completed.
 
 If you desire to see all of your submissions, type
 
@@ -95,7 +101,7 @@ If you desire to see all of your submissions, type
 
 to receive all your submission ids. These ids can be used in some of the commands listed below.
 
-To view code from a previous submission, have a submission id ready and type
+To receive code from a previous submission, have a submission id ready and type
 
 .. code-block::
 

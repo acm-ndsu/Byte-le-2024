@@ -327,7 +327,9 @@ document.write(`
                   
   <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">#</a></h1>
-<section id="notice">
+<style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
+<style> .blue {color:#1769BC; font-weight:bold; font-size:16px} </style>
+<style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style><section id="notice">
 <h2>NOTICE<a class="headerlink" href="#notice" title="Permalink to this heading">#</a></h2>
 <p>Please run the following command to install the necessary packages to run the game:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python -m pip install -r requirements.txt</span>
@@ -338,7 +340,8 @@ document.write(`
 <section id="objective">
 <h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
 <p>Your objective for this year is to gain more points than your opponents. This is done by mining more ores than the
-opposing team in The Quarry, and by unlocking upgrades. <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> will explain how the points are totaled.</p>
+opposing team in The Quarry, and by unlocking upgrades. <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> will explain how the points are totaled. Each
+game will have 500 turns before ending. Manage your time wisely!</p>
 <p>As you collect ores, make your way back to your base to cash them in for game points and science points!
 Upgrading your MOB-BOT with science points will increase its mining capabilities, thus improving corporate revenue
 (fantastic)! You can even disrupt the opposing team with traps, giving you the advantage and removing the competition
@@ -351,8 +354,8 @@ company in the task of mining the most ore, will result in <code class="docutils
 <section id="tournament-structure">
 <h2>Tournament Structure<a class="headerlink" href="#tournament-structure" title="Permalink to this heading">#</a></h2>
 <p>Each pairing of teams will have two games against each other. After one game, both teams will switch company
-affiliations (i.e., if first with Church Inc., will next be Turing Co.). The points gained from both games will be added
-to those teams’ total points in the tournament.</p>
+affiliations (i.e., if first with <span class="blue">Church Inc.</span>, will next be <span class="red">Turing Co.</span>). The points gained from both
+games will be added to those teams’ total points in the tournament.</p>
 </section>
 <section id="running-the-game">
 <h2>Running the Game<a class="headerlink" href="#running-the-game" title="Permalink to this heading">#</a></h2>
@@ -360,7 +363,7 @@ to those teams’ total points in the tournament.</p>
 <h3>Python Version<a class="headerlink" href="#python-version" title="Permalink to this heading">#</a></h3>
 <p>Make sure to uninstall the visual studio version of python if you have visual studio installed.
 You can do this by re-running the installer and unselecting the python development kit then clicking update.</p>
-<p><strong>We require using Python version 3.11.</strong> You can go to the
+<p><span class="gold">We require using Python version 3.11.</span> You can go to the
 <a class="reference external" href="https://www.python.org/downloads/release/python-3117/">official Python website</a> to download it.</p>
 <p>You can use any text editor or IDE for this competition, but we recommend Visual Studio Code.</p>
 </section>

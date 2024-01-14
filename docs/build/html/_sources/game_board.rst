@@ -2,6 +2,21 @@
 The Game Board
 ==============
 
+.. raw:: html
+
+    <style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
+    <style> .blue {color:#1769BC; font-weight:bold; font-size:16px} </style>
+    <style> .green {color:#469B34; font-weight:bold; font-size:16px} </style>
+    <style> .brown {color:#623514; font-weight:bold; font-size:16px} </style>
+    <style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style>
+
+.. role:: red
+.. role:: blue
+.. role:: green
+.. role:: brown
+.. role:: gold
+
+
 Layout
 ======
 
@@ -9,7 +24,7 @@ The map is a 14x14 grid, including the outer walls. Both MOB-BOTs for either tea
 The only thing separating them is the walls of The Quarry. However, if the two MOB-BOTs meet, it could be an explosive
 battle!
 
-**NOTE: Two MOB-BOTs cannot stand on the same tile.** However, MOB-BOT can stand on Traps, Dynamite, and Ores.
+:gold:`NOTE: Two MOB-BOTs cannot stand on the same tile. However, MOB-BOT can stand on Traps, Dynamite, and Ores.`
 
 .. image:: ./_static/images/game_map.png
    :width: 50%
@@ -28,8 +43,8 @@ The map is made of a 2D array of Tile objects. To access any tiles, use (y, x) c
 
    world.game_map[y][x]
 
-For example, looking at the game map, there is Copium ore close to the Church base at coordinate (2, 1) (remember that
-the top left is (0, 0)). To access that tile, type the following:
+For example, looking at the game map, there is Copium ore close to the :blue:`Church base` at coordinate (2, 1)
+(remember that the top left is (0, 0)). To access that tile, type the following:
 
 .. code-block:: python
 
@@ -90,8 +105,8 @@ Lastly, to receive an object that is on a Tile, type:
 
    tile.get_occupied_by(ObjectType.EXAMPLE_OBJECT_TYPE | ExampleClassName)
 
-This method will take either an ObjectType enum or a class name -- **not both** and search for it. If found, it will
-return the object. Otherwise, the ``None`` value will be returned.
+This method will take either an ObjectType enum or a class name -- :gold:`not both` -- and search for it. If found, it
+will return the object. Otherwise, the ``None`` value will be returned.
 
 The :doc:`placeables` page will explain everything that can be placed on the map by MOB-BOT, and :doc:`enums` will have
 the enums needed for every object that can be on the game map.
@@ -105,10 +120,10 @@ Bases
 
 Each team will have a base on the map. Their base will match their MOB-BOT and company color.
 
-- Church Inc.
-    - Church Inc. will have the blue base in the top left corner.
-- Turing Co.
-    - Turing Co. will have the red base in the bottom right corner.
+- :blue:`Church Inc`.
+    - :blue:`Church Inc.` will have the blue base in the top left corner.
+- :red:`Turing Co.`
+    - :red:`Turing Co.` will have the red base in the bottom right corner.
 
 When you want to cash in ores for points or upgrade your MOB-BOT, you can only do so at your base. Once MOB-BOT is
 standing on their base at the end of the turn, it will automatically deposit all the ores in its inventory.
@@ -121,13 +136,13 @@ Mining Interactions
 After mining ore from a Tile, there is a chance a new piece of ore is discovered underneath! Here's what can appear
 after mining specific ores:
 
-============ ==========================================
-Mined Ore    Next Generated Ore
-============ ==========================================
-Copium       Lambdium | Turite | Ancient Tech | Nothing
-Lambdium     Ancient Tech | Nothing
-Turite       Ancient Tech | Nothing
-Ancient Tech Nothing
-============ ==========================================
+===================== ==========================================
+Mined Ore             Next Generated Ore
+===================== ==========================================
+:green:`Copium`       :blue:`Lambdium` | :red:`Turite` | :brown:`Ancient Tech` | Nothing
+:blue:`Lambdium`      :brown:`Ancient Tech` | Nothing
+:red:`Turite`         :brown:`Ancient Tech` | Nothing
+:brown:`Ancient Tech` Nothing
+===================== ==========================================
 
 Visit :doc:`ores` for more information on ore values.

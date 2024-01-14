@@ -326,15 +326,16 @@ document.write(`
                   
   <section id="taking-action">
 <h1>Taking Action<a class="headerlink" href="#taking-action" title="Permalink to this heading">#</a></h1>
-<p>To control your MOB-BOT, you will be using <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> to determine which action(s) take place each turn.</p>
+<style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style><p>To control your MOB-BOT, you will be using <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> to determine which action(s) take place each turn.</p>
 <section id="take-turn-method">
 <h2>Take Turn Method<a class="headerlink" href="#take-turn-method" title="Permalink to this heading">#</a></h2>
 <p>The take turn method will be where you program your MOB-BOT. The <code class="docutils literal notranslate"><span class="pre">actions</span></code> variable passed in is a list of ActionType
 <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a>. Set your action(s) by typing the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">ActionType</span><span class="o">.</span><span class="n">EXAMPLE_ENUM</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">ActionType</span><span class="o">.</span><span class="n">EXAMPLE_ENUM</span><span class="p">,]</span>
 </pre></div>
 </div>
 <p>Make sure to keep the <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">actions</span></code> at the end of the method or your actions won’t be received!</p>
+<p>NOTE: If you will only provide a single enum to the list, add the comma at the end.</p>
 </section>
 <section id="action-management">
 <h2>Action Management<a class="headerlink" href="#action-management" title="Permalink to this heading">#</a></h2>
@@ -343,7 +344,7 @@ document.write(`
 <h3>Movement<a class="headerlink" href="#movement" title="Permalink to this heading">#</a></h3>
 <p>If you desire for MOB-BOT to move, make sure that the first action in your <code class="docutils literal notranslate"><span class="pre">actions</span></code> list is an ActionType enum for
 movement. Since it is possible to move multiple Tiles in one turn, if the first enum is for movement, the rest of the
-list will be filtered to <em>only</em> movement enums. The list size will then be based on MOB-BOT’s movement speed.</p>
+list will be filtered to <span class="gold">only</span> movement enums. The list size will then be based on MOB-BOT’s movement speed.</p>
 <p>For example, if MOB-BOT unlocked the Superior Drivetrain Tech to increase its movement speed to 3, an <code class="docutils literal notranslate"><span class="pre">actions</span></code> list
 of:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">ActionType</span><span class="o">.</span><span class="n">MOVE_DOWN</span><span class="p">,</span> <span class="n">ActionType</span><span class="o">.</span><span class="n">MOVE_DOWN</span><span class="p">,</span> <span class="n">ActionType</span><span class="o">.</span><span class="n">MINE</span><span class="p">,</span> <span class="n">ActionType</span><span class="o">.</span><span class="n">MOVE_RIGHT</span><span class="p">,</span> <span class="n">ActionType</span><span class="o">.</span><span class="n">MOVE_RIGHT</span><span class="p">]</span>
@@ -357,8 +358,8 @@ of:</p>
 </section>
 <section id="non-movement-actions">
 <h3>Non-movement Actions<a class="headerlink" href="#non-movement-actions" title="Permalink to this heading">#</a></h3>
-<p>In your <code class="docutils literal notranslate"><span class="pre">actions</span></code> list, if the first ActionType enum is <em>not</em> a movement option, that will be the only action taken
-for that turn. This includes placing dynamite or traps, mining, defusing traps, and buying new Techs. Recall that
+<p>In your <code class="docutils literal notranslate"><span class="pre">actions</span></code> list, if the first ActionType enum is <span class="gold">not</span> a movement option, that will be the only action
+taken for that turn. This includes placing dynamite or traps, mining, defusing traps, and buying new Techs. Recall that
 selling ores is done automatically as long as MOB-BOT ends the turn on its company base.</p>
 </section>
 <section id="buying-techs">
@@ -369,7 +370,7 @@ won’t work.</p>
 <section id="defusing-traps">
 <h3>Defusing Traps<a class="headerlink" href="#defusing-traps" title="Permalink to this heading">#</a></h3>
 <p>Defusing traps is done by using <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> to defuse in any adjacent space to MOB-BOT. This includes Up, Down, Left,
-and Right. If a trap is not in the specified direction when nothing is called, nothing will happen.</p>
+and Right. If a trap is not in the specified direction when called, nothing will happen.</p>
 </section>
 </section>
 </section>
