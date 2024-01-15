@@ -53,37 +53,37 @@ class ObjectType(Enum):
 
 
 class ActionType(Enum):
-    NONE = auto()
-    MOVE_UP = auto()
-    MOVE_DOWN = auto()
-    MOVE_LEFT = auto()
-    MOVE_RIGHT = auto()
-    INTERACT_UP = auto()
-    INTERACT_DOWN = auto()
-    INTERACT_LEFT = auto()
-    INTERACT_RIGHT = auto()
-    INTERACT_CENTER = auto()
-    PLACE_DYNAMITE = auto()
-    PLACE_LANDMINE = auto()
-    PLACE_EMP = auto()
-    MINE = auto()
-    DEFUSE_UP = auto()
-    DEFUSE_DOWN = auto()
-    DEFUSE_LEFT = auto()
-    DEFUSE_RIGHT = auto()
-    BUY_IMPROVED_DRIVETRAIN = auto()
-    BUY_SUPERIOR_DRIVETRAIN = auto()
-    BUY_OVERDRIVE_DRIVETRAIN = auto()
-    BUY_IMPROVED_MINING = auto()
-    BUY_SUPERIOR_MINING = auto()
-    BUY_OVERDRIVE_MINING = auto()
-    BUY_DYNAMITE = auto()
-    BUY_LANDMINES = auto()
-    BUY_EMPS = auto()
-    BUY_TRAP_DEFUSAL = auto()
+    NONE = auto()  # 1
+    MOVE_UP = auto()  # 2
+    MOVE_DOWN = auto()  # 3
+    MOVE_LEFT = auto()  # 4
+    MOVE_RIGHT = auto()  # 5
+    INTERACT_UP = auto()  # 6
+    INTERACT_DOWN = auto()  # 7
+    INTERACT_LEFT = auto()  # 8
+    INTERACT_RIGHT = auto()  # 9
+    INTERACT_CENTER = auto()  # 10
+    PLACE_DYNAMITE = auto()  # 11
+    PLACE_LANDMINE = auto()  # 12
+    PLACE_EMP = auto()  # 13
+    MINE = auto()  # 14
+    DEFUSE_UP = auto()  # 15
+    DEFUSE_DOWN = auto()  # 16
+    DEFUSE_LEFT = auto()  # 17
+    DEFUSE_RIGHT = auto()  # 18
+    BUY_IMPROVED_DRIVETRAIN = auto()  # 19
+    BUY_SUPERIOR_DRIVETRAIN = auto()  # 20
+    BUY_OVERDRIVE_DRIVETRAIN = auto()  # 21
+    BUY_IMPROVED_MINING = auto()  # 22
+    BUY_SUPERIOR_MINING = auto()  # 23
+    BUY_OVERDRIVE_MINING = auto()  # 24
+    BUY_DYNAMITE = auto()  # 25
+    BUY_LANDMINES = auto()  # 26
+    BUY_EMPS = auto()  # 27
+    BUY_TRAP_DEFUSAL = auto()  # 28
 
 
 # Added for Quarry Rush
 class Company(Enum):
-    CHURCH = auto()
-    TURING = auto()
+    CHURCH = auto()  # 1
+    TURING = auto()  # 2

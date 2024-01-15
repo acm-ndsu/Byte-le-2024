@@ -68,13 +68,10 @@ class TestDynamite(unittest.TestCase):
     def test_dynamite_can_explode(self):
         self.assertFalse(self.dynamite.can_explode)
 
-        self.dynamite.decrement_fuse()
+        [self.dynamite.decrement_fuse() for x in range(3)]  # decrement the fuse to be 0
         self.assertEqual(self.dynamite.fuse, 0)
 
         self.assertTrue(self.dynamite.can_explode)
-
-
-    # test inventory manager - later
 
     # test: json
     def test_dynamite_json(self):

@@ -84,7 +84,7 @@ class Item(GameObject):
         self.durability: int | None = durability  # durability can be None to represent infinite durability
         self.quantity: int = quantity  # the current amount of this item
         self.position: Vector | None = position  # position of item
-        self.name: str | None = name  # name associated with item
+        self.name: str | None = name  # name affiliated with item
 
     @property
     def durability(self) -> int | None:

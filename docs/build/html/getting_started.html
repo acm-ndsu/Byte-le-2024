@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Getting Started &#8212; Byte-le Royale 2024 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Useful Commands" href="useful_commands.html" />
+    <link rel="prev" title="Welcome to the official Quarry Rush User Manual!" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Byte-le Royale 2024 1.0.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="useful_commands.html">Useful Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="server.html">The Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobbot.html">MOB-BOT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="taking_action.html">Taking Action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="game_board.html">The Game Board</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="placeables.html">Placeables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scoring.html">Scoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualizer.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/getting_started.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Getting Started</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notice">NOTICE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective">Objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tournament-structure">Tournament Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-game">Running the Game</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-version">Python Version</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-code-and-mob-bot">Getting the Code and MOB-BOT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-code">Submitting Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-issues">Submitting Issues</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">#</a></h1>
+<style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
+<style> .blue {color:#1769BC; font-weight:bold; font-size:16px} </style>
+<style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style><section id="notice">
+<h2>NOTICE<a class="headerlink" href="#notice" title="Permalink to this heading">#</a></h2>
+<p>Please run the following command to install the necessary packages to run the game:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python -m pip install -r requirements.txt</span>
+</pre></div>
+</div>
+<p>More commands are listed in <a class="reference internal" href="useful_commands.html"><span class="doc">Useful Commands</span></a>. Thank you!</p>
+</section>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
+<img alt="_images/wcyotc.png" src="_images/wcyotc.png" />
+<p>Your objective for this year is to gain more points than your opponents. This is done by mining more ores than the
+opposing team in The Quarry, and by unlocking upgrades. <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> will explain how the points are totaled. Each
+game will have 500 turns before ending. Manage your time wisely!</p>
+<p>As you collect ores, make your way back to your base to cash them in for game points and science points!
+Upgrading your MOB-BOT with science points will increase its mining capabilities, thus improving corporate revenue
+(fantastic)! You can even disrupt the opposing team with traps, giving you the advantage and removing the competition
+from the market (astounding)!</p>
+<p>Visit <a class="reference internal" href="mobbot.html"><span class="doc">MOB-BOT</span></a> for more information on how it all works.</p>
+<p>Remember – failure to comply with the high standards of the company, along with failure to defeat the rival
+company in the task of mining the most ore, will result in <code class="docutils literal notranslate"><span class="pre">immediate</span> <span class="pre">termination</span></code>. But you’ll be okay.
+<code class="docutils literal notranslate"><span class="pre">:)</span></code></p>
+</section>
+<section id="tournament-structure">
+<h2>Tournament Structure<a class="headerlink" href="#tournament-structure" title="Permalink to this heading">#</a></h2>
+<img alt="_images/vs.png" src="_images/vs.png" />
+<p>Each pairing of teams will have two games against each other. After one game, both teams will switch company
+affiliations (i.e., if first with <span class="blue">Church Inc.</span>, will next be <span class="red">Turing Co.</span>). The points gained from both
+games will be added to those teams’ total points in the tournament.</p>
+</section>
+<section id="running-the-game">
+<h2>Running the Game<a class="headerlink" href="#running-the-game" title="Permalink to this heading">#</a></h2>
+<section id="python-version">
+<h3>Python Version<a class="headerlink" href="#python-version" title="Permalink to this heading">#</a></h3>
+<p>Make sure to uninstall the visual studio version of python if you have visual studio installed.
+You can do this by re-running the installer and unselecting the python development kit then clicking update.</p>
+<p><span class="gold">We require using Python version 3.11.</span> You can go to the
+<a class="reference external" href="https://www.python.org/downloads/release/python-3117/">official Python website</a> to download it.</p>
+<p>You can use any text editor or IDE for this competition, but we recommend Visual Studio Code.</p>
+</section>
+<section id="getting-the-code-and-mob-bot">
+<h3>Getting the Code and MOB-BOT<a class="headerlink" href="#getting-the-code-and-mob-bot" title="Permalink to this heading">#</a></h3>
+<p>To receive the code and your own MOB-BOT, please clone the repository here
+<a class="reference external" href="https://github.com/acm-ndsu/Byte-le-2024">here</a>.</p>
+<p>When on GitHub, press the green <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span> <span class="pre">Code</span></code> button to drop down the following menu:</p>
+<img alt="_images/clone_repo_options.png" src="_images/clone_repo_options.png" />
+<p>We highly recommend cloning with GitHub Desktop or downloading the ZIP folder.</p>
+<ol class="arabic">
+<li><dl>
+<dt>Open with GitHub Desktop</dt><dd><ul class="simple">
+<li><p>Allow the website to open GitHub Desktop if you have it downloaded already</p></li>
+<li><p>Once in GitHub Desktop, the URL to the repository will be provided</p></li>
+<li><p>Choose where you’d like it saved on your device</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Clone</span></code> and you’re good to go!</p></li>
+</ul>
+<img alt="_images/github_desktop_cloning.png" src="_images/github_desktop_cloning.png" />
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Download ZIP</dt><dd><ul class="simple">
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Download</span> <span class="pre">ZIP</span></code> and find it in your Downloads.</p></li>
+<li><p>Extract the files and save it some where on your device.</p></li>
+<li><p>Use your IDE/text editor (Visual Studio Code is recommended) of choice and open the extracted folder downloaded.</p></li>
+<li><p>You’re ready to code!</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+<section id="submitting-code">
+<h3>Submitting Code<a class="headerlink" href="#submitting-code" title="Permalink to this heading">#</a></h3>
+<p>To submit your code, program MOB-BOT in either your <code class="docutils literal notranslate"><span class="pre">base_client.py</span></code> or <code class="docutils literal notranslate"><span class="pre">base_client_2.py</span></code> files. When you submit
+your code via the command specified in <a class="reference internal" href="server.html"><span class="doc">The Server</span></a>, you can submit either of these files if you choose to.</p>
+</section>
+<section id="submitting-issues">
+<h3>Submitting Issues<a class="headerlink" href="#submitting-issues" title="Permalink to this heading">#</a></h3>
+<p>If you run into issues with the game, please submit an issue to the discord in the bugs channel or call a developer
+over!</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to the official Quarry Rush User Manual!</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="useful_commands.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Useful Commands</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notice">NOTICE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective">Objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tournament-structure">Tournament Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-game">Running the Game</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-version">Python Version</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-code-and-mob-bot">Getting the Code and MOB-BOT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-code">Submitting Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-issues">Submitting Issues</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By NDSU ACM
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 1974-2023, NDSU ACM.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
