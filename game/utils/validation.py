@@ -29,22 +29,22 @@ def verify_code(filename, already_string=False):
                 break
 
             # Check for illegal keywords
-            if 'from' in token:
+            if 'from' == token:
                 module = line[line.index('from') + 1]
                 if module not in ALLOWED_MODULES:
                     illegal_imports.append(module)
                 else:
                     break
-            elif 'import' in token:
+            elif 'import' == token:
                 module = line[line.index('import') + 1]
                 if module not in ALLOWED_MODULES:
                     illegal_imports.append(module)
                 else:
                     break
-            if 'open' in token:
+            if 'open(' in token:
                 uses_open = True
 
-            if 'print' in token:
+            if 'print(' in token:
                 uses_print = True
 
     return (illegal_imports, uses_open, uses_print)
