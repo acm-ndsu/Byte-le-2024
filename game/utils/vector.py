@@ -96,6 +96,14 @@ class Vector(GameObject):
         new_y: int = vector_1.y + vector_2.y
         return Vector(new_x, new_y)
 
+    @staticmethod
+    def from_xy_tuple(xy_tuple: Tuple[int, int]) -> 'Vector':
+        return Vector(*xy_tuple)
+
+    @staticmethod
+    def from_yx_tuple(yx_tuple: Tuple[int, int]) -> 'Vector':
+        return Vector(*yx_tuple[::-1])
+
     def add_to_vector(self, other_vector: Self) -> None:
         self.x += other_vector.x
         self.y += other_vector.y
