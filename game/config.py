@@ -29,13 +29,28 @@ SET_NUMBER_OF_CLIENTS_CONTINUE = 2                  # required number of clients
 
 ALLOWED_MODULES = ["game.client.user_client",       # modules that clients are specifically allowed to access
                    "game.common.enums",
+                   "game.common.map.game_board",
+                   "game.common.map.tile",
+                   "game.common.map.wall",
+                   "game.common.map.game_board",
+                   "game.common.avatar",
+                   "game.common.items.item",
+                   "game.common.stations.station",
+                   "game.common.stations.occupiable_station",
                    "game.utils.vector",
+                   "game.quarry_rush.entity.ancient_tech",
+                   "game.quarry_rush.entity.ores",
+                   "game.quarry_rush.station.company_station",
+                   "game.quarry_rush.station.ore_occupiable_station",
+                   "typing",
                    "numpy",
                    "scipy",
                    "pandas",
                    "itertools",
                    "functools",
                    "random",
+                   "heapq",
+                   "sympy",
                    ]
 
 RESULTS_FILE_NAME = "results.json"                                  # Name and extension of results file
