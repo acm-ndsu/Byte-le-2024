@@ -38,6 +38,7 @@ Jean Eckelberg
 
 Gunnar Moody
 
+.. image:: ./_static/contributors/gunnar.png
 
 ----
 
