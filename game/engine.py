@@ -227,7 +227,7 @@ class Engine:
             # If thread is no longer alive, mark it as non-functional, preventing it from receiving future turns
             if thr.is_alive():
                 client.functional = False
-                client.error = TimeoutError(f'{client.id} failed to reply in time and has been dropped.')
+                client.error = f'{client.id} failed to reply in time and has been dropped.'
                 print(client.error)
 
             # Also check to see if the client had created an error and save it
