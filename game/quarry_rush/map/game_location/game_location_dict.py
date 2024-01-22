@@ -13,8 +13,8 @@ GAME_LOCATION: dict = {
     [8, 11], [9, 11],
     [1, 12], [7, 12], [8, 12]
   ],
-  "turing_bases": [ [9, 12] ],
-  "church_bases": [ [4, 1] ],
+  "turing_bases": [ [9, 12], ],
+  "church_bases": [ [4, 1], ],
   "avatars": {
     "turing": [9, 12],
     "church": [4, 1]
