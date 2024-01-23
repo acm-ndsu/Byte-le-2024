@@ -10,14 +10,16 @@ It's a new day.
 It's your time to shine!
 It's your time to code!
 
-Welcome to your first day at ``<INSERT COMPANY NAME HERE>`` as a robotics specialist!
+Welcome to your first day at Church Inc. or Turing Co. as a robotics specialist!
 If you are reading this specialized User Manual (documentation), it means that you've got the guts and the
 brains to control the state-of-the-art proprietary technology: MOB-BOT - the Mining Operating Buddy Bot!
 
 Refer to this manual anytime you have questions about your short time here. If the manual doesn't answer
 your question, call a developer over and they'll answer your question!
 
-: .. image: after making movie poster, place it here
+.. figure:: ./_static/ceos/ceos_proper.jpg
+
+   The CEOs of Church Inc. and Turing Co. have job openings. Who will you side with?
 
 .. toctree::
    :maxdepth: 2
@@ -35,6 +37,7 @@ your question, call a developer over and they'll answer your question!
    enums
    visualizer
    credits
+   extras
 
 
 Indices and tables

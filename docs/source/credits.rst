@@ -24,6 +24,9 @@ Ian King
 
 Brandon Gasser
 
+.. image:: ./_static/contributors/brandon.png
+   :width: 460
+
 
 ----
 
@@ -39,6 +42,7 @@ Jean Eckelberg
 Gunnar Moody
 
 .. image:: ./_static/contributors/gunnar.png
+   :width: 460
 
 ----
 
@@ -46,30 +50,24 @@ Gunnar Moody
 Julia Motzko
 
 .. image:: ./_static/contributors/julia.png
-
+   :width: 460
 
 ----
-
 
 Carson Bring
 
 
 ----
 
+Mason Myles
+
+.. image:: ./_static/contributors/mason.png
+   :width: 460
+
+
+----
 
 Carson Keeping
 
 .. image:: ./_static/contributors/carson_keeping.png
-
-
-----
-
-
-Josiah Ernst
-
-
-----
-
-
-Caitlin Frank
-
+   :width: 460

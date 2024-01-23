@@ -33,6 +33,12 @@ very own MOB-BOT. MOB-BOT is a friendly, cute, and efficient robot designed to m
 Here are some important notes about MOB-BOT that will help you to improve its functionalities.
 
 
+MOB-BOT Attributes
+==================
+
+Your instance of MOB-BOT is passed into your ``base_client.py`` 
+
+
 Tech Tree
 =========
 

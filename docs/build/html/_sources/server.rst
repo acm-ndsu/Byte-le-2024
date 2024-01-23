@@ -97,8 +97,8 @@ If you desire to see all of your submissions, type
 
 .. code-block::
 
-    python launcher.pyz client -get_submissions
-    python launcher.pyz c -get_submissions
+    python launcher.pyz client stats -get_submissions
+    python launcher.pyz c s -get_submissions
 
 to receive all your submission ids. These ids can be used in some of the commands listed below.
 
@@ -106,8 +106,8 @@ To receive code from a previous submission, have a submission id ready and type
 
 .. code-block::
 
-    python launcher.pyz client -get_code_for_submission <submission_id>
-    python launcher.pyz c -get_code_for_submission <submission_id>
+    python launcher.pyz client stats -get_code_for_submission <submission_id>
+    python launcher.pyz c s -get_code_for_submission <submission_id>
 
 to receive the code file from the given submission.
 
