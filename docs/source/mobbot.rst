@@ -36,7 +36,10 @@ Here are some important notes about MOB-BOT that will help you to improve its fu
 MOB-BOT Attributes
 ==================
 
-Your instance of MOB-BOT is passed into your ``base_client.py`` 
+Your instance of MOB-BOT is passed into your ``base_client.py`` or ``base_client_2.py`` files. The object is listed as
+``avatar``. There is a list of attributes MOB-BOT will have that will help your coding endeavors.
+
+
 
 
 Tech Tree

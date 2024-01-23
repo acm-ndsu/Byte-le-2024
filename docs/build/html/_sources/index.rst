@@ -19,7 +19,7 @@ your question, call a developer over and they'll answer your question!
 
 .. figure:: ./_static/ceos/ceos_proper.jpg
 
-   The CEOs of Church Inc. and Turing Co. have job openings. Who will you side with?
+   The CEOs of Turing Co. and Church Inc. have job openings. Who will you side with?
 
 .. toctree::
    :maxdepth: 2
