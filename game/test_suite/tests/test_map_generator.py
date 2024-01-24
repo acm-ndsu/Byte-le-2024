@@ -52,10 +52,8 @@ class TestMapGenerator(unittest.TestCase):
             (Vector(x=1, y=12),): [Wall(), ],
             (Vector(x=7, y=12),): [Wall(), ],
             (Vector(x=8, y=12),): [Wall(), ],
-            (Vector(x=9, y=12),): [TuringStation(), ],
-            (Vector(x=4, y=1),): [ChurchStation(), ],
-            (Vector(9, 12),): [Avatar(), ],
-            (Vector(4, 1),): [Avatar(), ]
+            (Vector(x=9, y=12),): [TuringStation(), Avatar(), ],
+            (Vector(x=4, y=1),): [ChurchStation(), Avatar(), ],
         }
 
         # Get the actual result by calling the method
