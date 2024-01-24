@@ -27,6 +27,42 @@ MIN_CLIENTS_CONTINUE = None                         # minimum number of clients 
 MAX_CLIENTS_CONTINUE = None                         # maximum number of clients required to continue running the game; should be None when SET_NUMBER_OF_CLIENTS is used
 SET_NUMBER_OF_CLIENTS_CONTINUE = 2                  # required number of clients to continue running the game; should be None when MIN_CLIENTS or MAX_CLIENTS are used
 
+# Game Variables
+# Dynamite (referenced in dynamite.py and dynamite_active_ability.py)
+DYNAMITE_FUSE = 3                                   # Number of turns before dynamite item explodes
+DYNAMITE_COOLDOWN = 4                               # Number of turns player waits before they can activate the Dynamite ability again
+# Landmine (referenced in traps.py and landmine_active_ability.py)
+LANDMINE_STEAL_RATE = 0.1                           # Chance to steal each item in opponents inventory when Landmine detonates
+LANDMINE_COOLDOWN = 6                               # Number of turns player waits before they can activate the Landmine ability again
+# EMP (referenced in traps.py and emp_active_ability.py)
+EMP_STEAL_RATE = 0.2                                # Chance to steal each item in opponents inventory when EMP detonates
+EMP_COOLDOWN = 4                                    # Number of turns player waits before they can activate the EMP ability again
+# Trap Defusal (referenced in trap_defusal_active_ability)
+TRAP_DEFUSAL_COOLDOWN = 0                           # Number of turns player waits before they can activate the Trap Defusal ability again
+# Tech Costs (referenced in tech.py)
+IMPROVED_DRIVETRAIN_COST = 50                       # Cost of the Improved Drivetrain tech
+SUPERIOR_DRIVETRAIN_COST = 100                      # Cost of the Superior Drivetrain tech
+OVERDRIVE_DRIVETRAIN_COST = 250                     # Cost of the Overdrive Drivetrain tech
+IMPROVED_MINING_COST = 50                           # Cost of the Improved Mining tech
+SUPERIOR_MINING_COST = 100                          # Cost of the Superior Mining tech
+OVERDRIVE_MINING_COST = 250                         # Cost of the Overdrive Mining tech
+DYNAMITE_COST = 150                                 # Cost of the Dynamit tech
+LANDMINE_COST = 300                                 # Cost of the Landmine tech
+EMP_COST = 450                                      # Cost of the EMP tech
+TRAP_DEFUSAL_COST = 450                             # Cost of the Trap Defusal tech
+# Tech Points (referenced in tech.py)
+IMPROVED_DRIVETRAIN_POINTS = 200                    # Points awarded when purchasing the Improved Drivetrain tech
+SUPERIOR_DRIVETRAIN_POINTS = 400                    # Points awarded when purchasing the Superior Drivetrain tech
+OVERDRIVE_DRIVETRAIN_POINTS = 1600                  # Points awarded when purchasing the Overdrive Drivetrain tech
+IMPROVED_MINING_POINTS = 100                        # Points awarded when purchasing the Improved Mining tech
+SUPERIOR_MINING_POINTS = 200                        # Points awarded when purchasing the Superior Mining tech
+OVERDRIVE_MINING_POINTS = 800                       # Points awarded when purchasing the Overdrive Mining tech
+DYNAMITE_POINTS = 500                               # Points awarded when purchasing the Dynamite tech
+LANDMINE_POINTS = 1000                              # Points awarded when purchasing the Landmine tech
+EMP_POINTS = 2000                                   # Points awarded when purchasing the EMP tech
+TRAP_DEFUSAL_POINTS = 2000                          # Points awarded when purchasing the Trap Defusal tech
+
+
 ALLOWED_MODULES = ["game.client.user_client",       # modules that clients are specifically allowed to access
                    "game.common.enums",
                    "game.common.map.game_board",

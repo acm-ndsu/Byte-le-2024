@@ -1,5 +1,9 @@
 from typing import Callable
 from game.quarry_rush.avatar.avatar_functions import AvatarFunctions
+from game.config import IMPROVED_DRIVETRAIN_COST, SUPERIOR_DRIVETRAIN_COST, OVERDRIVE_DRIVETRAIN_COST, LANDMINE_COST, \
+    EMP_COST, IMPROVED_MINING_COST, SUPERIOR_MINING_COST, OVERDRIVE_MINING_COST, DYNAMITE_COST, TRAP_DEFUSAL_COST, \
+    IMPROVED_DRIVETRAIN_POINTS, SUPERIOR_DRIVETRAIN_POINTS, OVERDRIVE_DRIVETRAIN_POINTS, IMPROVED_MINING_POINTS, \
+    SUPERIOR_MINING_POINTS, OVERDRIVE_MINING_POINTS, DYNAMITE_POINTS, LANDMINE_POINTS, EMP_POINTS, TRAP_DEFUSAL_POINTS
 
 
 class Tech:
@@ -41,71 +45,71 @@ def techs(avatar_functions: AvatarFunctions) -> dict[str, Tech]:
 
         'Improved Drivetrain': Tech(
             name='Improved Drivetrain',
-            cost=50,
-            point_value=200,
+            cost=IMPROVED_DRIVETRAIN_COST,
+            point_value=IMPROVED_DRIVETRAIN_POINTS,
             apply=lambda: avatar_functions.increase_movement(1)
         ),
 
         'Improved Mining': Tech(
             name='Improved Mining',
-            cost=50,
-            point_value=100,
+            cost=IMPROVED_MINING_COST,
+            point_value=IMPROVED_MINING_POINTS,
             apply=lambda: avatar_functions.increase_mining(1)
         ),
 
         'Dynamite': Tech(
             name='Dynamite',
-            cost=150,
-            point_value=500,
+            cost=DYNAMITE_COST,
+            point_value=DYNAMITE_POINTS,
             apply=avatar_functions.unlock_dynamite
         ),
 
         'Superior Drivetrain': Tech(
             name='Superior Drivetrain',
-            cost=100,
-            point_value=400,
+            cost=SUPERIOR_DRIVETRAIN_COST,
+            point_value=SUPERIOR_DRIVETRAIN_POINTS,
             apply=lambda: avatar_functions.increase_movement(1)
         ),
 
         'Superior Mining': Tech(
             name='Superior Mining',
-            cost=100,
-            point_value=200,
+            cost=SUPERIOR_MINING_COST,
+            point_value=SUPERIOR_MINING_POINTS,
             apply=lambda: avatar_functions.increase_mining(1)
         ),
 
         'Landmines': Tech(
             name='Landmines',
-            cost=300,
-            point_value=1000,
+            cost=LANDMINE_COST,
+            point_value=LANDMINE_POINTS,
             apply=avatar_functions.unlock_landmines
         ),
 
         'Overdrive Drivetrain': Tech(
             name='Overdrive Drivetrain',
-            cost=250,
-            point_value=1600,
+            cost=OVERDRIVE_DRIVETRAIN_COST,
+            point_value=OVERDRIVE_DRIVETRAIN_POINTS,
             apply=avatar_functions.unlock_movement_overdrive
         ),
 
         'Overdrive Mining': Tech(
             name='Overdrive Mining',
-            cost=250,
-            point_value=800,
+            cost=OVERDRIVE_MINING_COST,
+            point_value=OVERDRIVE_MINING_POINTS,
             apply=avatar_functions.unlock_mining_overdrive
         ),
 
         'EMPs': Tech(
             name='EMPs',
-            cost=450,
-            point_value=2000,
+            cost=EMP_COST,
+            point_value=EMP_POINTS,
             apply=avatar_functions.unlock_emps
         ),
 
         'Trap Defusal': Tech(
             name='Trap Defusal',
-            cost=450,
-            point_value=2000,
+            cost=TRAP_DEFUSAL_COST,
+            point_value=TRAP_DEFUSAL_POINTS,
             apply=avatar_functions.unlock_trap_defusal
         )
     }
