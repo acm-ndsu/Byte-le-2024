@@ -1,6 +1,7 @@
 from game.utils.vector import Vector
 from game.common.stations.occupiable_station import OccupiableStation
 from game.common.enums import *
+from game.config import DYNAMITE_FUSE
 from typing import Self
 
 
@@ -13,7 +14,7 @@ class Dynamite(OccupiableStation):
         super().__init__()
         self.position: Vector | None = position
         self.blast_radius: int = blast_radius
-        self.fuse: int = 3  # how many turns it'll take before the dynamite explodes
+        self.fuse: int = DYNAMITE_FUSE  # how many turns it'll take before the dynamite explodes
         self.object_type: ObjectType = ObjectType.DYNAMITE
         self.company: Company = company
 

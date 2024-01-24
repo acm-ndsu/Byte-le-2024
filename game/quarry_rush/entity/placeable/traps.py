@@ -2,6 +2,7 @@ from game.common.stations.occupiable_station import OccupiableStation
 from game.utils.vector import Vector
 from game.common.enums import *
 from game.quarry_rush.avatar.inventory_manager import InventoryManager
+from game.config import LANDMINE_STEAL_RATE, EMP_STEAL_RATE
 from typing import Self
 from typing import Callable
 
@@ -128,7 +129,7 @@ class Landmine(Trap):
 
     def __init__(self, owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
                  opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
-        super().__init__(0.1, owner_company, target_company, opponent_position, position)
+        super().__init__(LANDMINE_STEAL_RATE, owner_company, target_company, opponent_position, position)
         self.object_type: ObjectType = ObjectType.LANDMINE
 
 
@@ -136,5 +137,5 @@ class EMP(Trap):
 
     def __init__(self, owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
                  opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
-        super().__init__(0.2, owner_company, target_company, opponent_position, position)
+        super().__init__(EMP_STEAL_RATE, owner_company, target_company, opponent_position, position)
         self.object_type: ObjectType = ObjectType.EMP
