@@ -20,8 +20,8 @@ class Client(UserClient):
         Allows the team to set a team name.
         :return: Your team name
         """
-        return 'The Real Jean'
-    
+        return 'Volunteer'
+
     def first_turn_init(self, world, avatar):
         """
         This is where you can put setup for things that should happen at the beginning of the first turn
@@ -41,21 +41,23 @@ class Client(UserClient):
         """
         if turn == 1:
             self.first_turn_init(world, avatar)
-            
-        current_tile = world.game_map[avatar.position.y][avatar.position.x] # set current tile to the tile that I'm standing on
-        
+
+        current_tile = world.game_map[avatar.position.y][
+            avatar.position.x]  # set current tile to the tile that I'm standing on
+
         # If I start the turn on my station, I should...
         if current_tile.occupied_by.object_type == self.my_station_type:
             # buy Improved Mining tech if I can...
-            if avatar.science_points >= avatar.get_tech_info('Improved Drivetrain').cost and not avatar.is_researched('Improved Drivetrain'):
+            if avatar.science_points >= avatar.get_tech_info('Improved Drivetrain').cost and not avatar.is_researched(
+                    'Improved Drivetrain'):
                 return [ActionType.BUY_IMPROVED_DRIVETRAIN]
             # otherwise set my state to mining
             self.current_state = State.MINING
-            
+
         # If I have at least 5 items in my inventory, set my state to selling
         if len([item for item in self.get_my_inventory(world) if item is not None]) >= 5:
             self.current_state = State.SELLING
-            
+
         # Make action decision for this turn
         if self.current_state == State.SELLING:
             # actions = [ActionType.MOVE_LEFT if self.company == Company.TURING else ActionType.MOVE_RIGHT] # If I'm selling, move towards my base
@@ -66,8 +68,9 @@ class Client(UserClient):
                 actions = [ActionType.MINE]
             else:
                 # If I'm mining and I'm not standing on an ore, move randomly
-                actions = [random.choice([ActionType.MOVE_LEFT, ActionType.MOVE_RIGHT, ActionType.MOVE_UP, ActionType.MOVE_DOWN])]
-                
+                actions = [random.choice(
+                    [ActionType.MOVE_LEFT, ActionType.MOVE_RIGHT, ActionType.MOVE_UP, ActionType.MOVE_DOWN])]
+
         return actions
 
     def generate_moves(self, start_position, end_position, vertical_first):
@@ -81,11 +84,11 @@ class Client(UserClient):
         """
         dx = end_position.x - start_position.x
         dy = end_position.y - start_position.y
-        
+
         horizontal = [ActionType.MOVE_LEFT] * -dx if dx < 0 else [ActionType.MOVE_RIGHT] * dx
         vertical = [ActionType.MOVE_UP] * -dy if dy < 0 else [ActionType.MOVE_DOWN] * dy
-        
+
         return vertical + horizontal if vertical_first else horizontal + vertical
-    
+
     def get_my_inventory(self, world):
         return world.inventory_manager.get_inventory(self.company)
