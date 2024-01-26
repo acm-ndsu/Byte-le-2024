@@ -20,6 +20,7 @@ class DynamiteController(Controller):
         """
 
         # don't do anything if the dynamite can't explode
+        dynamite.decrement_fuse()
         if not dynamite.is_fuse_at_0():
             return
 
@@ -37,7 +38,7 @@ class DynamiteController(Controller):
 
             # don't do anything if the occupied_by isn't an OreOccupiableStation
             if not isinstance(tile.occupied_by, OreOccupiableStation):
-                return
+                continue
 
             # call the give_item method to give the station's item to the dynamite's owner
             station = tile.occupied_by
@@ -45,3 +46,5 @@ class DynamiteController(Controller):
 
             # remove the station from the gameboard if it doesn't have a held item
             station.remove_from_game_board(tile)
+
+        world.game_map[dynamite.position.y][dynamite.position.x].remove_from_occupied_by(ObjectType.DYNAMITE)

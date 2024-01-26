@@ -53,7 +53,7 @@ class Dynamite(OccupiableStation):
     # can_explode setter
     @can_explode.setter
     def can_explode(self, can_explode: bool) -> None:
-        if can_explode is None or not isinstance(can_explode, int):
+        if can_explode is None or not isinstance(can_explode, bool):
             raise ValueError(f'{self.__class__.__name__}.can_explode must be a bool.')
         self.__can_explode = can_explode
 
@@ -91,6 +91,7 @@ class Dynamite(OccupiableStation):
     # to json
     def to_json(self) -> dict:
         data: dict = super().to_json()
+        data['fuse'] = self.fuse
         data['position'] = self.position.to_json() if self.position is not None else None
         data['blast_radius'] = self.blast_radius
         data['can_explode'] = self.can_explode
@@ -100,6 +101,7 @@ class Dynamite(OccupiableStation):
     # from json
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
+        self.fuse = data['fuse']
         self.position: Vector | None = None if data['position'] is None else Vector().from_json(data['position'])
         self.blast_radius: int = data['blast_radius']
         self.can_explode: bool = data['can_explode']

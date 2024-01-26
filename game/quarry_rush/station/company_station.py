@@ -5,6 +5,9 @@ from game.quarry_rush.avatar.inventory_manager import InventoryManager
 from game.common.enums import ObjectType
 from typing import Self
 
+from game.quarry_rush.entity.placeable.dynamite import Dynamite
+from game.quarry_rush.entity.placeable.traps import Landmine, EMP
+
 
 class CompanyStation(OccupiableStation):
     """
@@ -47,6 +50,22 @@ class CompanyStation(OccupiableStation):
     def from_json(self, data: dict) -> Self:
         super().from_json(data)
         self.company: Company = Company(data['company'])
+        if self.occupied_by is not None:
+            return self
+        occupied_by = data['occupied_by']
+        if occupied_by is None:
+            self.occupied_by = None
+            return self
+        # Add all possible game objects that can occupy a tile here (requires python 3.10)
+        match ObjectType(occupied_by['object_type']):
+            case ObjectType.DYNAMITE:
+                self.occupied_by: Dynamite = Dynamite().from_json(occupied_by)
+            case ObjectType.LANDMINE:
+                self.occupied_by: Landmine = Landmine().from_json(occupied_by)
+            case ObjectType.EMP:
+                self.occupied_by: EMP = EMP().from_json(occupied_by)
+            case _:
+                raise Exception(f'Could not parse occupied_by: {occupied_by}')
         return self
 
 

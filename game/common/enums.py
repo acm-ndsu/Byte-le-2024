@@ -87,3 +87,15 @@ class ActionType(Enum):
 class Company(Enum):
     CHURCH = auto()  # 1
     TURING = auto()  # 2
+
+class Tech(Enum):
+    IMPROVED_DRIVETRAIN = 'Improved Drivetrain'
+    SUPERIOR_DRIVETRAIN = 'Superior Drivetrain'
+    OVERDRIVE_DRIVETRAIN = 'Overdrive Drivetrain'
+    IMPROVED_MINING = 'Improved Mining'
+    SUPERIOR_MINING = 'Superior Mining'
+    OVERDRIVE_MINING = 'Overdrive Mining'
+    DYNAMITE = 'Dynamite'
+    LANDMINES = 'Landmines'
+    EMPS = 'EMPs'
+    TRAP_DEFUSAL = 'Trap Defusal'

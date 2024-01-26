@@ -2,6 +2,8 @@ import random
 
 from game.client.user_client import UserClient
 from game.common.enums import *
+from game.quarry_rush.entity.placeable.dynamite import Dynamite
+from game.quarry_rush.entity.placeable.traps import Trap
 from game.utils.vector import Vector
 
 
@@ -46,13 +48,30 @@ class Client(UserClient):
             tech_buy = self.determine_tech_buy(avatar)
             if len(tech_buy) > 0:
                 return tech_buy
-
-        if world.game_map[avatar.position.y][
-            avatar.position.x].occupied_by.object_type == ObjectType.ORE_OCCUPIABLE_STATION:
-            return [ActionType.MINE]
-
-        if len(self.get_my_inventory(world)) > 10:
+        if len(self.get_my_inventory(world)) > 40:
             return self.find_path(avatar.position, self.base_position, world)
+
+        if world.game_map[avatar.position.y][avatar.position.x].occupied_by.object_type == ObjectType.ORE_OCCUPIABLE_STATION:
+            return [ActionType.MINE]
+        elif (avatar.can_place_dynamite() and not
+                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(self.my_station_type) and not
+                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(ObjectType.DYNAMITE) and not
+                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(ObjectType.LANDMINE) and not
+                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(ObjectType.EMP)
+        ):
+            print('1')
+            return [ActionType.PLACE_DYNAMITE]
+        elif (avatar.can_place_landmine() and not
+                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(ObjectType.LANDMINE)):
+            print('2')
+            return [ActionType.PLACE_LANDMINE]
+        elif (avatar.can_place_emp() and not
+                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(ObjectType.EMP) and not
+                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(ObjectType.LANDMINE)):
+            print('3')
+            return [ActionType.PLACE_EMP]
+
+
 
         ore_poses = [pose for (pose, _) in world.get_objects(ObjectType.ORE_OCCUPIABLE_STATION)]
         closest_ore_pose = sorted(ore_poses, key=lambda pose: self.distance(avatar.position, pose, world))[0]
@@ -86,6 +105,16 @@ class Client(UserClient):
             if avatar.science_points >= info.cost:
                 return [ActionType.BUY_DYNAMITE]
 
+        elif not avatar.is_researched('Landmines'):
+            info = avatar.get_tech_info('Landmines')
+            if avatar.science_points >= info.cost:
+                return [ActionType.BUY_LANDMINES]
+
+        elif not avatar.is_researched(Tech.EMPS):
+            info = avatar.get_tech_info(Tech.EMPS)
+            if avatar.science_points >= info.cost:
+                return [ActionType.BUY_EMPS]
+
         return []
 
     def distance(self, pos_1, pos_2, world):
@@ -118,8 +147,8 @@ class Client(UserClient):
 
         def neighbors(pos):
             return list(filter(lambda p: p[0] in range(0, 14) and p[1] in range(0, 14) and (
-                        world.game_map[pos[0]][pos[1]].occupied_by is None or world.game_map[pos[0]][
-                    pos[1]].occupied_by.object_type != ObjectType.WALL),
+                    world.game_map[pos[0]][pos[1]].occupied_by is None or world.game_map[pos[0]][
+                pos[1]].occupied_by.object_type != ObjectType.WALL),
                                [(pos[0] + 1, pos[1]), (pos[0] - 1, pos[1]), (pos[0], pos[1] + 1),
                                 (pos[0], pos[1] - 1)]))
 

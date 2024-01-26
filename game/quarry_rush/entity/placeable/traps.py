@@ -135,9 +135,9 @@ class Trap(OccupiableStation):
         data['steal_rate'] = self.steal_rate
         data['owner_company'] = self.owner_company.value
         data['target_company'] = self.target_company.value
-        data['opponent_position'] = self.opponent_position
-        data['position'] = self.position
+        data['position'] = self.position.to_json()
         data['range'] = self.range
+
         return data
 
     def from_json(self, data: dict) -> Self:
@@ -145,8 +145,7 @@ class Trap(OccupiableStation):
         self.steal_rate: float = data['steal_rate']
         self.owner_company: Company = Company(data['owner_company'])
         self.target_company: Company = Company(data['target_company'])
-        self.opponent_position: Callable[[], Vector] = data['opponent_position']
-        self.position: Vector = data['position']
+        self.position: Vector = Vector().from_json(data['position'])
         self.range: int = data['range']
         return self
 
@@ -157,7 +156,8 @@ class Landmine(Trap):
 
     def __init__(self, owner_company: Company = Company.CHURCH, target_company: Company = Company.TURING,
                  opponent_position: Callable[[], Vector] = lambda: Vector(), position: Vector = Vector()):
-        super().__init__(LANDMINE_STEAL_RATE, owner_company, target_company, opponent_position, position, LANDMINE_RANGE)
+        super().__init__(LANDMINE_STEAL_RATE, owner_company, target_company, opponent_position, position,
+                         LANDMINE_RANGE)
         self.object_type: ObjectType = ObjectType.LANDMINE
 
 

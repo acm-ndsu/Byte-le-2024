@@ -9,7 +9,7 @@ what they do already. Refer to this file to clear any confusion, and make any ch
 
 # Runtime settings / Restrictions --------------------------------------------------------------------------------------
 # The engine requires these to operate
-MAX_TICKS = 500                                     # max number of ticks the server will run regardless of game state
+MAX_TICKS = 200                                     # max number of ticks the server will run regardless of game state
 TQDM_BAR_FORMAT = "Game running at {rate_fmt} "     # how TQDM displays the bar
 TQDM_UNITS = " turns"                               # units TQDM takes in the bar
 
@@ -37,12 +37,12 @@ DYNAMITE_COOLDOWN = 3                               # Number of turns player wai
 
 # Landmine (referenced in traps.py and landmine_active_ability.py)
 LANDMINE_STEAL_RATE = 0.5                           # Chance to steal each item in opponents inventory when Landmine detonates
-LANDMINE_COOLDOWN = 3                               # Number of turns player waits before they can activate the Landmine ability again
+LANDMINE_COOLDOWN = 4                               # Number of turns player waits before they can activate the Landmine ability again
 LANDMINE_RANGE = 1                                  # Range for detonation of a landmine
 
 # EMP (referenced in traps.py and emp_active_ability.py)
 EMP_STEAL_RATE = 1.0                                # Chance to steal each item in opponents inventory when EMP detonates
-EMP_COOLDOWN = 2                                    # Number of turns player waits before they can activate the EMP ability again
+EMP_COOLDOWN = 4                                    # Number of turns player waits before they can activate the EMP ability again
 EMP_RANGE = 2                                       # Range for detonation of a EMP
 
 # Trap Defusal (referenced in trap_defusal_active_ability)
@@ -85,6 +85,8 @@ ALLOWED_MODULES = ["game.client.user_client",       # modules that clients are s
                    "game.common.stations.station",
                    "game.common.stations.occupiable_station",
                    "game.utils.vector",
+                   "game.quarry_rush.entity.placeable.dynamite",
+                   "game.quarry_rush.entity.placeable.traps",
                    "game.quarry_rush.entity.ancient_tech",
                    "game.quarry_rush.entity.ores",
                    "game.quarry_rush.station.company_station",

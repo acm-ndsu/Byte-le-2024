@@ -1,6 +1,6 @@
 from typing import Self
 
-from game.common.enums import ObjectType, Company
+from game.common.enums import ObjectType, Company, Tech
 from game.common.game_object import GameObject
 from game.quarry_rush.ability.emp_active_ability import EMPActiveAbility
 from game.quarry_rush.ability.landmine_active_ability import LandmineActiveAbility
@@ -336,9 +336,10 @@ class Avatar(GameObject):
 
         return successful
 
-    def is_researched(self, tech_name: str) -> bool:
+    def is_researched(self, tech_name: Tech | str) -> bool:
         """Returns if the given tech was researched."""
-        return self.__tech_tree.is_researched(tech_name)
+        temp: str = tech_name.value if isinstance(tech_name, Tech) else tech_name
+        return self.__tech_tree.is_researched(temp)
 
     def get_researched_techs(self) -> list[str]:
         """Returns the list of researched techs."""
@@ -348,12 +349,13 @@ class Avatar(GameObject):
         """Returns a list of all possible tech names in a Tech Tree."""
         return self.__tech_tree.tech_names()
     
-    def get_tech_info(self, tech_name: str) -> TechInfo | None:
+    def get_tech_info(self, tech_name: str | Tech) -> TechInfo | None:
         """
         Returns a TechInfo object about the tech with the given name if the tech is found in the tree.
         Returns None if the tech isn't found
         """
-        return self.__tech_tree.tech_info(tech_name)
+        temp: str = tech_name.value if isinstance(tech_name, Tech) else tech_name
+        return self.__tech_tree.tech_info(temp)
 
     # Dynamite placing functionality ----------------------------------------------------------------------------------
     # if avatar calls place dynamite, set to true, i.e. they want to place dynamite
@@ -361,7 +363,7 @@ class Avatar(GameObject):
         return self.abilities['Dynamite'] and self.dynamite_active_ability.is_usable
 
     def can_place_landmine(self) -> bool:
-        return self.abilities['Landmines'] != self.abilities['EMPs'] and self.landmine_active_ability.is_usable
+        return self.abilities['Landmines'] is True and self.abilities['EMPs'] is False and self.landmine_active_ability.is_usable
 
     def can_place_emp(self) -> bool:
         return self.abilities['EMPs'] and self.emp_active_ability.is_usable
