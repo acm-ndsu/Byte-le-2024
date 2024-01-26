@@ -90,7 +90,7 @@ class InventoryManager(GameObject):
         inventory = self.__inventories[company]
 
         for i in range(0, self.__inventory_size):
-            if inventory[i].__eq__(item):
+            if inventory[i].object_type == (item.object_type):
                 inventory[i] = None
                 return True
         return False

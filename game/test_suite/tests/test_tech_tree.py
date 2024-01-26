@@ -85,7 +85,7 @@ class TestTechTree(unittest.TestCase):
         self.assertFalse(result3)
         
     def test_tech_info(self):
-        better_drivetrain_info = {'name': 'Improved Drivetrain', 'cost': 50, 'point_value': 200}
+        better_drivetrain_info = {'name': 'Improved Drivetrain', 'cost': 80, 'point_value': 150}
         result1 = self.tech_tree.tech_info('Improved Drivetrain')
         result2 = self.tech_tree.tech_info('Invalid Tech Name')
         self.assertEqual(better_drivetrain_info['name'], result1.name)
@@ -98,7 +98,7 @@ class TestTechTree(unittest.TestCase):
         self.tech_tree.research('Improved Mining')
         self.tech_tree.research('Dynamite')
         result = self.tech_tree.score()
-        self.assertEqual(result, 800)
+        self.assertEqual(result, 390)
 
     def test_tech_tree_json(self):
         self.tech_tree.research('Improved Mining')

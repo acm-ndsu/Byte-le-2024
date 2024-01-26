@@ -22,17 +22,17 @@ class Client(UserClient):
         """
         return 'Unpaid Intern'
     
-    def first_turn_init(self, world, avatar):
+    def first_turn_init(self, world, mobbot):
         """
         This is where you can put setup for things that should happen at the beginning of the first turn
         """
-        self.company = avatar.company
+        self.company = mobbot.company
         self.my_station_type = ObjectType.TURING_STATION if self.company == Company.TURING else ObjectType.CHURCH_STATION
         self.current_state = State.MINING
         self.base_position = world.get_objects(self.my_station_type)[0][0]
 
     # This is where your AI will decide what to do
-    def take_turn(self, turn, actions, world, avatar):
+    def take_turn(self, turn, actions, world, mobbot):
         """
         This is where your AI will decide what to do.
         :param turn:        The current turn of the game.
@@ -40,14 +40,14 @@ class Client(UserClient):
         :param world:       Generic world information
         """
         if turn == 1:
-            self.first_turn_init(world, avatar)
+            self.first_turn_init(world, mobbot)
             
-        current_tile = world.game_map[avatar.position.y][avatar.position.x] # set current tile to the tile that I'm standing on
+        current_tile = world.game_map[mobbot.position.y][mobbot.position.x] # set current tile to the tile that I'm standing on
         
         # If I start the turn on my station, I should...
         if current_tile.occupied_by.object_type == self.my_station_type:
             # buy Improved Mining tech if I can...
-            if avatar.science_points >= avatar.get_tech_info('Improved Drivetrain').cost and not avatar.is_researched('Improved Drivetrain'):
+            if mobbot.science_points >= mobbot.get_tech_info('Improved Drivetrain').cost and not mobbot.is_researched('Improved Drivetrain'):
                 return [ActionType.BUY_IMPROVED_DRIVETRAIN]
             # otherwise set my state to mining
             self.current_state = State.MINING
@@ -59,7 +59,7 @@ class Client(UserClient):
         # Make action decision for this turn
         if self.current_state == State.SELLING:
             # actions = [ActionType.MOVE_LEFT if self.company == Company.TURING else ActionType.MOVE_RIGHT] # If I'm selling, move towards my base
-            actions = self.generate_moves(avatar.position, self.base_position, turn % 2 == 0)
+            actions = self.generate_moves(mobbot.position, self.base_position, turn % 2 == 0)
         else:
             if current_tile.occupied_by.object_type == ObjectType.ORE_OCCUPIABLE_STATION:
                 # If I'm mining and I'm standing on an ore, mine it

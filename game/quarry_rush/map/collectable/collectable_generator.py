@@ -3,6 +3,7 @@ from json import load
 from game.quarry_rush.map.collectable.collectable_weights_dict import COLLECTABLE_WEIGHTS
 from game.utils.vector import Vector
 from game.quarry_rush.station.ore_occupiable_station import OreOccupiableStation
+from game.config import ORE_COUNT
 import random as rand
 import numpy as np
 from perlin_noise import PerlinNoise
@@ -10,7 +11,7 @@ from perlin_noise import PerlinNoise
 
 class CollectableGenerator:
     __board_size = 14  # This includes the borders. Field is 12x12
-    __ore_count = 75
+    __ore_count = ORE_COUNT
 
     def __init__(self, seed: int = rand.randint(0, 8675309)):
         collectable_weights = COLLECTABLE_WEIGHTS

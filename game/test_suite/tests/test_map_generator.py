@@ -76,4 +76,4 @@ class TestMapGenerator(unittest.TestCase):
             if [z.object_type for z in actual[key]].__contains__(ObjectType.ORE_OCCUPIABLE_STATION):
                 count += 1
 
-        self.assertEqual(count, 75)
+        self.assertEqual(count, 100)

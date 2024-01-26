@@ -294,7 +294,6 @@ class Avatar(GameObject):
 
     def __unlock_emps(self) -> None:
         self.abilities['EMPs'] = True
-        self.abilities['Landmines'] = False
 
     def __unlock_trap_defusal(self) -> None:
         self.abilities['Trap Defusal'] = True
@@ -362,10 +361,10 @@ class Avatar(GameObject):
         return self.abilities['Dynamite'] and self.dynamite_active_ability.is_usable
 
     def can_place_landmine(self) -> bool:
-        return self.abilities['Landmines'] and self.landmine_active_ability.is_usable
+        return self.abilities['Landmines'] != self.abilities['EMPs'] and self.landmine_active_ability.is_usable
 
     def can_place_emp(self) -> bool:
-        return self.abilities['EMPs'] and self.emp_active_ability.is_usable and not self.abilities['Landmines']
+        return self.abilities['EMPs'] and self.emp_active_ability.is_usable
 
     def can_defuse_trap(self) -> bool:
         return self.abilities['Trap Defusal'] and self.trap_defusal_active_ability.is_usable

@@ -29,7 +29,8 @@ class PlaceController(Controller):
 
     def __place_dynamite(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # places dynamite if the avatar's active ability allows it AND there isn't a dynamite object there already
-        if client.avatar.can_place_dynamite() and not tile.is_occupied_by_object_type(ObjectType.DYNAMITE):
+        if client.avatar.can_place_dynamite() and not tile.is_occupied_by_object_type(ObjectType.DYNAMITE) \
+                and not tile.is_occupied_by_game_object(Trap):
             dynamite: Dynamite = Dynamite(position=client.avatar.position, company=client.avatar.company)
             client.avatar.state = 'placing'
 
@@ -40,7 +41,8 @@ class PlaceController(Controller):
 
     def __place_landmine(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # places a landmine if the avatar's active ability allows it AND there isn't a landmine object there already
-        if client.avatar.can_place_landmine() and not tile.is_occupied_by_game_object(Trap):
+        if client.avatar.can_place_landmine() and not tile.is_occupied_by_game_object(Trap) \
+                and not tile.is_occupied_by_object_type(ObjectType.DYNAMITE):
             client.avatar.state = 'placing'
             landmine: Landmine = Landmine(owner_company=client.avatar.company,
                                           target_company=client.avatar.get_opposing_team(),
@@ -52,7 +54,8 @@ class PlaceController(Controller):
 
     def __place_emp(self, client: Player, tile: Tile, world: GameBoard) -> None:
         # places an EMP if the avatar's active ability allows it AND there isn't an EMP object there already
-        if client.avatar.can_place_emp() and not tile.is_occupied_by_game_object(Trap):
+        if client.avatar.can_place_emp() and not tile.is_occupied_by_game_object(Trap) \
+                and not tile.is_occupied_by_object_type(ObjectType.DYNAMITE):
             client.avatar.state = 'placing'
             emp: EMP = EMP(owner_company=client.avatar.company,
                            target_company=client.avatar.get_opposing_team(), position=client.avatar.position)
