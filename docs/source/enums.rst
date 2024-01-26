@@ -2,6 +2,12 @@
 Enums
 =====
 
+.. raw:: html
+
+    <style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style>
+
+.. role:: gold
+
 The use of enums will manage which actions you'd like to do. Pass these in to control your MOB-BOT! Make sure to type
 ``from game.common.enums import *`` to have access to all the enums you'll need.
 
@@ -46,12 +52,28 @@ ObjectType.ORE_OCCUPIABLE_STATION 30
 
 Placeables
 ----------
+=================== =========
+Enum Name           Int Value
+=================== =========
+ObjectType.DYNAMITE 29
+ObjectType.LANDMINE 32
+ObjectType.EMP      33
+=================== =========
+
+
+Other
+-----
+
+:gold:`NOTE: ObjectType.AVATAR refers to the ObjectType of your MOB-BOT!`
+
 ================================= =========
 Enum Name                         Int Value
 ================================= =========
-ObjectType.DYNAMITE               29
-ObjectType.LANDMINE               32
-ObjectType.EMP                    33
+ObjectType.AVATAR                 4
+ObjectType.GAMEBOARD              5
+ObjectType.VECTOR                 6
+ObjectType.TILE                   7
+ObjectType.WALL                   8
 ================================= =========
 
 

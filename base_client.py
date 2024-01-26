@@ -70,6 +70,7 @@ class Client(UserClient):
                 # If I'm mining and I'm not standing on an ore, move randomly
                 actions = [random.choice(
                     [ActionType.MOVE_LEFT, ActionType.MOVE_RIGHT, ActionType.MOVE_UP, ActionType.MOVE_DOWN])]
+
         return actions
 
     def determine_tech_buy(self, avatar):

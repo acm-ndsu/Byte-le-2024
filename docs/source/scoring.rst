@@ -33,14 +33,14 @@ Ore                    :blue:`Church Inc. Points`  :red:`Turing Co. Points`  :br
 ============================ ===================== ==============
 Tech Name                    Science Points Needed Points Awarded
 ============================ ===================== ==============
-Improved Drivetrain          50                    200
-Superior Drivetrain          100                   400
-Overdrive Drivetrain         250                   1600
+Improved Drivetrain          80                    150
+Superior Drivetrain          160                   250
+Overdrive Drivetrain         320                   350
 Improved Mining              50                    100
-Superior Mining              100                   200
-Overdrive Mining             250                   800
-Dynamite                     150                   500
-Landmine                     300                   1000
-EMPs                         450                   2000
-Trap Defusal                 450                   2000
+Superior Mining              100                   150
+Overdrive Mining             200                   300
+Dynamite                     70                    140
+Landmine                     120                   240
+EMPs                         180                   360
+Trap Defusal                 180                   360
 ============================ ===================== ==============
