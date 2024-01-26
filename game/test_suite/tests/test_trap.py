@@ -17,6 +17,8 @@ class TestTrap(unittest.TestCase):
         self.inventory_manager = InventoryManager()
         self.trap = Trap(0.1, Company.CHURCH, Company.TURING,
                          lambda: self.opponent_position, Vector(0, 0))
+        self.range = 1
+        self.position = Vector(0, 0)
 
     # test set steal_rate
     def test_set_steal_rate(self):
@@ -89,11 +91,12 @@ class TestTrap(unittest.TestCase):
         self.assertEqual(self.trap.in_range(), False)
         self.opponent_position = Vector(1, 1)
         self.assertEqual(self.trap.in_range(), False)
-        self.opponent_position = Vector(1, 0)
-        self.assertEqual(self.trap.in_range(), False)
+
 
     def test_in_range_true(self):
         self.opponent_position = Vector(0, 0)
+        self.assertEqual(self.trap.in_range(), True)
+        self.opponent_position = Vector(1, 0)
         self.assertEqual(self.trap.in_range(), True)
 
     # test detonate method (should have same bool results as in_range method)
@@ -104,22 +107,23 @@ class TestTrap(unittest.TestCase):
         self.assertEqual(self.trap.detonate(self.inventory_manager), False)
         self.opponent_position = Vector(1, 1)
         self.assertEqual(self.trap.detonate(self.inventory_manager), False)
-        self.opponent_position = Vector(1, 0)
-        self.assertEqual(self.trap.detonate(self.inventory_manager), False)
+
 
     def test_detonate_true(self):
         self.opponent_position = Vector(0, 0)
+        self.assertEqual(self.trap.detonate(self.inventory_manager), True)
+        self.opponent_position = Vector(1, 0)
         self.assertEqual(self.trap.detonate(self.inventory_manager), True)
 
     # test default of Landmine
     def test_landmine(self):
         self.landmine = Landmine(Company.CHURCH, Company.TURING, lambda: self.opponent_position, Vector(1, 1))
-        self.assertEqual(self.landmine.steal_rate, 0.1)
+        self.assertEqual(self.landmine.steal_rate, 0.5)
 
     # test default of EMP
     def test_EMP(self):
         self.EMP = EMP(Company.TURING, Company.CHURCH, lambda: self.opponent_position, Vector(2, 2))
-        self.assertEqual(self.EMP.steal_rate, 0.2)
+        self.assertEqual(self.EMP.steal_rate, 1.0)
 
     # test json
     def test_trap_json(self):
@@ -132,6 +136,8 @@ class TestTrap(unittest.TestCase):
         self.assertEqual(data['owner_company'], Company.CHURCH.value)
         self.assertEqual(data['target_company'], Company.TURING.value)
         self.assertEqual(data['opponent_position'](), self.opponent_position)
+        self.assertEqual(str(data['position']), str(self.position))
+        self.assertEqual(data['range'], self.range)
 
         # To test the object type, need to make a new Trap object
         trap: Trap = Trap().from_json(data)
