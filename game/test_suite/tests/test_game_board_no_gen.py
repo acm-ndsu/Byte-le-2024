@@ -94,7 +94,7 @@ class TestGameBoard(unittest.TestCase):
     def test_generate_map(self):
         self.game_board.generate_map()
         self.assertEqual(self.game_board.game_map[1][1].occupied_by.object_type, ObjectType.STATION)
-        self.assertEqual(self.game_board.game_map[2][1].occupied_by.object_type, ObjectType.OCCUPIABLE_STATION)
-        self.assertEqual(self.game_board.game_map[3][1].occupied_by.object_type, ObjectType.STATION)
+        self.assertEqual(self.game_board.game_map[3][1].occupied_by.object_type, ObjectType.OCCUPIABLE_STATION)
+        self.assertEqual(self.game_board.game_map[2][1].occupied_by.object_type, ObjectType.STATION)
         self.assertEqual(self.game_board.game_map[5][5].occupied_by.object_type, ObjectType.AVATAR)
         self.assertEqual(self.game_board.game_map[6][5].occupied_by.object_type, ObjectType.WALL)
