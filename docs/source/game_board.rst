@@ -89,30 +89,26 @@ To access the MOB-BOT from the tile, you can do the following:
 Is_occupied_by and get_occupied_by
 ----------------------------------
 
-If you simply want to check if a Tile is occupied by a certain object, you can type either of the following:
+If you simply want to check if a Tile is occupied by a certain object, you can type the following:
 
 .. code-block:: python
 
    tile.is_occupied_by_object_type(ObjectType.EXAMPLE_OBJECT_TYPE)
-   tile.is_occupied_by_game_object(ExampleClassName)
 
-Both methods will return a boolean representing if the Tile is occupied by the given parameter. The methods take an
-ObjectType and class name respectively.
+The method will return a boolean representing if the Tile is occupied by the given enum. The method will only take an
+ObjectType enum.
 
 Lastly, to receive an object that is on a Tile, type:
 
 .. code-block:: python
 
-   tile.get_occupied_by(ObjectType.EXAMPLE_OBJECT_TYPE | ExampleClassName)
+   tile.get_occupied_by(ObjectType.EXAMPLE_OBJECT_TYPE)
 
-This method will take either an ObjectType enum or a class name -- :gold:`not both` -- and search for it. If found, it
-will return the object. Otherwise, the ``None`` value will be returned.
+This method will take an ObjectType enum and search for it. If found, it will return the object. Otherwise, the ``None``
+value will be returned.
 
 The :doc:`placeables` page will explain everything that can be placed on the map by MOB-BOT, and :doc:`enums` will have
 the enums needed for every object that can be on the game map.
-
-If you would like to see
-
 
 
 Bases

@@ -312,7 +312,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unlocking-techs">Unlocking Techs</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score-science-points">Score &amp; Science Points</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#game-score-science-points">Game Score &amp; Science Points</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inventory">Inventory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-abilities">Passive Abilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#active-abilities">Active Abilities</a><ul class="nav section-nav flex-column">
@@ -436,7 +436,7 @@ in a <span class="gold">range of 3 Manhattan tiles.</span>
 </table>
 <p>For more information on Dynamite, Landmines, and EMPs, go to <a class="reference internal" href="placeables.html"><span class="doc">Placeables</span></a>.</p>
 <p>Make sure to upgrade the Tech Tree as time goes on. Not only will you gain upgrades, but each unlocked Tech will
-provide extra points. Visit <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> for an overview of how points are accumulated.</p>
+provide extra game points. Visit <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> for an overview of how points are accumulated.</p>
 </section>
 <section id="unlocking-techs">
 <h3>Unlocking Techs<a class="headerlink" href="#unlocking-techs" title="Permalink to this heading">#</a></h3>
@@ -454,9 +454,9 @@ the other cannot be purchased.</p>
 <p>To view the cost of all Techs, please visit <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> for more information.</p>
 </section>
 </section>
-<section id="score-science-points">
-<h2>Score &amp; Science Points<a class="headerlink" href="#score-science-points" title="Permalink to this heading">#</a></h2>
-<p>To know your total score at any given turn, type</p>
+<section id="game-score-science-points">
+<h2>Game Score &amp; Science Points<a class="headerlink" href="#game-score-science-points" title="Permalink to this heading">#</a></h2>
+<p>To know your total game points at any given turn, type</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">avatar</span><span class="o">.</span><span class="n">score</span>
 </pre></div>
 </div>
@@ -470,16 +470,14 @@ the other cannot be purchased.</p>
 <section id="inventory">
 <h2>Inventory<a class="headerlink" href="#inventory" title="Permalink to this heading">#</a></h2>
 <p>Each MOB-BOT comes with its own, standardized inventory system. The inventory has a <span class="gold">max capacity of 50 ores</span>.
-Once capacity has been reached, MOB-BOT will no longer be able to mine. Make sure to go back to base and make a deposit!</p>
+Once capacity has been reached, MOB-BOT will no longer be able to collect when mining. Make sure to go back to base and
+make a deposit!</p>
 <p>Each time you mine, your drop rate will determine how many ores are added to your inventory. For example, if Overdrive
 Mining (drop rate = 4) was unlocked and there is an empty inventory, the inventory will have 4/50 slots filled after
 mining.</p>
-<p><span class="gold">To view your inventory</span>, a method called get_my_inventory() is provided in either <code class="docutils literal notranslate"><span class="pre">base_client</span></code> file. It
+<p><span class="gold">To view your inventory</span>, a method called <code class="docutils literal notranslate"><span class="pre">get_my_inventory()</span></code> is provided in either <code class="docutils literal notranslate"><span class="pre">base_client</span></code> file. It
 requires the <code class="docutils literal notranslate"><span class="pre">world</span></code> object to be passed in, and you will receive the inventory for your company’s MOB-BOT. Remember
 that it is a list of the different <a class="reference internal" href="ores.html"><span class="doc">Ores</span></a> you can mine.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>As more Techs are unlocked, they will either be considered a Passive or Active Ability and behave differently.</p>
 </section>
 <section id="passive-abilities">
@@ -504,16 +502,16 @@ Manage your resources properly, and you can get the upper hand!</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Dynamite Active Ability</p></td>
-<td><p>4</p></td>
+<td><p>3</p></td>
 </tr>
 <tr class="row-odd"><td><p>Landmine Active Ability</p></td>
-<td><p>6</p></td>
+<td><p>4</p></td>
 </tr>
 <tr class="row-even"><td><p>EMP Active Ability</p></td>
 <td><p>4</p></td>
 </tr>
 <tr class="row-odd"><td><p>Trap Defusal</p></td>
-<td><p>0</p></td>
+<td><p>2</p></td>
 </tr>
 </tbody>
 </table>
@@ -532,7 +530,8 @@ MOB-BOTs. The audacity of them.</p>
 </section>
 <section id="when-using-active-abilities">
 <h3>When Using Active Abilities<a class="headerlink" href="#when-using-active-abilities" title="Permalink to this heading">#</a></h3>
-<p>When using active abilities, as long as they are available to use, they can be called whenever.</p>
+<p>When using active abilities, as long as they are available to use, they can be called whenever. Please note that
+when you use an Active Ability, that will be the only action you can do for that turn.</p>
 <p>For example, say MOB-BOT has the Dynamite and EMP Active Abilities, and they can both be used. MOB-BOT could place
 dynamite one turn, and then place an EMP the next turn. The same applies in the other order. As long as the cooldown
 is no longer active, an ability can be used.</p>
@@ -591,7 +590,7 @@ is no longer active, an ability can be used.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unlocking-techs">Unlocking Techs</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score-science-points">Score &amp; Science Points</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#game-score-science-points">Game Score &amp; Science Points</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inventory">Inventory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-abilities">Passive Abilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#active-abilities">Active Abilities</a><ul class="nav section-nav flex-column">

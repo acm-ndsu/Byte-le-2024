@@ -17,8 +17,8 @@ Scoring
 .. role:: gold
 
 
-In case you missed how all the points will be added, they will all be listed here. Remember: points and science points
-are different; science points are :gold:`only` used for buying Techs.
+In case you missed how all the points will be added, they will all be listed here. Remember: game points and science
+points are different; science points are :gold:`only` used for buying Techs.
 
 ====================== ==========================  ========================  =======================
 Ore                    :blue:`Church Inc. Points`  :red:`Turing Co. Points`  :brown:`Science Points`

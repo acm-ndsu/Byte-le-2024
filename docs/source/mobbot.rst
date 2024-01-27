@@ -159,7 +159,7 @@ To view the cost of all Techs, please visit :doc:`scoring` for more information.
 Game Score & Science Points
 ===========================
 
-To know your total score at any given turn, type
+To know your total game points at any given turn, type
 
 .. code-block::
 
@@ -179,17 +179,16 @@ Inventory
 =========
 
 Each MOB-BOT comes with its own, standardized inventory system. The inventory has a :gold:`max capacity of 50 ores`.
-Once capacity has been reached, MOB-BOT will no longer be able to mine. Make sure to go back to base and make a deposit!
+Once capacity has been reached, MOB-BOT will no longer be able to collect when mining. Make sure to go back to base and
+make a deposit!
 
 Each time you mine, your drop rate will determine how many ores are added to your inventory. For example, if Overdrive
 Mining (drop rate = 4) was unlocked and there is an empty inventory, the inventory will have 4/50 slots filled after
 mining.
 
-:gold:`To view your inventory`, a method called get_my_inventory() is provided in either ``base_client`` file. It
+:gold:`To view your inventory`, a method called ``get_my_inventory()`` is provided in either ``base_client`` file. It
 requires the ``world`` object to be passed in, and you will receive the inventory for your company's MOB-BOT. Remember
 that it is a list of the different :doc:`ores` you can mine.
-
-|
 
 As more Techs are unlocked, they will either be considered a Passive or Active Ability and behave differently.
 
@@ -216,10 +215,10 @@ Manage your resources properly, and you can get the upper hand!
 ======================= ========
 Ability                 Cooldown
 ======================= ========
-Dynamite Active Ability 4
-Landmine Active Ability 6
+Dynamite Active Ability 3
+Landmine Active Ability 4
 EMP Active Ability      4
-Trap Defusal            0
+Trap Defusal            2
 ======================= ========
 
 
@@ -243,7 +242,8 @@ This is briefly explained more in :doc:`taking_action`, and the enums are provid
 When Using Active Abilities
 ---------------------------
 
-When using active abilities, as long as they are available to use, they can be called whenever.
+When using active abilities, as long as they are available to use, they can be called whenever. Please note that
+when you use an Active Ability, that will be the only action you can do for that turn.
 
 For example, say MOB-BOT has the Dynamite and EMP Active Abilities, and they can both be used. MOB-BOT could place
 dynamite one turn, and then place an EMP the next turn. The same applies in the other order. As long as the cooldown

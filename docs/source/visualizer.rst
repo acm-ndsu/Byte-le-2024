@@ -4,8 +4,10 @@ Visualizer
 
 .. raw:: html
 
+   <style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
    <style> .blue {color:#1769BC; font-weight:bold; font-size:16px} </style>
 
+.. role:: red
 .. role:: blue
 
 The visualizer is a useful tool that will help visually test your MOB-BOT and what happens in a game. Some
@@ -27,7 +29,7 @@ available), their Tech Tree, and which Techs have been unlocked.
 
 .. figure:: ./_static/images/church_anc_tch.png
 
-(:blue:`Church Inc. MOB-BOT` admiring refined Ancient Tech)
+(:blue:`Church Inc.` MOB-BOT admiring refined Ancient Tech)
 
 
 
@@ -47,7 +49,7 @@ Next   Progresses to the next turn each time it's clicked. Puts the visualizer i
        navigation.
 Start  Starts the visualizer from the first turn. Puts the visualizer in a paused state, so press Pause to play as
        normal.
-Save   Saves a .mp4 video file of the game in your Byte-le 2024 folder. 
+Save   Saves a .mp4 video file of the game in your root directory folder.
 End    Jumps to the end of the game to instantly reveal the winner of the game.
 Speed  The speed controls are the last three buttons: 1x, 2x, and 4x. They will adjust the speed of the visualizer. The
        default speed is 1x.
