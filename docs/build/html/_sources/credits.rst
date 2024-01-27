@@ -2,6 +2,14 @@
 Credits
 =======
 
+.. raw:: html
+
+   <style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
+   <style> .blue {color:#1769BC; font-weight:bold; font-size:16px} </style>
+
+.. role:: red
+.. role:: blue
+
 
 THANK YOU!
 ==========
@@ -15,60 +23,65 @@ not go unnoticed! Until next year, take care!
 
 Thank you to:
 
-Ian King
+Ian King (:blue:`Church Inc.`)
 
-.. image:: ./_static/contributors/ian.png
-
-----
+.. figure:: ./_static/contributors/ian.png
 
 
-Brandon Gasser
-
+.. figure:: ./_static/contributors/ian_STYLISH.png
+   :width: 180
 
 ----
 
 
-Jean Eckelberg
+Brandon Gasser (:blue:`Church Inc.`)
 
-.. image:: ./_static/contributors/jean.png
-
-
-----
-
-
-Gunnar Moody
+.. figure:: ./_static/contributors/brandon.png
+   :width: 400
 
 
 ----
 
 
-Julia Motzko
+Jean Eckelberg (:red:`Turing Co.`)
 
-.. image:: ./_static/contributors/julia.png
-
-
-----
-
-
-Carson Bring
+.. figure:: ./_static/contributors/jean.png
 
 
 ----
 
 
-Carson Keeping
+Gunnar Moody (:blue:`Church Inc.`)
 
-.. image:: ./_static/contributors/carson_keeping.png
-
-
-----
-
-
-Josiah Ernst
-
+.. figure:: ./_static/contributors/gunnar.png
+   :width: 400
 
 ----
 
 
-Caitlin Frank
+Julia Motzko (:red:`Turing Co.`)
 
+.. figure:: ./_static/contributors/julia.png
+   :width: 400
+
+----
+
+Carson Bring (:red:`Turing Co.`)
+
+.. figure:: ./_static/contributors/carson_bring.png
+
+----
+
+Mason Myles (:red:`Turing Co.`)
+
+.. figure:: ./_static/contributors/mason.png
+   :width: 400
+
+POV: Two weeks after working on Byte-le.
+
+----
+
+Carson Keeping (:blue:`Church Inc.`)
+
+.. figure:: ./_static/contributors/carson_keeping.png
+   :width: 400

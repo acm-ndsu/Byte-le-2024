@@ -149,14 +149,16 @@
 <li class="toctree-l1"><a class="reference internal" href="useful_commands.html">Useful Commands</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">The Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mobbot.html">MOB-BOT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobbot_pt2.html">MOB-BOT Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="taking_action.html">Taking Action</a></li>
 <li class="toctree-l1"><a class="reference internal" href="game_board.html">The Game Board</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores &amp; Ancient Tech</a></li>
 <li class="toctree-l1"><a class="reference internal" href="placeables.html">Placeables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scoring.html">Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualizer.html">Visualizer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extras.html">Extras</a></li>
 </ul>
 
     </div>
@@ -326,7 +328,8 @@ document.write(`
                   
   <section id="the-server">
 <h1>The Server<a class="headerlink" href="#the-server" title="Permalink to this heading">#</a></h1>
-<style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style><p>Here are some notes to consider about the server to aid you in the competition.</p>
+<style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style>
+<style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style><p>Here are some notes to consider about the server to aid you in the competition.</p>
 <section id="registering">
 <h2>Registering<a class="headerlink" href="#registering" title="Permalink to this heading">#</a></h2>
 <p>To register your team, type</p>
@@ -334,7 +337,7 @@ document.write(`
 </pre></div>
 </div>
 <p>into the terminal. Follow the prompts to enter your team name, select your university, and select if you are an alumni.</p>
-<p>After registering, you will receive a new file called <code class="docutils literal notranslate"><span class="pre">vID</span></code> in your Byte-le 2024 folder. <span class="gold">DO NOT SHARE THIS.</span>
+<p>After registering, you will receive a new file called <code class="docutils literal notranslate"><span class="pre">vID</span></code> in your root folder. <span class="red">DO NOT SHARE THIS.</span>
 This is unique to your team and allows you to submit your clients and view specific team information.</p>
 </section>
 <section id="client-commands">
@@ -350,11 +353,11 @@ typed in its entirety, and the second command will be a shortened version for ea
 </pre></div>
 </div>
 <p>After successfully registering your team, you are able to submit your client code. At least one client must be
-submitted by 10 PM to be eligible to win. You can either submit <code class="docutils literal notranslate"><span class="pre">base_client.py</span></code> or <code class="docutils literal notranslate"><span class="pre">base_client_2.py</span></code>. The command
-will prompt you to submit <code class="docutils literal notranslate"><span class="pre">base_client.py</span></code> first. If you say ‘no,’ it will then prompt you to submit
-<code class="docutils literal notranslate"><span class="pre">base_client_2.py</span></code>.</p>
-<p>Once uploaded to the server, your code will run against other submitted code to determine placing. You can submit as
-many times as you’d like during the duration of the competition, but do not excessively upload, please.</p>
+submitted before the end of the competition to be eligible to win. You can either submit <code class="docutils literal notranslate"><span class="pre">base_client.py</span></code> or
+<code class="docutils literal notranslate"><span class="pre">base_client_2.py</span></code>. The command will prompt you to submit <code class="docutils literal notranslate"><span class="pre">base_client.py</span></code> first. If you say ‘no,’ it will then
+prompt you to submit <code class="docutils literal notranslate"><span class="pre">base_client_2.py</span></code>.</p>
+<p>Once uploaded to the server, your bot will run against other submitted bots to determine placing. You can submit as
+many times as you’d like during the duration of the competition, but do not excessively upload please.</p>
 </section>
 <section id="leaderboard">
 <h3>Leaderboard<a class="headerlink" href="#leaderboard" title="Permalink to this heading">#</a></h3>
@@ -385,14 +388,14 @@ leaderboard’s id:</p>
 </div>
 <p>Your stats will continue to change until all games are completed.</p>
 <p>If you desire to see all of your submissions, type</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">client</span> <span class="o">-</span><span class="n">get_submissions</span>
-<span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">c</span> <span class="o">-</span><span class="n">get_submissions</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">client</span> <span class="n">stats</span> <span class="o">-</span><span class="n">get_submissions</span>
+<span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">c</span> <span class="n">s</span> <span class="o">-</span><span class="n">get_submissions</span>
 </pre></div>
 </div>
 <p>to receive all your submission ids. These ids can be used in some of the commands listed below.</p>
 <p>To receive code from a previous submission, have a submission id ready and type</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">client</span> <span class="o">-</span><span class="n">get_code_for_submission</span> <span class="o">&lt;</span><span class="n">submission_id</span><span class="o">&gt;</span>
-<span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">c</span> <span class="o">-</span><span class="n">get_code_for_submission</span> <span class="o">&lt;</span><span class="n">submission_id</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">client</span> <span class="n">stats</span> <span class="o">-</span><span class="n">get_code_for_submission</span> <span class="o">&lt;</span><span class="n">submission_id</span><span class="o">&gt;</span>
+<span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">c</span> <span class="n">s</span> <span class="o">-</span><span class="n">get_code_for_submission</span> <span class="o">&lt;</span><span class="n">submission_id</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>to receive the code file from the given submission.</p>

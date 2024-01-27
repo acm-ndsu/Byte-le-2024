@@ -5,8 +5,10 @@ The Server
 .. raw:: html
 
     <style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style>
+    <style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
 
 .. role:: gold
+.. role:: red
 
 Here are some notes to consider about the server to aid you in the competition.
 
@@ -22,7 +24,7 @@ To register your team, type
 
 into the terminal. Follow the prompts to enter your team name, select your university, and select if you are an alumni.
 
-After registering, you will receive a new file called ``vID`` in your Byte-le 2024 folder. :gold:`DO NOT SHARE THIS.`
+After registering, you will receive a new file called ``vID`` in your root folder. :red:`DO NOT SHARE THIS.`
 This is unique to your team and allows you to submit your clients and view specific team information.
 
 Client Commands
@@ -46,12 +48,12 @@ To submit your client code, type one of the following into the terminal:
 
 
 After successfully registering your team, you are able to submit your client code. At least one client must be
-submitted by 10 PM to be eligible to win. You can either submit ``base_client.py`` or ``base_client_2.py``. The command
-will prompt you to submit ``base_client.py`` first. If you say 'no,' it will then prompt you to submit
-``base_client_2.py``.
+submitted before the end of the competition to be eligible to win. You can either submit ``base_client.py`` or
+``base_client_2.py``. The command will prompt you to submit ``base_client.py`` first. If you say 'no,' it will then
+prompt you to submit ``base_client_2.py``.
 
-Once uploaded to the server, your code will run against other submitted code to determine placing. You can submit as
-many times as you'd like during the duration of the competition, but do not excessively upload, please.
+Once uploaded to the server, your bot will run against other submitted bots to determine placing. You can submit as
+many times as you'd like during the duration of the competition, but do not excessively upload please.
 
 
 Leaderboard
@@ -97,8 +99,8 @@ If you desire to see all of your submissions, type
 
 .. code-block::
 
-    python launcher.pyz client -get_submissions
-    python launcher.pyz c -get_submissions
+    python launcher.pyz client stats -get_submissions
+    python launcher.pyz c s -get_submissions
 
 to receive all your submission ids. These ids can be used in some of the commands listed below.
 
@@ -106,8 +108,8 @@ To receive code from a previous submission, have a submission id ready and type
 
 .. code-block::
 
-    python launcher.pyz client -get_code_for_submission <submission_id>
-    python launcher.pyz c -get_code_for_submission <submission_id>
+    python launcher.pyz client stats -get_code_for_submission <submission_id>
+    python launcher.pyz c s -get_code_for_submission <submission_id>
 
 to receive the code file from the given submission.
 

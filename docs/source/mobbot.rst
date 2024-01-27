@@ -24,13 +24,27 @@ MOB-BOT
 
    :red:`Turing Inc. MOB-BOT`
 
-As you work for your assigned company (:blue:`Church Inc.` or :red:`Turing Co.`), you will be coding and upgrading your
-very own MOB-BOT. MOB-BOT is a friendly, cute, and efficient robot designed to mine in The Quarry forever! How lovely.
+|
 
+As you work for the companies (unpaid), you will be coding and upgrading your very own MOB-BOT. MOB-BOT is a friendly,
+cute, and efficient robot designed to mine in The Quarry forever! How lovely.
+
+|
+|
+|
 |
 |
 
 Here are some important notes about MOB-BOT that will help you to improve its functionalities.
+
+
+MOB-BOT Attributes
+==================
+
+Your instance of MOB-BOT is passed into your ``base_client.py`` or ``base_client_2.py`` files. The object is listed as
+``avatar``. There is a list of attributes MOB-BOT will have that will help your coding endeavors.
+
+
 
 
 Tech Tree
@@ -95,57 +109,59 @@ Overdrive Mining |om|                                      MOB-BOT has become th
                                                            mining! Bring in the money!
 
 Dynamite |dyn|                                             Become more efficient with your mining! Dynamite
-                                                           :gold:`explodes 3 turns after being placed`, mining multiple
+                                                           :gold:`explodes 2 turns after being placed`, mining multiple
                                                            ores at once!
 
 Landmines |lm|                                             The other company keeps taking valuable ores, so start
-                                                           setting traps for them... ``>:D`` Landmines
-                                                           :gold:`steal ores from the opponent when activated`.
+                                                           setting traps for them... ``>:D`` When a landmine detonates
+                                                           on an opponent,
+                                                           :gold:`each item the opponent carries has a 50% chance of
+                                                           being stolen.`
 
 EMPs |emp|                                                 EMPs are the rich Bot's landmine! EMPs
-                                                           :gold:`steal more ores from the opponent` than a normal
-                                                           landmine. Phenomenal!
-                                                           :gold:`NOTE: once purchased, Trap Defusal CANNOT be`
-                                                           :gold:`purchased.`
+                                                           :gold:`steal 100% of an opponent's inventory` when detonated.
+                                                           Phenomenal!
+                                                           :red:`NOTE: once purchased, Trap Defusal CANNOT be`
+                                                           :red:`purchased.`
 
 Trap Defusal |diffuse|                                     Fight back against the traps that are set against you. Trap
                                                            defusing will
-                                                           :gold:`deactivate any trap placed by the enemy` (as long as
-                                                           you don't step on it)!
-                                                           :gold:`NOTE: once purchased, EMPs CANNOT be purchased.`
+                                                           :gold:`deactivate ALL traps placed by you and the opponent`
+                                                           in a :gold:`range of 3 Manhattan tiles.`
+                                                           :red:`NOTE: once purchased, EMPs CANNOT be purchased.`
 ========================================================== =============================================================
 
 For more information on Dynamite, Landmines, and EMPs, go to :doc:`placeables`.
 
 Make sure to upgrade the Tech Tree as time goes on. Not only will you gain upgrades, but each unlocked Tech will
-provide extra points. Visit :doc:`scoring` for an overview of how points are accumulated.
+provide extra game points. Visit :doc:`scoring` for an overview of how points are accumulated.
 
 
 Unlocking Techs
 ---------------
 
 To unlock these Techs, you must mine Ancient Tech, which will yield science points. These do not count toward your total
-points.
+game points.
 
-To unlock these Techs, MOB-BOT *must end the turn on top of its company's base*. When there, it can also purchase a new
-Tech (assuming it has enough science points). To do so, use the :doc:`enums` that are provided, and :doc:`taking_action`
-will explain how to implement it in more detail.
+To unlock these Techs, MOB-BOT *must end the turn on top of its respective company's base*. When there, it can also
+purchase a new Tech (assuming it has enough science points). To do so, use the :doc:`enums` that are provided, and
+:doc:`taking_action` will explain how to implement it in more detail.
 
 Remember - the Tech Tree is... a tree. You must unlock techs in order based on their branches. That means you cannot buy
 Dynamite without first buying Improved Mining. You can, however, buy Improved Mining and then Improved Drivetrain, and
 vice versa.
 
 This also means that any branching paths can only access one Tech. More specifically, After purchasing landmines,
-there is the choice to purchase either EMPs or Trap Defusal. :gold:`Only one can be purchased.` After it is purchased, the
-other cannot be purchased.
+there is the choice to purchase either EMPs or Trap Defusal. :gold:`Only one can be purchased.` After it is purchased,
+the other cannot be purchased.
 
 To view the cost of all Techs, please visit :doc:`scoring` for more information.
 
 
-Score & Science Points
-======================
+Game Score & Science Points
+===========================
 
-To know your total score at any given turn, type
+To know your total game points at any given turn, type
 
 .. code-block::
 
@@ -165,17 +181,16 @@ Inventory
 =========
 
 Each MOB-BOT comes with its own, standardized inventory system. The inventory has a :gold:`max capacity of 50 ores`.
-Once capacity has been reached, MOB-BOT will no longer be able to mine. Make sure to go back to base and make a deposit!
+Once capacity has been reached, MOB-BOT will no longer be able to collect when mining. Make sure to go back to base and
+make a deposit!
 
 Each time you mine, your drop rate will determine how many ores are added to your inventory. For example, if Overdrive
 Mining (drop rate = 4) was unlocked and there is an empty inventory, the inventory will have 4/50 slots filled after
 mining.
 
-:gold:`To view your inventory`, a method called get_my_inventory() is provided in either ``base_client`` file. It
+:gold:`To view your inventory`, a method called ``get_my_inventory()`` is provided in either ``base_client`` file. It
 requires the ``world`` object to be passed in, and you will receive the inventory for your company's MOB-BOT. Remember
 that it is a list of the different :doc:`ores` you can mine.
-
-|
 
 As more Techs are unlocked, they will either be considered a Passive or Active Ability and behave differently.
 
@@ -202,10 +217,10 @@ Manage your resources properly, and you can get the upper hand!
 ======================= ========
 Ability                 Cooldown
 ======================= ========
-Dynamite Active Ability 4
-Landmine Active Ability 6
+Dynamite Active Ability 3
+Landmine Active Ability 4
 EMP Active Ability      4
-Trap Defusal            0
+Trap Defusal            2
 ======================= ========
 
 
@@ -229,7 +244,8 @@ This is briefly explained more in :doc:`taking_action`, and the enums are provid
 When Using Active Abilities
 ---------------------------
 
-When using active abilities, as long as they are available to use, they can be called whenever.
+When using active abilities, as long as they are available to use, they can be called whenever. Please note that
+when you use an Active Ability, that will be the only action you can do for that turn.
 
 For example, say MOB-BOT has the Dynamite and EMP Active Abilities, and they can both be used. MOB-BOT could place
 dynamite one turn, and then place an EMP the next turn. The same applies in the other order. As long as the cooldown

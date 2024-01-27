@@ -43,7 +43,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'game_board';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Ores" href="ores.html" />
+    <link rel="next" title="Ores &amp; Ancient Tech" href="ores.html" />
     <link rel="prev" title="Taking Action" href="taking_action.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -149,14 +149,16 @@
 <li class="toctree-l1"><a class="reference internal" href="useful_commands.html">Useful Commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="server.html">The Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mobbot.html">MOB-BOT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobbot_pt2.html">MOB-BOT Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="taking_action.html">Taking Action</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">The Game Board</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores &amp; Ancient Tech</a></li>
 <li class="toctree-l1"><a class="reference internal" href="placeables.html">Placeables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scoring.html">Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualizer.html">Visualizer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extras.html">Extras</a></li>
 </ul>
 
     </div>
@@ -380,22 +382,20 @@ object.</p>
 </section>
 <section id="is-occupied-by-and-get-occupied-by">
 <h3>Is_occupied_by and get_occupied_by<a class="headerlink" href="#is-occupied-by-and-get-occupied-by" title="Permalink to this heading">#</a></h3>
-<p>If you simply want to check if a Tile is occupied by a certain object, you can type either of the following:</p>
+<p>If you simply want to check if a Tile is occupied by a certain object, you can type the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tile</span><span class="o">.</span><span class="n">is_occupied_by_object_type</span><span class="p">(</span><span class="n">ObjectType</span><span class="o">.</span><span class="n">EXAMPLE_OBJECT_TYPE</span><span class="p">)</span>
-<span class="n">tile</span><span class="o">.</span><span class="n">is_occupied_by_game_object</span><span class="p">(</span><span class="n">ExampleClassName</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Both methods will return a boolean representing if the Tile is occupied by the given parameter. The methods take an
-ObjectType and class name respectively.</p>
+<p>The method will return a boolean representing if the Tile is occupied by the given enum. The method will only take an
+ObjectType enum.</p>
 <p>Lastly, to receive an object that is on a Tile, type:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tile</span><span class="o">.</span><span class="n">get_occupied_by</span><span class="p">(</span><span class="n">ObjectType</span><span class="o">.</span><span class="n">EXAMPLE_OBJECT_TYPE</span> <span class="o">|</span> <span class="n">ExampleClassName</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tile</span><span class="o">.</span><span class="n">get_occupied_by</span><span class="p">(</span><span class="n">ObjectType</span><span class="o">.</span><span class="n">EXAMPLE_OBJECT_TYPE</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This method will take either an ObjectType enum or a class name – <span class="gold">not both</span> – and search for it. If found, it
-will return the object. Otherwise, the <code class="docutils literal notranslate"><span class="pre">None</span></code> value will be returned.</p>
+<p>This method will take an ObjectType enum and search for it. If found, it will return the object. Otherwise, the <code class="docutils literal notranslate"><span class="pre">None</span></code>
+value will be returned.</p>
 <p>The <a class="reference internal" href="placeables.html"><span class="doc">Placeables</span></a> page will explain everything that can be placed on the map by MOB-BOT, and <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> will have
 the enums needed for every object that can be on the game map.</p>
-<p>If you would like to see</p>
 </section>
 <section id="bases">
 <h3>Bases<a class="headerlink" href="#bases" title="Permalink to this heading">#</a></h3>
@@ -418,7 +418,7 @@ the enums needed for every object that can be on the game map.</p>
 </ul>
 <p>When you want to cash in ores for points or upgrade your MOB-BOT, you can only do so at your base. Once MOB-BOT is
 standing on their base at the end of the turn, it will automatically deposit all the ores in its inventory.</p>
-<p>More information on ores is found in <a class="reference internal" href="ores.html"><span class="doc">Ores</span></a>, and information on MOB-BOT is found in <a class="reference internal" href="mobbot.html"><span class="doc">MOB-BOT</span></a>.</p>
+<p>More information on ores is found in <a class="reference internal" href="ores.html"><span class="doc">Ores &amp; Ancient Tech</span></a>, and information on MOB-BOT is found in <a class="reference internal" href="mobbot.html"><span class="doc">MOB-BOT</span></a>.</p>
 </section>
 </section>
 <section id="mining-interactions">
@@ -446,7 +446,7 @@ after mining specific ores:</p>
 </tr>
 </tbody>
 </table>
-<p>Visit <a class="reference internal" href="ores.html"><span class="doc">Ores</span></a> for more information on ore values.</p>
+<p>Visit <a class="reference internal" href="ores.html"><span class="doc">Ores &amp; Ancient Tech</span></a> for more information on ore values.</p>
 </section>
 </section>
 
@@ -475,7 +475,7 @@ after mining specific ores:</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ores</p>
+        <p class="prev-next-title">Ores &amp; Ancient Tech</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

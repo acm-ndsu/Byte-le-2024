@@ -43,7 +43,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'mobbot';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Taking Action" href="taking_action.html" />
+    <link rel="next" title="MOB-BOT Part 2" href="mobbot_pt2.html" />
     <link rel="prev" title="The Server" href="server.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -149,14 +149,16 @@
 <li class="toctree-l1"><a class="reference internal" href="useful_commands.html">Useful Commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="server.html">The Server</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">MOB-BOT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobbot_pt2.html">MOB-BOT Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="taking_action.html">Taking Action</a></li>
 <li class="toctree-l1"><a class="reference internal" href="game_board.html">The Game Board</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores &amp; Ancient Tech</a></li>
 <li class="toctree-l1"><a class="reference internal" href="placeables.html">Placeables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scoring.html">Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualizer.html">Visualizer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extras.html">Extras</a></li>
 </ul>
 
     </div>
@@ -305,12 +307,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mob-bot-attributes">MOB-BOT Attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tech-tree">Tech Tree</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structure">Structure</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unlocking-techs">Unlocking Techs</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score-science-points">Score &amp; Science Points</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#game-score-science-points">Game Score &amp; Science Points</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inventory">Inventory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-abilities">Passive Abilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#active-abilities">Active Abilities</a><ul class="nav section-nav flex-column">
@@ -347,13 +350,24 @@ document.write(`
 <p><span class="caption-text"><span class="red">Turing Inc. MOB-BOT</span></span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As you work for your assigned company (<span class="blue">Church Inc.</span> or <span class="red">Turing Co.</span>), you will be coding and upgrading your
-very own MOB-BOT. MOB-BOT is a friendly, cute, and efficient robot designed to mine in The Quarry forever! How lovely.</p>
 <div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>As you work for the companies (unpaid), you will be coding and upgrading your very own MOB-BOT. MOB-BOT is a friendly,
+cute, and efficient robot designed to mine in The Quarry forever! How lovely.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
 <div class="line"><br /></div>
 <div class="line"><br /></div>
 </div>
 <p>Here are some important notes about MOB-BOT that will help you to improve its functionalities.</p>
+<section id="mob-bot-attributes">
+<h2>MOB-BOT Attributes<a class="headerlink" href="#mob-bot-attributes" title="Permalink to this heading">#</a></h2>
+<p>Your instance of MOB-BOT is passed into your <code class="docutils literal notranslate"><span class="pre">base_client.py</span></code> or <code class="docutils literal notranslate"><span class="pre">base_client_2.py</span></code> files. The object is listed as
+<code class="docutils literal notranslate"><span class="pre">avatar</span></code>. There is a list of attributes MOB-BOT will have that will help your coding endeavors.</p>
+</section>
 <section id="tech-tree">
 <h2>Tech Tree<a class="headerlink" href="#tech-tree" title="Permalink to this heading">#</a></h2>
 <p>MOB-BOT can undergo a myriad of upgrades that will make it an amazing, mining machine. This tree structure shows
@@ -397,53 +411,55 @@ mining! Bring in the money!</p></td>
 </tr>
 <tr class="row-even"><td><p>Dynamite <a class="reference internal" href="_images/dynamite.png"><img alt="dyn" src="_images/dynamite.png" style="width: 80%;" /></a></p></td>
 <td><p>Become more efficient with your mining! Dynamite
-<span class="gold">explodes 3 turns after being placed</span>, mining multiple
+<span class="gold">explodes 2 turns after being placed</span>, mining multiple
 ores at once!</p></td>
 </tr>
 <tr class="row-odd"><td><p>Landmines <a class="reference internal" href="_images/landmine.png"><img alt="lm" src="_images/landmine.png" style="width: 80%;" /></a></p></td>
 <td><p>The other company keeps taking valuable ores, so start
-setting traps for them… <code class="docutils literal notranslate"><span class="pre">&gt;:D</span></code> Landmines
-<span class="gold">steal ores from the opponent when activated</span>.</p></td>
+setting traps for them… <code class="docutils literal notranslate"><span class="pre">&gt;:D</span></code> When a landmine detonates
+on an opponent,
+<span class="gold">each item the opponent carries has a 50% chance of
+being stolen.</span></p></td>
 </tr>
 <tr class="row-even"><td><p>EMPs <a class="reference internal" href="_images/emp.png"><img alt="emp" src="_images/emp.png" style="width: 80%;" /></a></p></td>
 <td><p>EMPs are the rich Bot’s landmine! EMPs
-<span class="gold">steal more ores from the opponent</span> than a normal
-landmine. Phenomenal!
-<span class="gold">NOTE: once purchased, Trap Defusal CANNOT be</span>
-<span class="gold">purchased.</span></p></td>
+<span class="gold">steal 100% of an opponent’s inventory</span> when detonated.
+Phenomenal!
+<span class="red">NOTE: once purchased, Trap Defusal CANNOT be</span>
+<span class="red">purchased.</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>Trap Defusal <a class="reference internal" href="_images/defuse.png"><img alt="diffuse" src="_images/defuse.png" style="width: 80%;" /></a></p></td>
 <td><p>Fight back against the traps that are set against you. Trap
 defusing will
-<span class="gold">deactivate any trap placed by the enemy</span> (as long as
-you don’t step on it)!
-<span class="gold">NOTE: once purchased, EMPs CANNOT be purchased.</span></p></td>
+<span class="gold">deactivate ALL traps placed by you and the opponent</span>
+in a <span class="gold">range of 3 Manhattan tiles.</span>
+<span class="red">NOTE: once purchased, EMPs CANNOT be purchased.</span></p></td>
 </tr>
 </tbody>
 </table>
 <p>For more information on Dynamite, Landmines, and EMPs, go to <a class="reference internal" href="placeables.html"><span class="doc">Placeables</span></a>.</p>
 <p>Make sure to upgrade the Tech Tree as time goes on. Not only will you gain upgrades, but each unlocked Tech will
-provide extra points. Visit <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> for an overview of how points are accumulated.</p>
+provide extra game points. Visit <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> for an overview of how points are accumulated.</p>
 </section>
 <section id="unlocking-techs">
 <h3>Unlocking Techs<a class="headerlink" href="#unlocking-techs" title="Permalink to this heading">#</a></h3>
 <p>To unlock these Techs, you must mine Ancient Tech, which will yield science points. These do not count toward your total
-points.</p>
-<p>To unlock these Techs, MOB-BOT <em>must end the turn on top of its company’s base</em>. When there, it can also purchase a new
-Tech (assuming it has enough science points). To do so, use the <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> that are provided, and <a class="reference internal" href="taking_action.html"><span class="doc">Taking Action</span></a>
-will explain how to implement it in more detail.</p>
+game points.</p>
+<p>To unlock these Techs, MOB-BOT <em>must end the turn on top of its respective company’s base</em>. When there, it can also
+purchase a new Tech (assuming it has enough science points). To do so, use the <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> that are provided, and
+<a class="reference internal" href="taking_action.html"><span class="doc">Taking Action</span></a> will explain how to implement it in more detail.</p>
 <p>Remember - the Tech Tree is… a tree. You must unlock techs in order based on their branches. That means you cannot buy
 Dynamite without first buying Improved Mining. You can, however, buy Improved Mining and then Improved Drivetrain, and
 vice versa.</p>
 <p>This also means that any branching paths can only access one Tech. More specifically, After purchasing landmines,
-there is the choice to purchase either EMPs or Trap Defusal. <span class="gold">Only one can be purchased.</span> After it is purchased, the
-other cannot be purchased.</p>
+there is the choice to purchase either EMPs or Trap Defusal. <span class="gold">Only one can be purchased.</span> After it is purchased,
+the other cannot be purchased.</p>
 <p>To view the cost of all Techs, please visit <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> for more information.</p>
 </section>
 </section>
-<section id="score-science-points">
-<h2>Score &amp; Science Points<a class="headerlink" href="#score-science-points" title="Permalink to this heading">#</a></h2>
-<p>To know your total score at any given turn, type</p>
+<section id="game-score-science-points">
+<h2>Game Score &amp; Science Points<a class="headerlink" href="#game-score-science-points" title="Permalink to this heading">#</a></h2>
+<p>To know your total game points at any given turn, type</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">avatar</span><span class="o">.</span><span class="n">score</span>
 </pre></div>
 </div>
@@ -457,16 +473,14 @@ other cannot be purchased.</p>
 <section id="inventory">
 <h2>Inventory<a class="headerlink" href="#inventory" title="Permalink to this heading">#</a></h2>
 <p>Each MOB-BOT comes with its own, standardized inventory system. The inventory has a <span class="gold">max capacity of 50 ores</span>.
-Once capacity has been reached, MOB-BOT will no longer be able to mine. Make sure to go back to base and make a deposit!</p>
+Once capacity has been reached, MOB-BOT will no longer be able to collect when mining. Make sure to go back to base and
+make a deposit!</p>
 <p>Each time you mine, your drop rate will determine how many ores are added to your inventory. For example, if Overdrive
 Mining (drop rate = 4) was unlocked and there is an empty inventory, the inventory will have 4/50 slots filled after
 mining.</p>
-<p><span class="gold">To view your inventory</span>, a method called get_my_inventory() is provided in either <code class="docutils literal notranslate"><span class="pre">base_client</span></code> file. It
+<p><span class="gold">To view your inventory</span>, a method called <code class="docutils literal notranslate"><span class="pre">get_my_inventory()</span></code> is provided in either <code class="docutils literal notranslate"><span class="pre">base_client</span></code> file. It
 requires the <code class="docutils literal notranslate"><span class="pre">world</span></code> object to be passed in, and you will receive the inventory for your company’s MOB-BOT. Remember
-that it is a list of the different <a class="reference internal" href="ores.html"><span class="doc">Ores</span></a> you can mine.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
+that it is a list of the different <a class="reference internal" href="ores.html"><span class="doc">Ores &amp; Ancient Tech</span></a> you can mine.</p>
 <p>As more Techs are unlocked, they will either be considered a Passive or Active Ability and behave differently.</p>
 </section>
 <section id="passive-abilities">
@@ -491,16 +505,16 @@ Manage your resources properly, and you can get the upper hand!</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Dynamite Active Ability</p></td>
-<td><p>4</p></td>
+<td><p>3</p></td>
 </tr>
 <tr class="row-odd"><td><p>Landmine Active Ability</p></td>
-<td><p>6</p></td>
+<td><p>4</p></td>
 </tr>
 <tr class="row-even"><td><p>EMP Active Ability</p></td>
 <td><p>4</p></td>
 </tr>
 <tr class="row-odd"><td><p>Trap Defusal</p></td>
-<td><p>0</p></td>
+<td><p>2</p></td>
 </tr>
 </tbody>
 </table>
@@ -519,7 +533,8 @@ MOB-BOTs. The audacity of them.</p>
 </section>
 <section id="when-using-active-abilities">
 <h3>When Using Active Abilities<a class="headerlink" href="#when-using-active-abilities" title="Permalink to this heading">#</a></h3>
-<p>When using active abilities, as long as they are available to use, they can be called whenever.</p>
+<p>When using active abilities, as long as they are available to use, they can be called whenever. Please note that
+when you use an Active Ability, that will be the only action you can do for that turn.</p>
 <p>For example, say MOB-BOT has the Dynamite and EMP Active Abilities, and they can both be used. MOB-BOT could place
 dynamite one turn, and then place an EMP the next turn. The same applies in the other order. As long as the cooldown
 is no longer active, an ability can be used.</p>
@@ -549,11 +564,11 @@ is no longer active, an ability can be used.</p>
       </div>
     </a>
     <a class="right-next"
-       href="taking_action.html"
+       href="mobbot_pt2.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Taking Action</p>
+        <p class="prev-next-title">MOB-BOT Part 2</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -572,12 +587,13 @@ is no longer active, an ability can be used.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mob-bot-attributes">MOB-BOT Attributes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tech-tree">Tech Tree</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structure">Structure</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unlocking-techs">Unlocking Techs</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score-science-points">Score &amp; Science Points</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#game-score-science-points">Game Score &amp; Science Points</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inventory">Inventory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-abilities">Passive Abilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#active-abilities">Active Abilities</a><ul class="nav section-nav flex-column">

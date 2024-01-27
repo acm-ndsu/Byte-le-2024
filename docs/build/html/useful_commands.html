@@ -149,14 +149,16 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Useful Commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="server.html">The Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mobbot.html">MOB-BOT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobbot_pt2.html">MOB-BOT Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="taking_action.html">Taking Action</a></li>
 <li class="toctree-l1"><a class="reference internal" href="game_board.html">The Game Board</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores &amp; Ancient Tech</a></li>
 <li class="toctree-l1"><a class="reference internal" href="placeables.html">Placeables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scoring.html">Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualizer.html">Visualizer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extras.html">Extras</a></li>
 </ul>
 
     </div>
@@ -335,7 +337,7 @@ document.write(`
 <style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style><section id="running-the-launcher">
 <h2>Running the launcher<a class="headerlink" href="#running-the-launcher" title="Permalink to this heading">#</a></h2>
 <p>There are required packages necessary for running the game. Run the following command to install them all:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python -m pip install -r requirements.txt</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install -r requirements.txt</span>
 </pre></div>
 </div>
 <p>You can view the list of packages in the requirements.txt file.</p>
@@ -343,7 +345,7 @@ document.write(`
 <section id="pygame-installation">
 <h2>Pygame Installation<a class="headerlink" href="#pygame-installation" title="Permalink to this heading">#</a></h2>
 <p>If you have problems installing the pygame package, try running the following command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python -m pip install pygame --pre</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install pygame --pre</span>
 </pre></div>
 </div>
 </section>
@@ -354,12 +356,12 @@ document.write(`
 <p>Here are the commands:</p>
 <section id="generate">
 <h3>Generate<a class="headerlink" href="#generate" title="Permalink to this heading">#</a></h3>
-<p>Run the following in the byte-le folder:</p>
+<p>Run the following in the root directory in your terminal:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">g</span>
 </pre></div>
 </div>
-<p>If you don’t want to have a new map, don’t run this command. With the same map and clients, the results will stay
-consistent.</p>
+<p>If you don’t want to have a new, random seed, don’t run this command. With the same seed and clients, the results will
+stay consistent.</p>
 </section>
 <section id="run">
 <h3>Run<a class="headerlink" href="#run" title="Permalink to this heading">#</a></h3>
@@ -393,7 +395,7 @@ them for you!</p>
 </section>
 <section id="generate-and-run">
 <h3>Generate and Run<a class="headerlink" href="#generate-and-run" title="Permalink to this heading">#</a></h3>
-<p>‘What if I don’t want to visualize, but only generate and run?’ We’ve got you covered!</p>
+<p>“What if I don’t want to visualize, but only generate and run?” We’ve got you covered!</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">launcher</span><span class="o">.</span><span class="n">pyz</span> <span class="n">gr</span>
 </pre></div>
 </div>
@@ -408,12 +410,11 @@ them for you!</p>
 <p>in the terminal. Each of the sub-commands will have their own help messages too.</p>
 <div class="line-block">
 <div class="line"><br /></div>
-<div class="line"><br /></div>
 </div>
 <figure class="align-default">
 <img alt="_images/turing_comp.png" src="_images/turing_comp.png" />
 </figure>
-<p>(<span class="red">Turing Inc. MOB-BOT</span> using terminal commands to visualize The Quarry)</p>
+<p>(<span class="red">Turing Inc.</span> MOB-BOT using terminal commands to visualize The Quarry)</p>
 </section>
 </section>
 </section>

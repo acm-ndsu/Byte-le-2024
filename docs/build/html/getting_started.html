@@ -149,14 +149,16 @@
 <li class="toctree-l1"><a class="reference internal" href="useful_commands.html">Useful Commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="server.html">The Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mobbot.html">MOB-BOT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobbot_pt2.html">MOB-BOT Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="taking_action.html">Taking Action</a></li>
 <li class="toctree-l1"><a class="reference internal" href="game_board.html">The Game Board</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores &amp; Ancient Tech</a></li>
 <li class="toctree-l1"><a class="reference internal" href="placeables.html">Placeables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scoring.html">Scoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enums.html">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualizer.html">Visualizer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extras.html">Extras</a></li>
 </ul>
 
     </div>
@@ -330,10 +332,11 @@ document.write(`
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">#</a></h1>
 <style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
 <style> .blue {color:#1769BC; font-weight:bold; font-size:16px} </style>
-<style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style><section id="notice">
+<style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style>
+<style> .brown {color:#623514; font-weight:bold; font-size:16px} </style><section id="notice">
 <h2>NOTICE<a class="headerlink" href="#notice" title="Permalink to this heading">#</a></h2>
 <p>Please run the following command to install the necessary packages to run the game:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python -m pip install -r requirements.txt</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install -r requirements.txt</span>
 </pre></div>
 </div>
 <p>More commands are listed in <a class="reference internal" href="useful_commands.html"><span class="doc">Useful Commands</span></a>. Thank you!</p>
@@ -342,12 +345,14 @@ document.write(`
 <h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
 <img alt="_images/wcyotc.png" src="_images/wcyotc.png" />
 <p>Your objective for this year is to gain more points than your opponents. This is done by mining more ores than the
-opposing team in The Quarry, and by unlocking upgrades. <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> will explain how the points are totaled. Each
-game will have 500 turns before ending. Manage your time wisely!</p>
-<p>As you collect ores, make your way back to your base to cash them in for game points and science points!
-Upgrading your MOB-BOT with science points will increase its mining capabilities, thus improving corporate revenue
-(fantastic)! You can even disrupt the opposing team with traps, giving you the advantage and removing the competition
-from the market (astounding)!</p>
+opposing team in The Quarry and by unlocking upgrades. <a class="reference internal" href="scoring.html"><span class="doc">Scoring</span></a> will explain how the points are totaled. Each
+game will have <span class="gold">200 turns</span> before ending. Manage your time wisely!</p>
+<p>As you collect ores, make your way back to your base to cash them in for game points!</p>
+<p><code class="docutils literal notranslate"><span class="pre">Whichever</span> <span class="pre">MOB-BOT</span> <span class="pre">has</span> <span class="pre">the</span> <span class="pre">most</span> <span class="pre">game</span> <span class="pre">points</span> <span class="pre">at</span> <span class="pre">the</span> <span class="pre">end</span> <span class="pre">of</span> <span class="pre">200</span> <span class="pre">turns</span> <span class="pre">will</span> <span class="pre">win</span> <span class="pre">the</span> <span class="pre">game.</span></code></p>
+<p>Along with this, you can collect <span class="brown">Ancient Tech</span> to earn science points.
+<span class="gold">Note that science points do not award game points.</span> Upgrading your MOB-BOT with science points will increase its
+capabilities, thus improving corporate revenue (fantastic)! You can even disrupt the opposing team with traps,
+giving you the advantage and removing the competition from the market (astounding)!</p>
 <p>Visit <a class="reference internal" href="mobbot.html"><span class="doc">MOB-BOT</span></a> for more information on how it all works.</p>
 <p>Remember – failure to comply with the high standards of the company, along with failure to defeat the rival
 company in the task of mining the most ore, will result in <code class="docutils literal notranslate"><span class="pre">immediate</span> <span class="pre">termination</span></code>. But you’ll be okay.
@@ -372,8 +377,8 @@ You can do this by re-running the installer and unselecting the python developme
 </section>
 <section id="getting-the-code-and-mob-bot">
 <h3>Getting the Code and MOB-BOT<a class="headerlink" href="#getting-the-code-and-mob-bot" title="Permalink to this heading">#</a></h3>
-<p>To receive the code and your own MOB-BOT, please clone the repository here
-<a class="reference external" href="https://github.com/acm-ndsu/Byte-le-2024">here</a>.</p>
+<p>To receive the code and your own MOB-BOT, please clone the repository
+<a class="reference external" href="https://github.com/acm-ndsu/Byte-le-2024-Client-Package">here</a>.</p>
 <p>When on GitHub, press the green <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span> <span class="pre">Code</span></code> button to drop down the following menu:</p>
 <img alt="_images/clone_repo_options.png" src="_images/clone_repo_options.png" />
 <p>We highly recommend cloning with GitHub Desktop or downloading the ZIP folder.</p>

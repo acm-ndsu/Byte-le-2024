@@ -72,6 +72,4 @@ won't work.
 Defusing Traps
 --------------
 
-Defusing traps is done by using :doc:`enums` to defuse in any adjacent space to MOB-BOT. This includes Up, Down, Left,
-and Right. If a trap is not in the specified direction when called, nothing will happen.
-
+Defusing traps is done by using an enum to defuse in a range from MOB-BOT.

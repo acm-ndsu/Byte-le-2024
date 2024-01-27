@@ -149,14 +149,16 @@
 <li class="toctree-l1"><a class="reference internal" href="useful_commands.html">Useful Commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="server.html">The Server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mobbot.html">MOB-BOT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobbot_pt2.html">MOB-BOT Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="taking_action.html">Taking Action</a></li>
 <li class="toctree-l1"><a class="reference internal" href="game_board.html">The Game Board</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ores.html">Ores &amp; Ancient Tech</a></li>
 <li class="toctree-l1"><a class="reference internal" href="placeables.html">Placeables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scoring.html">Scoring</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Enums</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualizer.html">Visualizer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extras.html">Extras</a></li>
 </ul>
 
     </div>
@@ -310,6 +312,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ores">Ores</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stations">Stations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#placeables">Placeables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other">Other</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actiontype-enums">ActionType Enums</a><ul class="nav section-nav flex-column">
@@ -333,7 +336,7 @@ document.write(`
                   
   <section id="enums">
 <h1>Enums<a class="headerlink" href="#enums" title="Permalink to this heading">#</a></h1>
-<p>The use of enums will manage which actions you’d like to do. Pass these in to control your MOB-BOT! Make sure to type
+<style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style><p>The use of enums will manage which actions you’d like to do. Pass these in to control your MOB-BOT! Make sure to type
 <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">game.common.enums</span> <span class="pre">import</span> <span class="pre">*</span></code> to have access to all the enums you’ll need.</p>
 <section id="company-enums">
 <h2>Company Enums<a class="headerlink" href="#company-enums" title="Permalink to this heading">#</a></h2>
@@ -421,6 +424,34 @@ document.write(`
 </tbody>
 </table>
 </section>
+<section id="other">
+<h3>Other<a class="headerlink" href="#other" title="Permalink to this heading">#</a></h3>
+<p><span class="gold">NOTE: ObjectType.AVATAR refers to the ObjectType of your MOB-BOT!</span></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enum Name</p></th>
+<th class="head"><p>Int Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ObjectType.AVATAR</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>ObjectType.GAMEBOARD</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>ObjectType.VECTOR</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>ObjectType.TILE</p></td>
+<td><p>7</p></td>
+</tr>
+<tr class="row-even"><td><p>ObjectType.WALL</p></td>
+<td><p>8</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 <section id="actiontype-enums">
 <h2>ActionType Enums<a class="headerlink" href="#actiontype-enums" title="Permalink to this heading">#</a></h2>
@@ -493,17 +524,8 @@ document.write(`
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>ActionType.DEFUSE_UP</p></td>
+<tr class="row-even"><td><p>ActionType.DEFUSE</p></td>
 <td><p>15</p></td>
-</tr>
-<tr class="row-odd"><td><p>ActionType.DEFUSE_DOWN</p></td>
-<td><p>16</p></td>
-</tr>
-<tr class="row-even"><td><p>ActionType.DEFUSE_LEFT</p></td>
-<td><p>17</p></td>
-</tr>
-<tr class="row-odd"><td><p>ActionType.DEFUSE_RIGHT</p></td>
-<td><p>18</p></td>
 </tr>
 </tbody>
 </table>
@@ -518,34 +540,34 @@ document.write(`
 </thead>
 <tbody>
 <tr class="row-even"><td><p>ActionType.BUY_IMPROVED_DRIVETRAIN</p></td>
-<td><p>19</p></td>
+<td><p>16</p></td>
 </tr>
 <tr class="row-odd"><td><p>ActionType.BUY_SUPERIOR_DRIVETRAIN</p></td>
-<td><p>20</p></td>
+<td><p>17</p></td>
 </tr>
 <tr class="row-even"><td><p>ActionType.BUY_OVERDRIVE_DRIVETRAIN</p></td>
-<td><p>21</p></td>
+<td><p>18</p></td>
 </tr>
 <tr class="row-odd"><td><p>ActionType.BUY_IMPROVED_MINING</p></td>
-<td><p>22</p></td>
+<td><p>19</p></td>
 </tr>
 <tr class="row-even"><td><p>ActionType.BUY_SUPERIOR_MINING</p></td>
-<td><p>23</p></td>
+<td><p>20</p></td>
 </tr>
 <tr class="row-odd"><td><p>ActionType.BUY_OVERDRIVE_MINING</p></td>
-<td><p>24</p></td>
+<td><p>21</p></td>
 </tr>
 <tr class="row-even"><td><p>ActionType.BUY_DYNAMITE</p></td>
-<td><p>25</p></td>
+<td><p>22</p></td>
 </tr>
 <tr class="row-odd"><td><p>ActionType.LANDMINES</p></td>
-<td><p>26</p></td>
+<td><p>23</p></td>
 </tr>
 <tr class="row-even"><td><p>ActionType.BUY_EMPS</p></td>
-<td><p>27</p></td>
+<td><p>24</p></td>
 </tr>
 <tr class="row-odd"><td><p>ActionType.BUY_TRAP_DEFUSAL</p></td>
-<td><p>28</p></td>
+<td><p>25</p></td>
 </tr>
 </tbody>
 </table>
@@ -602,6 +624,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ores">Ores</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stations">Stations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#placeables">Placeables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other">Other</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actiontype-enums">ActionType Enums</a><ul class="nav section-nav flex-column">

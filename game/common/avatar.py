@@ -363,7 +363,8 @@ class Avatar(GameObject):
         return self.abilities['Dynamite'] and self.dynamite_active_ability.is_usable
 
     def can_place_landmine(self) -> bool:
-        return self.abilities['Landmines'] is True and self.abilities['EMPs'] is False and self.landmine_active_ability.is_usable
+        return self.abilities['Landmines'] is True and self.abilities['EMPs'] is False and \
+            self.landmine_active_ability.is_usable
 
     def can_place_emp(self) -> bool:
         return self.abilities['EMPs'] and self.emp_active_ability.is_usable
@@ -374,6 +375,10 @@ class Avatar(GameObject):
     # method to return the opposing team based on the avatar's company
     def get_opposing_team(self) -> Company:
         return Company.CHURCH if self.company is Company.TURING else Company.TURING
+
+    # method to return your company
+    def get_company(self) -> Company:
+        return self.__company
 
     def to_json(self) -> dict:
         data: dict = super().to_json()
