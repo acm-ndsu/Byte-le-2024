@@ -25,15 +25,19 @@ Thank you to:
 
 Ian King (:blue:`Church Inc.`)
 
-.. image:: ./_static/contributors/ian.png
+.. figure:: ./_static/contributors/ian.png
+
+
+.. figure:: ./_static/contributors/ian_STYLISH.png
+   :width: 180
 
 ----
 
 
 Brandon Gasser (:blue:`Church Inc.`)
 
-.. image:: ./_static/contributors/brandon.png
-   :width: 420
+.. figure:: ./_static/contributors/brandon.png
+   :width: 400
 
 
 ----
@@ -41,7 +45,7 @@ Brandon Gasser (:blue:`Church Inc.`)
 
 Jean Eckelberg (:red:`Turing Co.`)
 
-.. image:: ./_static/contributors/jean.png
+.. figure:: ./_static/contributors/jean.png
 
 
 ----
@@ -49,35 +53,35 @@ Jean Eckelberg (:red:`Turing Co.`)
 
 Gunnar Moody (:blue:`Church Inc.`)
 
-.. image:: ./_static/contributors/gunnar.png
-   :width: 420
+.. figure:: ./_static/contributors/gunnar.png
+   :width: 400
 
 ----
 
 
 Julia Motzko (:red:`Turing Co.`)
 
-.. image:: ./_static/contributors/julia.png
-   :width: 420
+.. figure:: ./_static/contributors/julia.png
+   :width: 400
 
 ----
 
 Carson Bring (:red:`Turing Co.`)
 
-.. image:: ./_static/contributors/carson_bring.png
-   :width: 420
+.. figure:: ./_static/contributors/carson_bring.png
 
 ----
 
 Mason Myles (:red:`Turing Co.`)
 
-.. image:: ./_static/contributors/mason.png
-   :width: 420
+.. figure:: ./_static/contributors/mason.png
+   :width: 400
 
+POV: Two weeks after working on Byte-le.
 
 ----
 
 Carson Keeping (:blue:`Church Inc.`)
 
-.. image:: ./_static/contributors/carson_keeping.png
-   :width: 420
+.. figure:: ./_static/contributors/carson_keeping.png
+   :width: 400
