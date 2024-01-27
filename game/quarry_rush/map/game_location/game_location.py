@@ -34,7 +34,7 @@ class GameLocation:
         for pos in self.__church_bases:
             game_location[(Vector(x=pos[0], y=pos[1]),)] = [ChurchStation(), ]
         for avatar_name, pos in self.__avatars.items():
-            game_location[(Vector(x=pos[0], y=pos[1]),)] += [
+            game_location[(Vector(x=pos[0], y=pos[1]),)] = [
                     Avatar(company=Company.TURING if avatar_name == 'turing' else Company.CHURCH,
                            position=Vector(x=pos[0], y=pos[1])), ]
 

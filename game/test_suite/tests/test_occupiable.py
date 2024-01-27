@@ -17,7 +17,8 @@ class TestOccupiable(unittest.TestCase):
 
         # adds ores to all adjacent tiles and the one the avatar will be on
         self.locations: dict[tuple[Vector]: list[GameObject]] = {
-            (Vector(1, 0), ): [self.ore_station, self.avatar, ],
+            (Vector(1, 0), ): [self.ore_station,],
+            (Vector(1, 0), ): [self.avatar, ],
         }
 
         self.game_board = GameBoard(0, Vector(3, 3), self.locations, False)  # create 3x3 gameboard

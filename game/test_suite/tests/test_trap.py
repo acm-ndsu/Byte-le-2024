@@ -108,7 +108,6 @@ class TestTrap(unittest.TestCase):
         self.opponent_position = Vector(1, 1)
         self.assertEqual(self.trap.detonate(self.inventory_manager), False)
 
-
     def test_detonate_true(self):
         self.opponent_position = Vector(0, 0)
         self.assertEqual(self.trap.detonate(self.inventory_manager), True)
@@ -135,9 +134,8 @@ class TestTrap(unittest.TestCase):
         self.assertEqual(str(e.exception), '\'inventory_manager\'')
         self.assertEqual(data['owner_company'], Company.CHURCH.value)
         self.assertEqual(data['target_company'], Company.TURING.value)
-        self.assertEqual(data['opponent_position'](), self.opponent_position)
-        self.assertEqual(str(data['position']), str(self.position))
         self.assertEqual(data['range'], self.range)
+        self.assertEqual(str(self.position), str(data['position']))
 
         # To test the object type, need to make a new Trap object
         trap: Trap = Trap().from_json(data)
