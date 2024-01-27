@@ -127,20 +127,24 @@ If there is an OreOccupiableStation object, you can do the following to check th
 
 .. code-block:: python
 
-    ore = tile.get_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION)
-    isinstance(ore, Turite)
+    ore = tile.get_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION).held_item
+    ore.object_type == ObjectType.TURITE
 
-In this example, the code is checking if the ore is Turite. Using the ``isinstance()`` method will return a boolean
-value indicating if the first argument is an instance of the second argument. Below is all the ways you can check for
-all materials assuming ``ore = tile.get_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION)`` returned an object. Make sure
-to type these verbatim.
+:gold:`NOTE:` Calling ``get_occupied_by`` may return a ``None`` value, so you will need to incorporate null handling.
+
+In this example, the code is checking if the ore is Turite. Comparing the ore's ObjectType to the specified enum will
+return a boolean value indicating if it is the ore specified.
+
+Below is all the ways you can check for all materials assuming
+``ore = tile.get_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION).held_item`` returned an object. Make sure to type these
+verbatim.
 
 .. code-block:: python
 
-    isinstance(ore, Copium)
-    isinstance(ore, Turite)
-    isinstance(ore, Lambdium)
-    isinstance(ore, AncientTech)
+    ore.object_type == ObjectType.COPIUM
+    ore.object_type == ObjectType.TURITE
+    ore.object_type == ObjectType.LAMBDIUM
+    ore.object_type == ObjectType.ANCIENT_TECH
 
 Bases
 -----

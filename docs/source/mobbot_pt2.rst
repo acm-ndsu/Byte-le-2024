@@ -17,7 +17,11 @@ MOB-BOT Properties
 
 Attributes
 ----------
-Your MOB-BOT will come with a list of attributes you can use to see the current status of the game! This includes:
+Your MOB-BOT will come with a list of attributes you can use to see the current status of the game!
+Depending on the parameter passed in, you will either need to use ``mobbot`` or ``avatar``. The examples below will
+assume that the parameter is named ``mobbot``.
+
+This includes:
 
 ======================= ==================================================
 Attributes              Descriptions
