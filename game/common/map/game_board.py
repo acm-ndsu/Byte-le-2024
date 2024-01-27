@@ -307,6 +307,11 @@ class GameBoard(GameObject):
 
             # random.sample returns a randomized list which is used in __help_populate()
             j = random.sample(k, k=len(k))
+            if len(k) == len(v):
+                j = random.sample(k, k=len(k))
+            else:
+                j = k
+
             self.__help_populate(j, v)
 
     def __occupied_filter(self, game_object_list: list[GameObject]) -> list[GameObject]:
@@ -315,7 +320,9 @@ class GameBoard(GameObject):
         :param game_object_list:
         :return: a list of game object
         """
-        return [game_object for game_object in game_object_list if hasattr(game_object, 'occupied_by')]
+        return [game_object for game_object in game_object_list if hasattr(game_object, 'occupied_by')] \
+            if len(game_object_list) > len([game_object for game_object in game_object_list if hasattr(game_object, 'occupied_by')])+1 \
+            else game_object_list
 
     def __help_populate(self, vector_list: list[Vector], game_object_list: list[GameObject]) -> None:
         """
@@ -359,6 +366,8 @@ class GameBoard(GameObject):
         for game_object in remaining_objects:
             if not hasattr(temp_tile, 'occupied_by') or temp_tile.occupied_by is not None:
                 raise ValueError("Last item on the given tile doesn't have the 'occupied_by' attribute.")
+            if isinstance(game_object, Avatar):  # If the GameObject is an Avatar, assign it the coordinate position
+                game_object.position = last_vec
             temp_tile.occupied_by = game_object
             temp_tile = temp_tile.occupied_by
 
