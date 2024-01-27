@@ -20,7 +20,7 @@ class Client(UserClient):
         Allows the team to set a team name.
         :return: Your team name
         """
-        return 'Unpaid Intern'
+        return 'Volunteer'
 
     def first_turn_init(self, world, mobbot):
         """
