@@ -21,8 +21,8 @@ class TestPlaceController(unittest.TestCase):
         self.place_controller: PlaceController = PlaceController()
         self.movement_controller: MovementController = MovementController()
 
-        self.avatar = Avatar(position=Vector(1, 0))
-        self.avatar_2 = Avatar(position=Vector(0, 0))
+        self.avatar = Avatar(position=Vector(1, 0), company=Company.CHURCH)
+        self.avatar_2 = Avatar(position=Vector(0, 0), company=Company.TURING)
         self.avatar.science_points = 5000  # set science points in order to buy techs
         self.ore_station: OreOccupiableStation = OreOccupiableStation()
 

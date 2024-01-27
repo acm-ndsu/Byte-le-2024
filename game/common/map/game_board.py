@@ -457,6 +457,8 @@ class GameBoard(GameObject):
 
     # removes trap from game_map based on position, method called in trap queue detonate method
     def remove_trap_at(self, position: Vector) -> None:
+        if position.y < 0 or position.y >= len(self.game_map) or position.x < 0 or position.x >= len(self.game_map[0]):
+            return
         tile: Tile = self.game_map[position.y][position.x]
         tile.remove_from_occupied_by(ObjectType.LANDMINE)
         tile.remove_from_occupied_by(ObjectType.EMP)

@@ -67,20 +67,17 @@ class ActionType(Enum):
     PLACE_LANDMINE = auto()  # 12
     PLACE_EMP = auto()  # 13
     MINE = auto()  # 14
-    DEFUSE_UP = auto()  # 15
-    DEFUSE_DOWN = auto()  # 16
-    DEFUSE_LEFT = auto()  # 17
-    DEFUSE_RIGHT = auto()  # 18
-    BUY_IMPROVED_DRIVETRAIN = auto()  # 19
-    BUY_SUPERIOR_DRIVETRAIN = auto()  # 20
-    BUY_OVERDRIVE_DRIVETRAIN = auto()  # 21
-    BUY_IMPROVED_MINING = auto()  # 22
-    BUY_SUPERIOR_MINING = auto()  # 23
-    BUY_OVERDRIVE_MINING = auto()  # 24
-    BUY_DYNAMITE = auto()  # 25
-    BUY_LANDMINES = auto()  # 26
-    BUY_EMPS = auto()  # 27
-    BUY_TRAP_DEFUSAL = auto()  # 28
+    DEFUSE = auto()  # 15
+    BUY_IMPROVED_DRIVETRAIN = auto()  # 16
+    BUY_SUPERIOR_DRIVETRAIN = auto()  # 17
+    BUY_OVERDRIVE_DRIVETRAIN = auto()  # 18
+    BUY_IMPROVED_MINING = auto()  # 19
+    BUY_SUPERIOR_MINING = auto()  # 20
+    BUY_OVERDRIVE_MINING = auto()  # 21
+    BUY_DYNAMITE = auto()  # 22
+    BUY_LANDMINES = auto()  # 23
+    BUY_EMPS = auto()  # 24
+    BUY_TRAP_DEFUSAL = auto()  # 25
 
 
 # Added for Quarry Rush

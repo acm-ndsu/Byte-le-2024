@@ -3,6 +3,7 @@ import unittest
 from game.common.avatar import Avatar
 from game.common.items.item import Item
 from game.utils.vector import Vector
+from game.config import IMPROVED_DRIVETRAIN_POINTS, SUPERIOR_DRIVETRAIN_POINTS, OVERDRIVE_DRIVETRAIN_POINTS, IMPROVED_DRIVETRAIN_COST, SUPERIOR_DRIVETRAIN_COST, OVERDRIVE_DRIVETRAIN_COST, IMPROVED_MINING_POINTS, SUPERIOR_MINING_POINTS, OVERDRIVE_MINING_POINTS, IMPROVED_MINING_COST, SUPERIOR_MINING_COST, OVERDRIVE_MINING_COST
 
 
 class TestAvatar(unittest.TestCase):
@@ -134,8 +135,8 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.abilities['Superior Drivetrain'])
         self.assertTrue(self.avatar.abilities['Overdrive Drivetrain'])
 
-        self.assertEqual(self.avatar.score, 750)  # test that the score updates correctly based on tech points
-        self.assertEqual(self.avatar.science_points, 4440)  # test science points updates correctly
+        self.assertEqual(self.avatar.score, IMPROVED_DRIVETRAIN_POINTS + SUPERIOR_DRIVETRAIN_POINTS + OVERDRIVE_DRIVETRAIN_POINTS)  # test that the score updates correctly based on tech points
+        self.assertEqual(self.avatar.science_points, 5000 - IMPROVED_DRIVETRAIN_COST - SUPERIOR_DRIVETRAIN_COST - OVERDRIVE_DRIVETRAIN_COST)  # test science points updates correctly
 
     # Buying Overdrive Mining will return False if the tree hasn't developed to it yet
     def test_unlock_overdrive_mining_fail(self):
@@ -155,8 +156,8 @@ class TestAvatar(unittest.TestCase):
         self.assertTrue(self.avatar.abilities['Superior Mining'])
         self.assertTrue(self.avatar.abilities['Overdrive Mining'])
 
-        self.assertEqual(self.avatar.score, 550)  # test that the score updates correctly based on tech points
-        self.assertEqual(self.avatar.science_points, 4650)  # test science points updates correctly
+        self.assertEqual(self.avatar.score, IMPROVED_MINING_POINTS + SUPERIOR_MINING_POINTS + OVERDRIVE_MINING_POINTS)  # test that the score updates correctly based on tech points
+        self.assertEqual(self.avatar.science_points, 5000 - IMPROVED_MINING_COST - SUPERIOR_MINING_COST - OVERDRIVE_MINING_COST)  # test science points updates correctly
 
     # Buying Dynamite will return False if the tree hasn't developed to it yet
     def test_unlock_dynamite_fail(self):

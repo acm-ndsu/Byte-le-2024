@@ -121,22 +121,27 @@ class TestGameBoard(unittest.TestCase):
 
         self.assertEqual(trap_queue.size(), 0)
         trap_queue.add_trap(Landmine(owner_company=Company.CHURCH, target_company=Company.TURING,
-                                     opponent_position=lambda: Vector(), position=Vector()))
+                                        opponent_position=lambda: Vector(), position=Vector()),
+                                        remove_trap_at=self.game_board.remove_trap_at)
         self.assertEqual(trap_queue.size(), 1)
 
         for i in range(0, 10):
             trap_queue.add_trap(Landmine(owner_company=Company.CHURCH, target_company=Company.TURING,
-                                         opponent_position=lambda: Vector(), position=Vector()))
+                                            opponent_position=lambda: Vector(), position=Vector()),
+                                            remove_trap_at=self.game_board.remove_trap_at)
         self.assertEqual(trap_queue.size(), 10)
 
     def test_trap_detonator_controller(self):
         self.game_board.turing_trap_queue.add_trap(Landmine(owner_company=Company.TURING,
                                                             target_company=Company.CHURCH,
-                                                            opponent_position=lambda: Vector(), position=Vector()))
+                                                            opponent_position=lambda: Vector(), position=Vector()),
+                                                            remove_trap_at=self.game_board.remove_trap_at)
         self.game_board.turing_trap_queue.add_trap(EMP(owner_company=Company.TURING, target_company=Company.CHURCH,
-                                                       opponent_position=lambda: Vector(), position=Vector(4, 7)))
+                                                       opponent_position=lambda: Vector(), position=Vector(4, 7)),
+                                                        remove_trap_at=self.game_board.remove_trap_at)
         self.game_board.church_trap_queue.add_trap(Landmine(owner_company=Company.CHURCH, target_company=Company.TURING,
-                                                            opponent_position=lambda: Vector(5, 5), position=Vector()))
+                                                            opponent_position=lambda: Vector(5, 5), position=Vector()),
+                                                            remove_trap_at=self.game_board.remove_trap_at)
         self.assertEqual(self.game_board.turing_trap_queue.size(), 2)
         self.assertEqual(self.game_board.church_trap_queue.size(), 1)
         self.game_board.trap_detonation_control(avatars={Company.CHURCH: self.avatar, Company.TURING: self.avatar2})

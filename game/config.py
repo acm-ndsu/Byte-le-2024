@@ -50,16 +50,16 @@ TRAP_DEFUSAL_COOLDOWN = 2                           # Number of turns player wai
 TRAP_DEFUSAL_RANGE = EMP_RANGE + 1                  # Range for defusing traps on the map
 
 # Tech Costs (referenced in tech.py)
-IMPROVED_DRIVETRAIN_COST = 80                       # Cost of the Improved Drivetrain tech
-SUPERIOR_DRIVETRAIN_COST = 160                      # Cost of the Superior Drivetrain tech
-OVERDRIVE_DRIVETRAIN_COST = 320                     # Cost of the Overdrive Drivetrain tech
-IMPROVED_MINING_COST = 50                           # Cost of the Improved Mining tech
-SUPERIOR_MINING_COST = 100                          # Cost of the Superior Mining tech
-OVERDRIVE_MINING_COST = 200                         # Cost of the Overdrive Mining tech
-DYNAMITE_COST = 70                                  # Cost of the Dynamit tech
-LANDMINE_COST = 120                                 # Cost of the Landmine tech
-EMP_COST = 180                                      # Cost of the EMP tech
-TRAP_DEFUSAL_COST = 180                             # Cost of the Trap Defusal tech
+IMPROVED_DRIVETRAIN_COST = 0                       # Cost of the Improved Drivetrain tech
+SUPERIOR_DRIVETRAIN_COST = 0                      # Cost of the Superior Drivetrain tech
+OVERDRIVE_DRIVETRAIN_COST = 0                     # Cost of the Overdrive Drivetrain tech
+IMPROVED_MINING_COST = 0                           # Cost of the Improved Mining tech
+SUPERIOR_MINING_COST = 0                          # Cost of the Superior Mining tech
+OVERDRIVE_MINING_COST = 0                         # Cost of the Overdrive Mining tech
+DYNAMITE_COST = 0                                  # Cost of the Dynamit tech
+LANDMINE_COST = 0                                 # Cost of the Landmine tech
+EMP_COST = 0                                      # Cost of the EMP tech
+TRAP_DEFUSAL_COST = 0                             # Cost of the Trap Defusal tech
 
 # Tech Points (referenced in tech.py)
 IMPROVED_DRIVETRAIN_POINTS = 150                    # Points awarded when purchasing the Improved Drivetrain tech

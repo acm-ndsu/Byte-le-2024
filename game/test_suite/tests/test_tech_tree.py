@@ -3,6 +3,7 @@ from unittest.mock import Mock
 
 from game.quarry_rush.avatar.avatar_functions import AvatarFunctions
 from game.quarry_rush.tech.tech_tree import TechTree
+from game.config import IMPROVED_DRIVETRAIN_COST, IMPROVED_DRIVETRAIN_POINTS
 
 class TestTechTree(unittest.TestCase):
     def setUp(self):
@@ -85,7 +86,7 @@ class TestTechTree(unittest.TestCase):
         self.assertFalse(result3)
         
     def test_tech_info(self):
-        better_drivetrain_info = {'name': 'Improved Drivetrain', 'cost': 80, 'point_value': 150}
+        better_drivetrain_info = {'name': 'Improved Drivetrain', 'cost': IMPROVED_DRIVETRAIN_COST, 'point_value': IMPROVED_DRIVETRAIN_POINTS}
         result1 = self.tech_tree.tech_info('Improved Drivetrain')
         result2 = self.tech_tree.tech_info('Invalid Tech Name')
         self.assertEqual(better_drivetrain_info['name'], result1.name)
