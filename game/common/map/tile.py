@@ -7,6 +7,8 @@ from game.common.map.occupiable import Occupiable
 from game.common.map.wall import Wall
 from game.common.stations.station import Station
 from game.common.stations.occupiable_station import OccupiableStation
+from game.quarry_rush.entity.placeable.dynamite import Dynamite
+from game.quarry_rush.entity.placeable.traps import EMP, Landmine
 from game.quarry_rush.station.company_station import ChurchStation, TuringStation
 
 
@@ -51,6 +53,12 @@ class Tile(Occupiable):
                 self.occupied_by: ChurchStation = ChurchStation().from_json(occupied_by)
             case ObjectType.TURING_STATION:
                 self.occupied_by: TuringStation = TuringStation().from_json(occupied_by)
+            case ObjectType.DYNAMITE:
+                self.occupied_by: Dynamite = Dynamite().from_json(occupied_by)
+            case ObjectType.LANDMINE:
+                self.occupied_by: Landmine = Landmine().from_json(occupied_by)
+            case ObjectType.EMP:
+                self.occupied_by: EMP = EMP().from_json(occupied_by)
             case _:
                 raise ValueError(f'Could not parse occupied_by: {occupied_by}')
         return self

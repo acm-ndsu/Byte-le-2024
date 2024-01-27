@@ -22,11 +22,12 @@ from game.quarry_rush.entity.placeable.traps import EMP, Landmine
 class TrapQueue(GameObject):
     def __init__(self):
         super().__init__()
-        self.__traps: list[Trap] = []
+        self.__traps: list[Trap | None] = []
         self.__max_traps = 10
 
-    def add_trap(self, trap: Trap):
+    def add_trap(self, trap: Trap, remove_trap_at: Callable[[Vector], None]):
         if len(self.__traps) >= self.__max_traps:
+            remove_trap_at(self.__traps[0].position)
             self.__traps = self.__traps[1:]
         self.__traps += [trap]
 
@@ -36,9 +37,11 @@ class TrapQueue(GameObject):
                 # call remove trap from game board method
                 remove_trap_at(self.__traps[i].position)
                 # remove trap from list of traps
-                self.__traps: list[Trap] = self.__traps[:i] + self.__traps[i+1:]
+                self.__traps[i] = None
                 avatar.state = 'exploding'  # set the state of the avatar for the visualizer
-                
+
+        self.__traps = [x for x in self.__traps if x is not None]
+
     def dequeue_trap_at(self, position: Vector):
         for i in range(0, len(self.__traps))[::-1]:
             if self.__traps[i].position.x == position.x and self.__traps[i].position.y == position.y:
@@ -303,10 +306,7 @@ class GameBoard(GameObject):
                 raise ValueError("A key-value pair from game_board.locations has a length of 0. ")
 
             # random.sample returns a randomized list which is used in __help_populate()
-            if len(k) == len(v):
-                j = random.sample(k, k=len(k))
-            else:
-                j = k
+            j = random.sample(k, k=len(k))
             self.__help_populate(j, v)
 
     def __occupied_filter(self, game_object_list: list[GameObject]) -> list[GameObject]:
@@ -315,9 +315,7 @@ class GameBoard(GameObject):
         :param game_object_list:
         :return: a list of game object
         """
-        return [game_object for game_object in game_object_list if hasattr(game_object, 'occupied_by')] \
-            if len(game_object_list) > len([game_object for game_object in game_object_list if hasattr(game_object, 'occupied_by')])+1 \
-            else game_object_list
+        return [game_object for game_object in game_object_list if hasattr(game_object, 'occupied_by')]
 
     def __help_populate(self, vector_list: list[Vector], game_object_list: list[GameObject]) -> None:
         """
@@ -333,6 +331,7 @@ class GameBoard(GameObject):
         remaining_objects: list[GameObject] | None = self.__occupied_filter(game_object_list[len(zipped_list):]) \
             if len(self.__occupied_filter(game_object_list)) > len(zipped_list) \
             else None
+
         # Will cap at smallest list when zipping two together
         for vector, game_object in zipped_list:
             if isinstance(game_object, Avatar):  # If the GameObject is an Avatar, assign it the coordinate position
@@ -360,9 +359,6 @@ class GameBoard(GameObject):
         for game_object in remaining_objects:
             if not hasattr(temp_tile, 'occupied_by') or temp_tile.occupied_by is not None:
                 raise ValueError("Last item on the given tile doesn't have the 'occupied_by' attribute.")
-            if isinstance(game_object, Avatar):  # If the GameObject is an Avatar, assign it the coordinate position
-                game_object.position = last_vec
-
             temp_tile.occupied_by = game_object
             temp_tile = temp_tile.occupied_by
 
@@ -461,11 +457,17 @@ class GameBoard(GameObject):
 
     # removes trap from game_map based on position, method called in trap queue detonate method
     def remove_trap_at(self, position: Vector) -> None:
+        if position.y < 0 or position.y >= len(self.game_map) or position.x < 0 or position.x >= len(self.game_map[0]):
+            return
         tile: Tile = self.game_map[position.y][position.x]
         tile.remove_from_occupied_by(ObjectType.LANDMINE)
         tile.remove_from_occupied_by(ObjectType.EMP)
 
     def trap_detonation_control(self, avatars: dict[Company, Avatar]) -> None:
+        for avatar in avatars.values():
+            avatar.dynamite_active_ability.decrease_fuse()
+            avatar.emp_active_ability.decrease_fuse()
+            avatar.landmine_active_ability.decrease_fuse()
         self.church_trap_queue.detonate(self.inventory_manager, self.remove_trap_at, avatars[Company.TURING])
         self.turing_trap_queue.detonate(self.inventory_manager, self.remove_trap_at, avatars[Company.CHURCH])
 

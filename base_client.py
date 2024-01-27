@@ -187,4 +187,4 @@ class Client(UserClient):
         return vertical + horizontal if vertical_first else horizontal + vertical
 
     def get_my_inventory(self, world):
-        return [item for item in world.inventory_manager.get_inventory(self.company) if item is not None]
+        return world.inventory_manager.get_inventory(self.company)

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from game.common.game_object import GameObject
 from game.common.enums import ObjectType
-from typing import Self, Tuple, Union
+from typing import Self, Tuple
 
 
 class Vector(GameObject):
@@ -138,41 +138,6 @@ class Vector(GameObject):
 
     def __str__(self) -> str:
         return f"Coordinates: ({self.x}, {self.y})"
-
-    def __add__(self, other: 'Vector') -> 'Vector':
-        return Vector(self.x + other.x, self.y + other.y)
-
-    def __sub__(self, other: 'Vector') -> 'Vector':
-        return Vector(self.x - other.x, self.y - other.y)
-
-    def __mul__(self, other: 'Vector') -> 'Vector':
-        return Vector(self.x*other.x, self.y*other.y)
-
-    def __floordiv__(self, other: 'Vector') -> Union['Vector', None]:
-        if other.x == 0 or other.y == 0:
-            return None
-        return Vector(self.x//other.x, self.y//other.y)
-
-    def __ne__(self, other: 'Vector') -> bool:
-        return hash(str(self)) != hash(str(other))
-
-    def __eq__(self, other: 'Vector') -> bool:
-        return hash(str(self)) == hash(str(other))
-
-    def __lt__(self, other: 'Vector') -> bool:
-        return self.x < other.x and self.y < other.y
-
-    def __gt__(self, other: 'Vector') -> bool:
-        return self.x > other.x and self.y > other.y
-
-    def __le__(self, other: 'Vector') -> bool:
-        return self.x <= other.x and self.y <= other.y
-
-    def __ge__(self, other: 'Vector') -> bool:
-        return self.x >= other.x and self.y >= other.y
-
-    def __hash__(self) -> int:
-        return hash(str(self))
 
     # Stuff added for Byte-le 2024
     
