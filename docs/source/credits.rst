@@ -27,10 +27,6 @@ Ian King (:blue:`Church Inc.`)
 
 .. figure:: ./_static/contributors/ian.png
 
-
-.. figure:: ./_static/contributors/ian_STYLISH.png
-   :width: 180
-
 ----
 
 
@@ -70,6 +66,15 @@ Carson Bring (:red:`Turing Co.`)
 
 .. figure:: ./_static/contributors/carson_bring.png
 
+
+----
+
+Carson Keeping (:blue:`Church Inc.`)
+
+.. figure:: ./_static/contributors/carson_keeping.png
+   :width: 400
+
+
 ----
 
 Mason Myles (:red:`Turing Co.`)
@@ -78,10 +83,3 @@ Mason Myles (:red:`Turing Co.`)
    :width: 400
 
 POV: Two weeks after working on Byte-le.
-
-----
-
-Carson Keeping (:blue:`Church Inc.`)
-
-.. figure:: ./_static/contributors/carson_keeping.png
-   :width: 400

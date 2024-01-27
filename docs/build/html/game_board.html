@@ -312,6 +312,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates">Coordinates</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#occupied-by">Occupied_by</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-occupied-by-and-get-occupied-by">Is_occupied_by and get_occupied_by</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oreoccupiablestation">OreOccupiableStation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bases">Bases</a></li>
 </ul>
 </li>
@@ -396,6 +397,30 @@ ObjectType enum.</p>
 value will be returned.</p>
 <p>The <a class="reference internal" href="placeables.html"><span class="doc">Placeables</span></a> page will explain everything that can be placed on the map by MOB-BOT, and <a class="reference internal" href="enums.html"><span class="doc">Enums</span></a> will have
 the enums needed for every object that can be on the game map.</p>
+</section>
+<section id="oreoccupiablestation">
+<h3>OreOccupiableStation<a class="headerlink" href="#oreoccupiablestation" title="Permalink to this heading">#</a></h3>
+<p>OreOccupiableStation is a class that helps store the Ores and Ancient Tech. If you would like to check if a Tile has any
+Ore or Ancient Tech, type the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tile</span><span class="o">.</span><span class="n">is_occupied_by_object_type</span><span class="p">(</span><span class="n">ObjectType</span><span class="o">.</span><span class="n">ORE_OCCUPIABLE_STATION</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If this method returns <code class="docutils literal notranslate"><span class="pre">True</span></code>, that means that either Copium, Lambdium, Turite, or Ancient Tech is on that Tile.</p>
+<p>If there is an OreOccupiableStation object, you can do the following to check the type of the stored material:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ore</span> <span class="o">=</span> <span class="n">tile</span><span class="o">.</span><span class="n">get_occupied_by</span><span class="p">(</span><span class="n">ObjectType</span><span class="o">.</span><span class="n">ORE_OCCUPIABLE_STATION</span><span class="p">)</span>
+<span class="nb">isinstance</span><span class="p">(</span><span class="n">ore</span><span class="p">,</span> <span class="n">Turite</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this example, the code is checking if the ore is Turite. Using the <code class="docutils literal notranslate"><span class="pre">isinstance()</span></code> method will return a boolean
+value indicating if the first argument is an instance of the second argument. Below is all the ways you can check for
+all materials assuming <code class="docutils literal notranslate"><span class="pre">ore</span> <span class="pre">=</span> <span class="pre">tile.get_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION)</span></code> returned an object. Make sure
+to type these verbatim.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">isinstance</span><span class="p">(</span><span class="n">ore</span><span class="p">,</span> <span class="n">Copium</span><span class="p">)</span>
+<span class="nb">isinstance</span><span class="p">(</span><span class="n">ore</span><span class="p">,</span> <span class="n">Turite</span><span class="p">)</span>
+<span class="nb">isinstance</span><span class="p">(</span><span class="n">ore</span><span class="p">,</span> <span class="n">Lambdium</span><span class="p">)</span>
+<span class="nb">isinstance</span><span class="p">(</span><span class="n">ore</span><span class="p">,</span> <span class="n">AncientTech</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="bases">
 <h3>Bases<a class="headerlink" href="#bases" title="Permalink to this heading">#</a></h3>
@@ -499,6 +524,7 @@ after mining specific ores:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordinates">Coordinates</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#occupied-by">Occupied_by</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-occupied-by-and-get-occupied-by">Is_occupied_by and get_occupied_by</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oreoccupiablestation">OreOccupiableStation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bases">Bases</a></li>
 </ul>
 </li>

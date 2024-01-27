@@ -35,3 +35,17 @@ they are rivals and absolutely despise the other. I did a good job, huh? -- Unpa
 .. figure:: ./_static/ceos/you're_fired_turing.jpg
 
 "You're fired." - CEO of :red:`Turing Co.`
+
+----
+
+Here are some extra gifs that were used in the game. Enjoy
+
+=================================================== ===================================================
+.. image:: ./_static/gifs/church_bot.gif            .. image:: ./_static/gifs/turing_bot.gif
+.. image:: ./_static/gifs/church_mobbot_damaged.gif .. image:: ./_static/gifs/turing_mobbot_damaged.gif
+.. image:: ./_static/gifs/church_mobbot_placing.gif .. image:: ./_static/gifs/turing_mobbot_placing.gif
+.. image:: ./_static/gifs/dynamite.gif              .. image:: ./_static/gifs/landmine.gif
+.. image:: ./_static/gifs/emp.gif                   .. image:: ./_static/gifs/copium.gif
+.. image:: ./_static/gifs/turite.gif                .. image:: ./_static/gifs/lambdium.gif
+.. image:: ./_static/gifs/ancient_tech.gif
+=================================================== ===================================================
