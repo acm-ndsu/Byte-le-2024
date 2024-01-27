@@ -37,6 +37,7 @@ your question, call a developer over and they'll answer your question!
    useful_commands
    server
    mobbot
+   mobbot_pt2
    taking_action
    game_board
    ores
