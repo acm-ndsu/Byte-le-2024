@@ -1,5 +1,0 @@
-===================
-Dynamite |dynamite|
-===================
-
-.. |dynamite| image:: ./_static/images/dynamite.gif
