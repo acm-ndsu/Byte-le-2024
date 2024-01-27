@@ -407,18 +407,20 @@ Ore or Ancient Tech, type the following:</p>
 </div>
 <p>If this method returns <code class="docutils literal notranslate"><span class="pre">True</span></code>, that means that either Copium, Lambdium, Turite, or Ancient Tech is on that Tile.</p>
 <p>If there is an OreOccupiableStation object, you can do the following to check the type of the stored material:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ore</span> <span class="o">=</span> <span class="n">tile</span><span class="o">.</span><span class="n">get_occupied_by</span><span class="p">(</span><span class="n">ObjectType</span><span class="o">.</span><span class="n">ORE_OCCUPIABLE_STATION</span><span class="p">)</span>
-<span class="nb">isinstance</span><span class="p">(</span><span class="n">ore</span><span class="p">,</span> <span class="n">Turite</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ore</span> <span class="o">=</span> <span class="n">tile</span><span class="o">.</span><span class="n">get_occupied_by</span><span class="p">(</span><span class="n">ObjectType</span><span class="o">.</span><span class="n">ORE_OCCUPIABLE_STATION</span><span class="p">)</span><span class="o">.</span><span class="n">held_item</span>
+<span class="n">ore</span><span class="o">.</span><span class="n">object_type</span> <span class="o">==</span> <span class="n">ObjectType</span><span class="o">.</span><span class="n">TURITE</span>
 </pre></div>
 </div>
-<p>In this example, the code is checking if the ore is Turite. Using the <code class="docutils literal notranslate"><span class="pre">isinstance()</span></code> method will return a boolean
-value indicating if the first argument is an instance of the second argument. Below is all the ways you can check for
-all materials assuming <code class="docutils literal notranslate"><span class="pre">ore</span> <span class="pre">=</span> <span class="pre">tile.get_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION)</span></code> returned an object. Make sure
-to type these verbatim.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">isinstance</span><span class="p">(</span><span class="n">ore</span><span class="p">,</span> <span class="n">Copium</span><span class="p">)</span>
-<span class="nb">isinstance</span><span class="p">(</span><span class="n">ore</span><span class="p">,</span> <span class="n">Turite</span><span class="p">)</span>
-<span class="nb">isinstance</span><span class="p">(</span><span class="n">ore</span><span class="p">,</span> <span class="n">Lambdium</span><span class="p">)</span>
-<span class="nb">isinstance</span><span class="p">(</span><span class="n">ore</span><span class="p">,</span> <span class="n">AncientTech</span><span class="p">)</span>
+<p><span class="gold">NOTE:</span> Calling <code class="docutils literal notranslate"><span class="pre">get_occupied_by</span></code> may return a <code class="docutils literal notranslate"><span class="pre">None</span></code> value, so you will need to incorporate null handling.</p>
+<p>In this example, the code is checking if the ore is Turite. Comparing the ore’s ObjectType to the specified enum will
+return a boolean value indicating if it is the ore specified.</p>
+<p>Below is all the ways you can check for all materials assuming
+<code class="docutils literal notranslate"><span class="pre">ore</span> <span class="pre">=</span> <span class="pre">tile.get_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION).held_item</span></code> returned an object. Make sure to type these
+verbatim.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ore</span><span class="o">.</span><span class="n">object_type</span> <span class="o">==</span> <span class="n">ObjectType</span><span class="o">.</span><span class="n">COPIUM</span>
+<span class="n">ore</span><span class="o">.</span><span class="n">object_type</span> <span class="o">==</span> <span class="n">ObjectType</span><span class="o">.</span><span class="n">TURITE</span>
+<span class="n">ore</span><span class="o">.</span><span class="n">object_type</span> <span class="o">==</span> <span class="n">ObjectType</span><span class="o">.</span><span class="n">LAMBDIUM</span>
+<span class="n">ore</span><span class="o">.</span><span class="n">object_type</span> <span class="o">==</span> <span class="n">ObjectType</span><span class="o">.</span><span class="n">ANCIENT_TECH</span>
 </pre></div>
 </div>
 </section>
