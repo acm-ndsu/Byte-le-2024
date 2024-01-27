@@ -71,6 +71,8 @@ class Trap(OccupiableStation):
     @opponent_position.setter
     def opponent_position(self, opponent_position: Callable[[], Vector]) -> None:
         try:
+            if not isinstance(opponent_position, Callable):
+                raise Exception
             if not isinstance(opponent_position(), Vector):
                 raise Exception
         except:

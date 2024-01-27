@@ -24,17 +24,17 @@ class Client(UserClient):
         """
         return 'Volunteer'
 
-    def first_turn_init(self, world, avatar):
+    def first_turn_init(self, world, mobbot):
         """
         This is where you can put setup for things that should happen at the beginning of the first turn
         """
-        self.company = avatar.company
+        self.company = mobbot.company
         self.my_station_type = ObjectType.TURING_STATION if self.company == Company.TURING else ObjectType.CHURCH_STATION
         self.current_state = State.MINING
         self.base_position = world.get_objects(self.my_station_type)[0][0]
 
     # This is where your AI will decide what to do
-    def take_turn(self, turn, actions, world, avatar):
+    def take_turn(self, turn, actions, world, mobbot):
         """
         This is where your AI will decide what to do.
         :param turn:        The current turn of the game.
@@ -42,77 +42,77 @@ class Client(UserClient):
         :param world:       Generic world information
         """
         if turn == 1:
-            self.first_turn_init(world, avatar)
+            self.first_turn_init(world, mobbot)
 
-        if world.game_map[avatar.position.y][avatar.position.x].occupied_by.object_type == self.my_station_type:
-            tech_buy = self.determine_tech_buy(avatar)
+        if world.game_map[mobbot.position.y][mobbot.position.x].occupied_by.object_type == self.my_station_type:
+            tech_buy = self.determine_tech_buy(mobbot)
             if len(tech_buy) > 0:
                 return tech_buy
         if len(self.get_my_inventory(world)) > 40:
-            return self.find_path(avatar.position, self.base_position, world)
+            return self.find_path(mobbot.position, self.base_position, world)
 
-        if world.game_map[avatar.position.y][avatar.position.x].occupied_by.object_type == ObjectType.ORE_OCCUPIABLE_STATION:
+        if world.game_map[mobbot.position.y][mobbot.position.x].occupied_by.object_type == ObjectType.ORE_OCCUPIABLE_STATION:
             return [ActionType.MINE]
-        elif (avatar.can_place_dynamite() and not
-                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(self.my_station_type) and not
-                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(ObjectType.DYNAMITE) and not
-                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(ObjectType.LANDMINE) and not
-                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(ObjectType.EMP)
+        elif (mobbot.can_place_dynamite() and not
+                world.game_map[mobbot.position.y][mobbot.position.x].is_occupied_by_object_type(self.my_station_type) and not
+                world.game_map[mobbot.position.y][mobbot.position.x].is_occupied_by_object_type(ObjectType.DYNAMITE) and not
+                world.game_map[mobbot.position.y][mobbot.position.x].is_occupied_by_object_type(ObjectType.LANDMINE) and not
+                world.game_map[mobbot.position.y][mobbot.position.x].is_occupied_by_object_type(ObjectType.EMP)
         ):
             print('1')
             return [ActionType.PLACE_DYNAMITE]
-        elif (avatar.can_place_landmine() and not
-                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(ObjectType.LANDMINE)):
+        elif (mobbot.can_place_landmine() and not
+                world.game_map[mobbot.position.y][mobbot.position.x].is_occupied_by_object_type(ObjectType.LANDMINE)):
             print('2')
             return [ActionType.PLACE_LANDMINE]
-        elif (avatar.can_place_emp() and not
-                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(ObjectType.EMP) and not
-                world.game_map[avatar.position.y][avatar.position.x].is_occupied_by_object_type(ObjectType.LANDMINE)):
+        elif (mobbot.can_place_emp() and not
+                world.game_map[mobbot.position.y][mobbot.position.x].is_occupied_by_object_type(ObjectType.EMP) and not
+                world.game_map[mobbot.position.y][mobbot.position.x].is_occupied_by_object_type(ObjectType.LANDMINE)):
             print('3')
             return [ActionType.PLACE_EMP]
 
 
 
         ore_poses = [pose for (pose, _) in world.get_objects(ObjectType.ORE_OCCUPIABLE_STATION)]
-        closest_ore_pose = sorted(ore_poses, key=lambda pose: self.distance(avatar.position, pose, world))[0]
-        actions = self.find_path(avatar.position, closest_ore_pose, world)
+        closest_ore_pose = sorted(ore_poses, key=lambda pose: self.distance(mobbot.position, pose, world))[0]
+        actions = self.find_path(mobbot.position, closest_ore_pose, world)
 
         return actions
 
-    def determine_tech_buy(self, avatar):
-        if not avatar.is_researched('Improved Mining'):
-            info = avatar.get_tech_info('Improved Mining')
-            if avatar.science_points >= info.cost:
+    def determine_tech_buy(self, mobbot):
+        if not mobbot.is_researched('Improved Mining'):
+            info = mobbot.get_tech_info('Improved Mining')
+            if mobbot.science_points >= info.cost:
                 return [ActionType.BUY_IMPROVED_MINING]
 
-        elif not avatar.is_researched('Improved Drivetrain'):
-            info = avatar.get_tech_info('Improved Drivetrain')
-            if avatar.science_points >= info.cost:
+        elif not mobbot.is_researched('Improved Drivetrain'):
+            info = mobbot.get_tech_info('Improved Drivetrain')
+            if mobbot.science_points >= info.cost:
                 return [ActionType.BUY_IMPROVED_DRIVETRAIN]
 
-        elif not avatar.is_researched('Superior Mining'):
-            info = avatar.get_tech_info('Superior Mining')
-            if avatar.science_points >= info.cost:
+        elif not mobbot.is_researched('Superior Mining'):
+            info = mobbot.get_tech_info('Superior Mining')
+            if mobbot.science_points >= info.cost:
                 return [ActionType.BUY_SUPERIOR_MINING]
 
-        elif not avatar.is_researched('Superior Drivetrain'):
-            info = avatar.get_tech_info('Superior Drivetrain')
-            if avatar.science_points >= info.cost:
+        elif not mobbot.is_researched('Superior Drivetrain'):
+            info = mobbot.get_tech_info('Superior Drivetrain')
+            if mobbot.science_points >= info.cost:
                 return [ActionType.BUY_SUPERIOR_DRIVETRAIN]
 
-        elif not avatar.is_researched('Dynamite'):
-            info = avatar.get_tech_info('Dynamite')
-            if avatar.science_points >= info.cost:
+        elif not mobbot.is_researched('Dynamite'):
+            info = mobbot.get_tech_info('Dynamite')
+            if mobbot.science_points >= info.cost:
                 return [ActionType.BUY_DYNAMITE]
 
-        elif not avatar.is_researched('Landmines'):
-            info = avatar.get_tech_info('Landmines')
-            if avatar.science_points >= info.cost:
+        elif not mobbot.is_researched('Landmines'):
+            info = mobbot.get_tech_info('Landmines')
+            if mobbot.science_points >= info.cost:
                 return [ActionType.BUY_LANDMINES]
 
-        elif not avatar.is_researched(Tech.EMPS):
-            info = avatar.get_tech_info(Tech.EMPS)
-            if avatar.science_points >= info.cost:
+        elif not mobbot.is_researched(Tech.EMPS):
+            info = mobbot.get_tech_info(Tech.EMPS)
+            if mobbot.science_points >= info.cost:
                 return [ActionType.BUY_EMPS]
 
         return []

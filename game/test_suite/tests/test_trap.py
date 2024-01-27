@@ -127,15 +127,16 @@ class TestTrap(unittest.TestCase):
     # test json
     def test_trap_json(self):
         data: dict = self.trap.to_json()
+        trap: Trap = Trap().from_json(data)
         self.assertEqual(data['steal_rate'], 0.1)
         # inventory_manager not a part of json as there is only one
         with self.assertRaises(KeyError) as e:
             self.assertEqual(data['inventory_manager'], InventoryManager())
         self.assertEqual(str(e.exception), '\'inventory_manager\'')
-        self.assertEqual(data['owner_company'], Company.CHURCH.value)
-        self.assertEqual(data['target_company'], Company.TURING.value)
-        self.assertEqual(data['range'], self.range)
-        self.assertEqual(str(self.position), str(data['position']))
+        self.assertEqual(trap.owner_company.value, Company.CHURCH.value)
+        self.assertEqual(trap.target_company.value, Company.TURING.value)
+        self.assertEqual(trap.range, self.range)
+        self.assertEqual(str(trap.position), str(self.position))
 
         # To test the object type, need to make a new Trap object
         trap: Trap = Trap().from_json(data)

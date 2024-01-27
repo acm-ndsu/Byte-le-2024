@@ -75,5 +75,5 @@ class PlaceController(Controller):
             client.avatar.emp_active_ability.reset_fuse()
 
         # add the trap to the corresponding trap queue
-        world.church_trap_queue.add_trap(placed_object) if client.avatar.company is Company.CHURCH else \
-            world.turing_trap_queue.add_trap(placed_object)
+        world.church_trap_queue.add_trap(placed_object, world.remove_trap_at) if client.avatar.company is Company.CHURCH else \
+            world.turing_trap_queue.add_trap(placed_object, world.remove_trap_at)

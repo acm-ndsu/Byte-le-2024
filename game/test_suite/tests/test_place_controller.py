@@ -2,6 +2,7 @@ import unittest
 
 from game.common.avatar import Avatar
 from game.common.game_object import GameObject
+from game.config import *
 from game.controllers.movement_controller import *
 from game.controllers.place_controller import *
 from game.quarry_rush.station.ore_occupiable_station import *
@@ -21,12 +22,14 @@ class TestPlaceController(unittest.TestCase):
         self.movement_controller: MovementController = MovementController()
 
         self.avatar = Avatar(position=Vector(1, 0))
+        self.avatar_2 = Avatar(position=Vector(0, 0))
         self.avatar.science_points = 5000  # set science points in order to buy techs
         self.ore_station: OreOccupiableStation = OreOccupiableStation()
 
         self.locations: dict[tuple[Vector]: list[GameObject]] = {
             (Vector(1, 1),): [self.ore_station],
-            (Vector(1, 0),): [self.avatar]
+            (Vector(1, 0),): [self.avatar],
+            (Vector(0, 0),): [self.avatar_2]
         }
 
         self.game_board = GameBoard(0, Vector(3, 3), self.locations, False)
@@ -77,7 +80,7 @@ class TestPlaceController(unittest.TestCase):
         self.assertEqual(placed_landmine.occupied_by, self.client.avatar)
 
         # double-check the ability cooldown reset
-        self.assertEqual(self.avatar.landmine_active_ability.cooldown, 3)
+        self.assertEqual(self.avatar.landmine_active_ability.cooldown, LANDMINE_COOLDOWN)
 
     def test_placing_emp(self) -> None:
         self.avatar.buy_new_tech('EMPs')  # unlock emps for testing
@@ -93,7 +96,7 @@ class TestPlaceController(unittest.TestCase):
         placed_emp: EMP = self.ore_station.occupied_by  # returns the correct type; ignore warning
         self.assertEqual(placed_emp.occupied_by, self.client.avatar)
 
-        self.assertEqual(self.avatar.emp_active_ability.cooldown, 2)  # double-check the ability cooldown reset
+        self.assertEqual(self.avatar.emp_active_ability.cooldown, EMP_COOLDOWN)  # double-check the ability cooldown reset
 
     # test that 2 dynamite aren't on the same tile
     def test_placing_multiple_dynamite(self):

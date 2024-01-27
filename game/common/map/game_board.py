@@ -25,8 +25,9 @@ class TrapQueue(GameObject):
         self.__traps: list[Trap | None] = []
         self.__max_traps = 10
 
-    def add_trap(self, trap: Trap):
+    def add_trap(self, trap: Trap, remove_trap_at: Callable[[Vector], None]):
         if len(self.__traps) >= self.__max_traps:
+            remove_trap_at(self.__traps[0].position)
             self.__traps = self.__traps[1:]
         self.__traps += [trap]
 
