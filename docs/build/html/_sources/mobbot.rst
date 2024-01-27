@@ -113,11 +113,13 @@ Dynamite |dyn|                                             Become more efficient
                                                            ores at once!
 
 Landmines |lm|                                             The other company keeps taking valuable ores, so start
-                                                           setting traps for them... ``>:D`` Landmines
-                                                           :gold:`steal 50% of ores from the opponent when detonated`.
+                                                           setting traps for them... ``>:D`` When a landmine detonates
+                                                           on an opponent,
+                                                           :gold:`each item the opponent carries has a 50% chance of
+                                                           being stolen.`
 
 EMPs |emp|                                                 EMPs are the rich Bot's landmine! EMPs
-                                                           :gold:`steal 100% from the opponent` when detonated.
+                                                           :gold:`steal 100% of an opponent's inventory` when detonated.
                                                            Phenomenal!
                                                            :red:`NOTE: once purchased, Trap Defusal CANNOT be`
                                                            :red:`purchased.`

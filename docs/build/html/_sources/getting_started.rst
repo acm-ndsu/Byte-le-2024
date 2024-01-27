@@ -43,7 +43,7 @@ As you collect ores, make your way back to your base to cash them in for game po
 
 Along with this, you can collect :brown:`Ancient Tech` to earn science points.
 :gold:`Note that science points do not award game points.` Upgrading your MOB-BOT with science points will increase its
-mining capabilities, thus improving corporate revenue (fantastic)! You can even disrupt the opposing team with traps,
+capabilities, thus improving corporate revenue (fantastic)! You can even disrupt the opposing team with traps,
 giving you the advantage and removing the competition from the market (astounding)!
 
 Visit :doc:`mobbot` for more information on how it all works.

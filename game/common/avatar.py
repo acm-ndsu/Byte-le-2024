@@ -376,6 +376,10 @@ class Avatar(GameObject):
     def get_opposing_team(self) -> Company:
         return Company.CHURCH if self.company is Company.TURING else Company.TURING
 
+    # method to return your company
+    def get_company(self) -> Company:
+        return self.__company
+
     def to_json(self) -> dict:
         data: dict = super().to_json()
         data['company'] = self.company.value
