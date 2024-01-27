@@ -141,3 +141,21 @@ ActionType.LANDMINES                  23
 ActionType.BUY_EMPS                   24
 ActionType.BUY_TRAP_DEFUSAL           25
 ====================================  =========
+
+Tech
+----
+
+====================================  ======================
+Tech                                  String Value
+====================================  ======================
+Tech.IMPROVED_DRIVETRAIN              'Improved Drivetrain'
+Tech.SUPERIOR_DRIVETRAIN              'Superior Drivetrain'
+Tech.OVERDRIVE_DRIVETRAIN             'Overdrive Drivetrain'
+Tech.IMPROVED_MINING                  'Improved Mining'
+Tech.SUPERIOR_MINING                  'Superior Mining'
+Tech.OVERDRIVE_MINING                 'Overdrive Mining'
+Tech.DYNAMITE                         'Dynamite'
+Tech.LANDMINES                        'Landmines'
+Tech.EMPS                             'EMPs'
+Tech.TRAP_DEFUSAL                     'Trap Defusal'
+====================================  ======================
