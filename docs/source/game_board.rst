@@ -160,8 +160,12 @@ More information on ores is found in :doc:`ores`, and information on MOB-BOT is 
 Mining Interactions
 ===================
 
-After mining ore from a Tile, there is a chance a new piece of ore is discovered underneath! Here's what can appear
-after mining specific ores:
+After mining ore from a Tile, there is a chance a new piece of ore is discovered underneath!
+
+:gold:`NOTE:` As you move towards the center of the Quarry, the chance for Lambdium, Turite, and Ancient Tech to
+spawn significantly increases!
+
+Here's what can appear after mining specific ores:
 
 ===================== ==========================================
 Mined Ore             Next Generated Ore

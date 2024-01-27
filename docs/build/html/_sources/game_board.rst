@@ -162,8 +162,8 @@ Mining Interactions
 
 After mining ore from a Tile, there is a chance a new piece of ore is discovered underneath!
 
-:gold:`NOTE:` As you move towards the center of the Quarry, the chance for Lambdium, Turite, and Ancient Tech to spawn
-significantly increases!
+:gold:`NOTE:` As you move towards the center of the Quarry, the chance for Lambdium, Turite, and Ancient Tech to
+spawn significantly increases!
 
 Here's what can appear after mining specific ores:
 
