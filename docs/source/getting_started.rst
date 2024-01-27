@@ -7,10 +7,12 @@ Getting Started
     <style> .red {color:#BC0C25; font-weight:bold; font-size:16px} </style>
     <style> .blue {color:#1769BC; font-weight:bold; font-size:16px} </style>
     <style> .gold {color:#E1C564; font-weight:bold; font-size:16px} </style>
+    <style> .brown {color:#623514; font-weight:bold; font-size:16px} </style>
 
 .. role:: red
 .. role:: blue
 .. role:: gold
+.. role:: brown
 
 
 NOTICE
@@ -20,7 +22,7 @@ Please run the following command to install the necessary packages to run the ga
 
 .. code-block:: console
 
-    python -m pip install -r requirements.txt
+    pip install -r requirements.txt
 
 More commands are listed in :doc:`useful_commands`. Thank you!
 
@@ -32,13 +34,17 @@ Objective
 
 
 Your objective for this year is to gain more points than your opponents. This is done by mining more ores than the
-opposing team in The Quarry, and by unlocking upgrades. :doc:`scoring` will explain how the points are totaled. Each
-game will have 500 turns before ending. Manage your time wisely!
+opposing team in The Quarry and by unlocking upgrades. :doc:`scoring` will explain how the points are totaled. Each
+game will have :gold:`200 turns` before ending. Manage your time wisely!
 
-As you collect ores, make your way back to your base to cash them in for game points and science points!
-Upgrading your MOB-BOT with science points will increase its mining capabilities, thus improving corporate revenue
-(fantastic)! You can even disrupt the opposing team with traps, giving you the advantage and removing the competition
-from the market (astounding)!
+As you collect ores, make your way back to your base to cash them in for game points!
+
+``Whichever MOB-BOT has the most game points at the end of 200 turns will win the game.``
+
+Along with this, you can collect :brown:`Ancient Tech` to earn science points.
+:gold:`Note that science points do not award game points.` Upgrading your MOB-BOT with science points will increase its
+mining capabilities, thus improving corporate revenue (fantastic)! You can even disrupt the opposing team with traps,
+giving you the advantage and removing the competition from the market (astounding)!
 
 Visit :doc:`mobbot` for more information on how it all works.
 
@@ -76,8 +82,8 @@ You can use any text editor or IDE for this competition, but we recommend Visual
 Getting the Code and MOB-BOT
 ----------------------------
 
-To receive the code and your own MOB-BOT, please clone the repository here
-`here <https://github.com/acm-ndsu/Byte-le-2024>`_.
+To receive the code and your own MOB-BOT, please clone the repository
+`here <https://github.com/acm-ndsu/Byte-le-2024-Client-Package>`_.
 
 When on GitHub, press the green ``<> Code`` button to drop down the following menu:
 

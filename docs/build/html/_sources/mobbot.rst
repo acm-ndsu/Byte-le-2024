@@ -24,9 +24,14 @@ MOB-BOT
 
    :red:`Turing Inc. MOB-BOT`
 
-As you work for your assigned company (:blue:`Church Inc.` or :red:`Turing Co.`), you will be coding and upgrading your
-very own MOB-BOT. MOB-BOT is a friendly, cute, and efficient robot designed to mine in The Quarry forever! How lovely.
+|
 
+As you work for the companies (unpaid), you will be coding and upgrading your very own MOB-BOT. MOB-BOT is a friendly,
+cute, and efficient robot designed to mine in The Quarry forever! How lovely.
+
+|
+|
+|
 |
 |
 
@@ -104,24 +109,24 @@ Overdrive Mining |om|                                      MOB-BOT has become th
                                                            mining! Bring in the money!
 
 Dynamite |dyn|                                             Become more efficient with your mining! Dynamite
-                                                           :gold:`explodes 3 turns after being placed`, mining multiple
+                                                           :gold:`explodes 2 turns after being placed`, mining multiple
                                                            ores at once!
 
 Landmines |lm|                                             The other company keeps taking valuable ores, so start
                                                            setting traps for them... ``>:D`` Landmines
-                                                           :gold:`steal ores from the opponent when activated`.
+                                                           :gold:`steal 50% of ores from the opponent when detonated`.
 
 EMPs |emp|                                                 EMPs are the rich Bot's landmine! EMPs
-                                                           :gold:`steal more ores from the opponent` than a normal
-                                                           landmine. Phenomenal!
-                                                           :gold:`NOTE: once purchased, Trap Defusal CANNOT be`
-                                                           :gold:`purchased.`
+                                                           :gold:`steal 100% from the opponent` when detonated.
+                                                           Phenomenal!
+                                                           :red:`NOTE: once purchased, Trap Defusal CANNOT be`
+                                                           :red:`purchased.`
 
 Trap Defusal |diffuse|                                     Fight back against the traps that are set against you. Trap
                                                            defusing will
-                                                           :gold:`deactivate any trap placed by the enemy` (as long as
-                                                           you don't step on it)!
-                                                           :gold:`NOTE: once purchased, EMPs CANNOT be purchased.`
+                                                           :gold:`deactivate ALL traps placed by you and the opponent`
+                                                           in a :gold:`range of 3 Manhattan tiles.`
+                                                           :red:`NOTE: once purchased, EMPs CANNOT be purchased.`
 ========================================================== =============================================================
 
 For more information on Dynamite, Landmines, and EMPs, go to :doc:`placeables`.
@@ -134,19 +139,19 @@ Unlocking Techs
 ---------------
 
 To unlock these Techs, you must mine Ancient Tech, which will yield science points. These do not count toward your total
-points.
+game points.
 
-To unlock these Techs, MOB-BOT *must end the turn on top of its company's base*. When there, it can also purchase a new
-Tech (assuming it has enough science points). To do so, use the :doc:`enums` that are provided, and :doc:`taking_action`
-will explain how to implement it in more detail.
+To unlock these Techs, MOB-BOT *must end the turn on top of its respective company's base*. When there, it can also
+purchase a new Tech (assuming it has enough science points). To do so, use the :doc:`enums` that are provided, and
+:doc:`taking_action` will explain how to implement it in more detail.
 
 Remember - the Tech Tree is... a tree. You must unlock techs in order based on their branches. That means you cannot buy
 Dynamite without first buying Improved Mining. You can, however, buy Improved Mining and then Improved Drivetrain, and
 vice versa.
 
 This also means that any branching paths can only access one Tech. More specifically, After purchasing landmines,
-there is the choice to purchase either EMPs or Trap Defusal. :gold:`Only one can be purchased.` After it is purchased, the
-other cannot be purchased.
+there is the choice to purchase either EMPs or Trap Defusal. :gold:`Only one can be purchased.` After it is purchased,
+the other cannot be purchased.
 
 To view the cost of all Techs, please visit :doc:`scoring` for more information.
 

@@ -15,7 +15,7 @@ There are required packages necessary for running the game. Run the following co
 
 .. code-block:: console
 
-    python -m pip install -r requirements.txt
+    pip install -r requirements.txt
 
 You can view the list of packages in the requirements.txt file.
 
@@ -27,7 +27,7 @@ If you have problems installing the pygame package, try running the following co
 
 .. code-block:: console
 
-    python -m pip install pygame --pre
+    pip install pygame --pre
 
 
 Generate, Run, Visualize!
@@ -41,14 +41,14 @@ Here are the commands:
 Generate
 --------
 
-Run the following in the byte-le folder:
+Run the following in the root directory in your terminal:
 
 .. code-block::
 
     python launcher.pyz g
 
-If you don't want to have a new map, don't run this command. With the same map and clients, the results will stay
-consistent.
+If you don't want to have a new, random seed, don't run this command. With the same seed and clients, the results will
+stay consistent.
 
 
 Run
@@ -94,7 +94,7 @@ in the terminal, it will generate, run, and visualize all at once in one command
 Generate and Run
 ----------------
 
-'What if I don't want to visualize, but only generate and run?' We've got you covered!
+"What if I don't want to visualize, but only generate and run?" We've got you covered!
 
 .. code-block::
 
@@ -115,9 +115,8 @@ Lastly, a list of commands will be listed by typing
 in the terminal. Each of the sub-commands will have their own help messages too.
 
 |
-|
 
 .. figure:: ./_static/images/turing_comp.png
 
-(:red:`Turing Inc. MOB-BOT` using terminal commands to visualize The Quarry)
+(:red:`Turing Inc.` MOB-BOT using terminal commands to visualize The Quarry)
 
