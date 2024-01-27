@@ -111,6 +111,37 @@ The :doc:`placeables` page will explain everything that can be placed on the map
 the enums needed for every object that can be on the game map.
 
 
+OreOccupiableStation
+--------------------
+
+OreOccupiableStation is a class that helps store the Ores and Ancient Tech. If you would like to check if a Tile has any
+Ore or Ancient Tech, type the following:
+
+.. code-block:: python
+
+    tile.is_occupied_by_object_type(ObjectType.ORE_OCCUPIABLE_STATION)
+
+If this method returns ``True``, that means that either Copium, Lambdium, Turite, or Ancient Tech is on that Tile.
+
+If there is an OreOccupiableStation object, you can do the following to check the type of the stored material:
+
+.. code-block:: python
+
+    ore = tile.get_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION)
+    isinstance(ore, Turite)
+
+In this example, the code is checking if the ore is Turite. Using the ``isinstance()`` method will return a boolean
+value indicating if the first argument is an instance of the second argument. Below is all the ways you can check for
+all materials assuming ``ore = tile.get_occupied_by(ObjectType.ORE_OCCUPIABLE_STATION)`` returned an object. Make sure
+to type these verbatim.
+
+.. code-block:: python
+
+    isinstance(ore, Copium)
+    isinstance(ore, Turite)
+    isinstance(ore, Lambdium)
+    isinstance(ore, AncientTech)
+
 Bases
 -----
 
