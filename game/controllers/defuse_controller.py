@@ -3,6 +3,7 @@ from game.common.map.game_board import GameBoard
 from game.common.player import Player
 from game.controllers.controller import Controller
 from game.utils.vector import Vector
+from game.config import TRAP_DEFUSAL_RANGE
 
 
 class DefuseController(Controller):
@@ -15,16 +16,10 @@ class DefuseController(Controller):
 
         temp_vector: Vector
         match action:
-            case ActionType.DEFUSE_UP:
-                temp_vector = Vector(0, -1)
-            case ActionType.DEFUSE_DOWN:
-                temp_vector = Vector(0, 1)
-            case ActionType.DEFUSE_LEFT:
-                temp_vector = Vector(-1, 0)
-            case ActionType.DEFUSE_RIGHT:
-                temp_vector = Vector(1, 0)
+            case ActionType.DEFUSE:
+                all_poses = [Vector(x=x, y=y) for x in range(14) for y in range(14)]
+                in_range = filter(lambda vec: vec.distance(client.avatar.position) <= TRAP_DEFUSAL_RANGE, all_poses)
+                for vec in in_range:
+                    world.defuse_trap_at(vec)
             case _:
                 return
-
-        temp_vector.add_to_vector(client.avatar.position)
-        world.defuse_trap_at(temp_vector)

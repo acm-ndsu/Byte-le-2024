@@ -1,5 +1,6 @@
 import pygame
 
+import game.config as gc
 from game.utils.vector import Vector
 from visualizer.sprites.scoreboard.number_light import NumberLight
 from visualizer.sprites.scoreboard.scoreboard_backdrop import ScoreboardBackdrop
@@ -46,16 +47,17 @@ class ScoreboardTemplate(InfoTemplate):
         self.scoreboard_turn_slash.character = '/'
         self.scoreboard_turn_slash.add(self.render_list)
 
+        temp: int
         self.scoreboard_turn_t1: NumberLight = NumberLight(top_left=Vector(x=697, y=6))
-        self.scoreboard_turn_t1.character = 5
+        self.scoreboard_turn_t1.character, temp = divmod(gc.MAX_TICKS, 100)
         self.scoreboard_turn_t1.add(self.render_list)
 
         self.scoreboard_turn_t2: NumberLight = NumberLight(top_left=Vector(x=723, y=6))
-        self.scoreboard_turn_t2.character = 0
+        self.scoreboard_turn_t2.character, temp = divmod(temp, 10)
         self.scoreboard_turn_t2.add(self.render_list)
 
         self.scoreboard_turn_t3: NumberLight = NumberLight(top_left=Vector(x=749, y=6))
-        self.scoreboard_turn_t3.character = 0
+        self.scoreboard_turn_t3.character = temp
         self.scoreboard_turn_t3.add(self.render_list)
 
         # Team 2 Score

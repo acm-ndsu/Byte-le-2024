@@ -9,11 +9,11 @@ what they do already. Refer to this file to clear any confusion, and make any ch
 
 # Runtime settings / Restrictions --------------------------------------------------------------------------------------
 # The engine requires these to operate
-MAX_TICKS = 500                                     # max number of ticks the server will run regardless of game state
+MAX_TICKS = 200                                     # max number of ticks the server will run regardless of game state
 TQDM_BAR_FORMAT = "Game running at {rate_fmt} "     # how TQDM displays the bar
 TQDM_UNITS = " turns"                               # units TQDM takes in the bar
 
-MAX_SECONDS_PER_TURN = 0.1                          # max number of basic operations clients have for their turns
+MAX_SECONDS_PER_TURN = 0.2                          # max number of basic operations clients have for their turns
 
 MAX_NUMBER_OF_ACTIONS_PER_TURN = 5                  # master_controller will be handling max actions enforcement for Byte-le 2024 "Quarry Rush"
 
@@ -28,39 +28,50 @@ MAX_CLIENTS_CONTINUE = None                         # maximum number of clients 
 SET_NUMBER_OF_CLIENTS_CONTINUE = 2                  # required number of clients to continue running the game; should be None when MIN_CLIENTS or MAX_CLIENTS are used
 
 # Game Variables
+# Ore Count on game board (referenced in collectable_generator.py)
+ORE_COUNT = 100                                     # Number of ores generated on the game board for a game
+
 # Dynamite (referenced in dynamite.py and dynamite_active_ability.py)
-DYNAMITE_FUSE = 3                                   # Number of turns before dynamite item explodes
-DYNAMITE_COOLDOWN = 4                               # Number of turns player waits before they can activate the Dynamite ability again
+DYNAMITE_FUSE = 2                                   # Number of turns before dynamite item explodes
+DYNAMITE_COOLDOWN = 3                               # Number of turns player waits before they can activate the Dynamite ability again
+
 # Landmine (referenced in traps.py and landmine_active_ability.py)
-LANDMINE_STEAL_RATE = 0.1                           # Chance to steal each item in opponents inventory when Landmine detonates
-LANDMINE_COOLDOWN = 6                               # Number of turns player waits before they can activate the Landmine ability again
+LANDMINE_STEAL_RATE = 0.5                           # Chance to steal each item in opponents inventory when Landmine detonates
+LANDMINE_COOLDOWN = 4                               # Number of turns player waits before they can activate the Landmine ability again
+LANDMINE_RANGE = 1                                  # Range for detonation of a landmine
+
 # EMP (referenced in traps.py and emp_active_ability.py)
-EMP_STEAL_RATE = 0.2                                # Chance to steal each item in opponents inventory when EMP detonates
+EMP_STEAL_RATE = 1.0                                # Chance to steal each item in opponents inventory when EMP detonates
 EMP_COOLDOWN = 4                                    # Number of turns player waits before they can activate the EMP ability again
+EMP_RANGE = 2                                       # Range for detonation of a EMP
+
 # Trap Defusal (referenced in trap_defusal_active_ability)
-TRAP_DEFUSAL_COOLDOWN = 0                           # Number of turns player waits before they can activate the Trap Defusal ability again
+TRAP_DEFUSAL_COOLDOWN = 2                           # Number of turns player waits before they can activate the Trap Defusal ability again
+TRAP_DEFUSAL_RANGE = EMP_RANGE + 1                  # Range for defusing traps on the map
+
 # Tech Costs (referenced in tech.py)
-IMPROVED_DRIVETRAIN_COST = 50                       # Cost of the Improved Drivetrain tech
-SUPERIOR_DRIVETRAIN_COST = 100                      # Cost of the Superior Drivetrain tech
-OVERDRIVE_DRIVETRAIN_COST = 250                     # Cost of the Overdrive Drivetrain tech
+IMPROVED_DRIVETRAIN_COST = 80                       # Cost of the Improved Drivetrain tech
+SUPERIOR_DRIVETRAIN_COST = 160                      # Cost of the Superior Drivetrain tech
+OVERDRIVE_DRIVETRAIN_COST = 320                     # Cost of the Overdrive Drivetrain tech
 IMPROVED_MINING_COST = 50                           # Cost of the Improved Mining tech
 SUPERIOR_MINING_COST = 100                          # Cost of the Superior Mining tech
-OVERDRIVE_MINING_COST = 250                         # Cost of the Overdrive Mining tech
-DYNAMITE_COST = 150                                 # Cost of the Dynamit tech
-LANDMINE_COST = 300                                 # Cost of the Landmine tech
-EMP_COST = 450                                      # Cost of the EMP tech
-TRAP_DEFUSAL_COST = 450                             # Cost of the Trap Defusal tech
+OVERDRIVE_MINING_COST = 200                         # Cost of the Overdrive Mining tech
+DYNAMITE_COST = 70                                  # Cost of the Dynamit tech
+LANDMINE_COST = 120                                 # Cost of the Landmine tech
+EMP_COST = 180                                      # Cost of the EMP tech
+TRAP_DEFUSAL_COST = 180                             # Cost of the Trap Defusal tech
+
 # Tech Points (referenced in tech.py)
-IMPROVED_DRIVETRAIN_POINTS = 200                    # Points awarded when purchasing the Improved Drivetrain tech
-SUPERIOR_DRIVETRAIN_POINTS = 400                    # Points awarded when purchasing the Superior Drivetrain tech
-OVERDRIVE_DRIVETRAIN_POINTS = 1600                  # Points awarded when purchasing the Overdrive Drivetrain tech
+IMPROVED_DRIVETRAIN_POINTS = 150                    # Points awarded when purchasing the Improved Drivetrain tech
+SUPERIOR_DRIVETRAIN_POINTS = 250                    # Points awarded when purchasing the Superior Drivetrain tech
+OVERDRIVE_DRIVETRAIN_POINTS = 350                   # Points awarded when purchasing the Overdrive Drivetrain tech
 IMPROVED_MINING_POINTS = 100                        # Points awarded when purchasing the Improved Mining tech
-SUPERIOR_MINING_POINTS = 200                        # Points awarded when purchasing the Superior Mining tech
-OVERDRIVE_MINING_POINTS = 800                       # Points awarded when purchasing the Overdrive Mining tech
-DYNAMITE_POINTS = 500                               # Points awarded when purchasing the Dynamite tech
-LANDMINE_POINTS = 1000                              # Points awarded when purchasing the Landmine tech
-EMP_POINTS = 2000                                   # Points awarded when purchasing the EMP tech
-TRAP_DEFUSAL_POINTS = 2000                          # Points awarded when purchasing the Trap Defusal tech
+SUPERIOR_MINING_POINTS = 150                        # Points awarded when purchasing the Superior Mining tech
+OVERDRIVE_MINING_POINTS = 300                       # Points awarded when purchasing the Overdrive Mining tech
+DYNAMITE_POINTS = 140                               # Points awarded when purchasing the Dynamite tech
+LANDMINE_POINTS = 240                               # Points awarded when purchasing the Landmine tech
+EMP_POINTS = 360                                    # Points awarded when purchasing the EMP tech
+TRAP_DEFUSAL_POINTS = 360                           # Points awarded when purchasing the Trap Defusal tech
 
 
 ALLOWED_MODULES = ["game.client.user_client",       # modules that clients are specifically allowed to access
@@ -74,6 +85,8 @@ ALLOWED_MODULES = ["game.client.user_client",       # modules that clients are s
                    "game.common.stations.station",
                    "game.common.stations.occupiable_station",
                    "game.utils.vector",
+                   "game.quarry_rush.entity.placeable.dynamite",
+                   "game.quarry_rush.entity.placeable.traps",
                    "game.quarry_rush.entity.ancient_tech",
                    "game.quarry_rush.entity.ores",
                    "game.quarry_rush.station.company_station",

@@ -34,30 +34,12 @@ class TestDefuseController(unittest.TestCase):
         self.world.generate_map()
 
     # test defusing a trap above works
-    def test_defuse_trap_above(self):
+    def test_defuse_trap(self):
         self.assertTrue(self.world.game_map[0][1].is_occupied_by_game_object(Landmine))
-        self.defuse_controller.handle_actions(ActionType.DEFUSE_UP, self.client, self.world)
+        self.defuse_controller.handle_actions(ActionType.DEFUSE, self.client, self.world)
         self.assertFalse(self.world.game_map[0][1].is_occupied_by_game_object(Landmine))  # remember (y, x) coordinates
-
-    # test defusing a trap to the right works
-    def test_defuse_trap_to_right(self):
-        self.assertTrue(self.world.game_map[1][2].is_occupied_by_game_object(EMP))
-        self.defuse_controller.handle_actions(ActionType.DEFUSE_RIGHT, self.client, self.world)
-        self.assertFalse(self.world.game_map[1][2].is_occupied_by_game_object(EMP))
-
-    # test defusing a trap below works
-    def test_defuse_trap_below(self):
-        self.assertTrue(self.world.game_map[2][1].is_occupied_by_game_object(Landmine))
-        self.defuse_controller.handle_actions(ActionType.DEFUSE_DOWN, self.client, self.world)
-        self.assertFalse(self.world.game_map[2][1].is_occupied_by_game_object(Landmine))
-
-    # test defusing a trap to the left works
-    def test_defuse_trap_to_left(self):
-        self.assertTrue(self.world.game_map[1][0].is_occupied_by_game_object(EMP))
-        self.defuse_controller.handle_actions(ActionType.DEFUSE_LEFT, self.client, self.world)
-        self.assertFalse(self.world.game_map[1][0].is_occupied_by_game_object(EMP))
 
     # test defusing the same spot causes no errors
     def test_defuse_twice(self):
-        self.test_defuse_trap_above()
+        self.test_defuse_trap()
         self.assertFalse(self.world.game_map[0][1].is_occupied_by_game_object(Landmine))

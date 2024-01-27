@@ -52,8 +52,10 @@ class TestMapGenerator(unittest.TestCase):
             (Vector(x=1, y=12),): [Wall(), ],
             (Vector(x=7, y=12),): [Wall(), ],
             (Vector(x=8, y=12),): [Wall(), ],
-            (Vector(x=9, y=12),): [TuringStation(), Avatar(), ],
-            (Vector(x=4, y=1),): [ChurchStation(), Avatar(), ],
+            (Vector(x=9, y=12),): [TuringStation(), ],
+            (Vector(x=4, y=1),): [ChurchStation(), ],
+            (Vector(9, 12),): [Avatar(), ],
+            (Vector(4, 1),): [Avatar(), ]
         }
 
         # Get the actual result by calling the method
@@ -74,4 +76,4 @@ class TestMapGenerator(unittest.TestCase):
             if [z.object_type for z in actual[key]].__contains__(ObjectType.ORE_OCCUPIABLE_STATION):
                 count += 1
 
-        self.assertEqual(count, 75)
+        self.assertEqual(count, 100)
