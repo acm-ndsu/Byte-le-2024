@@ -120,8 +120,7 @@ class Engine:
                 finally:
                     # Note: I keep the above thread for both naming conventions to check for client errors
                     try:
-                        if self.use_filenames:
-                            player.file_name = filename
+                        player.file_name = filename
                         player.team_name = thr.retrieve_value()
                     except Exception as e:
                         player.functional = False
@@ -142,7 +141,7 @@ class Engine:
             self.shutdown(source='Client_error')
         else:
             # Sort clients based on name, for the client runner
-            self.clients.sort(key=lambda clnt: clnt.team_name, reverse=True)
+            self.clients.sort(key=lambda clnt: clnt.file_name, reverse=True)
             # Finally, request master controller to establish clients with basic objects
             if SET_NUMBER_OF_CLIENTS_START == 1:
                 self.master_controller.give_clients_objects(self.clients[0], self.world)
@@ -201,6 +200,8 @@ class Engine:
 
         # Time and wait for clients to be done
         start_time = datetime.now()
+
+
         for thr in threads:
             # We only want to wait a maximum of MAX_SECONDS_PER_TURN once all of the clients have started.
             # However, we can't simultaneously join threads without more threads or multiprocessing.

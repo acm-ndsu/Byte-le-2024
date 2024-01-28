@@ -100,6 +100,7 @@ ALLOWED_MODULES = ["game.client.user_client",       # modules that clients are s
                    "random",
                    "heapq",
                    "sympy",
+                   "math",
                    ]
 
 RESULTS_FILE_NAME = "results.json"                                  # Name and extension of results file
